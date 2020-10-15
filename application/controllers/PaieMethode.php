@@ -6,8 +6,16 @@ require 'AdminControler.php';
 class PaieMethode extends AdminControler
 {
 
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Payment_modes_model', 'payment_modes_model');
+
+    }
+
     public function index()
     {
-        $this->load_view('paie_method/manager');
+        $data['data'] = $this->payment_modes_model->get();
+        $this->load_view('paie_method/manager', $data);
     }
 }

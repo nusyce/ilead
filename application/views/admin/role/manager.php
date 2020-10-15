@@ -24,9 +24,11 @@
                                     <td><?= $role['name'] ?></td>
                                     <td><?= 0 ?></td>
                                     <td>
-                                        <div class="form-check form-check-inline" style="padding: 0 !important;">
+                                        <div class="form-check form-check-inline"
+                                             style="margin-top:0 !important;padding: 0 !important;">
                                             <label class="form-check-label">
-                                                <input type="checkbox" checked="" class="form-check-input">
+                                                <input type="checkbox" <?= $role['active'] ? 'checked' : '' ?>
+                                                       class="form-check-input">
                                                 <i class="input-frame"></i></label>
                                         </div>
                                     </td>

@@ -10,16 +10,13 @@ class Payment_modes_model extends CI_Model
 
     }
 
-    /**
-     * @param  string Email address for login
-     * @param  string User Password
-     * @param  boolean Set cookies for user if remember me is checked
-     * @param  boolean Is Staff Or Client
-     * @return boolean if not redirect url found, if found redirect to the url
-     */
-
-    public function get_all()
+    public function get($id = '', $where = [])
     {
+
+        if (is_numeric($id)){
+            $this->db->where('id', $id);
+            return $this->db->get('tbl_payments_modes')->row();
+        }
         return $this->db->get('tbl_payments_modes')->result_array();
     }
 

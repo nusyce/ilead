@@ -11,10 +11,10 @@ class User_roles_model extends CI_Model
     }
 
     /**
-     * @param  string Email address for login
-     * @param  string User Password
-     * @param  boolean Set cookies for user if remember me is checked
-     * @param  boolean Is Staff Or Client
+     * @param string Email address for login
+     * @param string User Password
+     * @param boolean Set cookies for user if remember me is checked
+     * @param boolean Is Staff Or Client
      * @return boolean if not redirect url found, if found redirect to the url
      */
 
@@ -22,25 +22,5 @@ class User_roles_model extends CI_Model
     {
         return $this->db->get('tbl_roles')->result_array();
     }
-
-    /**
-     * @param  boolean If Client or Staff
-     * @return none
-     */
-
-    /**
-     * @param  integer ID to create autologin
-     * @param  boolean Is Client or Staff
-     * @return boolean
-     */
-
-    /**
-     * Update user password from forgot password feature or set password
-     * @param boolean $staff        is staff or contact
-     * @param mixed $userid
-     * @param string $new_pass_key the password generate key
-     * @param string $password     new password
-     */
-
 
 }

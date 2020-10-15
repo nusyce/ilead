@@ -9,7 +9,7 @@ class Start extends AdminControler
     {
         $this->load->view('home/home');
     }
-    
+
 
     public function dashboard()
     {

@@ -10,12 +10,12 @@
                         <table id="dataTableExample" class="table">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Nom</th>
+                                <th>Profession</th>
+                                <th>Genre</th>
+                                <th>Plan</th>
+                                <th>Sponsor</th>
+                                <th>Cluster</th>
                             </tr>
                             </thead>
                             <tbody>

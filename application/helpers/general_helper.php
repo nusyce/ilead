@@ -25,10 +25,11 @@ function get_user_role()
 }
 
 
-function countries()
+function countries($active = '')
 {
     $CI = &get_instance();
-    $CI->db->where('active', 1);
+    if (!empty($active))
+        $CI->db->where('active', $active);
     $CI->db->from('tbl_country');
     return $CI->db->get()->result_array();
 

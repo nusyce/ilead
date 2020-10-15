@@ -26,7 +26,7 @@
                                     <td>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="checkbox" checked="" class="form-check-input"> 
+                                                <input type="checkbox" checked="" class="form-check-input">
                                                 <i class="input-frame"></i></label>
                                         </div>
                                     </td>

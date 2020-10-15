@@ -13,7 +13,7 @@ class Misc extends AdminControler
     public function countries()
     {
         $data['title'] = '';
-        $this->load->view('country/manager', $data);
+        $this->load_view('country/manager', $data);
     }
 
 

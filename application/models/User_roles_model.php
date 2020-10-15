@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_roles extends CI_Model
+class User_roles_model extends CI_Model
 {
     public function __construct()
     {

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User_roles_model extends CI_Model
+class Country_model extends CI_Model
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class User_roles_model extends CI_Model
 
     public function get_all()
     {
-        return $this->db->get('tbl_roles')->result_array();
+        return $this->db->get('tbl_country')->result_array();
     }
 
     /**

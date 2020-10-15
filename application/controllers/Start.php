@@ -4,10 +4,19 @@ require 'AdminControler.php';
 
 class Start extends AdminControler
 {
+    function __construct(){
+
+        parent::__construct();
+        //    auth_check(); // check login auth
+        // $this->rbac->check_module_access();
+        $this->load->model('Plans_model', 'plans');
+
+    }
 
     public function index()
     {
-        $this->load->view('home/home');
+        $data['plans'] = $this->plans->get_all();
+        $this->load->view('home/home', $data);
     }
 
 

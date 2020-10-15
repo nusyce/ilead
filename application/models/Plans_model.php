@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Country_model extends CI_Model
+class Plans_model extends CI_Model
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class Country_model extends CI_Model
 
     public function get_all()
     {
-        return $this->db->get('tbl_country')->result_array();
+        return $this->db->get('tbl_plans')->result_array();
     }
 
     /**

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Payment_modes extends CI_Model
+class Representates_model extends CI_Model
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class Payment_modes extends CI_Model
 
     public function get_all()
     {
-        return $this->db->get('tbl_payments_modes')->result_array();
+        return $this->db->get('tbl_representates')->result_array();
     }
 
     /**

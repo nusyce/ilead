@@ -312,6 +312,12 @@
                     <span class="link-title">Mode de paiements</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url('misc/countries') ?>" class="nav-link">
+                    <i class="link-icon" data-feather="dollar-sign"></i>
+                    <span class="link-title">Pays</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

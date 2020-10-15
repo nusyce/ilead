@@ -10,4 +10,8 @@ class Users extends AdminControler
     {
         $this->load_view('user/manager');
     }
+    public function mychildren()
+    {
+        $this->load_view('user/adherents');
+    }
 }

@@ -1,9 +1,6 @@
 <?php
 
-
-require 'AdminControler.php';
-
-class Auth extends AdminControler
+class Auth extends CI_Controller
 {
 
     public function index()
@@ -13,12 +10,12 @@ class Auth extends AdminControler
 
     public function login()
     {
-        $this->load_view('auth/login');
+        $this->load->view('admin/auth/login');
     }
 
     public function register()
     {
-        $this->load_view('auth/register');
+        $this->load->view('admin/auth/register');
 
     }
 }

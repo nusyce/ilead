@@ -22,10 +22,10 @@
 <body>
 <div class="main-wrapper">
     <div class="page-wrapper full-page">
-        <div class="page-content d-flex align-items-center justify-content-center">
+        <div class="page-content d-flex align-items-center justify-content-center" style="padding: 0">
 
             <div class="row w-100 mx-0 auth-page">
-                <div class="col-md-12">
+                <div class="col-md-12" style="padding: 0">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-center mb-3 mt-4">Choose a plan</h4>
@@ -43,7 +43,8 @@
                                                 <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                                 <?= $plan['description']  ?>
 
-                                                <button class="btn btn-primary d-block mx-auto mt-4">Star free trial</button>
+
+                                                <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4">Subscribe</a>
                                             </div>
                                         </div>
                                     </div>

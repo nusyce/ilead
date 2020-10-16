@@ -6,7 +6,7 @@ class Start extends CI_Controller
 {
     function __construct()
     {
-        
+
         parent::__construct();
         if (!get_user_lang()) {
             $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -18,8 +18,8 @@ class Start extends CI_Controller
         } else {
             $lann = get_user_lang();
         }
+        $this->lang->load($lann, $lann);
 
-        $this->lang->load($key . '_lang', $lann);
         $this->load->model('Plans_model', 'plans');
         $this->load->model('User_model', 'user');
         $this->load->model('payment_modes_model', 'mode');

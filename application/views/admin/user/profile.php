@@ -4,58 +4,58 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Ajouter un adhérant</h6>
+                    <h6 class="card-title"><?php echo $this->lang->line('child_ajout_adherant_message'); ?></h6>
                     <form>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label">Prénom</label>
-                                    <input type="text" class="form-control" placeholder="Enter first name" name="firstname">
+                                    <label class="control-label"><?php echo $this->lang->line('register_name_message'); ?></label>
+                                    <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('register_name_message'); ?>" name="firstname">
                                 </div>
                             </div><!-- Col -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label">Nom</label>
-                                    <input type="text" class="form-control" name="lastname" placeholder="Enter last name">
+                                    <label class="control-label"><?php echo $this->lang->line('register_lastname_message'); ?></label>
+                                    <input type="text" class="form-control" name="lastname" placeholder="<?php echo $this->lang->line('register_lastname_message'); ?>">
                                 </div>
                             </div><!-- Col -->
                         </div><!-- Row -->
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label">Adresse email</label>
-                                    <input type="email" class="form-control" placeholder="Enter email">
+                                    <label class="control-label"><?php echo $this->lang->line('register_mail_message'); ?></label>
+                                    <input type="email" class="form-control" placeholder="email">
                                 </div>
                             </div><!-- Col -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label">Profession</label>
-                                    <input type="text" class="form-control" placeholder="Profession">
+                                    <label class="control-label"><?php echo $this->lang->line('child_profession_message'); ?></label>
+                                    <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('child_profession_message'); ?>">
                                 </div>
                             </div><!-- Col -->
                         </div><!-- Row -->
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="control-label">City</label>
-                                    <input type="text" class="form-control" placeholder="Enter city">
+                                    <label class="control-label"><?php echo $this->lang->line('child_ville_message'); ?></label>
+                                    <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('child_ville_message'); ?>">
                                 </div>
                             </div><!-- Col -->
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="control-label">State</label>
-                                    <input type="text" class="form-control" placeholder="Enter state">
+                                    <label class="control-label"><?php echo $this->lang->line('child_etat_message'); ?></label>
+                                    <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('child_etat_message'); ?>">
                                 </div>
                             </div><!-- Col -->
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label class="control-label">Zip</label>
-                                    <input type="text" class="form-control" placeholder="Enter zip code">
+                                    <label class="control-label"><?php echo $this->lang->line('child_zip_message'); ?></label>
+                                    <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('child_zip_message'); ?>">
                                 </div>
                             </div><!-- Col -->
                         </div><!-- Row -->
                     </form>
-                    <button type="button" class="btn btn-primary submit">Enregistrer</button>
+                    <button type="button" class="btn btn-primary submit"><?php echo $this->lang->line('child_save_message'); ?></button>
                 </div>
             </div>
         </div>

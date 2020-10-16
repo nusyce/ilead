@@ -19,7 +19,7 @@ $lang['register_lastname_message'] = 'Prenom';
 $lang['register_mail_message'] = 'Adresse électronique';
 $lang['register_whatapp_phone_message'] = 'Téléphone Whatsapp';
 $lang['register_country_message'] = 'Pays';
-$lang['register_cluster_message'] = 'Grappe';
+$lang['register_cluster_message'] = 'Cluster';
 $lang['register_sponsor_key_message'] = 'Sponsor KEY';
 $lang['register_sex_message'] = 'Sexe';
 $lang['register_masculin_message'] = 'Masculin';
@@ -37,7 +37,7 @@ $lang['dashboard_edit_message'] = 'Éditer';
 $lang['dashboard_delete_message'] = 'Supprimer';
 $lang['dashboard_print_message'] = 'Imprimer';
 $lang['dashboard_download_message'] = 'Télécharger';
-$lang['dashboard_new_orders_message'] = 'Nouvelles commandes';
+$lang['dashboard_new_orders_message'] = 'Administrateur';
 $lang['dashboard_grows_message'] = 'Croissance';
 
 // country
@@ -83,5 +83,36 @@ $lang['transaction_annuler_message'] = "Annuler";
 $lang['transaction_confirmation_message'] = "Confirmation";
 $lang['transaction_fermer_message'] = "Fermer";
 $lang['transaction_valider_message'] = "Valider";
+$lang['transaction_detail_message'] = "Détail";
+
+
+// home
+
+$lang['home_message'] = "Choisissez un plan";
+$lang['home_choose_message'] = "Choisissez les fonctionnalités et fonctionnalités dont votre équipe a besoin aujourd'hui. Mettez à niveau facilement au fur et à mesure que votre entreprise se développe";
+$lang['home_subscribe_message'] = "Souscrire";
+
+// user
+
+$lang['user_message'] = "Position";
+$lang['user_office_message'] = "Office";
+$lang['user_age_message'] = "Age";
+$lang['user_start_date_message'] = "Date de début";
+$lang['user_salary_message'] = "Salaire";
+
+// child
+$lang['child_message'] = "Soumettre";
+$lang['child_ajout_adherant_message'] = "Ajouter un adhérant";
+$lang['child_sponsor_message'] = "Parrainer";
+$lang['child_profession_message'] = "Profession";
+$lang['child_genre_message'] = "Genre";
+$lang['child_user_message'] = "Utilisateurs";
+$lang['child_ajouter_message'] = "Ajouter";
+$lang['child_add_respo_message'] = "Ajouter un responsable";
+$lang['child_telephone_message'] = "Télephone";
+$lang['child_ville_message'] = "Ville";
+$lang['child_etat_message'] = "Etat";
+$lang['child_zip_message'] = "Zip";
+$lang['child_save_message'] = "Enregistrer";
 
 

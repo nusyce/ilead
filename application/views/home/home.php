@@ -54,10 +54,9 @@
                             </div>
                         </div>
                     </nav>
-                    <h4 class="text-center mb-3 mt-4">Choose a plan</h4>
-                    <p class="text-muted text-center mb-4 pb-2">Choose the features and functionality your team need
-                        today. Easily upgrade as your company grows.<br>
-                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted">Already a user? Sign in</a></p>
+                    <h4 class="text-center mb-3 mt-4"><?php echo $this->lang->line('home_message'); ?></h4>
+                    <p class="text-muted text-center mb-4 pb-2"><?php echo $this->lang->line('home_choose_message'); ?>.<br>
+                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a></p>
 
                     <div class="container">
 
@@ -76,7 +75,7 @@
                                             <br>
                                             <?= $plan['description'] ?>
 
-                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4">Subscribe</a>
+                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4"><?php echo $this->lang->line('home_subscribe_message'); ?></a>
                                         </div>
                                     </div>
                                 </div>

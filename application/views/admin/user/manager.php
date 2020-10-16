@@ -5,20 +5,20 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Utilisateurs</h6>
+                    <h6 class="card-title"><?php echo $this->lang->line('child_user_message'); ?></h6>
                     <div class="table-responsive">
                         <?php
                         $this->load->view('admin/includes/message.php'); ?>
                         <table id="databable" class="table">
                             <thead>
                             <tr>
-                                <th>Nom</th>
-                                <th>Profession</th>
-                                <th>Genre</th>
-                                <th>Plan</th>
-                                <th>Sponsor</th>
-                                <th>Cluster</th>
-                                <th>Role</th>
+                                <th><?php echo $this->lang->line('register_name_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_profession_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_genre_message'); ?></th>
+                                <th><?php echo $this->lang->line('transaction_plan_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_sponsor_message'); ?></th>
+                                <th><?php echo $this->lang->line('register_cluster_message'); ?></th>
+                                <th><?php echo $this->lang->line('asides_roles_message'); ?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -28,10 +28,10 @@
                                     <td>
                                         <div><?= $dd['firstname'] . ' ' . $dd['lastname'] ?></div>
                                         <div class="detail-option">
-                                            <a href="#" class="">Detail</a> | <a
+                                            <a href="#" class=""><?php echo $this->lang->line('transaction_detail_message'); ?></a> | <a
                                                     href="<?= base_url('users/delete/') . $dd['id'] ?>"
                                                     data-message="Voulez vous supprimer cet utilisateur?"
-                                                    class="delete text-danger">Supprimer</a>
+                                                    class="delete text-danger"><?php echo $this->lang->line('dashboard_delete_message'); ?></a>
                                         </div>
                                     </td>
                                     <td><?= $dd['profession'] ?></td>

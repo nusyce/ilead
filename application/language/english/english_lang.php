@@ -37,7 +37,7 @@ $lang['dashboard_edit_message'] = 'Edit';
 $lang['dashboard_delete_message'] = 'Delete';
 $lang['dashboard_print_message'] = 'Print';
 $lang['dashboard_download_message'] = 'Download';
-$lang['dashboard_new_orders_message'] = 'New Orders';
+$lang['dashboard_new_orders_message'] = 'Admin';
 $lang['dashboard_grows_message'] = 'Growth';
 
 
@@ -83,7 +83,36 @@ $lang['transaction_annuler_message'] = "Reset";
 $lang['transaction_confirmation_message'] = "Confirmation";
 $lang['transaction_fermer_message'] = "Close";
 $lang['transaction_valider_message'] = "Validate";
+$lang['transaction_detail_message'] = "Detail";
 
 
 
+// home
 
+$lang['home_message'] = "Choose a plan";
+$lang['home_choose_message'] = "Choose the features and functionality your team need today. Easily upgrade as your company grows";
+$lang['home_subscribe_message'] = "Subscribe";
+
+
+// user
+
+$lang['user_message'] = "Position";
+$lang['user_office_message'] = "Office";
+$lang['user_age_message'] = "Age";
+$lang['user_start_date_message'] = "Start date";
+$lang['user_salary_message'] = "Salary";
+
+// child
+$lang['child_message'] = "Submit";
+$lang['child_ajout_adherant_message'] = "Add a member";
+$lang['child_sponsor_message'] = "Sponsor";
+$lang['child_profession_message'] = "Profession";
+$lang['child_genre_message'] = "Kind";
+$lang['child_user_message'] = "Users";
+$lang['child_ajouter_message'] = "Add";
+$lang['child_add_respo_message'] = "Add a manager";
+$lang['child_telephone_message'] = "Phone";
+$lang['child_ville_message'] = "City";
+$lang['child_etat_message'] = "State";
+$lang['child_zip_message'] = "Zip";
+$lang['child_save_message'] = "Save";

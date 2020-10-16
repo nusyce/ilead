@@ -6,7 +6,10 @@ class Start extends AdminControler
 {
     function __construct(){
 
-        parent::__construct();
+        parent::__construct(); 
+
+        $this->lang->load('english', 'lang');
+
         $this->load->model('Plans_model', 'plans');
         if(!is_user_logged_in())
         {

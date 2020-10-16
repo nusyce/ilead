@@ -74,6 +74,7 @@
                             <?php endforeach; ?>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>Pays</label>
                     <select class="country w-100" name="country_id">
@@ -83,7 +84,6 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-
 
                 <div class="text-right">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

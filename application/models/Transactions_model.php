@@ -29,6 +29,7 @@ class Transactions_model extends CI_Model
             $this->db->where('u.country_id', $can->country_id);
         }
 
+
         $this->db->select('tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement');
         $this->db->join('tbl_users as u', 'u.id = tbl_transactions.user_id', 'left');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'left');
@@ -38,6 +39,7 @@ class Transactions_model extends CI_Model
         if (is_numeric($id)) {
             $this->db->where('tbl_transactions.id', $id);
             $transaction = $this->db->get('tbl_transactions')->row();
+            //    var_dump($transaction);
             $transaction->attachements = $this->get_attachments($transaction->id);
             return $transaction;
         }

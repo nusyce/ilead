@@ -16,7 +16,6 @@ class User_model extends CI_Model
     }
 
 
-
     public function get($id = '', $where = [])
     {
         $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role,sexe');
@@ -35,15 +34,17 @@ class User_model extends CI_Model
         $this->db->select('pl.name as plan, pl.id as plan_id,pl.price as price');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'inner');
         $this->db->where('user_id', get_user_id());
-        return $this->db->order_by('tbl_transactions.id',"desc")->limit(1)->get('tbl_transactions')->row();
+        return $this->db->order_by('tbl_transactions.id', "desc")->limit(1)->get('tbl_transactions')->row();
     }
+
     public function get_user_representate()
     {
         $this->db->select('us.firstname, us.whatsapp_phone,us.email');
         $this->db->join('tbl_users as us', 'us.id = tbl_representates.user_id', 'inner');
         $this->db->where('tbl_representates.country_id', get_user_country());
-        return $this->db->order_by('tbl_representates.id',"desc")->get('tbl_representates')->result_array();
+        return $this->db->order_by('tbl_representates.id', "desc")->get('tbl_representates')->result_array();
     }
+
     public function representants($id = '')
     {
         $this->db->select('tbl_representates.id as id, firstname,lastname,cl.name as cluster,c.name as country,profession,whatsapp_phone,sponsor');
@@ -57,14 +58,16 @@ class User_model extends CI_Model
         }
         return $this->db->get('tbl_representates')->result_array();
     }
-public function myadherents()
-{
-    $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
-    $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
-    $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
-    $this->db->where('sponsor', get_user_cle());
-    return $this->db->get('tbl_users')->result_array();
-}
+
+    public function myadherents()
+    {
+        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
+        $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
+        $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
+        $this->db->where('sponsor', get_user_cle());
+        return $this->db->get('tbl_users')->result_array();
+    }
+
     public function login($data)
     {
 
@@ -95,6 +98,12 @@ public function myadherents()
             $this->db->insert('tbl_representates', $data);
             $insert = $this->db->insert_id();
         }
+
+        $dsds['role_id'] = 3;
+        $this->db->where('id', $data['user_id']);
+        $this->db->update('tbl_users', $dsds);
+
+
     }
 
     public function register($data, $pass)
@@ -102,16 +111,16 @@ public function myadherents()
 
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
-        $iso=get_country($data['country_id'])->iso;
-        $cle= $this->codeGeneratorKey($insert,$iso);
-        $this->welcome_email($data,$cle,$pass);
+        $iso = get_country($data['country_id'])->iso;
+        $cle = $this->codeGeneratorKey($insert, $iso);
+        $this->welcome_email($data, $cle, $pass);
         /*$this->db->where('id', $_POST['plan']);
         $plan= $this->db->get('tbl_plans')->row();*/
         $CI =& get_instance();
         $CI->load->model('plans_model');
-        $plan=$CI->plans_model->get_plan_by_id($_POST['plan']);
+        $plan = $CI->plans_model->get_plan_by_id($_POST['plan']);
 
-        $transaction=array('user_id'=>$insert,'plan_id'=>$plan->id,'due'=>date('d-m-Y H:i:s'),'created_at'=>date('d-m-Y H:i:s'),'status'=>'pending','amount'=>$plan->price);
+        $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price);
         $CI->load->model('transactions_model');
         $CI->transactions_model->add($transaction);
 
@@ -122,12 +131,12 @@ public function myadherents()
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
     }
+
     public function get_user_by_key($cle)
     {
         $this->db->where('cle', $cle);
-         $user=$this->db->get('tbl_users')->row();
-        if ($user)
-        {
+        $user = $this->db->get('tbl_users')->row();
+        if ($user) {
             return $user->firstname;
         }
     }
@@ -139,17 +148,11 @@ public function myadherents()
     }
 
 
-    public function logout()
-    {
-
-    }
-
-
-    public function codeGeneratorKey($user_id,$iso)
+    public function codeGeneratorKey($user_id, $iso)
     {
         $key = 0000 + $user_id;
         $key = str_pad($user_id, 4, "0", STR_PAD_LEFT); // 0010
-        $key =$iso.strval( $key );
+        $key = $iso . strval($key);
         $this->db->where('id', $user_id);
         $data = [];
         $data['cle'] = $key;
@@ -158,7 +161,7 @@ public function myadherents()
 
     }
 
-    private function welcome_email($key,$password,$client_mail)
+    private function welcome_email($key, $password, $client_mail)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);

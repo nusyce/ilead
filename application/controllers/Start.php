@@ -6,6 +6,7 @@ class Start extends CI_Controller
 {
     function __construct()
     {
+        
         parent::__construct();
         if (!get_user_lang()) {
             $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);

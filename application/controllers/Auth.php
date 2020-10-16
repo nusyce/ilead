@@ -15,9 +15,7 @@ class Auth extends CI_Controller
         } else {
             $lann = get_user_lang();
         }
-
-        $this->lang->load($key . '_lang', $lann);*/
-
+        $this->lang->load($lann, $lann);
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');
         $this->load->model('Plans_model', 'plans');
@@ -93,7 +91,7 @@ class Auth extends CI_Controller
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
                 'lastname' => $this->input->post('lastname'),
-                'password' =>  password_hash($pass, PASSWORD_BCRYPT),
+                'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),
                 'created_at' => date('Y-m-d : h:m:s'),

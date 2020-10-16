@@ -8,14 +8,18 @@ class AdminControler extends CI_Controller
     function __construct()
     {
         parent::__construct();
-      /*  $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        if ($key == 'fr') {
-            $lann = 'french';
-        } else {
-            $lann = 'english';
-        }
 
-        $this->lang->load($key . '_lang', $lann);*/
+        if (!get_user_lang()) {
+            $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+            if ($key == 'fr') {
+                $lann = 'french';
+            } else {
+                $lann = 'english';
+            }
+        } else {
+            $lann = get_user_lang();
+        }
+        $this->lang->load($lann, $lann);
 
         if (!is_user_logged_in()) {
             redirect(base_url() . 'auth/login');

@@ -9,6 +9,8 @@ class Start extends AdminControler
         parent::__construct();
         $this->load->model('Plans_model', 'plans');
 
+
+
     }
 
     public function index()
@@ -20,6 +22,6 @@ class Start extends AdminControler
 
     public function dashboard()
     {
-        $this->load_view('dashboard/dashboard');
+       $this->load_view('dashboard/dashboard');
     }
 }

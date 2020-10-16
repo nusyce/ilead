@@ -23,6 +23,14 @@ function get_user_role()
 
     return get_instance()->session->userdata('user_role');
 }
+function get_user_cle()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('cle');
+}
 
 function get_user_mail()
 {

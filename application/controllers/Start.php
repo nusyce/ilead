@@ -8,6 +8,10 @@ class Start extends AdminControler
 
         parent::__construct();
         $this->load->model('Plans_model', 'plans');
+        if(!is_user_logged_in())
+        {
+            redirect(base_url('auth/login'));
+        }
 
 
 

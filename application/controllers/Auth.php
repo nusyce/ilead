@@ -20,7 +20,7 @@ class Auth extends CI_Controller
 
         if ($this->input->post()) {
             $data = array(
-                'email' => $this->input->post('email'),
+                'cle' => $this->input->post('key'),
                 'password' => $this->input->post('password')
             );
             $this->User_roles_model->get_all();
@@ -33,6 +33,7 @@ class Auth extends CI_Controller
                     'user_role' => $this->User_roles_model->get_role_by_id($result['role_id'])->name,
                     'user_mail' => $result['email'],
                     'user_name' => $result['firstname'],
+                    'cle' => $result['cle'],
 
                 );
                 $this->session->set_userdata($admin_data);
@@ -59,6 +60,11 @@ class Auth extends CI_Controller
 
 
         if ($this->input->post()) {
+            if (!$this->user->get_user_by_key($this->input->post('sponsor')))
+            {
+                echo 'sponsor inconnu';
+            exit();
+            }
             $data = array(
                 'email' => $this->input->post('email'),
                 'firstname' => $this->input->post('name'),
@@ -67,6 +73,7 @@ class Auth extends CI_Controller
                 'email' => $this->input->post('email'),
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
+                'lastname' => $this->input->post('lastname'),
                 'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),

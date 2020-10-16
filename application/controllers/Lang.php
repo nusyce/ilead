@@ -14,6 +14,10 @@ class Lang extends CI_Controller
 
         $this->lang->load($lann , $lann);
         $this->session->set_userdata(['lang' => $lann]);
-        redirect(('start/dashboard'));
+        if ($this->input->get('t')){
+            redirect(base_url('start'));
+        }else{
+            redirect(base_url('start/dashboard'));
+        }
     }
 }

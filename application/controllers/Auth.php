@@ -6,14 +6,14 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        if ($key == 'fr') {
+       /* if ($key == 'fr') {
             $lann = 'french';
         } else {
             $lann = 'english';
             $key = 'en';
         }
 
-        $this->lang->load($key . '_lang', $lann);
+        $this->lang->load($key . '_lang', $lann);*/
 
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');

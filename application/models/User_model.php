@@ -19,7 +19,7 @@ class User_model extends CI_Model
 
     public function get($id = '', $where = [])
     {
-        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role,sexe');
+        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
         $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         if (is_numeric($id)) {
@@ -77,35 +77,18 @@ class User_model extends CI_Model
         }
     }
 
-    public function register($data, $pass)
+    public function register($data)
     {
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso=get_country($data['country_id'])->iso;
-        $cle= $this->codeGeneratorKey($insert,$iso);
-        $this->welcome_email($data,$cle,$pass);
-        /*$this->db->where('id', $_POST['plan']);
-        $plan= $this->db->get('tbl_plans')->row();*/
-
-        $transaction=array('user_id'=>$insert,'plan_id'=>$_POST['plan'],'due'=>date('d-m-Y H:i:s'),'created_at'=>date('d-m-Y H:i:s'),'status'=>'pending');
-        $CI =& get_instance();
-        $CI->load->model('transactions_model');
-        return $CI->transactions_model->add($transaction);
-
+        $this->codeGeneratorKey($insert,$iso);
     }
 
     public function get_user_by_email($email)
     {
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
-    }
-    public function get_my_adherents()
-    {
-        $this->db->select('tbl_users.id as id, firstname,lastname,co.name as country,sexe,email,cu.name as cluster,whatsapp_phone');
-        $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
-        $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
-        $this->db->where('sponsor', get_user_cle());
-        return $this->db->get('tbl_users')->result_array();
     }
     public function get_user_by_key($cle)
     {
@@ -138,11 +121,11 @@ class User_model extends CI_Model
         $data = [];
         $data['cle'] = $key;
         $this->db->update('tbl_users', $data);
-        return $key;
+
 
     }
 
-    private function welcome_email($data,$cle,$pass)
+    private function welcome_email($key,$password,$client_mail)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -159,7 +142,7 @@ class User_model extends CI_Model
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue';
-            $mail->Body = 'Merci de votre confiance <br>Votre clé est <b>'.$cle.'</b> et votre mot de passe est <br>'.$pass.'</b>';
+            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
 
             $mail->send();
             echo 'Message has been sent';
@@ -168,4 +151,10 @@ class User_model extends CI_Model
         }
     }
 
+
+    public function delete($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_users');
+    }
 }

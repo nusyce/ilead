@@ -223,6 +223,7 @@
                             <p class="email text-muted mb-3"><?=get_user_mail() ?></p>
                         </div>
                     </div>
+
                     <div class="dropdown-body">
                         <ul class="profile-nav p-0 pt-3">
                             <li class="nav-item">

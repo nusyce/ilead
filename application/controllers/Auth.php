@@ -60,6 +60,11 @@ class Auth extends CI_Controller
 
 
         if ($this->input->post()) {
+            if (!$this->user->get_user_by_key($this->input->post('sponsor')))
+            {
+                echo 'sponsor inconnu';
+            exit();
+            }
             $data = array(
                 'email' => $this->input->post('email'),
                 'firstname' => $this->input->post('name'),

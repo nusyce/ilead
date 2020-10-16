@@ -1,6 +1,10 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 defined('BASEPATH') or exit('No direct script access allowed');
+
 
 class User_model extends CI_Model
 {
@@ -14,6 +18,8 @@ class User_model extends CI_Model
     public function get($id = '', $where = [])
     {
         $this->db->select('firstname,lastname,country_id,profession,whatsapp_phone,cluster,sponsor,tbl_roles.name as role');
+        $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
+
         if (is_numeric($id)) {
             $this->db->where('id', $id);
             $user = $this->db->get('tbl_users')->row();
@@ -79,5 +85,30 @@ class User_model extends CI_Model
 
     }
 
+    private function welcome_email()
+    {
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Recipients
+            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+            $mail->addAddress('ellen@example.com');               // Name is optional
+            $mail->addReplyTo('info@example.com', 'Information');
+            $mail->addCC('cc@example.com');
+            $mail->addBCC('bcc@example.com');
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Bienvenue';
+            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 
 }

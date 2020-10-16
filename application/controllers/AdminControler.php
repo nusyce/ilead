@@ -5,7 +5,15 @@ class AdminControler extends CI_Controller
 {
 
 
-    public function load_view($view, $data=[])
+    function __construct()
+    {
+        parent::__construct();
+       if (!is_user_logged_in()) {
+            redirect(base_url() . 'auth/login');
+        }
+    }
+
+    public function load_view($view, $data = [])
     {
         $this->load->view('admin/includes/header', $data);
         $this->load->view('admin/includes/asides', $data);
@@ -13,3 +21,4 @@ class AdminControler extends CI_Controller
         $this->load->view('admin/includes/footer', $data);
     }
 }
+

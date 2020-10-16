@@ -15,6 +15,8 @@ class User_model extends CI_Model
 
     }
 
+
+
     public function get($id = '', $where = [])
     {
         $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');

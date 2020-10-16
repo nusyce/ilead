@@ -288,6 +288,7 @@
                     <span class="link-title">Réprésentants</span>
                 </a>
             </li>
+
             <li class="nav-item nav-category">Configurations</li>
             <li class="nav-item">
                 <a href="<?= base_url('users') ?>" class="nav-link">

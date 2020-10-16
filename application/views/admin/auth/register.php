@@ -33,41 +33,41 @@
                         <div class="col-md-10 pl-md-0">
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
-                                <h5 class="text-muted font-weight-normal mb-4">Register for <?= $pack ?> PLAN</h5>
+                                <h5 class="text-muted font-weight-normal mb-4"><?php echo $this->lang->line('register_message'); ?><?= $pack ?> PLAN</h5>
                                 <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
                                     <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="row">
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Name</label>
+                                        <label for="exampleInputUsername1"><?php echo $this->lang->line('register_name_message'); ?></label>
                                         <input name="name" type="text" class="form-control" id="exampleInputUsername1"
-                                               autocomplete="name" placeholder="name">
+                                               autocomplete="name" placeholder="<?php echo $this->lang->line('register_name_message'); ?>">
                                     </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">LastName</label>
+                                                <label for="exampleInputUsername1"><?php echo $this->lang->line('register_lastname_message'); ?></label>
                                                 <input name="lastname" type="text" class="form-control" id="exampleInputUsername1"
-                                                       autocomplete="name" placeholder="lastname">
+                                                       autocomplete="name" placeholder="<?php echo $this->lang->line('register_lastname_message'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_mail_message'); ?></label>
                                         <input name="email" type="email" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Email">
+                                               placeholder="<?php echo $this->lang->line('register_mail_message'); ?>">
                                     </div>
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Whatsapp Phone</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_whatapp_phone_message'); ?></label>
                                         <input name="whatsapp" type="text" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Whatsapp Phone">
+                                               placeholder="<?php echo $this->lang->line('register_whatapp_phone_message'); ?>">
                                     </div>
                                         </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Country</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_country_message'); ?></label>
                                         <select style="color: black"  id="monselect" name="country">
                                             <?php foreach(countries() as $country) { ?>
                                             <option value="<?=$country['id'] ?>"><?=$country['name'] ?></option>
@@ -78,7 +78,7 @@
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Cluster</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_cluster_message'); ?></label>
                                         <select style="color: black"  id="monselect" name="cluster">
                                             <?php foreach(clusters() as $cluster) { ?>
                                                 <option  value="<?=$cluster['id'] ?>"><?=$cluster['name'] ?></option>
@@ -89,26 +89,26 @@
                                         </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Sponsor KEY</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_sponsor_key_message'); ?></label>
                                         <input name="sponsor" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Sponsor KEY">
+                                               placeholder="<?php echo $this->lang->line('register_sponsor_key_message'); ?>">
                                         <span style="color: #727cf5;" id ="sponsor_name"></span>
                                     </div>
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label for="exampleInputPassword1"><?php echo $this->lang->line('password_message'); ?></label>
                                         <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                                placeholder="Password">
+                                                placeholder="<?php echo $this->lang->line('password_message'); ?>">
                                     </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Sexe</label>
+                                                <label for="exampleInputEmail1"><?php echo $this->lang->line('register_sex_message'); ?></label>
                                                 <select style="color: black"  id="monselect" name="sexe">
 
-                                                        <option value="Masculin">Masculin</option>
-                                                    <option value="Feminin">Feminin</option>
+                                                        <option value="Masculin"><?php echo $this->lang->line('register_masculin_message'); ?></option>
+                                                    <option value="Feminin"><?php echo $this->lang->line('register_feminin_message'); ?></option>
 
 
                                                 </select>
@@ -119,15 +119,15 @@
                                     <div class="mt-3">
                                         <label class="checkbox">
                                             <input type="checkbox" class="">
-                                            Remember me
+                                            <?php echo $this->lang->line('remember_message'); ?>
                                         </label>
                                     </div>
                                     <div class="mt-3">
-                                        <input style="    width: 150px;" class="btn btn-primary text-white mr-2 mb-2 mb-md-0" type="submit" value="Sing up">
+                                        <input style="    width: 150px;" class="btn btn-primary text-white mr-2 mb-2 mb-md-0" type="submit" value="<?php echo $this->lang->line('register_sign_up_message'); ?>">
 
                                     </div>
 
-                                    <a href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted">Already a user? Sign in</a>
+                                    <a href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a>
                                 </form>
                             </div>
                         </div>

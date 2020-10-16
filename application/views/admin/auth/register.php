@@ -27,6 +27,7 @@
 
         <div class="row w-100 mx-0 auth-page">
             <div class="col-md-12" style="padding: 0">
+
                 <div class="card">
                     <div class="row">
 <div class="col-1"></div>

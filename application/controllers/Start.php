@@ -36,14 +36,11 @@ class Start extends CI_Controller
 
     public function dashboard()
     {
+
         if(get_user_djp()==0)
         {
 
-            $data['transation'] = $this->user->get_last_transaction();
-            $data['modes'] = $this->mode->get();
-            $data['representates'] = $this->user->get_user_representate();
-
-            $this->load->view('home/paid',$data);
+          redirect(base_url('paid'));
 
 
         }

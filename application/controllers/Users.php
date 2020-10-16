@@ -25,7 +25,7 @@ class Users extends AdminControler
     public function mychildren()
     {
 
-        $data['adherents'] = $this->User_model->get_last_transaction();
+        $data['adherents'] = $this->User_model->myadherents();
         $this->load_view('user/adherents',$data);
     }
 

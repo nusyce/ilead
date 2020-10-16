@@ -9,7 +9,10 @@ class Transactions_model extends CI_Model
         parent::__construct();
 
     }
-
+public function add($data)
+{
+    $this->db->insert('tbl_transactions', $data);
+}
     public function get($id = '')
     {
         /*if (get_user_role_id() == 1) {

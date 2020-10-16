@@ -23,10 +23,12 @@
 <body>
 <div class="main-wrapper">
     <div class="page-wrapper full-page">
-        <div class="page-content d-flex align-items-center justify-content-center">
+        <div class="">
 
-            <div class="row w-100">
-                <div class="col-md-12">
+            <div class="row w-100" style="padding: 0;padding: 0;
+    margin-right: 0px;
+    margin-left: 0px;">
+                <div class="col-md-12" style="padding: 0">
                     <nav id="topmenu" class="navbar navbar-expand-lg navbar-light bg-light">
                         <a class="navbar-brand" href="<?=base_url()?>">iLEAD</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"

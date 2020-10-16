@@ -16,9 +16,10 @@ class User_model extends CI_Model
     }
 
 
+
     public function get($id = '', $where = [])
     {
-        $this->db->select('tbl_users.id as id, firstname,lastname,country_id, sexe, profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
+        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role,sexe');
         $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         if (is_numeric($id)) {
@@ -56,7 +57,14 @@ class User_model extends CI_Model
         }
         return $this->db->get('tbl_representates')->result_array();
     }
-
+public function myadherents()
+{
+    $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
+    $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
+    $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
+    $this->db->where('sponsor', get_user_cle());
+    return $this->db->get('tbl_users')->result_array();
+}
     public function login($data)
     {
 
@@ -89,12 +97,24 @@ class User_model extends CI_Model
         }
     }
 
-    public function register($data)
+    public function register($data, $pass)
     {
+
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso=get_country($data['country_id'])->iso;
-        $this->codeGeneratorKey($insert,$iso);
+        $cle= $this->codeGeneratorKey($insert,$iso);
+        $this->welcome_email($data,$cle,$pass);
+        /*$this->db->where('id', $_POST['plan']);
+        $plan= $this->db->get('tbl_plans')->row();*/
+        $CI =& get_instance();
+        $CI->load->model('plans_model');
+        $plan=$CI->plans_model->get_plan_by_id($_POST['plan']);
+
+        $transaction=array('user_id'=>$insert,'plan_id'=>$plan->id,'due'=>date('d-m-Y H:i:s'),'created_at'=>date('d-m-Y H:i:s'),'status'=>'pending','amount'=>$plan->price);
+        $CI->load->model('transactions_model');
+        $CI->transactions_model->add($transaction);
+
     }
 
     public function get_user_by_email($email)

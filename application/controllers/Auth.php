@@ -46,6 +46,8 @@ class Auth extends CI_Controller
                     'user_mail' => $result['email'],
                     'user_name' => $result['firstname'],
                     'cle' => $result['cle'],
+                    'djp' => $result['djp'],
+                    'country' => $result['country_id'],
 
                 );
                 $this->session->set_userdata($admin_data);

@@ -14,12 +14,14 @@ class Transactions_model extends CI_Model
         parent::__construct();
 
     }
-public function add($data)
-{
-    $this->db->insert('tbl_transactions', $data);
-    $insert = $this->db->insert_id();
-    $this->numgeneratorcode($insert);
-}
+
+    public function add($data)
+    {
+        $this->db->insert('tbl_transactions', $data);
+        $insert = $this->db->insert_id();
+        $this->numgeneratorcode($insert);
+    }
+
     public function get($id = '')
     {
         if (get_user_role_id() == 1) {
@@ -82,7 +84,7 @@ public function add($data)
     {
         $code = 00000 + $id;
         $code = str_pad($id, 5, "0", STR_PAD_LEFT); // 0010
-        $code ='tr'.strval( $code );
+        $code = 'tr' . strval($code);
         $this->db->where('id', $id);
         $data = [];
         $data['num_trans'] = $code;
@@ -98,6 +100,7 @@ public function add($data)
         $this->db->update('tbl_transactions', $data);
         $invoice = $this->create_invoice($id);
         $this->send_invoice($invoice, $id);
+
     }
 
 
@@ -108,9 +111,13 @@ public function add($data)
         $data = $this->invoices($invoice);
         $this->load->model('user_model');
         $user = $this->user_model->get_user_by_id($tansaction->user_id);
+
+        $this->db->where('id', $tansaction->user_id);
+        $data['djp'] = 1;
+        $this->db->update('tbl_users', $data);
+
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
-
         try {
             extract($data, EXTR_REFS);
             try {

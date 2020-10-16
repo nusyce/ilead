@@ -1,0 +1,25 @@
+
+.detail-option {
+    opacity: 0;
+    font-size: 11px;
+    padding-top: 15px;
+}
+
+td:hover .detail-option {
+    opacity: 1;
+}
+
+#topmenu {
+    width: 100% !important;
+    left: 0 !important;
+    position: relative !important;
+    background-color: #fff !important;
+    border-bottom: none !important;
+    box-shadow:none !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 80px;
+}
+.stretch-card>.card{
+    max-width: 300px;
+}

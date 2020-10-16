@@ -7,15 +7,17 @@ class User_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Misc_model');
 
     }
 
     public function get($id = '', $where = [])
     {
-
-        if (is_numeric($id)){
+      //  $this->db->select('firstname', 'lastname', 'country_id', 'profession', 'whatsapp_phone', 'cluster', 'sponsor');
+        if (is_numeric($id)) {
             $this->db->where('id', $id);
-            return $this->db->get('tbl_users')->row();
+            $user = $this->db->get('tbl_users')->row();
+            $user->country = $this->Misc_model->get_country($user->country_id);
         }
         return $this->db->get('tbl_users')->result_array();
     }
@@ -43,7 +45,8 @@ class User_model extends CI_Model
     public function register($data)
     {
         $this->db->insert('tbl_users', $data);
-        return $this->db->insert_id();
+        $insert = $this->db->insert_id();
+        $this->codeGeneratorKey($insert);
     }
 
     public function get_user_by_email($email)
@@ -61,6 +64,17 @@ class User_model extends CI_Model
 
     public function logout()
     {
+
+    }
+
+
+    public function codeGeneratorKey($user_id)
+    {
+        $key = 0000 + $user_id;
+        $this->db->where('id', $user_id);
+        $data = [];
+        $data['key'] = $key;
+        $this->db->update('tbl_users', $data);
 
     }
 

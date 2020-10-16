@@ -17,14 +17,14 @@ public function add($data)
 }
     public function get($id = '')
     {
-        /*if (get_user_role_id() == 1) {
+      if (get_user_role_id() == 1) {
             $this->db->where('user_id', get_user_id());
         } elseif (can_represente()) {
             $can = can_represente();
             $this->db->where('u.country_id', $can->country_id);
-        }*/
+        }
 
-        $this->db->select('tbl_transactions.id as id, due,c.name as cluster,by_user_id, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement');
+        $this->db->select('tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement');
         $this->db->join('tbl_users as u', 'u.id = tbl_transactions.user_id', 'left');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = u.cluster', 'left');
@@ -32,7 +32,9 @@ public function add($data)
 
         if (is_numeric($id)) {
             $this->db->where('tbl_transactions.id', $id);
-            return $this->db->get('tbl_transactions')->row();
+            $transaction = $this->db->get('tbl_transactions')->row();
+            $transaction->attachements = $this->get_attachments($transaction->id);
+            return $transaction;
         }
         return $this->db->get('tbl_transactions')->result_array();
     }
@@ -42,7 +44,7 @@ public function add($data)
     {
         if (is_numeric($id)) {
             $this->db->where('tbl_factures.id', $id);
-            return $this->db->get('tbl_factures')->row();
+            return $this->db->get('tbl_factures')->result_array()[0];
         }
         return $this->db->get('tbl_factures')->result_array();
     }
@@ -59,10 +61,14 @@ public function add($data)
         $data['due'] = $data_ar->due;
         $data['mode_paiement'] = $data_ar->mde_pement;
         $data['amount'] = $data_ar->amount;
+        $data['sponsor'] = $data_ar->sponsor;
+        $data['code_user'] = $data_ar->code;
         $data['by_user'] = get_user_name();
         $data['num_trans'] = $data_ar->num_trans;
         $this->db->insert('tbl_factures', $data);
     }
+
+
     public function numgeneratorcode($id)
     {
         $code = 00000 + $id;
@@ -75,4 +81,30 @@ public function add($data)
         return $code;
     }
 
+
+    public function make_paie($id)
+    {
+        $this->db->where('id', $id);
+        $data['status'] = 'paie';
+        $this->db->update('tbl_transactions', $data);
+        $this->create_invoice($id);
+    }
+
+    public function add_attachments($id, $datapod)
+    {
+        $data['file_type'] = $datapod['file_type'];
+        $data['name'] = $datapod['raw_name'];
+        $data['ref'] = 'transactions';
+        $data['ref_id'] = $id;
+        $data['patch'] = $datapod['file_name'];
+        $this->db->insert('tbl_attachments', $data);
+        return true;
+    }
+
+    public function get_attachments($id)
+    {
+        $this->db->where('ref_id', $id);
+        $this->db->where('ref', 'transactions');
+        return $this->db->get('tbl_attachments')->result_array();
+    }
 }

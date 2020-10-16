@@ -1,5 +1,10 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Html2Pdf;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 require 'AdminControler.php';
 
@@ -20,7 +25,6 @@ class Transactions extends AdminControler
     }
 
 
-
     public function detail($id)
     {
         $data['data'] = $this->Transactions_model->get($id);
@@ -34,4 +38,112 @@ class Transactions extends AdminControler
         $this->Transactions_model->create_invoice($id);
         redirect(base_url('transactions/detail/' . $id));
     }
+
+    public function print_inv($id)
+    {
+
+        $data=$this->Transactions_model->invoices($id);
+        extract($data,EXTR_REFS);
+        try {
+            ob_start();
+            include APPPATH . '/helpers/invoice/res/ticket.php';
+            $content = ob_get_clean();
+
+            $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', 0);
+            $html2pdf->pdf->SetDisplayMode('fullpage');
+            $html2pdf->writeHTML($content);
+            $html2pdf->output('ticket.pdf');
+        } catch (Html2PdfException $e) {
+            $html2pdf->clean();
+
+            $formatter = new ExceptionFormatter($e);
+            echo $formatter->getHtmlMessage();
+        }
+
+
+    }
+
+    public function make_paiement()
+    {
+        $id = '';
+        if ($this->input->post() !== FALSE) {
+            $id = $this->input->post('id');
+            if (!empty($_FILES['attachment']['name'][0])) {
+                if ($this->upload_files($_FILES['attachment'], $id) === FALSE) {
+                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
+                }
+            }
+            $this->Transactions_model->make_paie($id);
+            redirect(base_url('transactions/detail/' . $id));
+
+        } else {
+            redirect(base_url('transactions/detail/' . $id));
+        }
+    }
+
+
+    private function upload_files($files, $id)
+    {
+        $paths = 'uploads/transactions/' . $id;
+        if (!file_exists($paths)) {
+            mkdir($paths, 777, true);
+        }
+
+        $config = array(
+            'upload_path' => $paths,
+            'allowed_types' => '*',
+            'overwrite' => 1,
+        );
+
+        $this->load->library('upload', $config);
+
+        $images = array();
+
+        foreach ($files['name'] as $key => $image) {
+            $_FILES['attachment[]']['name'] = $files['name'][$key];
+            $_FILES['attachment[]']['type'] = $files['type'][$key];
+            $_FILES['attachment[]']['tmp_name'] = $files['tmp_name'][$key];
+            $_FILES['attachment[]']['error'] = $files['error'][$key];
+            $_FILES['attachment[]']['size'] = $files['size'][$key];
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('attachment[]')) {
+                $dd = $this->upload->data();
+                $this->Transactions_model->add_attachments($id, $dd);
+
+
+            } else {
+                return false;
+            }
+        }
+
+        return $images;
+    }
+
+
+    private function send_invoice($invoice, $tansactions)
+    {
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        $pdf = '';
+        try {
+            //Recipients
+            $mail->setFrom('contact@ileadglobe.com', 'iLead');
+            $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+            $mail->addAddress('ellen@example.com');               // Name is optional
+            $mail->addReplyTo('info@example.com', 'Information');
+            $mail->AddStringAttachment($pdf, 'Ticket.pdf', 'base64', 'application/pdf');
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'CONFIRMATION DE PAIEMENT';
+            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+
 }

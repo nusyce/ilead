@@ -10,7 +10,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nom</th>
-                                <th>Membres</th>
                                 <th>Status</th>
                             </tr>
                             </thead>
@@ -20,7 +19,6 @@
                                 <tr>
                                     <td><?= $role['id'] ?></td>
                                     <td><?= $role['name'] ?></td>
-                                    <td><?= 0 ?></td>
                                     <td>
                                         <div class="form-check form-check-inline"
                                              style="margin-top:0 !important;padding: 0 !important;">

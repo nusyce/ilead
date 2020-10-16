@@ -14,7 +14,7 @@ class Auth extends CI_Controller
         }
 
         $this->lang->load($key . '_lang', $lann);
-        
+
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');
         $this->load->model('Plans_model', 'plans');

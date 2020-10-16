@@ -9,6 +9,7 @@ class PaieMethode extends AdminControler
     function __construct()
     {
         parent::__construct();
+        has_permission();
         $this->load->model('Payment_modes_model', 'payment_modes_model');
 
     }

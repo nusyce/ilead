@@ -39,7 +39,6 @@ class Transactions_model extends CI_Model
         $this->db->update('tbl_transactions', $data);
         return $code;
 
-    }
     /**
      * @param  boolean If Client or Staff
      * @return none

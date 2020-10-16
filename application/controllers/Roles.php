@@ -8,6 +8,7 @@ class Roles extends AdminControler
     public function __construct()
     {
         parent::__construct();
+        has_permission();
         $this->load->model('User_roles_model');
     }
 

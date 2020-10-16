@@ -220,20 +220,20 @@
                             <img src="https://via.placeholder.com/80x80" alt="">
                         </div>
                         <div class="info text-center">
-                            <p class="name font-weight-bold mb-0"><?=get_user_name() ?></p>
-                            <p class="email text-muted mb-3"><?=get_user_mail() ?></p>
+                            <p class="name font-weight-bold mb-0"><?= get_user_name() ?></p>
+                            <p class="email text-muted mb-3"><?= get_user_mail() ?></p>
                         </div>
                     </div>
                     <div class="dropdown-body">
                         <ul class="profile-nav p-0 pt-3">
                             <li class="nav-item">
-                                <a href="<?= base_url('users/profile')?>" class="nav-link">
+                                <a href="<?= base_url('users/profile') ?>" class="nav-link">
                                     <i data-feather="user"></i>
                                     <span>Profile</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?=base_url('auth/logout') ?>" class="nav-link">
+                                <a href="<?= base_url('auth/logout') ?>" class="nav-link">
                                     <i data-feather="log-out"></i>
                                     <span>Deconnexion</span>
                                 </a>
@@ -281,45 +281,50 @@
                     <span class="link-title">Transactions</span>
                 </a>
             </li>
-            <li class="nav-item nav-category">Autres</li>
-            <li class="nav-item">
-                <a href="<?= base_url('users/representants'); ?>" class="nav-link">
-                    <i class="link-icon" data-feather="bar-chart-2"></i>
-                    <span class="link-title">Réprésentants</span>
-                </a>
-            </li>
 
-            <li class="nav-item nav-category">Configurations</li>
-            <li class="nav-item">
-                <a href="<?= base_url('users') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="user"></i>
-                    <span class="link-title">Utilisateurs</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?= base_url('roles') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="lock"></i>
-                    <span class="link-title">Roles</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?= base_url('plans') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="trending-up"></i>
-                    <span class="link-title">Pack d'abonnement</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?= base_url('PaieMethode') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="dollar-sign"></i>
-                    <span class="link-title">Mode de paiements</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?= base_url('misc/countries') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="globe"></i>
-                    <span class="link-title">Pays</span>
-                </a>
-            </li>
+            <?php
+
+            if (get_user_role_id() == 2): ?>
+                <li class="nav-item nav-category">Autres</li>
+                <li class="nav-item">
+                    <a href="<?= base_url('users/representants'); ?>" class="nav-link">
+                        <i class="link-icon" data-feather="bar-chart-2"></i>
+                        <span class="link-title">Réprésentants</span>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Configurations</li>
+                <li class="nav-item">
+                    <a href="<?= base_url('users') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="user"></i>
+                        <span class="link-title">Utilisateurs</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('roles') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="lock"></i>
+                        <span class="link-title">Roles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('plans') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="trending-up"></i>
+                        <span class="link-title">Pack d'abonnement</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('PaieMethode') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="dollar-sign"></i>
+                        <span class="link-title">Mode de paiements</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('misc/countries') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="globe"></i>
+                        <span class="link-title">Pays</span>
+                    </a>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

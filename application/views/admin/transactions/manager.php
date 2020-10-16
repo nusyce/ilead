@@ -20,26 +20,29 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>#2121</td>
-                                <td>61</td>
-                                <td>System Architect</td>
-                                <td>$320,800</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
-                                           data-toggle="dropdown" aria-haspopup="true" href="#" aria-expanded="false">
-                                            En attente
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" id="dopayer" href="#">Payé</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
+                            <?php foreach ($data as $dd): ?>
+                                <tr>
+                                    <td><?= $dd['id'] ?></td>
+                                    <td><?= $dd['id'] ?></td>
+                                    <td><?= $dd['plan'] ?></td>
+                                    <td><?= $dd['lastname'] . ' ' . $dd['firstname'] ?></td>
+                                    <td><?= number_format($dd['amount'], 0, 0, ' ') ?></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
+                                               data-toggle="dropdown" aria-haspopup="true" href="#"
+                                               aria-expanded="false">
+                                                <?= $dd['status'] ?>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" id="dopayer" href="#">Payé</a>
+                                                <a class="dropdown-item" href="#">Annuler</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>2011/04/25</td>
-                            </tr>
+                                    </td>
+                                    <td><?= _dd($dd['due'])?></td>
+                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

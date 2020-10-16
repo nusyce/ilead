@@ -23,6 +23,7 @@ function get_user_role()
 
     return get_instance()->session->userdata('user_role');
 }
+
 function get_user_cle()
 {
     if (!is_user_logged_in()) {
@@ -40,6 +41,7 @@ function get_user_mail()
 
     return get_instance()->session->userdata('user_mail');
 }
+
 function get_user_name()
 {
     if (!is_user_logged_in()) {
@@ -55,7 +57,32 @@ function get_user_role_id()
         return false;
     }
 
-    return get_instance()->session->userdata('user_role_id');
+    return (int)get_instance()->session->userdata('user_role_id');
+}
+
+function can_represente()
+{
+    $CI = &get_instance();
+    $CI->db->where('user_id', get_user_id());
+    $CI->db->from('tbl_representates');
+    $rest = $CI->db->get()->row();
+    if ($rest) {
+        return $rest;
+    } else {
+        return false;
+    }
+}
+
+
+function _dd($date)
+{
+    return date('d/m/Y', strtotime($date));
+}
+
+function has_permission()
+{
+    if (get_user_role_id() !== 2)
+        redirect('auth/login');
 }
 
 function countries($active = '')
@@ -66,6 +93,7 @@ function countries($active = '')
     $CI->db->from('tbl_country');
     return $CI->db->get()->result_array();
 }
+
 function get_country($id)
 {
 
@@ -75,9 +103,10 @@ function get_country($id)
     $CI->db->where('id', $id);
     $row = $CI->db->get('tbl_country')->row();
 
-        return $row;
+    return $row;
 
 }
+
 function clusters($active = '')
 {
     $CI = &get_instance();
@@ -86,8 +115,6 @@ function clusters($active = '')
     $CI->db->from('tbl_cluster');
     return $CI->db->get()->result_array();
 }
-
-
 
 
 /**

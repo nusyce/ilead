@@ -34,7 +34,7 @@
                                     <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
                                     <td>
                                         <?php
-                                        if (get_user_role_id() == 2):?>
+                                        if (get_user_role_id() == 2 && $dd['status'] != 'paie'):?>
                                             <div class="dropdown">
                                                 <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
                                                    data-toggle="dropdown" aria-haspopup="true" href="#"
@@ -49,7 +49,7 @@
                                                 </div>
                                             </div>
                                         <?php else: ?>
-                                            <span class="badge badge-info">
+                                            <span class="badge badge-success">
                                                  <?= $dd['status'] ?>
                                              </span>
                                         <?php endif; ?>
@@ -94,13 +94,15 @@
                                                 <!-- <form> -->
                                                 <div class="form-group">
                                                     <button id="addEmail" class="btn btn-primary">Ajouter plus</button>
-                                                    <button id="removeEmail" class="btn btn-warning">Supprimer le dernier champs
+                                                    <button id="removeEmail" class="btn btn-warning">Supprimer le
+                                                        dernier champs
                                                     </button>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Ajouter une pièce</label>
-                                                    <input type="file" name="attachment[]" required class="file-upload-default">
+                                                    <input type="file" name="attachment[]" required
+                                                           class="file-upload-default">
                                                     <div class="input-group col-xs-12">
                                                         <input type="text" class="form-control file-upload-info"
                                                                disabled="" placeholder="Ajouter une pièce jointe">
@@ -124,7 +126,8 @@
                         <button type="button" class="btn btn-secondary "
                                 data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
                         <button type="submit"
-                                class="btn btn-primary deleted" data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                                class="btn btn-primary deleted"
+                                data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
                     </div>
                 </form>
             </div>

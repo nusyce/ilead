@@ -14,12 +14,12 @@ class Transactions_model extends CI_Model
         parent::__construct();
 
     }
-
-    public function add($data)
-    {
-        $this->db->insert('tbl_transactions', $data);
-    }
-
+public function add($data)
+{
+    $this->db->insert('tbl_transactions', $data);
+    $insert = $this->db->insert_id();
+    $this->numgeneratorcode($insert);
+}
     public function get($id = '')
     {
         if (get_user_role_id() == 1) {
@@ -82,7 +82,7 @@ class Transactions_model extends CI_Model
     {
         $code = 00000 + $id;
         $code = str_pad($id, 5, "0", STR_PAD_LEFT); // 0010
-        $code = 'tr' . strval($code);
+        $code ='tr'.strval( $code );
         $this->db->where('id', $id);
         $data = [];
         $data['num_trans'] = $code;

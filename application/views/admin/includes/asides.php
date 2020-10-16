@@ -281,6 +281,7 @@
                     <span class="link-title"><?php echo $this->lang->line('asides_transaction_message'); ?></span>
                 </a>
             </li>
+            <?php if (get_user_role_id()==2){?>
             <li class="nav-item nav-category"><?php echo $this->lang->line('asides_autre_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('users/representants'); ?>" class="nav-link">
@@ -320,6 +321,7 @@
                     <span class="link-title"><?php echo $this->lang->line('register_country_message'); ?></span>
                 </a>
             </li>
+            <?php }?>
         </ul>
     </div>
 </nav>

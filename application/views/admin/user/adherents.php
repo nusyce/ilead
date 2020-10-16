@@ -13,23 +13,30 @@
                         <table id="databable" class="table">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ID</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Cluster</th>
+                                <th>Country</th>
+                                <th>Sexe</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
+                            <?php
+                            foreach ($adherents as $adherent): ?>
+                                <tr>
+                                    <td><?= $adherent['id'] ?></td>
+                                    <td><?= $adherent['firstname'] ?></td>
+                                    <td><?= $adherent['lastname'] ?></td>
+                                    <td><?= $adherent['email'] ?></td>
+                                    <td><?= $adherent['whatsapp_phone'] ?></td>
+                                    <td><?= $adherent['cluster'] ?></td>
+                                    <td><?= $adherent['country'] ?></td>
+                                    <td><?= $adherent['sexe'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

@@ -5,7 +5,8 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Ajouter un adhérant</h6>
-                    <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
+                    <form class="forms-sample" method="post" action="<?= base_url('users/child')?>">
+                        <?php $this->load->view('admin/includes/message.php') ?>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
@@ -57,14 +58,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Sponsor KEY</label>
-                                    <input disabled name="sponsor" value="<?=get_user_cle()?>" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
+
+                                    <input hidden name="sponsor" value="<?=get_user_cle()?>" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
                                            placeholder="Sponsor KEY">
-                                    <span style="color: #727cf5;" id ="sponsor_name"></span>
-                                </div>
-                            </div>
+
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>

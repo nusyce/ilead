@@ -30,7 +30,7 @@
                                         </div>
                                     </td>
                                     <td><?= $dd['profession'] ?></td>
-                                    <td><?= '' ?></td>
+                                    <td><?= $dd['sexe']?></td>
                                     <td><?= '' ?></td>
                                     <td><?= $dd['sponsor'] ?></td>
                                     <td><?= $dd['cluster'] ?></td>

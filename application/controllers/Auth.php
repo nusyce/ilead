@@ -17,6 +17,7 @@ class Auth extends CI_Controller
         
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');
+        $this->load->model('Plans_model', 'plans');
     }
 
     public function index()
@@ -89,16 +90,17 @@ class Auth extends CI_Controller
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
                 'lastname' => $this->input->post('lastname'),
-                'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'password' =>  password_hash(substr(md5(microtime()),rand(0,26),5), PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
             $user = $this->user->register($data);
-
+            $this->session->set_flashdata('success', 'Enregistré avec succes');
             redirect(base_url('auth/login'));
         }else{
+            $data['plans'] = $this->plans->get_all();
             $data['pack']=(!empty($_GET['pack'])) ?$_GET['pack']:'';
             $this->load->view('admin/auth/register',$data);
         }

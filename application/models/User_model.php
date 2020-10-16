@@ -19,7 +19,7 @@ class User_model extends CI_Model
 
     public function get($id = '', $where = [])
     {
-        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
+        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role,sexe');
         $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         if (is_numeric($id)) {
@@ -90,6 +90,14 @@ class User_model extends CI_Model
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
     }
+    public function get_my_adherents()
+    {
+        $this->db->select('tbl_users.id as id, firstname,lastname,co.name as country,sexe,email,cu.name as cluster,whatsapp_phone');
+        $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
+        $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
+        $this->db->where('sponsor', get_user_cle());
+        return $this->db->get('tbl_users')->result_array();
+    }
     public function get_user_by_key($cle)
     {
         $this->db->where('cle', $cle);
@@ -125,7 +133,7 @@ class User_model extends CI_Model
 
     }
 
-    private function welcome_email($key,$password,$client_mail)
+    private function welcome_email($data)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);

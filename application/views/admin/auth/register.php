@@ -95,13 +95,7 @@
                                         <span style="color: #727cf5;" id ="sponsor_name"></span>
                                     </div>
                                     </div>
-                                        <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1"><?php echo $this->lang->line('password_message'); ?></label>
-                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                                placeholder="<?php echo $this->lang->line('password_message'); ?>">
-                                    </div>
-                                        </div>
+
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1"><?php echo $this->lang->line('register_sex_message'); ?></label>
@@ -114,7 +108,17 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Your Plan</label>
+                                                <select style="color: black"  id="monselect" name="cluster">
+                                                    <?php foreach($plans as $plan) { ?>
+                                                        <option <?=($plan['name']==$pack) ? 'selected':'' ?>  value="<?=$plan['id'] ?>"><?=$plan['name'] ?></option>
+                                                    <?php } ?>
 
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mt-3">
                                         <label class="checkbox">

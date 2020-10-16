@@ -11,7 +11,7 @@ class Users extends AdminControler
 
         parent::__construct();
         $this->load->model('User_model');
-
+        $this->load->model('Plans_model', 'plans');
     }
 
     public function index()
@@ -36,6 +36,7 @@ class Users extends AdminControler
             {
                 $this->session->set_flashdata('danger', 'sponsor inconnu');
             }
+            $pass=substr(md5(microtime()),rand(0,26),5);
             $data = array(
                 'email' => $this->input->post('email'),
                 'firstname' => $this->input->post('name'),
@@ -45,17 +46,18 @@ class Users extends AdminControler
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
                 'lastname' => $this->input->post('lastname'),
-                'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'password' =>  password_hash($pass, PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
-            $user = $this->User_model->register($data);
+            $user = $this->User_model->register($data, $pass);
             $this->session->set_flashdata('success', 'Enregistré avec succes');
 
         }
-        $this->load_view('user/child');
+        $data['plans'] = $this->plans->get_all();
+        $this->load_view('user/child',$data);
 
     }
 

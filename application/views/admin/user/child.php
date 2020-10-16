@@ -62,13 +62,7 @@
                                     <input hidden name="sponsor" value="<?=get_user_cle()?>" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
                                            placeholder="Sponsor KEY">
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Password">
-                                </div>
-                            </div>
+
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Sexe</label>
@@ -77,6 +71,17 @@
                                         <option value="Masculin">Masculin</option>
                                         <option value="Feminin">Feminin</option>
 
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Your Plan</label>
+                                    <select style="color: black"  id="monselect" name="cluster">
+                                        <?php foreach($plans as $plan) { ?>
+                                            <option   value="<?=$plan['id'] ?>"><?=$plan['name'] ?></option>
+                                        <?php } ?>
 
                                     </select>
                                 </div>

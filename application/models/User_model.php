@@ -77,12 +77,13 @@ class User_model extends CI_Model
         }
     }
 
-    public function register($data)
+    public function register($data, $pass)
     {
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso=get_country($data['country_id'])->iso;
-        $this->codeGeneratorKey($insert,$iso);
+        $cle= $this->codeGeneratorKey($insert,$iso);
+        $this->welcome_email($data,$cle,$pass);
     }
 
     public function get_user_by_email($email)
@@ -129,11 +130,11 @@ class User_model extends CI_Model
         $data = [];
         $data['cle'] = $key;
         $this->db->update('tbl_users', $data);
-
+        return $key;
 
     }
 
-    private function welcome_email($data)
+    private function welcome_email($data,$cle,$pass)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -150,7 +151,7 @@ class User_model extends CI_Model
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+            $mail->Body = 'Merci de votre confiance <br>Votre clé est <b>'.$cle.'</b> et votre mot de passe est <br>'.$pass.'</b>';
 
             $mail->send();
             echo 'Message has been sent';

@@ -80,6 +80,7 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('danger', 'sponsor inconnu');
            redirect(base_url('auth/register'));
             }
+            $pass=substr(md5(microtime()),rand(0,26),5);
             $data = array(
                 'email' => $this->input->post('email'),
                 'firstname' => $this->input->post('name'),
@@ -89,13 +90,13 @@ class Auth extends CI_Controller
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
                 'lastname' => $this->input->post('lastname'),
-                'password' =>  password_hash(substr(md5(microtime()),rand(0,26),5), PASSWORD_BCRYPT),
+                'password' =>  password_hash($pass, PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
-            $user = $this->user->register($data);
+            $user = $this->user->register($data, $pass);
             $this->session->set_flashdata('success', 'Enregistré avec succes');
             redirect(base_url('auth/login'));
         }else{

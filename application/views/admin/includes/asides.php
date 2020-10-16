@@ -22,8 +22,7 @@
                             class="font-weight-medium ml-1 mr-1"><?php echo $this->lang->line('asides_message'); ?></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                    <a href="<?=base_url('lang/?lang=en') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
-                                                                         title="us" id="us"></i> <span
+                    <a href="<?=base_url('lang/?lang=en') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us" title="us" id="us"></i> <span
                                 class="ml-1"><?php echo $this->lang->line('asides_message'); ?></span></a>
                     <a href="<?=base_url('lang/?lang=fr') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
                                                                          title="fr" id="fr"></i> <span

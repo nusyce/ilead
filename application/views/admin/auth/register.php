@@ -105,9 +105,9 @@
                                                         <option value="Masculin"><?php echo $this->lang->line('register_masculin_message'); ?></option>
                                                     <option value="Feminin"><?php echo $this->lang->line('register_feminin_message'); ?></option>
 
-
                                                 </select>
                                             </div>
+
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
@@ -120,6 +120,36 @@
                                                 </select>
                                             </div>
                                         </div>
+<!--
+                                        <div class="mt-3">
+                                            <div style="margin-left: 15px; width: 150px;" id="show" class="btn btn-primary text-white mr-2 mb-2 mb-md-0">Autres</div>
+                                        </div>
+-->
+
+                                            <div class="col-6" id="preferences">
+                                        <?php  if($pack == "PLATINUM") {?>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Quel est votre plage horaire préféré ?</label>
+                                                <select style="color: black"  id="plage_horaire" name="plage_horaire">
+
+                                                    <option value="5h - 7h">5h - 7h</option>
+                                                    <option value="6h - 8h">6h - 8h</option>
+
+
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Quel sont vos exigence par rapport a la retraite ?</label>
+
+                                                <textarea name="exigences" id="exigences" type="text" class="form-control" id="exampleInputEmail1" rows="15"></textarea>
+                                            </div>
+
+                                        <?php } ?>
+                                        </div>
+
+
                                     </div>
                                     <div class="mt-3">
                                         <label class="checkbox">
@@ -170,6 +200,17 @@
                     });
             });
         });
+
+      /*  $(document).ready(function(){
+
+            $('#preferences').hide();
+
+            $('#show').click(function(){
+
+                $('#preferences').show();
+            });
+
+        });*/
 
         </script>
 	<!-- endinject -->

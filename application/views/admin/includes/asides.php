@@ -261,63 +261,63 @@
     </div>
     <div class="sidebar-body">
         <ul class="nav">
-            <li class="nav-item nav-category">Principal</li>
+            <li class="nav-item nav-category"><?php echo $this->lang->line('asides_principal_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('start/dashboard') ?>" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">Tableau de bord</span>
+                    <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('users/mychildren'); ?>" class="nav-link">
                     <i class="link-icon" data-feather="users"></i>
-                    <span class="link-title">Mes Aderents</span>
+                    <span class="link-title"><?php echo $this->lang->line('dashboard_adherent_message'); ?></span>
                 </a>
             </li>
-            <li class="nav-item nav-category">Transactions</li>
+            <li class="nav-item nav-category"><?php echo $this->lang->line('asides_transaction_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('transactions'); ?>" class="nav-link">
                     <i class="link-icon" data-feather="bar-chart-2"></i>
-                    <span class="link-title">Transactions</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_transaction_message'); ?></span>
                 </a>
             </li>
-            <li class="nav-item nav-category">Autres</li>
+            <li class="nav-item nav-category"><?php echo $this->lang->line('asides_autre_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('users/representants'); ?>" class="nav-link">
                     <i class="link-icon" data-feather="bar-chart-2"></i>
-                    <span class="link-title">Réprésentants</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_representant_message'); ?></span>
                 </a>
             </li>
 
-            <li class="nav-item nav-category">Configurations</li>
+            <li class="nav-item nav-category"><?php echo $this->lang->line('asides_configuration_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('users') ?>" class="nav-link">
                     <i class="link-icon" data-feather="user"></i>
-                    <span class="link-title">Utilisateurs</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_utilisateur_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('roles') ?>" class="nav-link">
                     <i class="link-icon" data-feather="lock"></i>
-                    <span class="link-title">Roles</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_roles_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('plans') ?>" class="nav-link">
                     <i class="link-icon" data-feather="trending-up"></i>
-                    <span class="link-title">Pack d'abonnement</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_pack_abon_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('PaieMethode') ?>" class="nav-link">
                     <i class="link-icon" data-feather="dollar-sign"></i>
-                    <span class="link-title">Mode de paiements</span>
+                    <span class="link-title"><?php echo $this->lang->line('asides_mode_pay_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url('misc/countries') ?>" class="nav-link">
                     <i class="link-icon" data-feather="globe"></i>
-                    <span class="link-title">Pays</span>
+                    <span class="link-title"><?php echo $this->lang->line('register_country_message'); ?></span>
                 </a>
             </li>
         </ul>
@@ -329,29 +329,29 @@
             <a href="#" class="settings-sidebar-toggler">
                 <i data-feather="settings"></i>
             </a>
-            <h6 class="text-muted">Sidebar:</h6>
+            <h6 class="text-muted"><?php echo $this->lang->line('asides_sidebar_message'); ?>:</h6>
             <div class="form-group border-bottom">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarLight"
                                value="sidebar-light" checked>
-                        Light
+                        <?php echo $this->lang->line('asides_light_message'); ?>
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarDark"
                                value="sidebar-dark">
-                        Dark
+                        <?php echo $this->lang->line('asides_dark_message'); ?>
                     </label>
                 </div>
             </div>
             <div class="theme-wrapper">
-                <h6 class="text-muted mb-2">Light Theme:</h6>
+                <h6 class="text-muted mb-2"><?php echo $this->lang->line('asides_light_theme_message'); ?>:</h6>
                 <a class="theme-item active" href="../demo_1/dashboard-one.html">
                     <img src="../assets/images/screenshots/light.jpg" alt="light theme">
                 </a>
-                <h6 class="text-muted mb-2">Dark Theme:</h6>
+                <h6 class="text-muted mb-2"><?php echo $this->lang->line('asides_dark_theme_message'); ?>:</h6>
                 <a class="theme-item" href="../demo_2/dashboard-one.html">
                     <img src="../assets/images/screenshots/dark.jpg" alt="light theme">
                 </a>

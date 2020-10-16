@@ -47,7 +47,7 @@ class User_model extends CI_Model
     {
 
         $this->db->from('tbl_users');
-        $this->db->where('email', $data['email']);
+        $this->db->where('cle', $data['cle']);
 
         $query = $this->db->get();
         if ($query->num_rows() == 0) {

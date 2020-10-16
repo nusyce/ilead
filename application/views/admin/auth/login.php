@@ -36,9 +36,9 @@
                                     account.</h5>
                                 <form class="forms-sample" action="<?= base_url('auth/login')?>" method="post">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Email">
+                                        <label for="exampleInputEmail1">Your Key</label>
+                                        <input name="key" type="text" class="form-control" id="exampleInputEmail1"
+                                               placeholder="Your Key">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>

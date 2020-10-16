@@ -44,6 +44,13 @@
                                     </div>
                                         </div>
                                         <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputUsername1">LastName</label>
+                                                <input name="lastname" type="text" class="form-control" id="exampleInputUsername1"
+                                                       autocomplete="name" placeholder="lastname">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input name="email" type="email" class="form-control" id="exampleInputEmail1"

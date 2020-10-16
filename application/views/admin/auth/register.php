@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
 	<!-- core:css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="<?= base_url()?>assets/vendors/core/core.css">
 	<!-- endinject -->
   <!-- plugin css for this page -->
@@ -81,8 +82,9 @@
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Sponsor KEY</label>
-                                        <input name="sponsor" type="text" class="form-control" id="exampleInputEmail1"
+                                        <input name="sponsor" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="Sponsor KEY">
+                                        <span style="color: #727cf5;" id ="sponsor_name"></span>
                                     </div>
                                     </div>
                                         <div class="col-6">
@@ -92,13 +94,18 @@
                                                 placeholder="Password">
                                     </div>
                                         </div>
-                                            <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password Confirmation</label>
-                                            <input type="password" name="confirm" class="form-control" id="exampleInputPassword1"
-                                                    placeholder="Password Confirmation">
-                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Sexe</label>
+                                                <select style="color: black"  id="monselect" name="sexe">
+
+                                                        <option value="Masculin">Masculin</option>
+                                                    <option value="Feminin">Feminin</option>
+
+
+                                                </select>
                                             </div>
+                                        </div>
 
                                     </div>
                                     <div class="mt-3">
@@ -134,6 +141,24 @@
 	<!-- inject:js -->
 	<script src="<?= base_url()?>assets/vendors/feather-icons/feather.min.js"></script>
 	<script src="<?= base_url()?>assets/js/template.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#sponsor").change(function(){
+
+                $.get('<?=base_url("auth/get_sponsor_name")?>',
+                    {
+                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                        cle: $(this).val(),
+
+                    },
+                    function (data) {
+                        $("#sponsor_name").html(data);
+
+                    });
+            });
+        });
+
+        </script>
 	<!-- endinject -->
   <!-- custom js for this page -->
 	<!-- end custom js for this page -->

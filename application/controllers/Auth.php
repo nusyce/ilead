@@ -31,6 +31,8 @@ class Auth extends CI_Controller
                     'user_id' => $result['id'],
                     'user_role_id' => $result['role_id'],
                     'user_role' => $this->User_roles_model->get_role_by_id($result['role_id'])->name,
+                    'user_mail' => $result['email'],
+                    'user_name' => $result['firstname'],
 
                 );
                 $this->session->set_userdata($admin_data);
@@ -41,6 +43,15 @@ class Auth extends CI_Controller
             $this->load->view('admin/auth/login');
         }
 
+    }
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect(base_url('auth/login'), 'refresh');
+    }
+    public function get_sponsor_name()
+    {
+
+         echo $this->user->get_user_by_key($_GET['cle']);
     }
 
     public function register()
@@ -58,6 +69,7 @@ class Auth extends CI_Controller
                 'sponsor' => $this->input->post('sponsor'),
                 'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
+                'sexe' => $this->input->post('sexe'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );

@@ -23,6 +23,24 @@ function get_user_role()
 
     return get_instance()->session->userdata('user_role');
 }
+
+function get_user_mail()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_mail');
+}
+function get_user_name()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_name');
+}
+
 function get_user_role_id()
 {
     if (!is_user_logged_in()) {

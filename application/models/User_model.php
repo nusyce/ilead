@@ -61,7 +61,15 @@ class User_model extends CI_Model
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
     }
-
+    public function get_user_by_key($cle)
+    {
+        $this->db->where('cle', $cle);
+         $user=$this->db->get('tbl_users')->row();
+        if ($user)
+        {
+            return $user->firstname;
+        }
+    }
     public function get_user_by_id($id)
     {
         $this->db->where('id', $id);

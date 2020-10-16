@@ -51,8 +51,11 @@
                     </nav>
                     <h4 class="text-center mb-3 mt-4">Choose a plan</h4>
                     <p class="text-muted text-center mb-4 pb-2">Choose the features and functionality your team need
-                        today. Easily upgrade as your company grows.</p>
+                        today. Easily upgrade as your company grows.<br>
+                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted">Already a user? Sign in</a></p>
+
                     <div class="container">
+
                         <div class="row">
                             <?php foreach ($plans as $plan) { ?>
                                 <div class="col-md-4 stretch-card grid-margin grid-margin-md-0">
@@ -76,6 +79,7 @@
 
 
                         </div>
+
                     </div>
                 </div>
             </div>

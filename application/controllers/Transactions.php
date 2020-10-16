@@ -24,6 +24,14 @@ class Transactions extends AdminControler
     public function detail($id)
     {
         $data['data'] = $this->Transactions_model->get($id);
+        $data['factures'] = $this->Transactions_model->invoices();
         $this->load_view('transactions/transaction', $data);
+    }
+
+
+    public function create_inv($id)
+    {
+        $this->Transactions_model->create_invoice($id);
+        redirect(base_url('transactions/detail/' . $id));
     }
 }

@@ -16,10 +16,9 @@ class User_model extends CI_Model
     }
 
 
-
     public function get($id = '', $where = [])
     {
-        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
+        $this->db->select('tbl_users.id as id, firstname,lastname,country_id, sexe, profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
         $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         if (is_numeric($id)) {

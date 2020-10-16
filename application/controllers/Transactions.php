@@ -42,8 +42,8 @@ class Transactions extends AdminControler
     public function print_inv($id)
     {
 
-        $data=$this->Transactions_model->invoices($id);
-        extract($data,EXTR_REFS);
+        $data = $this->Transactions_model->invoices($id);
+        extract($data, EXTR_REFS);
         try {
             ob_start();
             include APPPATH . '/helpers/invoice/res/ticket.php';
@@ -119,31 +119,6 @@ class Transactions extends AdminControler
         return $images;
     }
 
-
-    private function send_invoice($invoice, $tansactions)
-    {
-        // Instantiation and passing `true` enables exceptions
-        $mail = new PHPMailer(true);
-        $pdf = '';
-        try {
-            //Recipients
-            $mail->setFrom('contact@ileadglobe.com', 'iLead');
-            $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-            $mail->addAddress('ellen@example.com');               // Name is optional
-            $mail->addReplyTo('info@example.com', 'Information');
-            $mail->AddStringAttachment($pdf, 'Ticket.pdf', 'base64', 'application/pdf');
-
-            // Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'CONFIRMATION DE PAIEMENT';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
 
 
 }

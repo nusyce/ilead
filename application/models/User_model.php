@@ -131,6 +131,7 @@ public function myadherents()
             return $user->firstname;
         }
     }
+
     public function get_user_by_id($id)
     {
         $this->db->where('id', $id);

@@ -19,7 +19,7 @@ class Start extends CI_Controller
             $lann = get_user_lang();
         }
 
-        $this->lang->load($key . '_lang', $lann);
+        $this->lang->load($lann, $lann);
         $this->load->model('Plans_model', 'plans');
         $this->load->model('User_model', 'user');
         $this->load->model('payment_modes_model', 'mode');
@@ -42,7 +42,6 @@ class Start extends CI_Controller
             $data['transation'] = $this->user->get_last_transaction();
             $data['modes'] = $this->mode->get();
             $data['representates'] = $this->user->get_user_representate();
-
             $this->load->view('home/paid',$data);
 
 

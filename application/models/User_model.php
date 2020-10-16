@@ -30,7 +30,20 @@ class User_model extends CI_Model
         return $this->db->get('tbl_users')->result_array();
     }
 
-
+    public function get_last_transaction()
+    {
+        $this->db->select('pl.name as plan, pl.id as plan_id,pl.price as price');
+        $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'inner');
+        $this->db->where('user_id', get_user_id());
+        return $this->db->order_by('tbl_transactions.id',"desc")->limit(1)->get('tbl_transactions')->row();
+    }
+    public function get_user_representate()
+    {
+        $this->db->select('us.firstname, us.whatsapp_phone,us.email');
+        $this->db->join('tbl_users as us', 'us.id = tbl_representates.user_id', 'inner');
+        $this->db->where('tbl_representates.country_id', get_user_country());
+        return $this->db->order_by('tbl_representates.id',"desc")->get('tbl_representates')->result_array();
+    }
     public function representants($id = '')
     {
         $this->db->select('tbl_representates.id as id, firstname,lastname,cl.name as cluster,c.name as country,profession,whatsapp_phone,sponsor');

@@ -78,7 +78,6 @@ class Auth extends CI_Controller
             if (!$this->user->get_user_by_key($this->input->post('sponsor')))
             {
                 $this->session->set_flashdata('danger', 'sponsor inconnu');
-
            redirect(base_url('auth/register'));
             }
             $data = array(

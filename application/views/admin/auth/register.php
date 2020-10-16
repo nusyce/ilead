@@ -34,7 +34,7 @@
                         <div class="col-md-10 pl-md-0">
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
-                                <h5 class="text-muted font-weight-normal mb-4"><?php echo $this->lang->line('register_message'); ?><?= $pack ?> PLAN</h5>
+                                <h5 class="text-muted font-weight-normal mb-4"><?php echo $this->lang->line('register_message'); ?> <?= $pack ?> PLAN</h5>
                                 <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
                                     <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="row">
@@ -165,7 +165,8 @@
 
                     },
                     function (data) {
-                        $("#sponsor_name").html(data);
+                        var parsed_data = JSON.parse(data);
+                        $("#sponsor_name").html(parsed_data.firstname);
 
                     });
             });

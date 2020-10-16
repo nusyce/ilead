@@ -12,6 +12,8 @@ class Transactions_model extends CI_Model
 public function add($data)
 {
     $this->db->insert('tbl_transactions', $data);
+    $insert = $this->db->insert_id();
+    $this->numgeneratorcode($insert);
 }
     public function get($id = '')
     {

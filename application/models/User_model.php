@@ -128,7 +128,7 @@ public function myadherents()
          $user=$this->db->get('tbl_users')->row();
         if ($user)
         {
-            return $user->firstname;
+            return json_encode($user);
         }
     }
     public function get_user_by_id($id)

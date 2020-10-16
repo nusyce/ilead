@@ -78,10 +78,21 @@ class Auth extends CI_Controller
 
 
         if ($this->input->post()) {
-            if (!$this->user->get_user_by_key($this->input->post('sponsor')))
+            $user=$this->user->get_user_by_key($this->input->post('sponsor'));
+            if (!$user)
             {
-                $this->session->set_flashdata('danger', 'sponsor inconnu');
-           redirect(base_url('auth/register'));
+                $this->session->set_flashdata('danger', 'Sponsor inconnu');
+                redirect(base_url('auth/register'));
+            }
+            else
+            {
+                if($user->djp==0)
+                {
+                    $this->session->set_flashdata('danger', 'Sponsor invalide');
+                    redirect(base_url('auth/register'));
+                }
+
+
             }
             $pass=substr(md5(microtime()),rand(0,26),5);
             $data = array(

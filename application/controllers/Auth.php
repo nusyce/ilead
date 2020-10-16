@@ -26,7 +26,46 @@ class Auth extends CI_Controller
         redirect(base_url() . 'auth/login');
 
     }
+    public function login_key()
+    {
 
+        if ($this->input->post()) {
+
+            $this->User_roles_model->get_all();
+            $result = $this->user->get_user_by_key($this->input->post('key'));
+            if($result) {
+                $user=json_decode($result);
+
+                if($user->djp!=0)
+                {
+                    $this->session->set_flashdata('danger', 'Vous avez deja un abonnement actif');
+                    redirect(base_url('auth/login'));
+                }
+                $admin_data = array(
+                    'user_logged_in' => true,
+                    'user_id' => $user->id,
+                    'user_role_id' => $user->role_id,
+                    'user_role' => $this->User_roles_model->get_role_by_id($user->role_id)->name,
+                    'user_mail' => $user->email,
+                    'user_name' => $user->firstname,
+                    'cle' => $user->cle,
+                    'djp' => $user->djp,
+                    'country' => $user->country_id,
+
+                );
+                $this->session->set_userdata($admin_data);
+                redirect(base_url('start/dashboard'));
+            }else{
+                $this->session->set_flashdata('danger', 'Données érronées');
+                redirect(base_url('auth/login_key'));
+            }
+
+        }else{
+
+            $this->load->view('admin/auth/login_key');
+        }
+
+    }
     public function login()
     {
 
@@ -86,6 +125,8 @@ class Auth extends CI_Controller
             }
             else
             {
+                $user=json_decode($user);
+
                 if($user->djp==0)
                 {
                     $this->session->set_flashdata('danger', 'Sponsor invalide');

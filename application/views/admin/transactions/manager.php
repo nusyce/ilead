@@ -28,12 +28,11 @@
                                 <td>$320,800</td>
                                 <td><div class="dropdown">
                                         <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" href="#" aria-expanded="false">
-                                            Coming soon
+                                           En attente
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Payé</a>
                                             <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
                                     </td>

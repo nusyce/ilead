@@ -21,7 +21,6 @@
                             </thead>
                             <tbody>
                             <?php
-                            var_dump($data);
                             foreach ($data as $dd): ?>
                                 <tr>
                                     <td>
@@ -35,7 +34,7 @@
                                     <td><?= '' ?></td>
                                     <td><?= $dd['sponsor'] ?></td>
                                     <td><?= $dd['cluster'] ?></td>
-                                    <td><?= $dd['cluster'] ?></td>
+                                    <td><?= $dd['role'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

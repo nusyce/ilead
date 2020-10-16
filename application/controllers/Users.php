@@ -38,4 +38,24 @@ class Users extends AdminControler
         $this->load_view('user/profile');
 
     }
+
+    public function add_repos()
+    {
+        if (isset($_POST)) {
+            $data = $_POST;
+            $this->User_model->add_responsable($data);
+            redirect('users/representants');
+        } else {
+            redirect('users/representants');
+        }
+
+    }
+
+    public function representants()
+    {
+        $data['data'] = $this->User_model->representants();
+        $data['users'] = $this->User_model->get();
+        $this->load_view('user/representants', $data);
+
+    }
 }

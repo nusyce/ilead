@@ -28,6 +28,7 @@
 <script src="<?= base_url()?>assets/vendors/feather-icons/feather.min.js"></script>
 <script src="<?= base_url()?>assets/js/template.js"></script>
 
+<script src="<?= base_url()?>assets/vendors/select2/select2.min.js"></script>
 <script src="<?= base_url()?>assets/js/data-table.js"></script>
 <!-- endinject -->
 <!-- custom js for this page -->

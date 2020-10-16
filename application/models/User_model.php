@@ -17,7 +17,7 @@ class User_model extends CI_Model
 
     public function get($id = '', $where = [])
     {
-        $this->db->select('firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
+        $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
         $this->db->join('tbl_roles as r', 'r.id = tbl_users.role_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         if (is_numeric($id)) {
@@ -28,6 +28,20 @@ class User_model extends CI_Model
         return $this->db->get('tbl_users')->result_array();
     }
 
+
+    public function representants($id = '')
+    {
+        $this->db->select('tbl_representates.id as id, firstname,lastname,cl.name as cluster,c.name as country,profession,whatsapp_phone,sponsor');
+        $this->db->join('tbl_users as u', 'u.id = tbl_representates.user_id', 'inner');
+        $this->db->join('tbl_country as c', 'c.id = tbl_representates.country_id', 'inner');
+        $this->db->join('tbl_cluster as cl', 'cl.id = u.cluster', 'inner');
+        if (is_numeric($id)) {
+            $this->db->where('id', $id);
+            $user = $this->db->get('tbl_representates')->row();
+            $user->country = $this->Misc_model->get_country($user->country_id);
+        }
+        return $this->db->get('tbl_representates')->result_array();
+    }
 
     public function login($data)
     {
@@ -47,6 +61,19 @@ class User_model extends CI_Model
         }
     }
 
+
+    public function add_responsable($data)
+    {
+
+        $this->db->where('country_id', $data['country_id']);
+        $this->db->where('user_id', $data['user_id']);
+        $rest = $this->db->get('tbl_representates')->row();
+        if (!$rest) {
+            $data['due'] = date('Y-m-d H:s');
+            $this->db->insert('tbl_representates', $data);
+            $insert = $this->db->insert_id();
+        }
+    }
 
     public function register($data)
     {

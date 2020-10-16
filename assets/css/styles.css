@@ -15,11 +15,16 @@ td:hover .detail-option {
     position: relative !important;
     background-color: #fff !important;
     border-bottom: none !important;
-    box-shadow:none !important;
+    box-shadow: none !important;
     padding-left: 20px;
     padding-right: 20px;
     margin-bottom: 80px;
 }
-.stretch-card>.card{
+
+.stretch-card > .card {
     max-width: 300px;
+}
+
+#modal-responsable .select2 {
+    width: 100% !important;
 }

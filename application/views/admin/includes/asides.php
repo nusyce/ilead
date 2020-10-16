@@ -281,6 +281,13 @@
                     <span class="link-title">Transactions</span>
                 </a>
             </li>
+            <li class="nav-item nav-category">Autres</li>
+            <li class="nav-item">
+                <a href="<?= base_url('users/representants'); ?>" class="nav-link">
+                    <i class="link-icon" data-feather="bar-chart-2"></i>
+                    <span class="link-title">Réprésentants</span>
+                </a>
+            </li>
             <li class="nav-item nav-category">Configurations</li>
             <li class="nav-item">
                 <a href="<?= base_url('users') ?>" class="nav-link">

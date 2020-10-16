@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url()?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="<?= base_url()?>assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
 
+    <link rel="stylesheet" href="<?= base_url()?>assets/vendors/select2/select2.min.css">
     <!-- end plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="<?= base_url()?>assets/fonts/feather-font/css/iconfont.css">

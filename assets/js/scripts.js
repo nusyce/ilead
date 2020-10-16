@@ -1,5 +1,7 @@
 $('body').on('click', '#dopayer', function (e) {
     e.preventDefault();
+    var id = $(this).data('id');
+    $('#id_transaction').val(id)
     $('#addAttachment').modal('show');
 })
 
@@ -15,27 +17,36 @@ if ($(".country").length) {
 if ($(".member").length) {
     $(".member").select2();
 }
+$('body').on('click', '.file-upload-browse', function (e) {
+    var file = $(this).parent().parent().parent().find('.file-upload-default');
+    file.trigger('click');
+});
+$('body').on('change', '.file-upload-default', function (e) {
+    $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});
 
 $('.delete').click(function () {
     var messages = $(this).data('message');
     return confirm(messages);
 })
 
-$(document).on('click', '.btn-add', function (e) {
-    e.preventDefault();
-
-    var dynaForm = $('.dynamic-wrap form:first'),
-        currentEntry = $(this).parents('.entry:first'),
-        newEntry = $(currentEntry.clone()).appendTo(dynaForm);
-
-    newEntry.find('input').val('');
-    dynaForm.find('.entry:not(:last) .btn-add')
-        .removeClass('btn-add').addClass('btn-remove')
-        .removeClass('btn-success').addClass('btn-danger')
-        .html('<i class="mdi mdi-minus iconn"  ></i>');
-}).on('click', '.btn-remove', function (e) {
-    $(this).parents('.entry:first').remove();
-
-    e.preventDefault();
-    return false;
+$(document).ready(function () {
+    $("#addEmail").on("click", function (e) {
+        e.preventDefault();
+        $("#more-email").append("<div class=\"form-group\">\n" +
+            "                                                    <label>Ajouter une pièce</label>\n" +
+            "                                                    <input type=\"file\" name=\"attachment[]\" class=\"file-upload-default\">\n" +
+            "                                                    <div class=\"input-group col-xs-12\">\n" +
+            "                                                        <input type=\"text\" class=\"form-control file-upload-info\"\n" +
+            "                                                               disabled=\"\" placeholder=\"Ajouter une pièce jointe\">\n" +
+            "                                                        <span class=\"input-group-append\">\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t\t<button class=\"file-upload-browse btn btn-primary\" type=\"button\">Selectionner</button>\n" +
+            "\t\t\t\t\t\t\t\t\t\t\t</span>\n" +
+            "                                                    </div>\n" +
+            "                                                </div>");
+    });
+    $("#removeEmail").on("click", function (e) {
+        e.preventDefault();
+        $("#more-email").children().last().remove();
+    });
 });

@@ -42,9 +42,9 @@
                                                     <?= $dd['status'] ?>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" id="dopayer"
+                                                    <a class="dropdown-item" id="dopayer" data-id="<?= $dd['id'] ?>"
                                                        href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
-                                                    <a class="dropdown-item"
+                                                    <a class="dropdown-item" data-id="<?= $dd['id'] ?>"
                                                        href="#"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
                                                 </div>
                                             </div>
@@ -72,53 +72,78 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $this->lang->line('transaction_confirmation_message'); ?></h5>
+                <h5 class="modal-title"
+                    id="exampleModalLabel"><?php echo $this->lang->line('transaction_confirmation_message'); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="field1">ini label teks</label>
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Name</label>
-                                <div class="dynamic-wrap">
-                                    <form role="form" autocomplete="off">
-                                        <div class="entry input-group">
-                                            <input class="form-control" name="attachments[]" type="file" />
-                                            <span class="input-group-btn">
-                                        <button class="btn btn-success btn-add" type="button">
-                                                                        <i class="iconn" data-feather="plus"></i>
+                <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data"
+                      action="<?= base_url('transactions/make_paiement') ?>">
 
-                                        </button>
-                                  </span>
+                    <input type="hidden" name="id" id="id_transaction">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- <div id="textboxDiv"></div>   -->
+                                            <div class="form-container">
+                                                <!-- <form> -->
+                                                <div class="form-group">
+                                                    <button id="addEmail" class="btn btn-primary">Ajouter plus</button>
+                                                    <button id="removeEmail" class="btn btn-warning">Supprimer le dernier champs
+                                                    </button>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Ajouter une pièce</label>
+                                                    <input type="file" name="attachment[]" required class="file-upload-default">
+                                                    <div class="input-group col-xs-12">
+                                                        <input type="text" class="form-control file-upload-info"
+                                                               disabled="" placeholder="Ajouter une pièce jointe">
+                                                        <span class="input-group-append">
+												<button class="file-upload-browse btn btn-primary" type="button">Selectionner</button>
+											</span>
+                                                    </div>
+                                                </div>
+                                                <div id="more-email"></div>
+                                                <!-- </form> -->
+                                            </div>
                                         </div>
-                                    </form>
-                                </div>
-                             </div>
 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
-                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
-                </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-secondary "
+                                data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
+                        <button type="submit"
+                                class="btn btn-primary deleted" data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <style>
-    .entry:not(:first-of-type)
-    {
-        margin-top: 10px;
+
+    .bs-callout {
+        padding: 10px 20px;
+        margin: 20px 0;
+        border: 1px solid #c6eaf5;
+        border-left-width: 5px;
+        border-radius: 3px;
+        background: #ddf6fd;
+        color: #1b809e;
     }
 
-    .iconn
-    {
-        font-size: 12px;
+    .bs-callout-info {
+        border-left-color: #1b809e;
     }
 </style>

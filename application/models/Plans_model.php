@@ -22,6 +22,8 @@ class Plans_model extends CI_Model
     {
         return $this->db->get('tbl_plans')->result_array();
     }
+
+
     public function get_plan_by_id($id)
     {
         $this->db->where('id', $id);

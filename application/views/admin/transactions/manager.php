@@ -26,7 +26,7 @@
                                     <td>#<?= $dd['num_trans'] ?>
                                         <?php if (get_user_role_id() == 2): ?>
                                             <br>
-                                            <a href="<?= base_url('transactions/detail/') . $dd['id'] ?>">Detail</a>
+                                            <a href="<?= base_url('transactions/detail/') . $dd['id'] ?>"><?php echo $this->lang->line('transaction_detail_message'); ?></a>
                                         <?php endif; ?>
                                     </td>
                                     <td><?= $dd['plan'] ?></td>
@@ -72,7 +72,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $this->lang->line('transaction_confirmation_message'); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,8 +104,8 @@
                 </div>
 
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
+                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
                 </div>
             </div>
         </div>

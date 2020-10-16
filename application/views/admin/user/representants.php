@@ -5,24 +5,24 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Répresantants
+                    <h6 class="card-title"><?php echo $this->lang->line('asides_representant_message'); ?>
 
                         <a type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0" id="addRespons"
                            href="#">
                             <i class="btn-icon-prepend" data-feather="plus"></i>
-                            Ajouter
+                            <?php echo $this->lang->line('child_ajouter_message'); ?>
                         </a></h6>
                     <div class="table-responsive">
                         <table id="databable" class="table">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nom</th>
-                                <th>Profession</th>
-                                <th>Genre</th>
-                                <th>Sponsor</th>
-                                <th>Pays</th>
-                                <th>Cluster</th>
+                                <th><?php echo $this->lang->line('register_name_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_profession_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_genre_message'); ?></th>
+                                <th><?php echo $this->lang->line('child_sponsor_message'); ?></th>
+                                <th><?php echo $this->lang->line('register_country_message'); ?></th>
+                                <th><?php echo $this->lang->line('register_cluster_message'); ?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,7 +56,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Ajouter un responsable</h5>
+                <h5 class="modal-title" id="titleModal"><?php echo $this->lang->line('child_add_respo_message'); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,7 +65,7 @@
                 <?php echo form_open('users/add_repos'); ?>
 
                 <div class="form-group">
-                    <label>Membre</label>
+                    <label><?php echo $this->lang->line('plan_message'); ?></label>
                     <select class="member w-100" name="user_id">
                         <?php foreach ($users
 
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Pays</label>
+                    <label><?php echo $this->lang->line('register_country_message'); ?></label>
                     <select class="country w-100" name="country_id">
                         <?php $countries = countries(); ?>
                         <?php foreach ($countries as $country): ?>
@@ -86,17 +86,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Télephone 1</label>
+                    <label for="name"><?php echo $this->lang->line('child_telephone_message'); ?> 1</label>
                     <input id="name" class="form-control" name="phone_1" type="text">
                 </div>
                 <div class="form-group">
-                    <label for="name">Télephone 2</label>
+                    <label for="name"><?php echo $this->lang->line('child_telephone_message'); ?> 2</label>
                     <input id="name" class="form-control" name="phone_2" type="text">
                 </div>
 
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
+                    <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
                 </div>
                 <?php echo form_close(); ?>
 

@@ -32,31 +32,30 @@
                         <div class="col-md-12">
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
-                                <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your
-                                    account.</h5>
+                                <h5 class="text-muted font-weight-normal mb-4"> <?php echo $this->lang->line('welcome_message'); ?> </h5>
                                 <form class="forms-sample" action="<?= base_url('auth/login')?>" method="post">
                                     <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Your Key</label>
+                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('key_message'); ?></label>
                                         <input name="key" type="text" class="form-control" id="exampleInputEmail1"
-                                               placeholder="Your Key">
+                                               placeholder="<?php echo $this->lang->line('key_message'); ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
+                                        <label for="exampleInputPassword1"><?php echo $this->lang->line('password_message'); ?></label>
                                         <input name="password" type="password" class="form-control" id="exampleInputPassword1"
-                                               autocomplete="current-password" placeholder="Password">
+                                               autocomplete="current-password" placeholder="<?php echo $this->lang->line('password_message'); ?>">
                                     </div>
                                     <div class="form-check form-check-flat form-check-primary">
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input">
-                                            Remember me
+                                            <?php echo $this->lang->line('remember_message'); ?>
                                         </label>
                                     </div>
                                     <div class="mt-3">
-                                        <input class="btn btn-primary text-white mr-2 mb-2 mb-md-0" type="submit" value="Sing in">
+                                        <input class="btn btn-primary text-white mr-2 mb-2 mb-md-0" type="submit" value="<?php echo $this->lang->line('sign_message'); ?>">
 
                                     </div>
-                                    <a href="<?= base_url('auth/register')?>" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+                                    <a href="<?= base_url('auth/register')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('not_user_message'); ?></a>
                                 </form>
                             </div>
                         </div>

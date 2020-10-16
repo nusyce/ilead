@@ -16,11 +16,12 @@
                                 <th>Plan</th>
                                 <th>Sponsor</th>
                                 <th>Cluster</th>
+                                <th>Role</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-
+                            var_dump($data);
                             foreach ($data as $dd): ?>
                                 <tr>
                                     <td>
@@ -33,6 +34,7 @@
                                     <td><?= '' ?></td>
                                     <td><?= '' ?></td>
                                     <td><?= $dd['sponsor'] ?></td>
+                                    <td><?= $dd['cluster'] ?></td>
                                     <td><?= $dd['cluster'] ?></td>
                                 </tr>
                             <?php endforeach; ?>

@@ -103,8 +103,8 @@ public function myadherents()
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso=get_country($data['country_id'])->iso;
-        $cle= $this->codeGeneratorKey($insert,$iso);
-        $this->welcome_email($data,$cle,$pass);
+        $generate= $this->codeGeneratorKey($insert,$iso);
+        $this->welcome_email($generate['cle'],$generate['code'],$_POST['email'],$_POST['firstname']);
         /*$this->db->where('id', $_POST['plan']);
         $plan= $this->db->get('tbl_plans')->row();*/
         $CI =& get_instance();
@@ -156,10 +156,11 @@ public function myadherents()
         $data['cle'] = $key;
         $data['password'] = password_hash($code, PASSWORD_BCRYPT);
         $this->db->update('tbl_users', $data);
+        return $data;
 
     }
 
-    private function welcome_email($key,$password,$client_mail)
+    private function welcome_email($key,$code,$client_mail,$client_name)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -167,7 +168,7 @@ public function myadherents()
         try {
             //Recipients
             $mail->setFrom('from@example.com', 'Mailer');
-            $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+            $mail->addAddress($client_mail, $client_name);     // Add a recipient
             $mail->addAddress('ellen@example.com');               // Name is optional
             $mail->addReplyTo('info@example.com', 'Information');
             $mail->addCC('cc@example.com');
@@ -176,7 +177,7 @@ public function myadherents()
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Bienvenue';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+            $mail->Body = 'Cher (e)<b>'.$client_name.'</b><br>votre code est :'.$code.'</br>votre clé est :'.$key.'</br>';
 
             $mail->send();
             echo 'Message has been sent';

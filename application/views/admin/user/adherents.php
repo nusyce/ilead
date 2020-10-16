@@ -1,17 +1,16 @@
 <div class="page-content">
-
-
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Mes Adherents
-                        <button type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0">
+                        <a type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0"
+                           href="<?= base_url('users/child') ?>">
                             <i class="btn-icon-prepend" data-feather="plus"></i>
                             Ajouter
-                        </button></h6>
+                        </a></h6>
                     <div class="table-responsive">
-                        <table id="dataTableExample" class="table">
+                        <table id="databable" class="table">
                             <thead>
                             <tr>
                                 <th>Name</th>

@@ -6,12 +6,36 @@ require 'AdminControler.php';
 class Users extends AdminControler
 {
 
+    function __construct()
+    {
+
+        parent::__construct();
+        $this->load->model('User_model');
+
+    }
+
     public function index()
     {
-        $this->load_view('user/manager');
+        $data['data'] = $this->User_model->get();
+        $this->load_view('user/manager', $data);
     }
+
+
     public function mychildren()
     {
         $this->load_view('user/adherents');
+    }
+
+
+    public function child()
+    {
+        $this->load_view('user/child');
+
+    }
+
+    public function profile()
+    {
+        $this->load_view('user/profile');
+
     }
 }

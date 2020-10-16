@@ -19,6 +19,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url()?>assets/css/demo_1/style.css">
+    <link rel="stylesheet" href="<?= base_url()?>assets/css/styles.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url()?>assets/images/favicon.png" />
 </head>

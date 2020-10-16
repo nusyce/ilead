@@ -6,9 +6,18 @@ require 'AdminControler.php';
 class Plans extends AdminControler
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        has_permission();
+        $this->load->model('Transactions_model');
+    }
+
+
     public function index()
     {
         has_permission();
-        $this->load_view('plan/manager');
+        $data['data'] = $this->Transactions_model->get_all();
+        $this->load_view('plan/manager', $data);
     }
 }

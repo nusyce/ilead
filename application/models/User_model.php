@@ -128,9 +128,10 @@ public function myadherents()
          $user=$this->db->get('tbl_users')->row();
         if ($user)
         {
-            return $user->firstname;
+            return json_encode($user);
         }
     }
+
     public function get_user_by_id($id)
     {
         $this->db->where('id', $id);
@@ -146,14 +147,15 @@ public function myadherents()
 
     public function codeGeneratorKey($user_id,$iso)
     {
-        $key = 0000 + $user_id;
-        $key = str_pad($user_id, 4, "0", STR_PAD_LEFT); // 0010
-        $key =$iso.strval( $key );
+
+        $key = str_pad($user_id, 5, "0", STR_PAD_LEFT); // 0010
+        $code =$iso.strval( $key ).rand(1,99);
         $this->db->where('id', $user_id);
         $data = [];
+        $data['code'] = $code;
         $data['cle'] = $key;
+        $data['password'] = password_hash($code, PASSWORD_BCRYPT);
         $this->db->update('tbl_users', $data);
-
 
     }
 

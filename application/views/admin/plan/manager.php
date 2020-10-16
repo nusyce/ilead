@@ -11,16 +11,16 @@
                             <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Membres</th>
-                                <th>Status</th>
+                                <th>Prix</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>active</td>
-                            </tr>
+                            <?php foreach ($data as $dd): ?>
+                                <tr>
+                                    <td><?= $dd['name']?></td>
+                                    <td><?= $dd['price']?></td>
+                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

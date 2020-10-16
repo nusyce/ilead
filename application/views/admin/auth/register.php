@@ -34,14 +34,14 @@
                         <div class="col-md-10 pl-md-0">
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
-                                <h5 class="text-muted font-weight-normal mb-4"><?php echo $this->lang->line('register_message'); ?><?= $pack ?> PLAN</h5>
+                                <h5 class="text-muted font-weight-normal mb-4"><?php echo $this->lang->line('register_message'); ?> <?= $pack ?> PLAN</h5>
                                 <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
                                     <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="row">
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputUsername1"><?php echo $this->lang->line('register_name_message'); ?></label>
-                                        <input name="name" type="text" class="form-control" id="exampleInputUsername1"
+                                        <input required name="name" type="text" class="form-control" id="exampleInputUsername1"
                                                autocomplete="name" placeholder="<?php echo $this->lang->line('register_name_message'); ?>">
                                     </div>
                                         </div>
@@ -55,21 +55,21 @@
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('register_mail_message'); ?></label>
-                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                                        <input required name="email" type="email" class="form-control" id="exampleInputEmail1"
                                                placeholder="<?php echo $this->lang->line('register_mail_message'); ?>">
                                     </div>
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('register_whatapp_phone_message'); ?></label>
-                                        <input name="whatsapp" type="text" class="form-control" id="exampleInputEmail1"
+                                        <input required name="whatsapp" type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="<?php echo $this->lang->line('register_whatapp_phone_message'); ?>">
                                     </div>
                                         </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1"><?php echo $this->lang->line('register_country_message'); ?></label>
-                                        <select style="color: black"  id="monselect" name="country">
+                                        <label  for="exampleInputEmail1"><?php echo $this->lang->line('register_country_message'); ?></label>
+                                        <select required style="color: black"  id="monselect" name="country">
                                             <?php foreach(countries() as $country) { ?>
                                             <option value="<?=$country['id'] ?>"><?=$country['name'] ?></option>
                                             <?php } ?>
@@ -91,7 +91,7 @@
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('register_sponsor_key_message'); ?></label>
-                                        <input name="sponsor" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
+                                        <input required name="sponsor" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="<?php echo $this->lang->line('register_sponsor_key_message'); ?>">
                                         <span style="color: #727cf5;" id ="sponsor_name"></span>
                                     </div>
@@ -195,7 +195,8 @@
 
                     },
                     function (data) {
-                        $("#sponsor_name").html(data);
+                        var parsed_data = JSON.parse(data);
+                        $("#sponsor_name").html(parsed_data.firstname);
 
                     });
             });

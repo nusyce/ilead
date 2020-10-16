@@ -12,7 +12,8 @@ $lang['not_user_message'] = 'Not a user? Sign up';
 
 // register
 
-
+$lang['register_with_key'] = 'Connect with the key, to finalize the payment';
+$lang['register_sponsor_code_message'] = 'Sponsor Code';
 $lang['register_message'] = 'Register for';
 $lang['register_name_message'] = 'Name';
 $lang['register_lastname_message'] = 'LastName';

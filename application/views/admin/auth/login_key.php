@@ -34,17 +34,12 @@
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
                                 <h5 class="text-muted font-weight-normal mb-4"> <?php echo $this->lang->line('welcome_message'); ?> </h5>
-                                <form class="forms-sample" action="<?= base_url('auth/login')?>" method="post">
+                                <form class="forms-sample" action="<?= base_url('auth/login_key')?>" method="post">
                                     <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('key_message'); ?></label>
                                         <input name="key" type="text" class="form-control" id="exampleInputEmail1"
                                                placeholder="<?php echo $this->lang->line('key_message'); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1"><?php echo $this->lang->line('password_message'); ?></label>
-                                        <input name="password" type="password" class="form-control" id="exampleInputPassword1"
-                                               autocomplete="current-password" placeholder="<?php echo $this->lang->line('password_message'); ?>">
                                     </div>
                                     <div class="form-check form-check-flat form-check-primary">
                                         <label class="form-check-label">
@@ -57,7 +52,6 @@
 
                                     </div>
                                     <a href="<?= base_url('auth/register')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('not_user_message'); ?></a>
-                                    <a href="<?= base_url('auth/login_key')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_with_key'); ?></a>
                                 </form>
                             </div>
                         </div>

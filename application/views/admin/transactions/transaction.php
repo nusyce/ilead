@@ -35,14 +35,25 @@
                         <div class="col-md-12">
                             <h6>Pièces jointes</h6>
                         </div>
-                        <div class="pieces-jointes">
-
+                        <div class="row pieces-jointes" style="width: 100%">
+                            <?php foreach ($data->attachements as $attachement): ?>
+                                <div class="col-md-3 text-center">
+                                    <a href="<?= base_url('uploads/transactions/') . $data->id . '/' . $attachement['patch'] ?>"
+                                       target="_blank">
+                                        <img style="width: 250px; height: 120px"
+                                             src="<?= base_url('uploads/transactions/') . $data->id . '/' . $attachement['patch'] ?>"
+                                             alt="<?= $attachement['name'] ?>">
+                                        <span><?= $attachement['name'] ?></span>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="btn btn-secondary delete" data-message="Voulez vous générer celle facture?" href="<?= base_url('transactions/create_inv/').$data->id?>">Génerer une facture</a>
+                            <a class="btn btn-secondary delete" data-message="Voulez vous générer celle facture?"
+                               href="<?= base_url('transactions/create_inv/') . $data->id ?>">Génerer une facture</a>
                         </div>
                     </div>
 
@@ -66,6 +77,7 @@
                                 <th><?php echo $this->lang->line('transaction_message'); ?></th>
                                 <th><?php echo $this->lang->line('transaction_date_message'); ?></th>
                                 <th>Généré par</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,6 +92,8 @@
                                     <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
                                     <td><?= _dd($dd['due']) ?></td>
                                     <td><?= $dd['by_user'] ?></td>
+                                    <td><a target="_blank" href="<?= base_url('transactions/print_inv/') . $dd['id'] ?>"><i
+                                                    data-feather="file"></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

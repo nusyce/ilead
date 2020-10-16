@@ -12,7 +12,7 @@ $lang['not_user_message'] = "Pas un utilisateur? S'inscrire";
 
 // register
 
-
+$lang['register_with_key'] = 'Se connecter avec la clé , pour finaliser le paiement';
 $lang['register_message'] = "S'inscrire à";
 $lang['register_name_message'] = 'Nom';
 $lang['register_lastname_message'] = 'Prenom';
@@ -22,6 +22,7 @@ $lang['register_country_message'] = 'Pays';
 $lang['register_cluster_message'] = 'Cluster';
 $lang['register_sponsor_key_message'] = 'Sponsor KEY';
 $lang['register_sex_message'] = 'Sexe';
+$lang['register_sponsor_code_message'] = 'Code du Sponsor';
 $lang['register_masculin_message'] = 'Masculin';
 $lang['register_feminin_message'] = 'Feminin';
 $lang['register_sign_up_message'] = "S'inscrire";

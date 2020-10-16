@@ -65,9 +65,10 @@
                                                 FCFA</h3>
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
+                                            <br>
                                             <?= $plan['description'] ?>
-                                            <button class="btn btn-primary d-block mx-auto mt-4">Star free trial
-                                            </button>
+
+                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4">Subscribe</a>
                                         </div>
                                     </div>
                                 </div>

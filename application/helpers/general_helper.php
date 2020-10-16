@@ -23,7 +23,14 @@ function get_user_role()
 
     return get_instance()->session->userdata('user_role');
 }
+function get_user_role_id()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
 
+    return get_instance()->session->userdata('user_role_id');
+}
 
 function countries($active = '')
 {
@@ -32,7 +39,26 @@ function countries($active = '')
         $CI->db->where('active', $active);
     $CI->db->from('tbl_country');
     return $CI->db->get()->result_array();
+}
+function get_country($id)
+{
 
+    $CI = &get_instance();
+    // is not auto loaded
+
+    $CI->db->where('id', $id);
+    $row = $CI->db->get('tbl_country')->row();
+
+        return $row;
+
+}
+function clusters($active = '')
+{
+    $CI = &get_instance();
+    if (!empty($active))
+        $CI->db->where('active', $active);
+    $CI->db->from('tbl_cluster');
+    return $CI->db->get()->result_array();
 }
 
 

@@ -22,5 +22,9 @@ class User_roles_model extends CI_Model
     {
         return $this->db->get('tbl_roles')->result_array();
     }
-
+    public function get_role_by_id($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('tbl_roles')->row();
+    }
 }

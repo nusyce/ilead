@@ -33,6 +33,11 @@ function get_user_cle()
     return get_instance()->session->userdata('cle');
 }
 
+function get_user_lang()
+{
+    return get_instance()->session->userdata('lang');
+}
+
 function get_user_mail()
 {
     if (!is_user_logged_in()) {

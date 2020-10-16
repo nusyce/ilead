@@ -13,9 +13,7 @@ class Lang extends CI_Controller
         }
 
         $this->lang->load($language . '_lang', $lann);
-
-        //Fetch the message from language file.
-        $data['msg'] = $this->lang->line('msg');
+        $this->session->set_userdata(['lang' => $lann]);
         redirect(('start/dashboard'));
     }
 }

@@ -50,7 +50,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Cluster</label>
-                                    <select style="color: black"  id="monselect" name="cluster">
+                                    <select style="color: black"  id="monselect" name="plan">
                                         <?php foreach(clusters() as $cluster) { ?>
                                             <option  value="<?=$cluster['id'] ?>"><?=$cluster['name'] ?></option>
                                         <?php } ?>

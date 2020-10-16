@@ -22,7 +22,24 @@ class Transactions_model extends CI_Model
     {
         return $this->db->get('tbl_transactions')->result_array();
     }
+    public function add($transaction)
+    {
+        $this->db->insert('tbl_transactions', $transaction);
+        $insert = $this->db->insert_id();
+        $cle= $this->numgeneratorcode($insert);
+    }
+    public function numgeneratorcode($id)
+    {
+        $code = 00000 + $id;
+        $code = str_pad($id, 5, "0", STR_PAD_LEFT); // 0010
+        $code ='tr'.strval( $code );
+        $this->db->where('id', $id);
+        $data = [];
+        $data['num_trans'] = $code;
+        $this->db->update('tbl_transactions', $data);
+        return $code;
 
+    }
     /**
      * @param  boolean If Client or Staff
      * @return none

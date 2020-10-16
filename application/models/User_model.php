@@ -84,6 +84,14 @@ class User_model extends CI_Model
         $iso=get_country($data['country_id'])->iso;
         $cle= $this->codeGeneratorKey($insert,$iso);
         $this->welcome_email($data,$cle,$pass);
+        /*$this->db->where('id', $_POST['plan']);
+        $plan= $this->db->get('tbl_plans')->row();*/
+
+        $transaction=array('user_id'=>$insert,'plan_id'=>$_POST['plan'],'due'=>date('d-m-Y H:i:s'),'created_at'=>date('d-m-Y H:i:s'),'status'=>'pending');
+        $CI =& get_instance();
+        $CI->load->model('transactions_model');
+        return $CI->transactions_model->add($transaction);
+
     }
 
     public function get_user_by_email($email)

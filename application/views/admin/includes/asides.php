@@ -22,10 +22,10 @@
                             class="font-weight-medium ml-1 mr-1"><?php echo $this->lang->line('asides_message'); ?></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
+                    <a href="<?=base_url('lang/?lang=en') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
                                                                          title="us" id="us"></i> <span
                                 class="ml-1"><?php echo $this->lang->line('asides_message'); ?></span></a>
-                    <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
+                    <a href="<?=base_url('lang/?lang=fr') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
                                                                          title="fr" id="fr"></i> <span
                                 class="ml-1"> <?php echo $this->lang->line('asides_french_message'); ?> </span></a><!--
                         <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-de"
@@ -349,11 +349,11 @@
             <div class="theme-wrapper">
                 <h6 class="text-muted mb-2"><?php echo $this->lang->line('asides_light_theme_message'); ?>:</h6>
                 <a class="theme-item active" href="../demo_1/dashboard-one.html">
-                    <img src="../assets/images/screenshots/light.jpg" alt="light theme">
+                    <img src="assets/images/screenshots/light.jpg" alt="light theme">
                 </a>
                 <h6 class="text-muted mb-2"><?php echo $this->lang->line('asides_dark_theme_message'); ?>:</h6>
                 <a class="theme-item" href="../demo_2/dashboard-one.html">
-                    <img src="../assets/images/screenshots/dark.jpg" alt="light theme">
+                    <img src="assets/images/screenshots/dark.jpg" alt="light theme">
                 </a>
             </div>
         </div>

@@ -23,24 +23,38 @@
                             <?php foreach ($data as $dd): ?>
                                 <tr>
                                     <td><?= $dd['id'] ?></td>
-                                    <td><?= $dd['id'] ?></td>
+                                    <td>#<?= $dd['num_trans'] ?>
+                                        <?php if (get_user_role_id() == 2): ?>
+                                            <br>
+                                            <a href="<?= base_url('transactions/detail/') . $dd['id'] ?>">Detail</a>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?= $dd['plan'] ?></td>
                                     <td><?= $dd['lastname'] . ' ' . $dd['firstname'] ?></td>
-                                    <td><?= number_format($dd['amount'], 0, 0, ' ') ?></td>
+                                    <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
-                                               data-toggle="dropdown" aria-haspopup="true" href="#"
-                                               aria-expanded="false">
-                                                <?= $dd['status'] ?>
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" id="dopayer" href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
-                                                <a class="dropdown-item" href="#"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
+                                        <?php
+                                        if (get_user_role_id() == 2):?>
+                                            <div class="dropdown">
+                                                <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
+                                                   data-toggle="dropdown" aria-haspopup="true" href="#"
+                                                   aria-expanded="false">
+                                                    <?= $dd['status'] ?>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" id="dopayer"
+                                                       href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
+                                                    <a class="dropdown-item"
+                                                       href="#"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php else: ?>
+                                            <span class="badge badge-info">
+                                                 <?= $dd['status'] ?>
+                                             </span>
+                                        <?php endif; ?>
                                     </td>
-                                    <td><?= _dd($dd['due'])?></td>
+                                    <td><?= _dd($dd['due']) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -58,7 +72,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $this->lang->line('transaction_confirmation_message'); ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -66,8 +80,8 @@
             <div class="modal-body">
 
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
-                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Valider</button>
                 </div>
             </div>
         </div>

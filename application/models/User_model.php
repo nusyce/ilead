@@ -16,7 +16,6 @@ class User_model extends CI_Model
     }
 
 
-
     public function get($id = '', $where = [])
     {
         $this->db->select('tbl_users.id as id, firstname,lastname,country_id,profession,whatsapp_phone,c.name as cluster,sponsor,r.name as role');
@@ -81,8 +80,8 @@ class User_model extends CI_Model
     {
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
-        $iso=get_country($data['country_id'])->iso;
-        $this->codeGeneratorKey($insert,$iso);
+        $iso = get_country($data['country_id'])->iso;
+        $this->codeGeneratorKey($insert, $iso);
     }
 
     public function get_user_by_email($email)
@@ -90,15 +89,16 @@ class User_model extends CI_Model
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
     }
+
     public function get_user_by_key($cle)
     {
         $this->db->where('cle', $cle);
-         $user=$this->db->get('tbl_users')->row();
-        if ($user)
-        {
+        $user = $this->db->get('tbl_users')->row();
+        if ($user) {
             return $user->firstname;
         }
     }
+
     public function get_user_by_id($id)
     {
         $this->db->where('id', $id);
@@ -112,11 +112,11 @@ class User_model extends CI_Model
     }
 
 
-    public function codeGeneratorKey($user_id,$iso)
+    public function codeGeneratorKey($user_id, $iso)
     {
         $key = 0000 + $user_id;
         $key = str_pad($user_id, 4, "0", STR_PAD_LEFT); // 0010
-        $key =$iso.strval( $key );
+        $key = $iso . strval($key);
         $this->db->where('id', $user_id);
         $data = [];
         $data['cle'] = $key;
@@ -125,7 +125,7 @@ class User_model extends CI_Model
 
     }
 
-    private function welcome_email($key,$password,$client_mail)
+    private function welcome_email($key, $password, $client_mail)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
@@ -151,4 +151,10 @@ class User_model extends CI_Model
         }
     }
 
+
+    public function delete($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_users');
+    }
 }

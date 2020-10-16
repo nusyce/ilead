@@ -59,4 +59,11 @@ class Users extends AdminControler
         $this->load_view('user/representants', $data);
 
     }
+
+    public function delete($id)
+    {
+        $this->session->set_flashdata('success', 'Suppression éffectué avec success');
+        $this->User_model->delete($id);
+        redirect('users');
+    }
 }

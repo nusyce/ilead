@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
 	<!-- core:css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="<?= base_url()?>assets/vendors/core/core.css">
 	<!-- endinject -->
   <!-- plugin css for this page -->
@@ -22,52 +23,107 @@
 <body>
 	<div class="main-wrapper">
 		<div class="page-wrapper full-page">
-			<div class="page-content d-flex align-items-center justify-content-center">
+			<div class="" style="padding: 0">
 
         <div class="row w-100 mx-0 auth-page">
-            <div class="col-md-8 col-xl-6 mx-auto">
+            <div class="col-md-12" style="padding: 0">
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-4 pr-md-0">
-                            <div class="auth-left-wrapper">
-
-                            </div>
-                        </div>
-                        <div class="col-md-8 pl-md-0">
+<div class="col-1"></div>
+                        <div class="col-md-10 pl-md-0">
                             <div class="auth-form-wrapper px-4 py-5">
-                                <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
-                                <h5 class="text-muted font-weight-normal mb-4">Create a free account.</h5>
-                                <form class="forms-sample">
+                                <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
+                                <h5 class="text-muted font-weight-normal mb-4">Register for <?= $pack ?> PLAN</h5>
+                                <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
+                                    <div class="row">
+                                        <div class="col-6">
                                     <div class="form-group">
-                                        <label for="exampleInputUsername1">Username</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername1"
-                                               autocomplete="Username" placeholder="Username">
+                                        <label for="exampleInputUsername1">Name</label>
+                                        <input name="name" type="text" class="form-control" id="exampleInputUsername1"
+                                               autocomplete="name" placeholder="name">
                                     </div>
+                                        </div>
+                                        <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                        <input name="email" type="email" class="form-control" id="exampleInputEmail1"
                                                placeholder="Email">
                                     </div>
+                                    </div>
+                                        <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Whatsapp Phone</label>
+                                        <input name="whatsapp" type="text" class="form-control" id="exampleInputEmail1"
+                                               placeholder="Whatsapp Phone">
+                                    </div>
+                                        </div>
+                                        <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Country</label>
+                                        <select style="color: black"  id="monselect" name="country">
+                                            <?php foreach(countries() as $country) { ?>
+                                            <option value="<?=$country['id'] ?>"><?=$country['name'] ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
+                                    </div>
+                                        <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Cluster</label>
+                                        <select style="color: black"  id="monselect" name="cluster">
+                                            <?php foreach(clusters() as $cluster) { ?>
+                                                <option  value="<?=$cluster['id'] ?>"><?=$cluster['name'] ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
+                                        </div>
+                                        <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Sponsor KEY</label>
+                                        <input name="sponsor" id="sponsor" type="text" class="form-control" id="exampleInputEmail1"
+                                               placeholder="Sponsor KEY">
+                                        <span style="color: #727cf5;" id ="sponsor_name"></span>
+                                    </div>
+                                    </div>
+                                        <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1"
-                                               autocomplete="current-password" placeholder="Password">
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                                placeholder="Password">
                                     </div>
-                                    <div class="form-check form-check-flat form-check-primary">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Sexe</label>
+                                                <select style="color: black"  id="monselect" name="sexe">
+
+                                                        <option value="Masculin">Masculin</option>
+                                                    <option value="Feminin">Feminin</option>
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-3">
+                                        <label class="checkbox">
+                                            <input type="checkbox" class="">
                                             Remember me
                                         </label>
                                     </div>
                                     <div class="mt-3">
-                                        <a href="#"
-                                           class="btn btn-primary text-white mr-2 mb-2 mb-md-0">Sing up</a>
+                                        <input style="    width: 150px;" class="btn btn-primary text-white mr-2 mb-2 mb-md-0" type="submit" value="Sing up">
 
                                     </div>
+
                                     <a href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted">Already a user? Sign in</a>
                                 </form>
                             </div>
                         </div>
+                        <div class="col-1"></div>
                     </div>
                 </div>
             </div>
@@ -85,6 +141,24 @@
 	<!-- inject:js -->
 	<script src="<?= base_url()?>assets/vendors/feather-icons/feather.min.js"></script>
 	<script src="<?= base_url()?>assets/js/template.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#sponsor").change(function(){
+
+                $.get('<?=base_url("auth/get_sponsor_name")?>',
+                    {
+                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                        cle: $(this).val(),
+
+                    },
+                    function (data) {
+                        $("#sponsor_name").html(data);
+
+                    });
+            });
+        });
+
+        </script>
 	<!-- endinject -->
   <!-- custom js for this page -->
 	<!-- end custom js for this page -->

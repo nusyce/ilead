@@ -79,7 +79,8 @@ class User_model extends CI_Model
     {
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
-        $this->codeGeneratorKey($insert);
+        $iso=get_country($data['country_id'])->iso;
+        $this->codeGeneratorKey($insert,$iso);
     }
 
     public function get_user_by_email($email)
@@ -87,7 +88,15 @@ class User_model extends CI_Model
         $this->db->where('email', $email);
         return $this->db->get('tbl_users')->row();
     }
-
+    public function get_user_by_key($cle)
+    {
+        $this->db->where('cle', $cle);
+         $user=$this->db->get('tbl_users')->row();
+        if ($user)
+        {
+            return $user->firstname;
+        }
+    }
     public function get_user_by_id($id)
     {
         $this->db->where('id', $id);
@@ -101,18 +110,20 @@ class User_model extends CI_Model
     }
 
 
-    public function codeGeneratorKey($user_id)
+    public function codeGeneratorKey($user_id,$iso)
     {
         $key = 0000 + $user_id;
-        $key = str_pad($user_id, 3, "0", STR_PAD_LEFT); // 0010
+        $key = str_pad($user_id, 4, "0", STR_PAD_LEFT); // 0010
+        $key =$iso.strval( $key );
         $this->db->where('id', $user_id);
         $data = [];
-        $data['key'] = $key;
+        $data['cle'] = $key;
         $this->db->update('tbl_users', $data);
+
 
     }
 
-    private function welcome_email()
+    private function welcome_email($key,$password,$client_mail)
     {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);

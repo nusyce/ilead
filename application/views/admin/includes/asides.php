@@ -220,8 +220,8 @@
                             <img src="https://via.placeholder.com/80x80" alt="">
                         </div>
                         <div class="info text-center">
-                            <p class="name font-weight-bold mb-0">Amiah Burton</p>
-                            <p class="email text-muted mb-3">amiahburton@gmail.com</p>
+                            <p class="name font-weight-bold mb-0"><?=get_user_name() ?></p>
+                            <p class="email text-muted mb-3"><?=get_user_mail() ?></p>
                         </div>
                     </div>
                     <div class="dropdown-body">
@@ -233,7 +233,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="javascript:;" class="nav-link">
+                                <a href="<?=base_url('auth/logout') ?>" class="nav-link">
                                     <i data-feather="log-out"></i>
                                     <span>Deconnexion</span>
                                 </a>

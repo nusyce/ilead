@@ -20,6 +20,7 @@ class Transactions extends AdminControler
     }
 
 
+
     public function detail($id)
     {
         $data['data'] = $this->Transactions_model->get($id);

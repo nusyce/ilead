@@ -24,6 +24,11 @@ class AdminControler extends CI_Controller
         if (!is_user_logged_in()) {
             redirect(base_url() . 'auth/login');
         }
+        if(get_user_djp()==0)
+        {
+            redirect(base_url('paid'));
+        }
+
     }
 
     public function load_view($view, $data = [])

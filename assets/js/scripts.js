@@ -32,7 +32,7 @@ $(document).on('click', '.btn-add', function (e) {
     dynaForm.find('.entry:not(:last) .btn-add')
         .removeClass('btn-add').addClass('btn-remove')
         .removeClass('btn-success').addClass('btn-danger')
-        .html('<i class="btn-icon-prepend iconn" data-feather="minus"></i>');
+        .html('<i class="mdi mdi-minus iconn"  ></i>');
 }).on('click', '.btn-remove', function (e) {
     $(this).parents('.entry:first').remove();
 

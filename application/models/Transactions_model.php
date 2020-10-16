@@ -9,7 +9,10 @@ class Transactions_model extends CI_Model
         parent::__construct();
 
     }
-
+public function add($data)
+{
+    $this->db->insert('tbl_transactions', $data);
+}
     public function get($id = '')
     {
         /*if (get_user_role_id() == 1) {
@@ -58,6 +61,16 @@ class Transactions_model extends CI_Model
         $data['num_trans'] = $data_ar->num_trans;
         $this->db->insert('tbl_factures', $data);
     }
-
+    public function numgeneratorcode($id)
+    {
+        $code = 00000 + $id;
+        $code = str_pad($id, 5, "0", STR_PAD_LEFT); // 0010
+        $code ='tr'.strval( $code );
+        $this->db->where('id', $id);
+        $data = [];
+        $data['num_trans'] = $code;
+        $this->db->update('tbl_transactions', $data);
+        return $code;
+    }
 
 }

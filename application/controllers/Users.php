@@ -11,7 +11,7 @@ class Users extends AdminControler
 
         parent::__construct();
         $this->load->model('User_model');
-
+        $this->load->model('Plans_model', 'plans');
     }
 
     public function index()
@@ -24,13 +24,42 @@ class Users extends AdminControler
 
     public function mychildren()
     {
-        $this->load_view('user/adherents');
+
+        $data['adherents'] = $this->User_model->myadherents();
+        $this->load_view('user/adherents',$data);
     }
 
 
     public function child()
     {
-        $this->load_view('user/child');
+        if ($this->input->post()) {
+            if (!$this->User_model->get_user_by_key($this->input->post('sponsor')))
+            {
+                $this->session->set_flashdata('danger', 'sponsor inconnu');
+            }
+            $pass=substr(md5(microtime()),rand(0,26),5);
+            $data = array(
+                'email' => $this->input->post('email'),
+                'firstname' => $this->input->post('name'),
+                'whatsapp_phone' => $this->input->post('whatsapp'),
+                'role_id' => 1, // By default i putt role is 2 for registraiton
+                'email' => $this->input->post('email'),
+                'cluster' => $this->input->post('cluster'),
+                'sponsor' => $this->input->post('sponsor'),
+                'lastname' => $this->input->post('lastname'),
+                'password' =>  password_hash($pass, PASSWORD_BCRYPT),
+                'country_id' => $this->input->post('country'),
+                'sexe' => $this->input->post('sexe'),
+                'created_at' => date('Y-m-d : h:m:s'),
+                'updated_at' => date('Y-m-d : h:m:s'),
+            );
+            $user = $this->User_model->register($data, $pass);
+            $this->session->set_flashdata('success', 'Enregistré avec succes');
+            redirect(base_url('users/mychildren'));
+
+        }
+        $data['plans'] = $this->plans->get_all();
+        $this->load_view('user/child',$data);
 
     }
 
@@ -58,12 +87,5 @@ class Users extends AdminControler
         $data['users'] = $this->User_model->get();
         $this->load_view('user/representants', $data);
 
-    }
-
-    public function delete($id)
-    {
-        $this->session->set_flashdata('success', 'Suppression éffectué avec success');
-        $this->User_model->delete($id);
-        redirect('users');
     }
 }

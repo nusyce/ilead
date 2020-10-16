@@ -18,6 +18,7 @@ class Auth extends CI_Controller
         $this->lang->load($lann, $lann);
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');
+        $this->load->model('Plans_model', 'plans');
     }
 
     public function index()
@@ -45,6 +46,8 @@ class Auth extends CI_Controller
                     'user_mail' => $result['email'],
                     'user_name' => $result['firstname'],
                     'cle' => $result['cle'],
+                    'djp' => $result['djp'],
+                    'country' => $result['country_id'],
 
                 );
                 $this->session->set_userdata($admin_data);
@@ -78,9 +81,9 @@ class Auth extends CI_Controller
             if (!$this->user->get_user_by_key($this->input->post('sponsor')))
             {
                 $this->session->set_flashdata('danger', 'sponsor inconnu');
-
            redirect(base_url('auth/register'));
             }
+            $pass=substr(md5(microtime()),rand(0,26),5);
             $data = array(
                 'email' => $this->input->post('email'),
                 'firstname' => $this->input->post('name'),
@@ -96,10 +99,11 @@ class Auth extends CI_Controller
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
-            $user = $this->user->register($data);
-
+            $user = $this->user->register($data, $pass);
+            $this->session->set_flashdata('success', 'Enregistré avec succes');
             redirect(base_url('auth/login'));
         }else{
+            $data['plans'] = $this->plans->get_all();
             $data['pack']=(!empty($_GET['pack'])) ?$_GET['pack']:'';
             $this->load->view('admin/auth/register',$data);
         }

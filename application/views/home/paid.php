@@ -25,12 +25,10 @@
     <div class="page-wrapper full-page">
         <div class="">
 
-            <div class="row w-100" style="padding: 0;padding: 0;
-    margin-right: 0px;
-    margin-left: 0px;">
-                <div class="col-md-12" style="padding: 0">
+            <div class="row w-100">
+                <div class="col-md-12">
                     <nav id="topmenu" class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="<?=base_url()?>">iLEAD</a>
+                        <a class="navbar-brand" href="#">iLEAD</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -47,43 +45,47 @@
                                 </li>-->
                             </ul>
                             <div class="form-inline my-2 my-lg-0">
-                                <?php if (get_user_lang() == 'english'): ?>
-                                    <a href="<?= base_url('lang/?lang=fr&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="<?php echo $this->lang->line('asides_french_message'); ?>" id="fr"></i></a>
-                                <?php else: ?>
-                                    <a href="<?= base_url('lang/?lang=en&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us" title="<?php echo $this->lang->line('asides_message'); ?>" id="en"></i></a>
-
-                                <?php endif; ?>
+                                <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i></a>
                             </div>
                         </div>
                     </nav>
-                    <h4 class="text-center mb-3 mt-4"><?php echo $this->lang->line('home_message'); ?></h4>
-                    <p class="text-muted text-center mb-4 pb-2"><?php echo $this->lang->line('home_choose_message'); ?>.<br>
-                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a></p>
+                    <h4 class="text-center mb-3 mt-4">Choose your payment method</h4>
 
-                    <div class="container">
 
-                        <div class="row">
-                            <?php foreach ($plans as $plan) { ?>
-                                <div class="col-md-4 stretch-card grid-margin grid-margin-md-0">
+                    <div class="container ">
+
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <?php foreach ($modes as $mode) { ?>
+                            <?php if($mode['status'] ==1 ){?>
+                                <div class="col-md-3 stretch-card grid-margin grid-margin-md-0">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="text-center text-uppercase mt-3 mb-4"><?= $plan['name'] ?></h5>
+                                            <h5 class="text-center text-uppercase mt-3 mb-4"><?= $mode['nom'] ?></h5>
                                             <i data-feather="award"
                                                class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                                            <h3 class="text-center font-weight-light"><?= number_format($plan['price']) ?>
-                                                FCFA</h3>
+                                            <h5 class="text-center font-weight-light"><?= $transation->plan ?> <br> <?= number_format($transation->price) ?>
+                                                FCFA</h5>
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                             <br>
-                                            <?= $plan['description'] ?>
+                                            <?php if($mode['id'] !=4 ){?>
 
-                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4"><?php echo $this->lang->line('home_subscribe_message'); ?></a>
+                                            <a href="#" class="btn btn-primary d-block mx-auto mt-4">PAY BY <?= $mode['nom'] ?></a>
+                                            <?php }?>
+                                            <?php if($mode['id'] ==4 ){?>
+                                            <?php foreach ($representates as $representate) { ?>
+                                                <h5><b><?= $representate['firstname'] ?></h5>
+                                                <a href="mailto:<?=$representate['email'] ?>" ><?= $representate['email'] ?></a>
+                                                <a href="tel:<?=$representate['whatsapp_phone'] ?>" ><?=$representate['whatsapp_phone'] ?></a>
+
+                                            <?php }?>
+                                            <?php }?>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
 
-
+                            <?php } ?>
                         </div>
 
                     </div>

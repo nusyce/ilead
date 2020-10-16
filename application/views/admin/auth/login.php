@@ -30,6 +30,7 @@
                     <div class="row">
 
                         <div class="col-md-12">
+
                             <div class="auth-form-wrapper px-4 py-5">
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
                                 <h5 class="text-muted font-weight-normal mb-4"> <?php echo $this->lang->line('welcome_message'); ?> </h5>

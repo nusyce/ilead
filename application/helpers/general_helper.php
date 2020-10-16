@@ -14,7 +14,22 @@ function get_user_id()
 
     return get_instance()->session->userdata('user_id');
 }
+function get_user_djp()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
 
+    return get_instance()->session->userdata('djp');
+}
+function get_user_country()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('country');
+}
 function get_user_role()
 {
     if (!is_user_logged_in()) {

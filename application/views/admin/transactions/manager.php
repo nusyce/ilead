@@ -78,6 +78,30 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="field1">ini label teks</label>
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Name</label>
+                                <div class="dynamic-wrap">
+                                    <form role="form" autocomplete="off">
+                                        <div class="entry input-group">
+                                            <input class="form-control" name="attachments[]" type="file" />
+                                            <span class="input-group-btn">
+                                        <button class="btn btn-success btn-add" type="button">
+                                                                        <i class="iconn" data-feather="plus"></i>
+
+                                        </button>
+                                  </span>
+                                        </div>
+                                    </form>
+                                </div>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
 
                 <div class="text-right">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
@@ -87,3 +111,14 @@
         </div>
     </div>
 </div>
+<style>
+    .entry:not(:first-of-type)
+    {
+        margin-top: 10px;
+    }
+
+    .iconn
+    {
+        font-size: 12px;
+    }
+</style>

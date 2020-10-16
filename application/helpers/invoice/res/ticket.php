@@ -29,7 +29,7 @@
                         <p>Date : <b> <?php echo date('d/m/Y à H:i:s'); ?></b></p>
                         <p>Mode paiement : <b> </b></p>
                         <p>Montant : <b> </b></p>
-                        <p>Numero transaction : <b> </b></p>
+                        <p>Numero transaction : <b> </b> <span style="position: relative;left:290px;">Numero de code: <b> </b></span></p>
                     </div><br><br>
 
 

@@ -2,21 +2,12 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 require 'AdminControler.php';
 
-class Start extends AdminControler
+class Start extends CI_Controller
 {
-    function __construct(){
-
-        parent::__construct(); 
-
-        $this->lang->load('english', 'lang');
-
+    function __construct()
+    {
+        parent::__construct();
         $this->load->model('Plans_model', 'plans');
-        if(!is_user_logged_in())
-        {
-            redirect(base_url('auth/login'));
-        }
-
-
 
     }
 
@@ -29,6 +20,6 @@ class Start extends AdminControler
 
     public function dashboard()
     {
-       $this->load_view('dashboard/dashboard');
+        $this->load->view('admin/dashboard/dashboard');
     }
 }

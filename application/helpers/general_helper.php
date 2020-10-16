@@ -14,6 +14,7 @@ function get_user_id()
 
     return get_instance()->session->userdata('user_id');
 }
+
 function get_user_djp()
 {
     if (!is_user_logged_in()) {
@@ -22,6 +23,7 @@ function get_user_djp()
 
     return get_instance()->session->userdata('djp');
 }
+
 function get_user_country()
 {
     if (!is_user_logged_in()) {
@@ -30,6 +32,7 @@ function get_user_country()
 
     return get_instance()->session->userdata('country');
 }
+
 function get_user_role()
 {
     if (!is_user_logged_in()) {
@@ -82,6 +85,8 @@ function get_user_role_id()
 
 function can_represente()
 {
+    if (get_user_role_id() != 3)
+        return false;
     $CI = &get_instance();
     $CI->db->where('user_id', get_user_id());
     $CI->db->from('tbl_representates');

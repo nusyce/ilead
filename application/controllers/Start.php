@@ -6,6 +6,15 @@ class Start extends CI_Controller
 {
     function __construct()
     {
+        $key = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        if ($key == 'fr') {
+            $lann = 'french';
+        } else {
+            $lann = 'english';
+        }
+
+        $this->lang->load($key . '_lang', $lann);
+
         parent::__construct();
         $this->load->model('Plans_model', 'plans');
 

@@ -35,6 +35,7 @@
                                 <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your
                                     account.</h5>
                                 <form class="forms-sample" action="<?= base_url('auth/login')?>" method="post">
+                                    <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Your Key</label>
                                         <input name="key" type="text" class="form-control" id="exampleInputEmail1"

@@ -35,6 +35,7 @@
                                 <a href="#" class="noble-ui-logo d-block mb-2">i<span>LEAD</span></a>
                                 <h5 class="text-muted font-weight-normal mb-4">Register for <?= $pack ?> PLAN</h5>
                                 <form class="forms-sample" method="post" action="<?= base_url('auth/register')?>">
+                                    <?php $this->load->view('admin/includes/message.php') ?>
                                     <div class="row">
                                         <div class="col-6">
                                     <div class="form-group">

@@ -38,9 +38,13 @@ class Auth extends CI_Controller
                 );
                 $this->session->set_userdata($admin_data);
                 redirect(base_url('start/dashboard'));
+            }else{
+                $this->session->set_flashdata('danger', 'Données érronées');
+                redirect(base_url('auth/login'));
             }
 
         }else{
+
             $this->load->view('admin/auth/login');
         }
 
@@ -62,8 +66,9 @@ class Auth extends CI_Controller
         if ($this->input->post()) {
             if (!$this->user->get_user_by_key($this->input->post('sponsor')))
             {
-                echo 'sponsor inconnu';
-            exit();
+                $this->session->set_flashdata('danger', 'sponsor inconnu');
+
+           redirect(base_url('auth/register'));
             }
             $data = array(
                 'email' => $this->input->post('email'),

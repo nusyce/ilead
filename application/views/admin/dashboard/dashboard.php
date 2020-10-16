@@ -2,7 +2,7 @@
 <div class="page-content">
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0"><?php echo $this->lang->line('dashboard_message'); ?></h4>
+            <h4 class="mb-3 mb-md-0">Tableau de bord</h4>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0"><?php echo $this->lang->line('dashboard_adherent_message'); ?></h6>
+                                <h6 class="card-title mb-0">Nes Adherents</h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -22,18 +22,18 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="eye" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_view_message'); ?></span></a>
+                                                    class="">View</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_edit_message'); ?></span></a>
+                                                    class="">Edit</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_delete_message'); ?></span></a>
+                                                    class="">Delete</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class=""><?php echo $this->lang->line('dashboard_print_message'); ?></span></a>
+                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="download" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_download_message'); ?></span></a>
+                                                    class="">Download</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0"><?php echo $this->lang->line('dashboard_new_orders_message'); ?></h6>
+                                <h6 class="card-title mb-0">New Orders</h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton1"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,18 +68,18 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="eye" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_view_message'); ?></span></a>
+                                                    class="">View</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_edit_message'); ?></span></a>
+                                                    class="">Edit</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_delete_message'); ?></span></a>
+                                                    class="">Delete</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class=""><?php echo $this->lang->line('dashboard_print_message'); ?></span></a>
+                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="download" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_download_message'); ?></span></a>
+                                                    class="">Download</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0"><?php echo $this->lang->line('dashboard_grows_message'); ?></h6>
+                                <h6 class="card-title mb-0">Growth</h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton2"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -114,18 +114,18 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="eye" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_view_message'); ?></span></a>
+                                                    class="">View</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="edit-2" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_edit_message'); ?></span></a>
+                                                    class="">Edit</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="trash" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_delete_message'); ?></span></a>
+                                                    class="">Delete</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class=""><?php echo $this->lang->line('dashboard_print_message'); ?></span></a>
+                                                    data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
                                         <a class="dropdown-item d-flex align-items-center" href="#"><i
                                                     data-feather="download" class="icon-sm mr-2"></i> <span
-                                                    class=""><?php echo $this->lang->line('dashboard_download_message'); ?></span></a>
+                                                    class="">Download</span></a>
                                     </div>
                                 </div>
                             </div>

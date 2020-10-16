@@ -7,8 +7,6 @@
                 <div class="card-body">
                     <h6 class="card-title">Utilisateurs</h6>
                     <div class="table-responsive">
-                        <?php
-                        $this->load->view('admin/includes/message.php'); ?>
                         <table id="databable" class="table">
                             <thead>
                             <tr>
@@ -28,10 +26,7 @@
                                     <td>
                                         <div><?= $dd['firstname'] . ' ' . $dd['lastname'] ?></div>
                                         <div class="detail-option">
-                                            <a href="#" class="">Detail</a> | <a
-                                                    href="<?= base_url('users/delete/') . $dd['id'] ?>"
-                                                    data-message="Voulez vous supprimer cet utilisateur?"
-                                                    class="delete text-danger">Supprimer</a>
+                                            <a href="#" class="">Detail</a> | <a href="#" class="delete text-danger">Supprimer</a>
                                         </div>
                                     </td>
                                     <td><?= $dd['profession'] ?></td>

@@ -23,7 +23,7 @@
 <body>
 <div class="main-wrapper">
     <div class="page-wrapper full-page">
-        <div class="page-content d-flex align-items-center justify-content-center">
+        <div class="">
 
             <div class="row w-100">
                 <div class="col-md-12">
@@ -52,10 +52,11 @@
                     <h4 class="text-center mb-3 mt-4">Choose your payment method</h4>
 
 
-                    <div class="container">
+                    <div class="container ">
 
-                        <div class="row">
+                        <div class="row d-flex align-items-center justify-content-center">
                             <?php foreach ($modes as $mode) { ?>
+                            <?php if($mode['status'] ==1 ){?>
                                 <div class="col-md-3 stretch-card grid-margin grid-margin-md-0">
                                     <div class="card">
                                         <div class="card-body">
@@ -72,17 +73,19 @@
                                             <a href="#" class="btn btn-primary d-block mx-auto mt-4">PAY BY <?= $mode['nom'] ?></a>
                                             <?php }?>
                                             <?php if($mode['id'] ==4 ){?>
-                                                <h5>Contact your representate <b><?= $representate->firstname ?></b> by :</h5>
-                                                <br>
-                                                <a href="mailto:<?=$representate->email ?>" ><?= $representate->email ?></a>
-                                                <a href="tel:<?=$representate->whatsapp_phone ?>" ><?= $representate->whatsapp_phone ?></a>
+                                            <?php foreach ($representates as $representate) { ?>
+                                                <h5><b><?= $representate['firstname'] ?></h5>
+                                                <a href="mailto:<?=$representate['email'] ?>" ><?= $representate['email'] ?></a>
+                                                <a href="tel:<?=$representate['whatsapp_phone'] ?>" ><?=$representate['whatsapp_phone'] ?></a>
+
+                                            <?php }?>
                                             <?php }?>
                                         </div>
                                     </div>
                                 </div>
                             <?php } ?>
 
-
+                            <?php } ?>
                         </div>
 
                     </div>

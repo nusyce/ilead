@@ -17,9 +17,12 @@ class Start extends CI_Controller
         } else {
             $lann = get_user_lang();
         }
-        $this->lang->load($lann, $lann);
 
+        $this->lang->load($key . '_lang', $lann);
         $this->load->model('Plans_model', 'plans');
+        $this->load->model('User_model', 'user');
+        $this->load->model('payment_modes_model', 'mode');
+
 
     }
 
@@ -32,10 +35,24 @@ class Start extends CI_Controller
 
     public function dashboard()
     {
-        $data = [];
-        $this->load->view('admin/includes/header', $data);
-        $this->load->view('admin/includes/asides', $data);
-        $this->load->view('admin/dashboard/dashboard');
-        $this->load->view('admin/includes/footer', $data);
+        if(get_user_djp()==0)
+        {
+
+            $data['transation'] = $this->user->get_last_transaction();
+            $data['modes'] = $this->mode->get();
+            $data['representates'] = $this->user->get_user_representate();
+
+            $this->load->view('home/paid',$data);
+
+
+        }
+        else{
+            $data = [];
+            $this->load->view('admin/includes/header', $data);
+            $this->load->view('admin/includes/asides', $data);
+            $this->load->view('admin/dashboard/dashboard');
+            $this->load->view('admin/includes/footer', $data);
+        }
+
     }
 }

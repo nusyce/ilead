@@ -25,7 +25,7 @@ class Users extends AdminControler
     public function mychildren()
     {
 
-        $data['adherents'] = $this->User_model->get_my_adherents();
+        $data['adherents'] = $this->User_model->get_last_transaction();
         $this->load_view('user/adherents',$data);
     }
 
@@ -55,6 +55,7 @@ class Users extends AdminControler
             );
             $user = $this->User_model->register($data, $pass);
             $this->session->set_flashdata('success', 'Enregistré avec succes');
+            redirect(base_url('users/mychildren'));
 
         }
         $data['plans'] = $this->plans->get_all();
@@ -86,12 +87,5 @@ class Users extends AdminControler
         $data['users'] = $this->User_model->get();
         $this->load_view('user/representants', $data);
 
-    }
-
-    public function delete($id)
-    {
-        $this->session->set_flashdata('success', 'Suppression éffectué avec success');
-        $this->User_model->delete($id);
-        redirect('users');
     }
 }

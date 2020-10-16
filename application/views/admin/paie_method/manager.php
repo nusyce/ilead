@@ -5,14 +5,14 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title"><?php echo $this->lang->line('asides_mode_pay_message'); ?></h6>
+                    <h6 class="card-title">Mode de paiements</h6>
                     <div class="table-responsive">
                         <table id="databable" class="table">
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th><?php echo $this->lang->line('register_name_message'); ?></th>
-                                <th><?php echo $this->lang->line('country_status_message'); ?></th>
+                                <th>Nom</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -3,6 +3,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    <?php $this->load->view('admin/includes/message.php') ?>
                     <h6 class="card-title">Mes Adherents
                         <a type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0"
                            href="<?= base_url('users/child') ?>">

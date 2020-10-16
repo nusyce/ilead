@@ -18,24 +18,15 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php if (get_user_lang() == 'french'): ?>
-                        <i class="flag-icon flag-icon-fr mt-1" title="fr"></i> <span
-                                class="font-weight-medium ml-1 mr-1"><?php echo $this->lang->line('asides_french_message'); ?></span>
-                    <?php else: ?>
-                        <i class="flag-icon flag-icon-us mt-1" title="us"></i> <span
-                                class="font-weight-medium ml-1 mr-1"><?php echo $this->lang->line('asides_message'); ?></span>
-                    <?php endif; ?>
-
+                    <i class="flag-icon flag-icon-us mt-1" title="us"></i> <span
+                            class="font-weight-medium ml-1 mr-1"><?php echo $this->lang->line('asides_message'); ?></span>
                 </a>
-
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                    <a href="<?= base_url('lang/?lang=en') ?>" class="dropdown-item py-2"><i
-                                class="flag-icon flag-icon-us"
-                                title="us" id="us"></i> <span
+                    <a href="<?=base_url('lang/?lang=en') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
+                                                                         title="us" id="us"></i> <span
                                 class="ml-1"><?php echo $this->lang->line('asides_message'); ?></span></a>
-                    <a href="<?= base_url('lang/?lang=fr') ?>" class="dropdown-item py-2"><i
-                                class="flag-icon flag-icon-fr"
-                                title="fr" id="fr"></i> <span
+                    <a href="<?=base_url('lang/?lang=fr') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
+                                                                         title="fr" id="fr"></i> <span
                                 class="ml-1"> <?php echo $this->lang->line('asides_french_message'); ?> </span></a><!--
                         <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-de"
                                                                              title="de" id="de"></i> <span
@@ -221,8 +212,7 @@
             <li class="nav-item dropdown nav-profile">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://via.placeholder.com/30x30"
-                         alt="<?php echo $this->lang->line('asides_profile_message'); ?>">
+                    <img src="https://via.placeholder.com/30x30" alt="<?php echo $this->lang->line('asides_profile_message'); ?>">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                     <div class="dropdown-header d-flex flex-column align-items-center">
@@ -230,20 +220,20 @@
                             <img src="https://via.placeholder.com/80x80" alt="">
                         </div>
                         <div class="info text-center">
-                            <p class="name font-weight-bold mb-0"><?= get_user_name() ?></p>
-                            <p class="email text-muted mb-3"><?= get_user_mail() ?></p>
+                            <p class="name font-weight-bold mb-0"><?=get_user_name() ?></p>
+                            <p class="email text-muted mb-3"><?=get_user_mail() ?></p>
                         </div>
                     </div>
                     <div class="dropdown-body">
                         <ul class="profile-nav p-0 pt-3">
                             <li class="nav-item">
-                                <a href="<?= base_url('users/profile') ?>" class="nav-link">
+                                <a href="<?= base_url('users/profile')?>" class="nav-link">
                                     <i data-feather="user"></i>
                                     <span><?php echo $this->lang->line('asides_profile_message'); ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('auth/logout') ?>" class="nav-link">
+                                <a href="<?=base_url('auth/logout') ?>" class="nav-link">
                                     <i data-feather="log-out"></i>
                                     <span><?php echo $this->lang->line('asides_deconnect_message'); ?></span>
                                 </a>
@@ -261,7 +251,7 @@
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="#" class="sidebar-brand">
-            i<span>LEAD</span>
+            Noble<span>UI</span>
         </a>
         <div class="sidebar-toggler not-active">
             <span></span>

@@ -13,7 +13,7 @@ class User_model extends CI_Model
 
     public function get($id = '', $where = [])
     {
-      //  $this->db->select('firstname', 'lastname', 'country_id', 'profession', 'whatsapp_phone', 'cluster', 'sponsor');
+        $this->db->select('firstname,lastname,country_id,profession,whatsapp_phone,cluster,sponsor,tbl_roles.name as role');
         if (is_numeric($id)) {
             $this->db->where('id', $id);
             $user = $this->db->get('tbl_users')->row();
@@ -71,6 +71,7 @@ class User_model extends CI_Model
     public function codeGeneratorKey($user_id)
     {
         $key = 0000 + $user_id;
+        $key = str_pad($user_id, 3, "0", STR_PAD_LEFT); // 0010
         $this->db->where('id', $user_id);
         $data = [];
         $data['key'] = $key;

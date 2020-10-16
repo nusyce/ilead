@@ -148,6 +148,8 @@ class Auth extends CI_Controller
                 'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'country_id' => $this->input->post('country'),
                 'sexe' => $this->input->post('sexe'),
+                'plage_horaire' => $this->input->post('plage_horaire'),
+                'exigences' => $this->input->post('exigences'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );

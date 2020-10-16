@@ -113,8 +113,8 @@ class Transactions_model extends CI_Model
         $user = $this->user_model->get_user_by_id($tansaction->user_id);
 
         $this->db->where('id', $tansaction->user_id);
-        $data['djp'] = 1;
-        $this->db->update('tbl_users', $data);
+        $datas['djp'] = 1;
+        $this->db->update('tbl_users', $datas);
 
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);

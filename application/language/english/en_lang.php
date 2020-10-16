@@ -68,6 +68,21 @@ $lang['asides_light_theme_message'] = "Light Theme";
 $lang['asides_dark_theme_message'] = "Dark  Theme";
 
 
+// plan
+
+$lang['plan_message'] = "Members";
+
+// transaction
+
+$lang['transaction_message'] = "Amount";
+$lang['transaction_adherant_message'] = "Adherant";
+$lang['transaction_plan_message'] = "Plan";
+$lang['transaction_date_message'] = "Dated";
+$lang['transaction_payer_message'] = "Paid";
+$lang['transaction_annuler_message'] = "Reset";
+$lang['transaction_confirmation_message'] = "Confirmation";
+$lang['transaction_fermer_message'] = "Close";
+$lang['transaction_valider_message'] = "Validate";
 
 
 

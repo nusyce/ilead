@@ -5,18 +5,18 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Transactions</h6>
+                    <h6 class="card-title"><?php echo $this->lang->line('asides_transaction_message'); ?></h6>
                     <div class="table-responsive">
                         <table id="databable" class="table">
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>N° Transaction</th>
-                                <th>Plan</th>
-                                <th>Adherant</th>
-                                <th>Montant</th>
-                                <th>Status</th>
-                                <th>Date</th>
+                                <th>N°<?php echo $this->lang->line('asides_transaction_message'); ?></th>
+                                <th><?php echo $this->lang->line('transaction_plan_message'); ?></th>
+                                <th><?php echo $this->lang->line('transaction_adherant_message'); ?></th>
+                                <th><?php echo $this->lang->line('transaction_message'); ?></th>
+                                <th><?php echo $this->lang->line('country_status_message'); ?></th>
+                                <th><?php echo $this->lang->line('transaction_date_message'); ?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,8 +35,8 @@
                                                 <?= $dd['status'] ?>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" id="dopayer" href="#">Payé</a>
-                                                <a class="dropdown-item" href="#">Annuler</a>
+                                                <a class="dropdown-item" id="dopayer" href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
+                                                <a class="dropdown-item" href="#"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
                                             </div>
                                         </div>
                                     </td>
@@ -58,7 +58,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $this->lang->line('transaction_confirmation_message'); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -66,8 +66,8 @@
             <div class="modal-body">
 
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
+                    <button type="button" class="btn btn-primary"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
                 </div>
             </div>
         </div>

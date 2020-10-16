@@ -69,9 +69,9 @@
                     <select class="member w-100" name="user_id">
                         <?php foreach ($users
 
-                        as $user): ?>
-                        <option value="<?= $user['id'] ?>"><?= $user['firstname'] . ' ' . $user['lastname'] ?></option>
-                            <?php endforeach; ?>
+                                       as $user): ?>
+                            <option value="<?= $user['id'] ?>"><?= $user['firstname'] . ' ' . $user['lastname'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
@@ -83,6 +83,15 @@
                             <option value="<?= $country['id']; ?>"><?= $country['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Télephone 1</label>
+                    <input id="name" class="form-control" name="phone_1" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="name">Télephone 2</label>
+                    <input id="name" class="form-control" name="phone_2" type="text">
                 </div>
 
                 <div class="text-right">

@@ -4,9 +4,10 @@ require 'AdminControler.php';
 
 class Misc extends AdminControler
 {
-    function __construct(){
-
+    function __construct()
+    {
         parent::__construct();
+        has_permission();
 
     }
 

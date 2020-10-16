@@ -17,8 +17,6 @@ class Start extends CI_Controller
         } else {
             $lann = get_user_lang();
         }
-
-
         $this->lang->load($lann, $lann);
 
         $this->load->model('Plans_model', 'plans');

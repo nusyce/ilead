@@ -12,7 +12,7 @@ class Lang extends CI_Controller
             $lann = 'english';
         }
 
-        $this->lang->load($language . '_lang', $lann);
+        $this->lang->load($lann , $lann);
         $this->session->set_userdata(['lang' => $lann]);
         redirect(('start/dashboard'));
     }

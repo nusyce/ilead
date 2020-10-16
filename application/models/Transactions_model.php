@@ -104,8 +104,8 @@ public function add($data)
     private function send_invoice($invoice, $tansactions)
     {
 
-        $tansaction = $this->transactions_model->get($tansactions);
-        $data = $this->transactions_model->invoices($invoice);
+        $tansaction = $this->get($tansactions);
+        $data = $this->invoices($invoice);
         $this->load->model('user_model');
         $user = $this->user_model->get_user_by_id($tansaction->user_id);
         // Instantiation and passing `true` enables exceptions

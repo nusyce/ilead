@@ -1,11 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div class="page-content">
-
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
             <h4 class="mb-3 mb-md-0">Tableau de bord</h4>
         </div>
-
     </div>
 
     <div class="row">

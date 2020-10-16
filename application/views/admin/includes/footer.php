@@ -33,6 +33,7 @@
 <!-- custom js for this page -->
 <script src="<?= base_url()?>assets/js/dashboard.js"></script>
 <script src="<?= base_url()?>assets/js/datepicker.js"></script>
+<script src="<?= base_url()?>assets/js/scripts.js"></script>
 <!-- end custom js for this page -->
 </body>
 </html>    

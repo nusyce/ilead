@@ -28,7 +28,7 @@
             <div class="row w-100">
                 <div class="col-md-12">
                     <nav id="topmenu" class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="#">iLEAD</a>
+                        <a class="navbar-brand" href="<?=base_url()?>">iLEAD</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,12 @@
                                 </li>-->
                             </ul>
                             <div class="form-inline my-2 my-lg-0">
-                                <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i></a>
+                                <?php if (get_user_lang() == 'english'): ?>
+                                    <a href="<?= base_url('lang/?lang=fr&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="<?php echo $this->lang->line('asides_french_message'); ?>" id="fr"></i></a>
+                                <?php else: ?>
+                                    <a href="<?= base_url('lang/?lang=en&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us" title="<?php echo $this->lang->line('asides_message'); ?>" id="en"></i></a>
+
+                                <?php endif; ?>
                             </div>
                         </div>
                     </nav>

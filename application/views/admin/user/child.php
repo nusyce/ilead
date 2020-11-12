@@ -4,7 +4,7 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Ajouter un adhérant</h6>
+                    <h6 class="card-title"><?php echo $this->lang->line('add_adherent_message'); ?></h6>
                     <form class="forms-sample" method="post" action="<?= base_url('users/child')?>">
                         <?php $this->load->view('admin/includes/message.php') ?>
                         <div class="row">

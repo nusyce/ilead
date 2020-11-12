@@ -2,18 +2,19 @@
 <div class="page-content">
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">Tableau de bord</h4>
+            <h4 class="mb-3 mb-md-0"><?php echo $this->lang->line('dashboard_message'); ?></h4>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12 col-xl-12 stretch-card">
             <div class="row flex-grow">
-                <div class="col-md-4 grid-margin stretch-card">
+                
+                <?php if(get_user_role_id()==2){?><div class="col-md-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0">Nes Adherents</h6>
+                                <h6 class="card-title mb-0"><?php echo $this->lang->line('number_message'); ?></h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><?php } ?>
                 <div class="col-md-4 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">

@@ -94,6 +94,8 @@
                                     <td><?= $dd['by_user'] ?></td>
                                     <td><a target="_blank" href="<?= base_url('transactions/print_inv/') . $dd['id'] ?>"><i
                                                     data-feather="file"></i></a></td>
+                                                    <td><a target="_blank" href="<?= base_url('transactions/send_facture/') . $dd['id'] ?>"><i
+                                                    data-feather="send"></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

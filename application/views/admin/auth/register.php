@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
+	<title>iLead Globe</title>
 	<!-- core:css -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="<?= base_url()?>assets/vendors/core/core.css">
@@ -58,7 +58,16 @@
                                         <input required name="email" type="email" class="form-control" id="exampleInputEmail1"
                                                placeholder="<?php echo $this->lang->line('register_mail_message'); ?>">
                                     </div>
+
                                     </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><?php echo $this->lang->line('confirm_mail_message'); ?></label>
+                                                <input required name="confirm_email" type="email" class="form-control" id="exampleInputEmail1"
+                                                       placeholder="<?php echo $this->lang->line('confirm_mail_message'); ?>">
+                                            </div>
+
+                                        </div>
                                         <div class="col-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('register_whatapp_phone_message'); ?></label>
@@ -70,11 +79,15 @@
                                     <div class="form-group">
                                         <label  for="exampleInputEmail1"><?php echo $this->lang->line('register_country_message'); ?></label>
                                         <select required style="color: black"  id="monselect" name="country">
-                                            <?php foreach(countries() as $country) { ?>
-                                            <option value="<?=$country['id'] ?>"><?=$country['name'] ?></option>
-                                            <?php } ?>
+                                           <?php
 
-                                        </select>
+                                                        $countryCode = ip_info("Visitor", "Country Code"); // IN
+                                                        $iso = get_country_by_iso($countryCode)->iso;
+
+                                                        foreach (countries() as $country) { ?>
+                                                            <option <?= $country['iso'] == $iso ? 'selected' : ''; ?>
+                                                                    value="<?= $country['id'] ?>"><?= $country['name'] ?></option>
+                                                        <?php } ?>                                        </select>
                                     </div>
                                     </div>
                                         <div class="col-6">
@@ -111,7 +124,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Your Plan</label>
+                                                <label for="exampleInputEmail1">Package</label>
                                                 <select style="color: black"  id="monselect" name="plan">
                                                     <?php foreach($plans as $plan) { ?>
                                                         <option <?=($plan['name']==$pack) ? 'selected':'' ?>  value="<?=$plan['id'] ?>"><?=$plan['name'] ?></option>
@@ -130,9 +143,9 @@
                                         <?php  if($pack == "PLATINUM") {?>
 
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Quel est votre plage horaire préféré ?</label>
+                                                <label for="exampleInputEmail1">Quelle est votre plage horaire préférée ?</label>
                                                 <select style="color: black"  id="plage_horaire" name="plage_horaire">
-
+                                                 <option value="5h - 7h">4h - 6h</option>
                                                     <option value="5h - 7h">5h - 7h</option>
                                                     <option value="6h - 8h">6h - 8h</option>
 
@@ -141,7 +154,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Quel sont vos exigence par rapport a la retraite ?</label>
+                                                <label for="exampleInputEmail1">Quelles sont vos exigences par rapport à la retraite ?</label>
 
                                                 <textarea name="exigences" id="exigences" type="text" class="form-control" id="exampleInputEmail1" rows="15"></textarea>
                                             </div>
@@ -162,7 +175,7 @@
 
                                     </div>
 
-                                    <a href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a>
+                                    <a style="width: 250px" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a>
                                 </form>
                             </div>
                         </div>

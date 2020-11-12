@@ -10,14 +10,14 @@ class Plans extends AdminControler
     {
         parent::__construct();
         has_permission();
-        $this->load->model('Transactions_model');
+        $this->load->model('plans_model');
     }
 
 
     public function index()
     {
         has_permission();
-        $data['data'] = $this->Transactions_model->get_all();
+        $data['data'] = $this->plans_model->get_all();
         $this->load_view('plan/manager', $data);
     }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
+    <title>iLead Globe</title>
     <!-- core:css -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/core/core.css">
     <!-- endinject -->
@@ -44,12 +44,17 @@
                                     <a class="nav-link" href="#">Link</a>
                                 </li>-->
                             </ul>
-                            <div class="form-inline my-2 my-lg-0">
-                                <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i></a>
+                           <div class="form-inline my-2 my-lg-0">
+                                <?php if (get_user_lang() == 'english'): ?>
+                                    <a href="<?= base_url('lang/?lang=fr&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr" title="<?php echo $this->lang->line('asides_french_message'); ?>" id="fr"></i></a>
+                                <?php else: ?>
+                                    <a href="<?= base_url('lang/?lang=en&t=h') ?>" class="dropdown-item py-2"><i class="flag-icon flag-icon-us" title="<?php echo $this->lang->line('asides_message'); ?>" id="en"></i></a>
+
+                                <?php endif; ?>
                             </div>
                         </div>
                     </nav>
-                    <h4 class="text-center mb-3 mt-4">Choose your payment method</h4>
+                    <h4 class="text-center mb-3 mt-4"><?php echo $this->lang->line('choose_method'); ?></h4>
 
 
                     <div class="container ">
@@ -65,19 +70,28 @@
                                                class="text-primary icon-xxl d-block mx-auto my-3"></i>
                                             <h5 class="text-center font-weight-light"><?= $transation->plan ?> <br> <?= number_format($transation->price) ?>
                                                 FCFA</h5>
+                                                <h5 class="text-center font-weight-light"><?= number_format($transation->price_dollard) ?>
+                                                DOLLARS</h5>
+                                            <h5 class="text-center font-weight-light"><?= number_format($transation->price_euro) ?>
+                                                EURO</h5>
+                                                  
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                             <br>
                                             <?php if($mode['id'] !=4 ){?>
 
-                                            <a href="#" class="btn btn-primary d-block mx-auto mt-4">PAY BY <?= $mode['nom'] ?></a>
+                                            <a href="#" class="btn btn-primary d-block mx-auto mt-4"><?php echo $this->lang->line('paid_by'); ?> <?= $mode['nom'] ?></a>
                                             <?php }?>
                                             <?php if($mode['id'] ==4 ){?>
                                             <?php foreach ($representates as $representate) { ?>
                                                 <h5><b><?= $representate['firstname'] ?></h5>
                                                 <a href="mailto:<?=$representate['email'] ?>" ><?= $representate['email'] ?></a>
                                                 <a href="tel:<?=$representate['whatsapp_phone'] ?>" ><?=$representate['whatsapp_phone'] ?></a>
-
+                                                <?php if(isset($country->account_bank)){?>
+                                                <br><br>
+                                                <h5>BANK ACCOUNT</h5>
+                                             <?php echo $country->account_bank ?>
+                                             <?php }?>
                                             <?php }?>
                                             <?php }?>
                                         </div>
@@ -87,7 +101,7 @@
 
                             <?php } ?>
                         </div>
-
+                        <p style="text-align: center"><a href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('re_auth'); ?></a></p>
                     </div>
                 </div>
             </div>

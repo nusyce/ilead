@@ -19,6 +19,7 @@ class Auth extends CI_Controller
         $this->load->model('User_model','user');
         $this->load->model('User_roles_model');
         $this->load->model('Plans_model', 'plans');
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -38,7 +39,7 @@ class Auth extends CI_Controller
 
                 if($user->djp!=0)
                 {
-                    $this->session->set_flashdata('danger', 'Vous avez deja un abonnement actif');
+                    $this->session->set_flashdata('danger', $this->lang->line('have_abonnement'));
                     redirect(base_url('auth/login'));
                 }
                 $admin_data = array(
@@ -56,7 +57,7 @@ class Auth extends CI_Controller
                 $this->session->set_userdata($admin_data);
                 redirect(base_url('start/dashboard'));
             }else{
-                $this->session->set_flashdata('danger', 'Données érronées');
+                $this->session->set_flashdata('danger', $this->lang->line('error_input'));
                 redirect(base_url('auth/login_key'));
             }
 
@@ -92,7 +93,7 @@ class Auth extends CI_Controller
                 $this->session->set_userdata($admin_data);
                 redirect(base_url('start/dashboard'));
             }else{
-                $this->session->set_flashdata('danger', 'Données érronées');
+                $this->session->set_flashdata('danger', $this->lang->line('error_input'));
                 redirect(base_url('auth/login'));
             }
 
@@ -117,10 +118,21 @@ class Auth extends CI_Controller
 
 
         if ($this->input->post()) {
-            $user=$this->user->get_user_by_key($this->input->post('sponsor'));
+           $user=$this->user->get_user_by_key($this->input->post('sponsor'));
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('confirm_email', 'confirm_email', 'required|matches[email]');
+
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->session->set_flashdata('danger', $this->lang->line('error_mail_message'));
+                redirect(base_url('auth/register'));
+            }
+
             if (!$user)
             {
-                $this->session->set_flashdata('danger', 'Sponsor inconnu');
+
+                $this->session->set_flashdata('danger', $this->lang->line('sponsor_inconnu'));
                 redirect(base_url('auth/register'));
             }
             else
@@ -129,7 +141,7 @@ class Auth extends CI_Controller
 
                 if($user->djp==0)
                 {
-                    $this->session->set_flashdata('danger', 'Sponsor invalide');
+                    $this->session->set_flashdata('danger', $this->lang->line('sponsor_invalid'));
                     redirect(base_url('auth/register'));
                 }
 
@@ -154,8 +166,8 @@ class Auth extends CI_Controller
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
             $user = $this->user->register($data, $pass);
-            $this->session->set_flashdata('success', 'Enregistré avec succes');
-            redirect(base_url('auth/login'));
+            $this->session->set_flashdata('success', $this->lang->line('send_key').$this->input->post('email'));
+            redirect(base_url('auth/login_key'));
         }else{
             $data['plans'] = $this->plans->get_all();
             $data['pack']=(!empty($_GET['pack'])) ?$_GET['pack']:'';

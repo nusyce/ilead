@@ -22,6 +22,26 @@ class Representates_model extends CI_Model
     {
         return $this->db->get('tbl_representates')->result_array();
     }
+     public function update($data)
+    {
+         $this->db->where('id', $id);
+        return $this->db->update('tbl_representates',$data);
+    }
+    public function delete($id,$user_id)
+    {
+         $this->db->where('id', $id);
+        $this->db->delete('tbl_representates');
+         $CI =& get_instance();
+        $CI->load->model('User_model');
+        $representate=$CI->User_model->get_representate_by_user($user_id);
+        if(!$representate)
+        {
+            $data['id']=$user_id;
+            $data['role_id']=1;
+            $CI->User_model->change_role($data);
+        }
+        
+    }
 
     /**
      * @param  boolean If Client or Staff

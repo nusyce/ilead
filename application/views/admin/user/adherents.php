@@ -4,11 +4,11 @@
             <div class="card">
                 <div class="card-body">
                     <?php $this->load->view('admin/includes/message.php') ?>
-                    <h6 class="card-title">Mes Adherents
+                    <h6 class="card-title"><?php echo $this->lang->line('dashboard_adherent_message'); ?>
                         <a type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0"
                            href="<?= base_url('users/child') ?>">
                             <i class="btn-icon-prepend" data-feather="plus"></i>
-                            Ajouter
+                           <?php echo $this->lang->line('add_message'); ?>
                         </a></h6>
                     <div class="table-responsive">
                         <table id="databable" class="table">

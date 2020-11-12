@@ -12,6 +12,7 @@ class Users extends AdminControler
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('Plans_model', 'plans');
+        $this->load->model('Representates_model');
     }
 
     public function index()
@@ -80,12 +81,33 @@ class Users extends AdminControler
         }
 
     }
+   public function change_role($id)
+    {
+        
+        if ($this->input->post()) {
+            $data['role_id'] = $_POST['role'];
+            $data['id'] = $_POST['id'];
+            $this->User_model->change_role($data);
+            $this->session->set_flashdata('succes', "Le role a été mis à jour avec succes");
+              redirect(base_url('start/dashboard'));
+        } else {
+            
+            $data['user'] = $this->User_model->get_user_by_id($id);
+            $this->load_view('user/change_role', $data);
+        }
 
+    }
     public function representants()
     {
         $data['data'] = $this->User_model->representants();
         $data['users'] = $this->User_model->get();
         $this->load_view('user/representants', $data);
+
+    }
+     public function delete_representate($id,$user_id)
+    {
+        $this->Representates_model->delete($id,$user_id);
+        redirect('users/representants');
 
     }
 }

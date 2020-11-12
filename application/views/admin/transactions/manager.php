@@ -14,6 +14,8 @@
                                 <th>N°<?php echo $this->lang->line('asides_transaction_message'); ?></th>
                                 <th><?php echo $this->lang->line('transaction_plan_message'); ?></th>
                                 <th><?php echo $this->lang->line('transaction_adherant_message'); ?></th>
+                                <th>Conctact</th>
+                                <th>Country</th>
                                 <th><?php echo $this->lang->line('transaction_message'); ?></th>
                                 <th><?php echo $this->lang->line('country_status_message'); ?></th>
                                 <th><?php echo $this->lang->line('transaction_date_message'); ?></th>
@@ -31,10 +33,12 @@
                                     </td>
                                     <td><?= $dd['plan'] ?></td>
                                     <td><?= $dd['lastname'] . ' ' . $dd['firstname'] ?></td>
+                                    <td><?= $dd['phone'] ?></td>
+                                    <td><?= $dd['country'] ?></td>
                                     <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
                                     <td>
                                         <?php
-                                        if (get_user_role_id() == 2 && $dd['status'] != 'paie'):?>
+                                        if ((get_user_role_id() == 2 || get_user_role_id() == 3) && $dd['status'] != 'paie'):?>
                                             <div class="dropdown">
                                                 <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
                                                    data-toggle="dropdown" aria-haspopup="true" href="#"
@@ -50,7 +54,7 @@
                                             </div>
                                         <?php else: ?>
                                             <span class="badge badge-success">
-                                                 <?= $dd['status'] ?>
+                                                 <?php echo $this->lang->line('invoice_paid'); ?>
                                              </span>
                                         <?php endif; ?>
                                     </td>
@@ -93,21 +97,20 @@
                                             <div class="form-container">
                                                 <!-- <form> -->
                                                 <div class="form-group">
-                                                    <button id="addEmail" class="btn btn-primary">Ajouter plus</button>
-                                                    <button id="removeEmail" class="btn btn-warning">Supprimer le
-                                                        dernier champs
+                                                    <button id="addEmail" class="btn btn-primary"><?php echo $this->lang->line('add_message'); ?></button>
+                                                    <button id="removeEmail" class="btn btn-warning"><?php echo $this->lang->line('delete_last_field_message'); ?>
                                                     </button>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Ajouter une pièce</label>
+                                                    <label><?php echo $this->lang->line('add_file_message'); ?></label>
                                                     <input type="file" name="attachment[]" required
                                                            class="file-upload-default">
                                                     <div class="input-group col-xs-12">
                                                         <input type="text" class="form-control file-upload-info"
-                                                               disabled="" placeholder="Ajouter une pièce jointe">
+                                                               disabled="" placeholder="<?php echo $this->lang->line('add_file_message'); ?>">
                                                         <span class="input-group-append">
-												<button class="file-upload-browse btn btn-primary" type="button">Selectionner</button>
+												<button class="file-upload-browse btn btn-primary" type="button"><?php echo $this->lang->line('select_file_message'); ?></button>
 											</span>
                                                     </div>
                                                 </div>

@@ -1,9 +1,44 @@
 <?php
+$lang['error_mail_message'] = "Verifiez l'email saisi";
+$lang['confirm_mail_message'] = "Confirmer l'adresse électronique";
+$lang['delete_last_field_message'] = 'Supprimer le dernier champ';
+$lang['select_file_message'] = 'Selectionner  un  fichier';
+$lang['add_message'] = 'Ajouter';
+$lang['add_adherent_message'] = 'Ajouter un adhérent';
+$lang['datatable_language'] = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json";
+//
+$lang['add_file_message'] = 'Ajouter une piece jointe';
+$lang['payment_label'] = "Facture de paiement";
+$lang['payment_method'] = "Methode de paiement ";
+$lang['invoice_trans'] = 'Numero de la transaction';
+$lang['invoice_code'] = 'votre code';
+$lang['invoice_paid'] = 'payé';
+//
+$lang['new_member_registration_message'] = "Un nouveau membre vient de s'inscrire.";
+$lang['new_registration_message'] = "nouvelle inscription";
+$lang['confirm_pay'] = "CONFIRMATION DE PAIEMENT";
+$lang['your_pack_is_active'] = "Votre pack est maintenant activé avec succes , votre code est le suivant ";
+$lang['your_invoice_is_join'] = "votre facture est join à ce mail. ";
+//
+$lang['welcome_message'] = "Bienvenue";
+$lang['dear_message'] = "Cher (e)";
+$lang['your_code_is'] = "votre code est: ";
+$lang['your_key_is'] = "votre clé est ";
+//
+$lang['have_abonnement'] = "Vous avez deja un abonnement actif";
+$lang['error_input'] = "données érronées";
+$lang['sponsor_invalid'] = "Sponsor invalide";
+$lang['sponsor_inconnu'] = "Sponsor inconnnu";
+$lang['error_input'] = "données érronées";
+$lang['send_key'] = "Enregistré avec succes , votre clé vous a été transmise au ";
+
+$lang['number_message'] = "NOMBRE D'ADHERENTS";
+$lang['choose_method'] = 'Choisissez votre moyen de paiement';
 //login
 
 $lang['welcome_message'] = 'Nous saluons le retour! Connectez-vous à votre compte';
 
-$lang['key_message'] = 'Ta clé';
+$lang['key_message'] = 'Votre clé';
 $lang['password_message'] = 'Mot de passe';
 $lang['remember_message'] = 'Souviens-toi de moi';
 $lang['sign_message'] = 'Se connecter';
@@ -11,7 +46,8 @@ $lang['not_user_message'] = "Pas un utilisateur? S'inscrire";
 
 
 // register
-
+$lang['paid_by'] = 'PAYER PAR';
+$lang['re_auth'] = 'Authentifiez vous à nouveau si votre compte a subit une mise à jour récente';
 $lang['register_with_key'] = 'Se connecter avec la clé , pour finaliser le paiement';
 $lang['register_message'] = "S'inscrire à";
 $lang['register_name_message'] = 'Nom';
@@ -76,7 +112,7 @@ $lang['plan_message'] = "Membres";
 // transaction
 
 $lang['transaction_message'] = "Montant";
-$lang['transaction_adherant_message'] = "Adherant";
+$lang['transaction_adherant_message'] = "adhérent";
 $lang['transaction_plan_message'] = "Plan";
 $lang['transaction_date_message'] = "Date";
 $lang['transaction_payer_message'] = "Payé";
@@ -116,4 +152,52 @@ $lang['child_etat_message'] = "Etat";
 $lang['child_zip_message'] = "Zip";
 $lang['child_save_message'] = "Enregistrer";
 
+$lang['home_package'] = "Choisissez un package";
+$lang['home_features'] = "Choisissez les caractéristiques et fonctionnalités";
+$lang['desc_pack1'] = ' <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Accès à la retraite + accès à la communauté</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Facebook et au groupe whatsapp</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Manuel étudiant + certificat</p>
+                                                </div>
+                                               ';
+$lang['desc_pack2'] = ' <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Même avantages que le classique</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Session de groupe privée avec coach</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Vidéo de témoignage pendant la séssion</p>
+                                                </div>
+                                                 <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Droit aux questions en direct pendant la séssion</p>
+                                                </div>
+                                               ';
+$lang['desc_pack3'] = ' <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Même avantages que le VIP</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>01 journée avec le coach</p>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>02 autres sessions privées avec coach</p>
+                                                </div>
+                                                 <div class="d-flex align-items-center mb-2">
+                                                    <i data-feather="check" class="icon-md text-primary mr-2"></i>
+                                                    <p>Suggestion de 05 projets à lancer immédiatement</p>
+                                                </div>';
 

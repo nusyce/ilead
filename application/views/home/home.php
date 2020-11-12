@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NobleUI Responsive Bootstrap 4 Dashboard Template</title>
+    <title>iLEAD</title>
     <!-- core:css -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendors/core/core.css">
     <!-- endinject -->
@@ -56,9 +56,9 @@
                             </div>
                         </div>
                     </nav>
-                    <h4 class="text-center mb-3 mt-4">Choose a plan</h4>
-                    <p class="text-muted text-center mb-4 pb-2">Choose the features and functionality <br>
-                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted">Already a user? Sign in</a></p>
+                    <h4 class="text-center mb-3 mt-4"><?php echo $this->lang->line('home_package'); ?></h4>
+                    <p class="text-muted text-center mb-4 pb-2"><?php echo $this->lang->line('home_features'); ?><br>
+                        <a style="" href="<?= base_url('auth/login')?>" class="d-block mt-3 text-muted"><?php echo $this->lang->line('register_already_message'); ?></a></p>
 
                     <div class="container">
 
@@ -74,15 +74,15 @@
                                                 FCFA</h4>
 
                                             <h5 class="text-center font-weight-light"><?= number_format($plan['price_dollard']) ?>
-                                                DOLLARD</h5>
+                                                DOLLARS</h5>
                                             <h5 class="text-center font-weight-light"><?= number_format($plan['price_euro']) ?>
                                                 EURO</h5>
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                             <br>
-                                            <?= $plan['description'] ?>
+                                            <?= $this->lang->line('desc_pack'.$plan['id']) ?>
 
-                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4">Subscribe</a>
+                                            <a href="<?php echo base_url('auth/register?pack='.$plan['name'] ) ?>" class="btn btn-primary d-block mx-auto mt-4"><?php echo $this->lang->line('home_subscribe_message'); ?></a>
                                         </div>
                                     </div>
                                 </div>

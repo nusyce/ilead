@@ -72,7 +72,7 @@ class CI_DB_Cache {
 	 * @return	void
 	 */
 	public function __construct(&$db)
-	{
+	{ get_user_role_id()
 		// Assign the main CI object to $this->CI and load the file helper since we use it a lot
 		$this->CI =& get_instance();
 		$this->db =& $db;

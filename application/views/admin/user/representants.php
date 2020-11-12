@@ -18,10 +18,10 @@
                             <tr>
                                 <th>#</th>
                                 <th><?php echo $this->lang->line('register_name_message'); ?></th>
+                                <th><?php echo $this->lang->line('register_country_message'); ?></th>
                                 <th><?php echo $this->lang->line('child_profession_message'); ?></th>
                                 <th><?php echo $this->lang->line('child_genre_message'); ?></th>
                                 <th><?php echo $this->lang->line('child_sponsor_message'); ?></th>
-                                <th><?php echo $this->lang->line('register_country_message'); ?></th>
                                 <th><?php echo $this->lang->line('register_cluster_message'); ?></th>
                             </tr>
                             </thead>
@@ -30,14 +30,20 @@
                             foreach ($data as $dd):
                                 ?>
                                 <tr>
-                                    <td><?= $dd['id'] ?></td>
+                                    <td>
+                                     <div><?= $dd['id'] ?></div>
+                                        <div class="detail-option">
+                                            <!--<a href="<?=base_url('users/representates/update_representate/'.$dd['id']) ?>" class="">Modifier</a> | --><a href="<?=base_url('users/delete_representate/'.$dd['id'].'/'.$dd['user_id']) ?>" class="delete text-danger">Supprimer</a>
+                                        </div>
+                                        </td>
                                     <td>
                                         <div><?= $dd['firstname'] . ' ' . $dd['lastname'] ?></div>
                                     </td>
+                                    <td><?= $dd['country'] ?></td>
                                     <td><?= $dd['profession'] ?></td>
                                     <td><?= '' ?></td>
                                     <td><?= $dd['sponsor'] ?></td>
-                                    <td><?= $dd['country'] ?></td>
+                                    
                                     <td><?= $dd['cluster'] ?></td>
                                 </tr>
                             <?php endforeach; ?>

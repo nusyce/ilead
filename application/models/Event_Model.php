@@ -22,19 +22,32 @@ class Event_Model extends CI_Model
 
     public function insert($data)
     {
-        $this->db->insert('tbl_events', $data);
+        $my_data['name'] = $data['name'];
+        $my_data['description'] = $data['description'];
+        $my_data['start_date'] = $data['start_date'];
+        $my_data['end_date'] = $data['end_date'];
+        $my_data['created_at'] = date('Y-m-d H:i:s');
+        $my_data['updated_at'] = date('Y-m-d H:i:s');
+        $this->db->insert('tbl_events', $my_data);
+        return $this->db->insert_id();
     }
 
     public function update($data)
     {
+        $my_data['name'] = $data['name'];
+        $my_data['description'] = $data['description'];
+        $my_data['start_date'] = $data['start_date'];
+        $my_data['end_date'] = $data['end_date'];
+        $my_data['updated_at'] = date('Y-m-d H:i:s');
         $this->db->where('id', $data['id']);
         $this->db->update('tbl_events', $data);
     }
 
     public function delete($id)
     {
+        $this->db->select('tbl_transactions');
         $this->db->where('event_id', $id);
-        $result = $this->db->get('tbl_transactions')->get_result();
+        $result = $this->db->get('tbl_transactions');
         if ($result) {
             return false;
         }
@@ -42,6 +55,7 @@ class Event_Model extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('tbl_events');
         return true;
+
     }
 
     public function getAllParticipate($id)
@@ -84,7 +98,16 @@ class Event_Model extends CI_Model
         $this->db->where('ref', $ref);
         return $this->db->get('tbl_attachments')->result_array();
     }
-
+    public function add_attachments($id, $datapod)
+    {
+        $data['file_type'] = $datapod['file_type'];
+        $data['name'] = $datapod['raw_name'];
+        $data['ref'] = 'events';
+        $data['ref_id'] = $id;
+        $data['patch'] = $datapod['file_name'];
+        $this->db->insert('tbl_attachments', $data);
+        return true;
+    }
 
     public function getDepense($id)
     {

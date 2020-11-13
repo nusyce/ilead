@@ -224,6 +224,7 @@ $lang['position'] = "Position";
 $lang['status'] = "Status";
 $lang['liste_des_evenement'] = "Liste des évènements";
 $lang['ajouter_un_evenement'] = "Ajouter un évènement";
+$lang['modifier_un_evenement'] = "Modifier un évènement";
 $lang['description'] = "Description";
 $lang['nom_participant'] = "Nom du participant";
 $lang['liste_des_transactions'] = "Liste des transactions";
@@ -242,6 +243,12 @@ $lang['cout_depense'] = "Coût de la depense";
 $lang['N°'] = "N°";
 $lang['nom_du_fichier'] = "nom du fichier";
 $lang['type_de_fichier'] = "type de fichier ";
+$lang['add_succes'] = "Ajouté avec succes ";
+$lang['add_danger'] = "Echec d'insertion ";
+$lang['edit_succes'] = "Modifié avec succes ";
+$lang['edit_danger'] = "Echec de modification ";
+$lang['delete_succes'] = "Supprimé avec succes ";
+$lang['delete_danger'] = "Echec de suppression ";
 
 
 

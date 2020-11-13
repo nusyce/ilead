@@ -9,6 +9,14 @@ $('body').on('click', '#addRespons', function (e) {
     e.preventDefault();
     $('#modal-responsable').modal('show');
 })
+function requestGet(uri, params) {
+    params = typeof (params) == 'undefined' ? {} : params;
+    var options = {
+        type: 'GET',
+        url: uri.indexOf(admin_url) > -1 ? uri : admin_url + uri
+    };
+    return $.ajax($.extend({}, options, params));
+}
 
 if ($(".country").length) {
     $(".country").select2();
@@ -26,8 +34,9 @@ $('body').on('change', '.file-upload-default', function (e) {
 });
 
 $('.delete').click(function () {
-    var messages = $(this).data('message');
-    return confirm(messages);
+    var message = 'Confirm';
+
+    return confirm(message);
 })
 
 $(document).ready(function () {

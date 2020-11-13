@@ -250,6 +250,7 @@ $lang['edit_danger'] = "Echec de modification ";
 $lang['delete_succes'] = "Supprimé avec succes ";
 $lang['delete_danger'] = "Echec de suppression ";
 $lang['date_error'] = "La date de début ne peut pas être supérieure à la date de fin";
+$lang['parametre_generaux'] = "Paramètre généraux";
 
 
 

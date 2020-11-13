@@ -15,6 +15,19 @@
                   </div>
               </form>-->
         <ul class="navbar-nav">
+            
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="link-icon" title="us" data-feather="dollar-sign"></i> 
+                    <span  class="font-weight-small ml-1 mr-1" style="font-style: italic;"><?php echo $this->lang->line('asides_plan_message'); ?> : <?=get_user_plan() ?> </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <a href="<?=base_url('users/change_plan/'.get_user_plan_id()); ?>" class="dropdown-item py-2"> <span
+                                class="ml-1"><?php //echo $this->lang->line('asides_message'); ?> changer de plan ?</span></a>
+                </div>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,6 +51,7 @@
                                 class="ml-1"> Spanish </span></a>-->
                 </div>
             </li>
+
             <!--                <li class="nav-item dropdown nav-apps">
                                 <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

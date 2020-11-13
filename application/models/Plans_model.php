@@ -29,6 +29,12 @@ class Plans_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->get('tbl_plans')->row();
     }
+
+    public function get_plan_above_this($id)
+    {
+        $this->db->where('id > ', $id);
+        return $this->db->get('tbl_plans')->result_array();
+    }
     /**
      * @param  boolean If Client or Staff
      * @return none

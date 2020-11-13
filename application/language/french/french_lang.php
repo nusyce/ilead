@@ -102,6 +102,8 @@ $lang['asides_light_message'] = "Lumière";
 $lang['asides_dark_message'] = "Sombre";
 $lang['asides_light_theme_message'] = "Thème léger";
 $lang['asides_dark_theme_message'] = "Thème sombre";
+$lang['asides_plan_message'] = "Plan actuel";
+$lang['asides_change_plan_message'] = "Changer de plan?";
 
 
 // plan

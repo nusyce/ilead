@@ -92,6 +92,24 @@ function get_user_role_id()
     return (int)get_instance()->session->userdata('user_role_id');
 }
 
+function get_user_plan_id()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_plan_id');
+}
+
+function get_user_plan()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_plan');
+}
+
 function can_represente()
 {
     if (get_user_role_id() != 3)

@@ -242,6 +242,7 @@ $lang['cout_depense'] = "Coût de la depense";
 $lang['N°'] = "N°";
 $lang['nom_du_fichier'] = "nom du fichier";
 $lang['type_de_fichier'] = "type de fichier ";
+$lang['parametre_generaux'] = "Paramètre généraux";
 
 
 

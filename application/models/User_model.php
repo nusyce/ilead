@@ -95,6 +95,32 @@ class User_model extends CI_Model
         return $this->db->get('tbl_users')->result_array();
     }
 
+    //modification de la fonction myadherents() pour utilisation
+    public function myadherentsModify($code)
+    {
+        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
+        $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
+        $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
+        $this->db->where('sponsor', $code);
+        return $this->db->get('tbl_users')->result_array();
+    }
+
+    //initialise le portefeuille de tous les utilisateurs
+    public function getCommissionOfAllUser(){
+        $users = $this->get();
+        foreach ($users as $user){
+            $adherents = myadherentsModify($user['sponsor']);
+            $somme = 0;
+            foreach ($adherents  as $adherent){
+                $this->db->select('tbl_transactions');
+                $this->db->where('user_id',$adherent['id']);
+                $fetch = $this->db->get('tbl_transactions')->row();
+                $somme =+ (($fetch['amount']*20)/100);
+            }
+            $this->db->insert('tbl_meta_data', array("user_id"=>$user['id'],"key"=>"portefeuille","value"=>$somme));
+        }
+    }
+
     public function login($data)
     {
 
@@ -268,6 +294,7 @@ class User_model extends CI_Model
     public function get_user_membership(){
 
     }
+
 
     public function delete($id)
     {

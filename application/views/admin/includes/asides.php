@@ -310,11 +310,17 @@
                     </a>
             </li>
             <li class="nav-item">
-                <a href="<?= base_url('plans') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="trending-up"></i>
-                    <span class="link-title"><?php echo $this->lang->line('asides_pack_abon_message'); ?></span>
+                <a href="<?= base_url('Config') ?>" class="nav-link">
+                    <i class="fa fa-gear" data-feather="trending-up"></i>
+                    <span class="link-title"><?php echo $this->lang->line('parametre_generaux'); ?></span>
                 </a>
             </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('plans') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="trending-up"></i>
+                        <span class="link-title"><?php echo $this->lang->line('asides_pack_abon_message'); ?></span>
+                    </a>
+                </li>
             <li class="nav-item">
                 <a href="<?= base_url('PaieMethode') ?>" class="nav-link">
                     <i class="link-icon" data-feather="dollar-sign"></i>

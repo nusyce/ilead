@@ -225,9 +225,9 @@ $lang['status'] = "Status";
 $lang['liste_des_evenement'] = "Liste des évènements";
 $lang['ajouter_un_evenement'] = "Ajouter un évènement";
 $lang['description'] = "Description";
-$lang['nom_participant'] = "Description";
+$lang['nom_participant'] = "Nom du participant";
 $lang['liste_des_transactions'] = "Liste des transactions";
-$lang['montant'] = "Montant";
+$lang['Montant'] = "Montant";
 $lang['date_de_paiement'] = "Date de paiement";
 $lang['status_de_la_transaction'] = "Status de la transaction";
 $lang['methode_de_paiement'] = "Methode de paiement";
@@ -239,6 +239,9 @@ $lang['email_du_participant'] = "email du participant";
 $lang['nom_tache'] = "Nom de la tache";
 $lang['escription_depense'] = "Description de la depense";
 $lang['cout_depense'] = "Coût de la depense";
+$lang['N°'] = "N°";
+$lang['nom_du_fichier'] = "nom du fichier";
+$lang['type_de_fichier'] = "type de fichier ";
 
 
 

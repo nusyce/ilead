@@ -1,22 +1,37 @@
-<?php
-foreach ($data as $dd):
-?>
-<div class="row app-file-recent-access">
-    <div class="col-md-3 col-6">
-        <div class="card border shadow-none mb-1 app-file-info">
-            <div class="card-content">
-                <div class="app-file-content-logo card-img-top">
-                    <i class="bx bx-dots-vertical-rounded app-file-edit-icon d-block float-right"></i>
-                </div>
-                <div class="card-body p-50">
-                    <div class="app-file-recent-details">
-                        <div class="app-file-name font-size-small font-weight-bold"><?= $dd['name'] ?></div>
-                        <div class="app-file-size font-size-small text-muted mb-25"><?= $dd['file_type'] ?></div>
-                        <div class="app-file-last-access font-size-small text-muted">Last accessed : 3 hours ago</div>
-                    </div>
+<div class="page-content">
+    <?php $this->load->view('admin/event/nav'); ?>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <table id="databable" class="table">
+                        <thead>
+                        <tr>
+                            <th><?php echo $this->lang->line('N°'); ?></th>
+                            <th><?php echo $this->lang->line('nom_du_fichier'); ?></th>
+                            <th><?php echo $this->lang->line('type_de_fichier'); ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($data as $dd):
+                            ?>
+                            <tr>
+                                <td>
+                                    <div><?= $dd['id'] ?></div>
+                                </td>
+                                <td><?= $dd['name'] ?></td></td>
+                                <td><?= $dd['file_type'] ?></td></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php endforeach;?>
+
+
+
+

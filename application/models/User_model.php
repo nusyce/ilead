@@ -23,9 +23,10 @@ class User_model extends CI_Model
         $this->db->join('tbl_cluster as c', 'c.id = tbl_users.cluster', 'left');
         $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'left');
         if (is_numeric($id)) {
-            $this->db->where('id', $id);
+            $this->db->where('tbl_users.id', $id);
             $user = $this->db->get('tbl_users')->row();
             $user->country = $this->Misc_model->get_country($user->country_id);
+            return $user;
         }
         return $this->db->get('tbl_users')->result_array();
     }
@@ -38,6 +39,13 @@ class User_model extends CI_Model
         $this->db->where('user_id', get_user_id());
         return $this->db->order_by('tbl_transactions.id', "desc")->limit(1)->get('tbl_transactions')->row();
     }
+
+    public function update($data)
+    {
+        $this->db->where('id', get_user_id());
+        return $this->db->update('tbl_users', $data);
+    }
+
     public function get_all_paid()
     {
         $this->db->select('tbl_transactions.user_id,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, u.cle as cle, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
@@ -57,8 +65,7 @@ class User_model extends CI_Model
         $this->db->join('tbl_users as us', 'us.id = tbl_representates.user_id', 'inner');
         if (is_numeric($country)) {
             $this->db->where('tbl_representates.country_id', $country);
-        }
-        else{
+        } else {
             $this->db->where('tbl_representates.country_id', get_user_country());
         }
 
@@ -228,7 +235,7 @@ class User_model extends CI_Model
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $this->lang->line('welcome_message');
-            $mail->Body = $this->lang->line('dear_message').' <b>' . $data['firstname'] . '</b><br>'. $this->lang->line('your_code_is')  . substr($code, 0, -2) . 'XX' . '<br>'. $this->lang->line('your_key_is') .  $key . '<br>';
+            $mail->Body = $this->lang->line('dear_message') . ' <b>' . $data['firstname'] . '</b><br>' . $this->lang->line('your_code_is') . substr($code, 0, -2) . 'XX' . '<br>' . $this->lang->line('your_key_is') . $key . '<br>';
 
             if (!$mail->send()) {
                 echo 'Mailer Error: ' . $mail->ErrorInfo;
@@ -240,15 +247,14 @@ class User_model extends CI_Model
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 
         }
-         $mail->ClearAllRecipients();
+        $mail->ClearAllRecipients();
         $representates = $this->get_user_representate($data['country_id']);
-        foreach($representates as $representate) {
+        foreach ($representates as $representate) {
             $mail->ClearAllRecipients();
             $mail->isHTML(true);
             $mail->Subject = $this->lang->line('new_registration_message');
-            $mail->Body = $this->lang->line('dear_message').' <b>' . $representate['firstname'] . '</b><br>'. $this->lang->line('new_member_registration_message')  . '<br>'.$this->lang->line('register_name_message').' : '.$data['firstname'].' '.$data['lastname']. '<br>'.$this->lang->line('register_mail_message').' : '.$data['email']. '<br>'.$this->lang->line('register_whatapp_phone_message').' : '.$data['whatsapp_phone'];
-            if (filter_var($representate['email'], FILTER_VALIDATE_EMAIL))
-            {
+            $mail->Body = $this->lang->line('dear_message') . ' <b>' . $representate['firstname'] . '</b><br>' . $this->lang->line('new_member_registration_message') . '<br>' . $this->lang->line('register_name_message') . ' : ' . $data['firstname'] . ' ' . $data['lastname'] . '<br>' . $this->lang->line('register_mail_message') . ' : ' . $data['email'] . '<br>' . $this->lang->line('register_whatapp_phone_message') . ' : ' . $data['whatsapp_phone'];
+            if (filter_var($representate['email'], FILTER_VALIDATE_EMAIL)) {
                 $mail->addAddress($representate['email'], $representate['firstname']);
                 if (!$mail->send()) {
                     echo 'Invalid email address';

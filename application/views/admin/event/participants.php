@@ -1,6 +1,5 @@
 <div class="page-content">
-
-
+    <?php $this->load->view('admin/event/nav'); ?>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
@@ -10,7 +9,7 @@
                         <table id="databable" class="table">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('position'); ?></th>
+                                <th><?php echo $this->lang->line('N°'); ?></th>
                                 <th><?php echo $this->lang->line('nom_participant'); ?></th>
                                 <th><?php echo $this->lang->line('prenom_participant'); ?></th>
                                 <th><?php echo $this->lang->line('pays_du_participant'); ?></th>
@@ -24,7 +23,7 @@
                                 ?>
                                 <tr>
                                     <td>
-                                        <div><?= $dd['t.id'] ?></div>
+                                        <div><?= $dd['id'] ?></div>
                                     </td>
                                     <td>
                                         <div>
@@ -45,5 +44,7 @@
         </div>
     </div>
 </div>
-<script>
+
+
+
 

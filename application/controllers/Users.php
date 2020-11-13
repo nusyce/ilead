@@ -65,7 +65,17 @@ class Users extends AdminControler
 
     public function profile()
     {
-        $this->load_view('user/profile');
+        if ($this->input->post()) {
+            $data = array(
+                'firstname' => $this->input->post('firstname'),
+                'lastname' => $this->input->post('lastname'),
+            );
+            $user = $this->User_model->update($data);
+            redirect(base_url('users/profile'));
+
+        }
+        $data['data']= $this->User_model->get(get_user_id());
+        $this->load_view('user/profile', $data);
 
     }
 

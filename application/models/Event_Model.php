@@ -60,24 +60,32 @@ class Event_Model extends CI_Model
 
     public function getAllTransaction($id)
     {
-        $this->db->select('tbl_events.id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_users.country_id as ctryid,tbl_whatsapp_phone as whatsapp
-        tbl_users.email,
-        tbl_events.start_date as start,transactions.id as t_id,transactions.plan_id,transactions.status as status,transactions.due as date,transactions.mode_paiement as paiement_mode,
-        transactions.amount as amount,tbl_events.end_date as end,users.firstname as first, users.lastname as last');
-        $this->db->join('tbl_transactions as t', 't.event_id = tbl_events.id', 'inner');
-        $this->db->join('tbl_users as u', 'u.id = tbl_book_event.id', 'inner');
-        if (is_numeric($id)) {
-            $this->db->where('tbl_book_event.event_id', $id);
-            $transaction = $this->db->get('tbl_book_event');
-            return $transaction;
-        }
-        return $this->db->get('tbl_book_event')->result_array();
+        $this->db->select('tbl_events.id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_users.country_id as ctryid,tbl_users.whatsapp_phone as whatsapp, tbl_users.id as id,
+        tbl_users.email,  tbl_events.start_date as start,tbl_transactions.id as t_id,tbl_transactions.plan_id,tbl_transactions.status as status,tbl_transactions.due as date,tbl_transactions.mode_paiement as paiement_mode,
+        tbl_transactions.amount as amount,tbl_events.end_date as end,users.firstname as first, users.lastname as last');
+        $this->db->join('tbl_events', 'tbl_events.id = tbl_transactions.event_id', 'inner');
+        $this->db->join('tbl_book_event', 'tbl_book_event.event_id = tbl_events.id', 'inner');
+        $this->db->join('tbl_users', 'tbl_users.id = tbl_book_event.user_id', 'inner');
+        $this->db->where('tbl_transactions.event_id', $id);
+        return $this->db->get('tbl_transactions')->result_array();
+
     }
 
-    public function get_attachments($id)
+    public function getAllDepense($id){
+        $this->db->select('tbl_events.id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_users.country_id as ctryid,tbl_users.whatsapp_phone as whatsapp, tbl_users.id as id,
+        tbl_users.email,  tbl_events.start_date as start,tbl_transactions.id as t_id,tbl_transactions.plan_id,tbl_transactions.status as status,tbl_transactions.due as date,tbl_transactions.mode_paiement as paiement_mode,
+        tbl_transactions.amount as amount,tbl_events.end_date as end,users.firstname as first, users.lastname as last');
+        $this->db->join('tbl_events', 'tbl_events.id = tbl_depenses.event_id', 'inner');
+        $this->db->join('tbl_task', 'tbl_book_event.event_id = tbl_events.id', 'inner');
+        $this->db->join('tbl_users', 'tbl_users.id = tbl_book_event.user_id', 'inner');
+        $this->db->where('tbl_transactions.event_id', $id);
+        return $this->db->get('tbl_transactions')->result_array();
+    }
+
+    public function get_attachments($id,$ref)
     {
         $this->db->where('ref_id', $id);
-        $this->db->where('ref', 'events');
+        $this->db->where('ref', $ref);
         return $this->db->get('tbl_attachments')->result_array();
     }
 

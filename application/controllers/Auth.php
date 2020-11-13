@@ -85,6 +85,7 @@ class Auth extends CI_Controller
                     'user_role' => $this->User_roles_model->get_role_by_id($result['role_id'])->name,
                     'user_mail' => $result['email'],
                     'user_name' => $result['firstname'],
+                    'last_name' => $result['lastname'],
                     'cle' => $result['cle'],
                     'djp' => $result['djp'],
                     'country' => $result['country_id'],

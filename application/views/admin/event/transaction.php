@@ -1,22 +1,15 @@
 <div class="page-content">
-
-
+    <?php $this->load->view('admin/event/nav'); ?>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title"><?php echo $this->lang->line('liste_des_transactions'); ?>
-
-                        <a type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0" id="addRespons"
-                           href="#">
-                            <i class="btn-icon-prepend" data-feather="plus"></i>
-                            <?php echo $this->lang->line('ajouter_un_evenement'); ?>
-                        </a></h6>
                     <div class="table-responsive">
                         <table id="databable" class="table">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('position'); ?></th>
+                                <th><?php echo $this->lang->line('N°'); ?></th>
                                 <th><?php echo $this->lang->line('nom_participant'); ?></th>
                                 <th><?php echo $this->lang->line('Montant'); ?></th>
                                 <th><?php echo $this->lang->line('date_de_paiement'); ?></th>
@@ -30,7 +23,7 @@
                                 ?>
                                 <tr>
                                     <td>
-                                        <div><?= $dd['t.id'] ?></div>
+                                        <div><?= $dd['t_id'] ?></div>
                                     </td>
                                     <td>
                                         <div>
@@ -46,11 +39,10 @@
                             <?php endforeach; ?>
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
+
 

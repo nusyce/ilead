@@ -28,10 +28,20 @@ class Event extends AdminControler
             $this->load_view('event/detail', $data);
         }
 
-        else if ($_GET['navigation']=='expenses'){
+        else if ($_GET['navigation']=='transaction'){
             $data['data'] = $this->Event_Model->getAllTransaction($id);
             $this->load_view('event/transaction', $data);
         }
+        else if ($_GET['navigation']=='participants'){
+            $data['data'] = $this->Event_Model->getAllTransaction($id);
+            $this->load_view('event/participants', $data);
+        }
+        else if ($_GET['navigation']=='listfile'){
+            $ref = 'event';
+            $data['data'] = $this->Event_Model->get_attachments($id, $ref);
+            $this->load_view('event/list_file', $data);
+        }
+
     }
 
     public function delete_event($id)

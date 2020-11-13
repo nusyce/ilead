@@ -15,6 +15,15 @@ function get_user_id()
     return get_instance()->session->userdata('user_id');
 }
 
+function get_user_lastname()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('last_name');
+}
+
 function get_user_djp()
 {
     if (!is_user_logged_in()) {

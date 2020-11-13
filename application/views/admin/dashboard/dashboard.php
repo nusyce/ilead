@@ -205,4 +205,70 @@
     </div> <!-- row -->
 
 
+    <!-- Basic tabs start -->
+    <section id="basic-tabs-components">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h4>Basic Tab</h4>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <p>Takes the basic nav from above and adds the <code>.nav-tabs</code> class to generate a tabbed interface.</p>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">
+                                <i class="bx bx-home align-middle"></i>
+                                <span class="align-middle">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="false">
+                                <i class="bx bx-user align-middle"></i>
+                                <span class="align-middle">Service</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" aria-controls="about" role="tab" aria-selected="false">
+                                <i class="bx bx-message-square align-middle"></i>
+                                <span class="align-middle">Messages</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
+                            <p>
+                                Gummi bears liquorice brownie donut pastry bonbon biscuit. Jelly-o pudding fruitcake toffee apple pie
+                                sugar
+                                plum biscuit. Sweet roll brownie marshmallow dragée. Carrot cake carrot cake muffin donut gingerbread
+                                sweet.
+                                pudding chocolate. Halvah powder sugar plum marshmallow powder biscuit. Biscuit pudding fruitcake. Donut
+                                gummies
+                                dessert lollipop pie carrot cake bear claw lollipop danish.
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
+                            <p>
+                                Pudding candy canes sugar plum cookie chocolate cake powder croissant. Carrot cake tiramisu danish
+                                candy cake muffin croissant tart dessert. Tiramisu caramels candy canes chocolate cake sweet roll
+                                liquorice icing cupcake.
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="about" aria-labelledby="about-tab" role="tabpanel">
+                            <p>
+                                Carrot cake dragée chocolate. Lemon drops ice cream wafer gummies dragée. Chocolate bar liquorice
+                                cheesecake cookie chupa chups marshmallow oat cake biscuit. Dessert toffee fruitcake ice cream
+                                powder
+                                tootsie roll cake.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Basic Tag Input end -->
+
+
 </div>

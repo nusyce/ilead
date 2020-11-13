@@ -259,6 +259,10 @@ class User_model extends CI_Model
     }
 
 
+    public function get_user_membership(){
+
+    }
+
     public function delete($id)
     {
         $this->db->where('id', $id);

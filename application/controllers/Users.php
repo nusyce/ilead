@@ -44,7 +44,6 @@ class Users extends AdminControler
                 'firstname' => $this->input->post('name'),
                 'whatsapp_phone' => $this->input->post('whatsapp'),
                 'role_id' => 1, // By default i putt role is 2 for registraiton
-                'email' => $this->input->post('email'),
                 'cluster' => $this->input->post('cluster'),
                 'sponsor' => $this->input->post('sponsor'),
                 'lastname' => $this->input->post('lastname'),

@@ -22,6 +22,7 @@ class Event extends AdminControler
 
     public function event($id)
     {
+
         if (!isset($_GET['navigation'])){
             $data['data'] = $this->Event_Model->get();
             $this->load_view('event/detail', $data);
@@ -29,7 +30,6 @@ class Event extends AdminControler
 
         else if ($_GET['navigation']=='expenses'){
             $data['data'] = $this->Event_Model->getAllTransaction($id);
-            var_dump( $data['data']);
             $this->load_view('event/transaction', $data);
         }
     }

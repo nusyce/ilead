@@ -90,7 +90,6 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_attachments')->result_array();
     }
 
-
     public function getDepense($id)
     {
         $this->db->select('tbl_depenses.event.id,tbl_depenses.description as description, tbl_depenses.amount as amount,tbl_task.name as name');
@@ -100,6 +99,7 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_depenses.id')->result_array();
     }
 
+
     //retourne les évènements auxquels un utilisateur est affilié
     public function getMyEvenement($id){
         $this->db->select('id,name,start_date,end_date,description');
@@ -108,7 +108,7 @@ class Event_Model extends CI_Model
         if (is_numeric($id)) {
             $this->db->where('tbl_event.id', $id);
             $this->db->where('tbl_events.start_date>'.now());
-            $evenement= $this->db->get('tbl_events');
+            $evenement= $this->db->get('tbl_events')->result_array();
             return $evenement;
         }
         return $this->db->get('tbl_book_event')->result_array();
@@ -126,6 +126,7 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_events')->result_array();
     }
 
+    //retourne le status de la requête: savoir si elle est déja passée ou non
     public function getEventStatus($id){
         $this->db->select('tbl_events');
         $this->db->where('id',$id);
@@ -138,7 +139,5 @@ class Event_Model extends CI_Model
                 return false;
             }
         }
-
     }
-
 }

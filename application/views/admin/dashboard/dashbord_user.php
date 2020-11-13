@@ -17,109 +17,22 @@
                                         <th>Nom</th>
                                         <th>Date de début</th>
                                         <th>Date de fin</th>
-                                        <th>Description</th>
-                                        <th class="text-center">Action</th>
+                                        <th class="">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                  <?php foreach($myevent as $my_event) {?>
                                     <tr>
                                         <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/fs.png" alt="card" height="24" width="24">Fastrack Watches
+                                            <?=$my_event['name']?>
                                         </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>30%</span>
+                                        <td class="py-1"><i class="bx bx-trending-down text-danger align-middle mr-50"></i><span> <?=date('d/m/Y', strtotime($my_event['start_date']))?></span>
                                         </td>
-                                        <td class="py-1">$5,536</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <td class="py-1"> <?=date('d/m/Y', strtotime($my_event['end_date']))?></td>
+
+                                        <td class="text-success py-1"><button class="btn btn-primary">Consulter</button></td>
                                     </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/puma.png" alt="card" height="24" width="24">Puma Shoes
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-down text-danger align-middle mr-50"></i><span>15.5%</span>
-                                        </td>
-                                        <td class="py-1">$1,569</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/nike.png" alt="card" height="24" width="24">Nike Air Jordan
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>70.30%</span>
-                                        </td>
-                                        <td class="py-1">$23,859</td>
-                                        <td class="text-danger py-1">Closed</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/one-plus.png" alt="card" height="24" width="24">Oneplus 7 pro
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>10.4%</span>
-                                        </td>
-                                        <td class="py-1">$9,523</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/google.png" alt="card" height="24" width="24">Google Pixel 4 xl
-                                        </td>
-                                        <td class="py-1"><i class="bx bx-trending-down text-danger align-middle mr-50"></i><span>-62.38%</span>
-                                        </td>
-                                        <td class="py-1">12,897</td>
-                                        <td class="text-danger py-1">Closed</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropup">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                  <?php }?>
                                     </tbody>
                                 </table>
                                 <!-- table ends -->
@@ -148,101 +61,23 @@
                                         <th>Nom</th>
                                         <th>Date de début</th>
                                         <th>Date de fin</th>
-                                        <th>Description</th>
-                                        <th class="text-center">Action</th>
+
+                                        <th class="">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/fs.png" alt="card" height="24" width="24">Fastrack Watches
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>30%</span>
-                                        </td>
-                                        <td class="py-1">$5,536</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-success py-1"><button class="btn btn-primary"> Participer</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/puma.png" alt="card" height="24" width="24">Puma Shoes
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-down text-danger align-middle mr-50"></i><span>15.5%</span>
-                                        </td>
-                                        <td class="py-1">$1,569</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/nike.png" alt="card" height="24" width="24">Nike Air Jordan
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>70.30%</span>
-                                        </td>
-                                        <td class="py-1">$23,859</td>
-                                        <td class="text-danger py-1">Closed</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/one-plus.png" alt="card" height="24" width="24">Oneplus 7 pro
-                                        </td>
-                                        <td class="py-1">
-                                            <i class="bx bx-trending-up text-success align-middle mr-50"></i><span>10.4%</span>
-                                        </td>
-                                        <td class="py-1">$9,523</td>
-                                        <td class="text-success py-1">Active</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropdown">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-1 line-ellipsis">
-                                            <img class="rounded-circle mr-1" src="../../../app-assets/images/icon/google.png" alt="card" height="24" width="24">Google Pixel 4 xl
-                                        </td>
-                                        <td class="py-1"><i class="bx bx-trending-down text-danger align-middle mr-50"></i><span>-62.38%</span>
-                                        </td>
-                                        <td class="py-1">12,897</td>
-                                        <td class="text-danger py-1">Closed</td>
-                                        <td class="text-center py-1">
-                                            <div class="dropup">
-                                                        <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
-                                                        </span>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i> delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php foreach($othe_event as $my_event) {?>
+                                        <tr>
+                                            <td class="py-1 line-ellipsis">
+                                                <?=$my_event['name']?>
+                                            </td>
+                                            <td class="py-1"><i class="bx bx-trending-down text-danger align-middle mr-50"></i><span> <?=date('d/m/Y', strtotime($my_event['start_date']))?></span>
+                                            </td>
+                                            <td class="py-1"> <?=date('d/m/Y', strtotime($my_event['end_date']))?></td>
+
+                                            <td class="text-success py-1"><button class="btn btn-primary">Consulter</button></td>
+                                        </tr>
+                                    <?php }?>
                                     </tbody>
                                 </table>
                                 <!-- table ends -->

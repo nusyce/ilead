@@ -53,6 +53,11 @@ class Event extends AdminControler
 
         if ($this->input->post())
             {
+                if ($_POST['start_date'] > $_POST['end_date'])
+                {
+                    $this->session->set_flashdata('error', $this->lang->line('date_error'));
+                    redirect('event');
+                }
                 if ($id==''){
 
 

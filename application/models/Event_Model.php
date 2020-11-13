@@ -92,10 +92,10 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_depenses')->result_array();
     }
 
-    public function get_attachments($id,$ref)
+    public function get_attachments($id)
     {
         $this->db->where('ref_id', $id);
-        $this->db->where('ref', $ref);
+        $this->db->where('ref', 'events');
         return $this->db->get('tbl_attachments')->result_array();
     }
     public function add_attachments($id, $datapod)
@@ -119,33 +119,13 @@ class Event_Model extends CI_Model
     }
 
     public function getMyEvenement($id){
-        $this->db->select('id,name,start_date,end_date,description');
-        $this->db->join('tbl_book_event as b', 'b.id = tbl_event.id', 'inner');
-        $this->db->join('tbl_users as u', 'u.id = tbl_book_event.id', 'inner');
-        if (is_numeric($id)) {
-            $this->db->where('tbl_event.id', $id);
-            $this->db->where('tbl_events.start_date>'.now());
-            $evenement= $this->db->get('tbl_events');
-            return $evenement;
-        }
-        return $this->db->get('tbl_book_event')->result_array();
+        $sql="SELECT * FROM tbl_events WHERE tbl_events.start_date >".date('Y/m/d')."  and tbl_events.id in (select distinct event_id from tbl_book_event where user_id = ".$id.")";
+        return $this->db->query($sql)->result_array();
     }
 
     public function getOtherEvenement($id){
-        $result = $this->getMyEvenement($id);
-        $ids = array();
-        foreach ($result as $row){
-            $ids[] = $row['id'];
-        }
-        $this->db->select('tbl_events');
-        $this->db->where_not_in('id', $ids);
-        if (is_numeric($id)) {
-            $this->db->where('tbl_book_event.id', $id);
-            $this->db->where('tbl_events.start_date>'.now());
-            $evenement= $this->db->get('tbl_events');
-            return $evenement;
-        }
-        return $this->db->get('tbl_book_event')->result_array();
+        $sql="SELECT * FROM tbl_events WHERE tbl_events.start_date >".date('Y/m/d')."  and tbl_events.id not in (select distinct event_id from tbl_book_event where user_id = ".$id.")";
+        return $this->db->query($sql)->result_array();
     }
 
 }

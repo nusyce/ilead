@@ -304,6 +304,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                    <a href="<?= base_url('Event/liste')?>" class="nav-link">
+                        <i data-feather="user"></i>
+                        <span><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
+                    </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?= base_url('plans') ?>" class="nav-link">
                     <i class="link-icon" data-feather="trending-up"></i>
                     <span class="link-title"><?php echo $this->lang->line('asides_pack_abon_message'); ?></span>

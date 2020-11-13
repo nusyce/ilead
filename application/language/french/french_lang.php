@@ -201,3 +201,48 @@ $lang['desc_pack3'] = ' <div class="d-flex align-items-center mb-2">
                                                     <p>Suggestion de 05 projets à lancer immédiatement</p>
                                                 </div>';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//new version
+$lang['Liste_des_evenements'] = "Liste des evenements";
+$lang['nom_evenement'] = "Nom de l'évènement";
+$lang['date_debut'] = "Date de début";
+$lang['date_fin'] = "Date de fin";
+$lang['position'] = "Position";
+$lang['status'] = "Status";
+$lang['liste_des_evenement'] = "Liste des évènements";
+$lang['ajouter_un_evenement'] = "Ajouter un évènement";
+$lang['description'] = "Description";
+$lang['nom_participant'] = "Description";
+$lang['liste_des_transactions'] = "Liste des transactions";
+$lang['montant'] = "Montant";
+$lang['date_de_paiement'] = "Date de paiement";
+$lang['status_de_la_transaction'] = "Status de la transaction";
+$lang['methode_de_paiement'] = "Methode de paiement";
+$lang['prenom_participant'] = "Prenom du participant";
+$lang['pays_du_participant'] = "Pays du participant";
+$lang['numero_du_participant'] = "numero du participant";
+$lang['numero_du_participant'] = "numero du participant";
+$lang['email_du_participant'] = "email du participant";
+
+
+
+
+
+
+
+
+
+

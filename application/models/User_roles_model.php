@@ -27,4 +27,10 @@ class User_roles_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->get('tbl_roles')->row();
     }
+
+    public function update_role($data)
+    {
+        $this->db->where('id', $data['id']);
+        $us = $this->db->update('tbl_roles', $data);
+    }
 }

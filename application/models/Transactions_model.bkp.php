@@ -22,8 +22,9 @@ class Transactions_model extends CI_Model
         $this->numgeneratorcode($insert);
     }
 
-    public function get($id = '')
+    public function get($id = '',$where = [])
     {
+        $this->db->where($where);
         if (get_user_role_id() == 1) {
             $this->db->where('user_id', get_user_id());
         } elseif (can_represente()) {

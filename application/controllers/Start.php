@@ -53,4 +53,23 @@ class Start extends CI_Controller
         }
 
     }
+    public function dashboard2()
+    {
+
+        if(get_user_djp()==0)
+        {
+
+            redirect(base_url('paid'));
+
+
+        }
+        else{
+            $data = [];
+            $this->load->view('admin/includes/header', $data);
+            $this->load->view('admin/includes/asides', $data);
+            $this->load->view('admin/dashboard/dashbord_user');
+            $this->load->view('admin/includes/footer', $data);
+        }
+
+    }
 }

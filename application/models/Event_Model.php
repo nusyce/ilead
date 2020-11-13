@@ -33,9 +33,8 @@ class Event_Model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->select('tbl_transactions');
         $this->db->where('event_id', $id);
-        $result = $this->db->get('tbl_transactions');
+        $result = $this->db->get('tbl_transactions')->get_result();
         if ($result) {
             return false;
         }
@@ -72,14 +71,11 @@ class Event_Model extends CI_Model
     }
 
     public function getAllDepense($id){
-        $this->db->select('tbl_events.id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_users.country_id as ctryid,tbl_users.whatsapp_phone as whatsapp, tbl_users.id as id,
-        tbl_users.email,  tbl_events.start_date as start,tbl_transactions.id as t_id,tbl_transactions.plan_id,tbl_transactions.status as status,tbl_transactions.due as date,tbl_transactions.mode_paiement as paiement_mode,
-        tbl_transactions.amount as amount,tbl_events.end_date as end,users.firstname as first, users.lastname as last');
+        $this->db->select('tbl_depenses.description as description,tbl_depenses.amount as amount,tbl_task.name as taskname,tbl_depenses.id as id');
         $this->db->join('tbl_events', 'tbl_events.id = tbl_depenses.event_id', 'inner');
-        $this->db->join('tbl_task', 'tbl_book_event.event_id = tbl_events.id', 'inner');
-        $this->db->join('tbl_users', 'tbl_users.id = tbl_book_event.user_id', 'inner');
-        $this->db->where('tbl_transactions.event_id', $id);
-        return $this->db->get('tbl_transactions')->result_array();
+        $this->db->join('tbl_task', 'tbl_task.id = tbl_depenses.task_id', 'inner');
+        $this->db->where('tbl_events.id', $id);
+        return $this->db->get('tbl_depenses')->result_array();
     }
 
     public function get_attachments($id,$ref)
@@ -97,6 +93,36 @@ class Event_Model extends CI_Model
         $this->db->join('tbl_task as t', 't.id = tbl_depenses.task_id', 'inner');
         $this->db->where('tbl_depenses.id', $id);
         return $this->db->get('tbl_depenses.id')->result_array();
+    }
+
+    public function getMyEvenement($id){
+        $this->db->select('id,name,start_date,end_date,description');
+        $this->db->join('tbl_book_event as b', 'b.id = tbl_event.id', 'inner');
+        $this->db->join('tbl_users as u', 'u.id = tbl_book_event.id', 'inner');
+        if (is_numeric($id)) {
+            $this->db->where('tbl_event.id', $id);
+            $this->db->where('tbl_events.start_date>'.now());
+            $evenement= $this->db->get('tbl_events');
+            return $evenement;
+        }
+        return $this->db->get('tbl_book_event')->result_array();
+    }
+
+    public function getOtherEvenement($id){
+        $result = $this->getMyEvenement($id);
+        $ids = array();
+        foreach ($result as $row){
+            $ids[] = $row['id'];
+        }
+        $this->db->select('tbl_events');
+        $this->db->where_not_in('id', $ids);
+        if (is_numeric($id)) {
+            $this->db->where('tbl_book_event.id', $id);
+            $this->db->where('tbl_events.start_date>'.now());
+            $evenement= $this->db->get('tbl_events');
+            return $evenement;
+        }
+        return $this->db->get('tbl_book_event')->result_array();
     }
 
 }

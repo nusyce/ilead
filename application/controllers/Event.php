@@ -41,12 +41,23 @@ class Event extends AdminControler
             $data['data'] = $this->Event_Model->get_attachments($id, $ref);
             $this->load_view('event/list_file', $data);
         }
+        else if ($_GET['navigation']=='depense'){
+            $ref = 'event';
+            $data['data'] = $this->Event_Model->getAllDepense($id);
+            $this->load_view('event/list_file', $data);
+        }
 
     }
 
     public function delete_event($id)
     {
-        $this->Event_Model->delete($id);
+        $result = $this->Event_Model->delete($id);
+        if($result){
+
+        }
+        else{
+
+        }
         redirect('event/index');
     }
 

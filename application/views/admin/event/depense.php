@@ -14,7 +14,7 @@
                     <table id="databable" class="table">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('position'); ?></th>
+                            <th><?php echo $this->lang->line('N°'); ?></th>
                             <th><?php echo $this->lang->line('nom_tache'); ?></th>
                             <th><?php echo $this->lang->line('description_depense'); ?></th>
                             <th><?php echo $this->lang->line('cout_depense'); ?></th>
@@ -28,17 +28,13 @@
                             <tr>
                                 <td>
                                     <div><?= $dd['id'] ?></div>
-                                    <div class="detail-option">
-                                        <!--<a href="<?=base_url('users/representates/update_representate/'.$dd['id']) ?>" class="">Modifier</a> | --><a href="<?=base_url('event/delete_event/'.$dd['id']) ?>" class="delete text-danger">Supprimer</a>
-                                    </div>
                                 </td>
                                 <td>
                                     <div>
-                                        <?= $dd['name'] ?>
+                                        <?= $dd['taskname'] ?>
                                     </div>
                                 </td>
-                                <td><?= $dd['start_date'] ?></td></td>
-                                <td><?= $dd['description'] ?></td>
+                                <td><?= $dd['description'] ?></td></td>
                                 <td><?= $dd['amount'] ?></td>
                                 <td><i class="fa fa-circle online"></i></td>
 

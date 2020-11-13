@@ -38,5 +38,7 @@ class AdminControler extends CI_Controller
         $this->load->view('admin/' . $view, $data);
         $this->load->view('admin/includes/footer', $data);
     }
+
+
 }
 

@@ -236,6 +236,9 @@ $lang['pays_du_participant'] = "Pays du participant";
 $lang['numero_du_participant'] = "numero du participant";
 $lang['numero_du_participant'] = "numero du participant";
 $lang['email_du_participant'] = "email du participant";
+$lang['nom_tache'] = "Nom de la tache";
+$lang['escription_depense'] = "Description de la depense";
+$lang['cout_depense'] = "Coût de la depense";
 
 
 

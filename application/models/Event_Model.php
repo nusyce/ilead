@@ -76,14 +76,16 @@ class Event_Model extends CI_Model
     public function get_attachments($id)
     {
         $this->db->where('ref_id', $id);
-        $this->db->where('ref', 'transactions');
+        $this->db->where('ref', 'events');
         return $this->db->get('tbl_attachments')->result_array();
     }
     public function getDepense($id)
     {
-        $this->db->select('tbl.task.name,tbl_depenses.task.id,tbl_depenses.event.id,tbl_depenses.description');
+        $this->db->select('tbl_depenses.event.id,tbl_depenses.description as description, tbl_depenses.amount as amount,tbl_task.name as name');
         $this->db->join('tbl_events as e','e.id = tbl_depenses.event_id','inner');
-        $this->db->join('tbl_task as t','t.id = tbl_depenses.event_id','inner');
+        $this->db->join('tbl_task as t','t.id = tbl_depenses.task_id','inner');
+        $this->db->where('tbl_depenses.id', $id);
+        return $this->db->get('tbl_depenses.id')->result_array();
     }
 
 }

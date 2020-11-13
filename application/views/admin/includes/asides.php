@@ -304,7 +304,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                    <a href="<?= base_url('Event/liste')?>" class="nav-link">
+                    <a href="<?= base_url('Event/')?>" class="nav-link">
                         <i data-feather="user"></i>
                         <span><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
                     </a>

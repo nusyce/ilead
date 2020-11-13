@@ -105,6 +105,8 @@ $lang['asides_light_message'] = "Light";
 $lang['asides_dark_message'] = "Dark";
 $lang['asides_light_theme_message'] = "Light Theme";
 $lang['asides_dark_theme_message'] = "Dark  Theme";
+$lang['asides_plan_message'] = "Current package";
+$lang['asides_change_plan_message'] = "Change your package?";
 
 
 // plan

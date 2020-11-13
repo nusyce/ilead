@@ -89,6 +89,8 @@ class Auth extends CI_Controller
                     'cle' => $result['cle'],
                     'djp' => $result['djp'],
                     'country' => $result['country_id'],
+                    'user_plan_id' => $result['plan_id'],
+                    'user_plan' => $this->plans->get_plan_by_id($result['plan_id'])->name,
 
                 );
                 $this->session->set_userdata($admin_data);

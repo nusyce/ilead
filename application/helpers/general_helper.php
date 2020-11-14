@@ -419,6 +419,16 @@ function event_flag($event)
 }
 
 
+function isExpired($user)
+{
+    if (!$user->expiration)
+        return false;
+    if (strtotime($user->expiration) < time()) {
+        return true;
+    }
+    return false;
+}
+
 function __price($amount, $currency = ' F CFA')
 {
     return number_format($amount, $decimals = 0, $dec_point = ",", $thousands_sep = " ") . $currency;

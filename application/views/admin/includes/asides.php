@@ -33,7 +33,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
             </li>
             <li class="nav-item dropdown">
 
-                | <span class="<?php if (round((strtotime($user->expiration)-strtotime(date('Y-m-d H:i:s')))/ 86400) < 3) echo "danger"; ?>" > <?=date('d/m/Y H:i:s',strtotime($user->expiration))?></span>
+               <span style="padding-right: 4px;"> | </span><span class="<?php if (round((strtotime($user->expiration)-strtotime(date('Y-m-d H:i:s')))/ 86400) < 3) echo "danger"; ?>" > <?=date('d/m/Y H:i:s',strtotime($user->expiration))?></span>
 
             </li>
             <li class="nav-item dropdown">
@@ -266,6 +266,11 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
             </li>
         </ul>
     </div>
+    <?php if (isExpired($user)): ?>
+    <div class="row" style="width: 100%">
+        <div class="alert alert-danger col-md-12 text-center" style="padding: 0">Votre compte est expiré</div>
+    </div>
+    <?php endif;?>
 </nav>
 <!-- partial -->
 

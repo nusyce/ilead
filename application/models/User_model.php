@@ -180,7 +180,7 @@ class User_model extends CI_Model
         $plan = $this->db->get('tbl_plans')->row();
         $CI =& get_instance();
         $CI->load->model('plans_model');
-        $plan = $CI->plans_model->get_plan_by_id($_POST['plan']); 
+        $plan = $CI->plans_model->get_plan_by_id($_POST['plan']);
 
         $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription');
         $CI->load->model('transactions_model');

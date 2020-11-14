@@ -159,6 +159,7 @@ public function get_transaction_by_numtran($numtran)
 
             $this->db->where('id', $transaction->user_id);
             $user= $this->db->get('tbl_users')->row();
+
             if($user->expiration==null || $user->expiration=='')
             {
 
@@ -178,6 +179,27 @@ public function get_transaction_by_numtran($numtran)
             $this->db->where('id', $transaction->user_id);
             $data['plan_id'] = $transaction->plan_id;
             $this->db->update('tbl_users',$data);
+            //
+            $this->db->where('start_date > ', strtotime(date('Y-m-d H:i:s')));
+            $this->db->order_by("start_date","asc");
+            $this->db->limit(1);
+            $event= $this->db->get('tbl_events')->row();
+            if($event)
+            {
+                $this->db->where('event_id', $event->id);
+                $this->db->where('user_id',  $transaction->user_id);
+                $booking=$this->db->get('tbl_book_event')->result_array();
+                if(!$booking)
+                {
+                    $data=[];
+                    $data['event_id']=$event->id;
+                    $data['user_id']=$transaction->user_id;
+                    $data['created_at'] = date('Y-m-d H:i:s');
+                    $data['updated_at'] = date('Y-m-d H:i:s');
+                    $this->db->insert('tbl_book_event', $data);
+                }
+            }
+
         }
         $invoice = $this->create_invoice($id);
         $this->send_invoice($invoice, $id);

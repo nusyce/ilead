@@ -36,7 +36,9 @@ td:hover .detail-option {
     padding-right: 20px;
     margin-bottom: 80px;
 }
-
+.dashboard h6{
+    text-align: center !important;
+}
 .status-event {
     border-radius: 50%;
     width: 16px;

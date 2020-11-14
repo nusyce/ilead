@@ -32,7 +32,7 @@ $lang['sponsor_inconnu'] = "Sponsor inconnnu";
 $lang['error_input'] = "données érronées";
 $lang['send_key'] = "Enregistré avec succes , votre clé vous a été transmise au ";
 
-$lang['number_message'] = "NOMBRE D'ADHERENTS";
+$lang['number_message'] = "MES ADHERENTS";
 $lang['choose_method'] = 'Choisissez votre moyen de paiement';
 //login
 

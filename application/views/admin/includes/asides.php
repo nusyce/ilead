@@ -24,7 +24,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="languageDropdown">
                     <a href="<?=base_url('users/change_plan/'.get_user_plan_id()); ?>" class="dropdown-item py-2"> <span
-                                class="ml-1"><?php //echo $this->lang->line('asides_message'); ?> changer de plan ?</span></a>
+                                class="ml-1"><?php echo $this->lang->line('asides_change_plan_message'); ?></span></a>
                 </div>
             </li>
 

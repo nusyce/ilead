@@ -138,10 +138,10 @@ class Users extends AdminControler
             'amount' => get_plan_upgrade_price($plan_id)
         );
 
-        var_dump($transactionData);
+        //var_dump($transactionData);
 
-       // $this->transaction->add($transactionData);
+        $this->transaction->add($transactionData);
         
-        //redirect('users/representants');
+        redirect('users/representants');
     }
 }

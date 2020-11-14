@@ -21,6 +21,7 @@
                                 <th>Phone</th>
                                 <th>Cluster</th>
                                 <th>Country</th>
+                                <th>Paid</th>
                                 <th>Sexe</th>
                             </tr>
                             </thead>
@@ -35,6 +36,8 @@
                                     <td><?= $adherent['whatsapp_phone'] ?></td>
                                     <td><?= $adherent['cluster'] ?></td>
                                     <td><?= $adherent['country'] ?></td>
+                                    <td><?php if ($adherent['djp'] == '1') { echo '<span class="badge badge-success">'.$this->lang->line('invoice_paid').'
+                                    </span>';} else{ echo 'No';}?></td>
                                     <td><?= $adherent['sexe'] ?></td>
                                 </tr>
                             <?php endforeach; ?>

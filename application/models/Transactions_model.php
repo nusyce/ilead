@@ -121,6 +121,37 @@ public function get_transaction_by_numtran($numtran)
         $this->db->where('id', $id);
         $data['status'] = 'paie';
         $this->db->update('tbl_transactions', $data);
+        $this->db->where('id', $id);
+        $transaction = $this->db->get('tbl_transactions')->row();
+        if($transaction->type=="token")
+        {
+            $data=[];
+            $data['event_id']=$transaction->event_id;
+            $data['user_id']=$transaction->user_id;
+            $data['created_at'] = date('Y-m-d H:i:s');
+            $data['updated_at'] = date('Y-m-d H:i:s');
+            $this->db->insert('tbl_book_event', $data);
+        }else{
+            $data=[];
+            $CI =& get_instance();
+            $CI->load->model('plans_model');
+            $plan= $CI->plans_model->get_plan_by_id($transaction->plan_id);
+
+            $this->db->where('id', $transaction->user_id);
+            $user= $this->db->get('tbl_users')->row();
+            if($user->expiration==null || $user->expiration=='')
+            {
+
+                $data['expiration']=date('Y-m-d H:i:s', strtotime("+".$plan->duree." months", strtotime(date('Y-m-d H:i:s'))));
+
+            }
+            else{
+                $data['expiration']=date('Y-m-d H:i:s', strtotime("+".$plan->duree. "months", strtotime($user->expiration)));
+            }
+            $this->db->where('id', $transaction->user_id);
+            $data['plan_id'] = $transaction->plan_id;
+            $this->db->update('tbl_users',$data);
+        }
         $invoice = $this->create_invoice($id);
         $this->send_invoice($invoice, $id);
 
@@ -256,5 +287,15 @@ public function get_transaction_by_numtran($numtran)
         $this->db->where('ref_id', $id);
         $this->db->where('ref', 'transactions');
         return $this->db->get('tbl_attachments')->result_array();
+    }
+    
+
+    public function has_pending_souscription(){
+        $this->db->where('user_id', get_user_id());
+        $this->db->where('status', "pending");
+        $this->db->where('type', "souscription");
+        $query = $this->db->get('tbl_transactions');
+
+        return $query->num_rows() > 0 ? true : false;
     }
 }

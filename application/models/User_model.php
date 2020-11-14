@@ -88,7 +88,7 @@ class User_model extends CI_Model
 
     public function myadherents()
     {
-        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
+        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country,tbl_users.djp');
         $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
         $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
         $this->db->where('sponsor', get_user_cle());

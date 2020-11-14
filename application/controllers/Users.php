@@ -124,6 +124,7 @@ class Users extends AdminControler
     public function change_plan($plan_id)
     {
         $data['plans'] = $this->plans->get_plan_above_this($plan_id);
+        $data['has_pending_souscription'] = $this->transaction->has_pending_souscription();
         $this->load_view('user/change_plan',$data);
     }
 
@@ -135,13 +136,13 @@ class Users extends AdminControler
             'due' => date('d-m-Y H:i:s'), 
             'created_at' => date('d-m-Y H:i:s'), 
             'status' => 'pending', 
+            'type' => 'souscription', 
             'amount' => get_plan_upgrade_price($plan_id)
         );
 
-        //var_dump($transactionData);
-
         $this->transaction->add($transactionData);
+        $this->session->set_flashdata('success', $this->lang->line('success_package_change_message'));
         
-        redirect('users/representants');
+        redirect('users/change_plan/'.get_user_plan_id());
     }
 }

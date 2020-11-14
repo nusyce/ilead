@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="<?= base_url()?>assets/css/styles.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url()?>assets/images/favicon.png" />
+    <script>
+        var admin_url = '<?php echo base_url(); ?>';
+    </script>
 </head>
 <body>
 <div class="main-wrapper">

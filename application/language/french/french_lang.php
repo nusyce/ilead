@@ -226,6 +226,7 @@ $lang['position'] = "Position";
 $lang['status'] = "Status";
 $lang['liste_des_evenement'] = "Liste des évènements";
 $lang['ajouter_un_evenement'] = "Ajouter un évènement";
+$lang['modifier_un_evenement'] = "Modifier un évènement";
 $lang['description'] = "Description";
 $lang['nom_participant'] = "Nom du participant";
 $lang['liste_des_transactions'] = "Liste des transactions";
@@ -244,9 +245,19 @@ $lang['cout_depense'] = "Coût de la depense";
 $lang['N°'] = "N°";
 $lang['nom_du_fichier'] = "nom du fichier";
 $lang['type_de_fichier'] = "type de fichier ";
+$lang['add_succes'] = "Ajouté avec succes ";
+$lang['add_danger'] = "Echec d'insertion ";
+$lang['edit_succes'] = "Modifié avec succes ";
+$lang['edit_danger'] = "Echec de modification ";
+$lang['delete_succes'] = "Supprimé avec succes ";
+$lang['delete_danger'] = "Echec de suppression ";
+$lang['date_error'] = "La date de début ne peut pas être supérieure à la date de fin";
 $lang['parametre_generaux'] = "Paramètre généraux";
 
 
+//changement de plan
+$lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Impossible de sélectionner un plan quand un autre est en attente </div>";
+$lang['success_package_change_message'] = "Votre demande à été envoyé; il ne vous reste plus qu'à payer";
 
 
 

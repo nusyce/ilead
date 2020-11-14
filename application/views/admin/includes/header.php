@@ -23,8 +23,6 @@
     <link rel="stylesheet" href="<?= base_url()?>assets/css/styles.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url()?>assets/images/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/vendors/css/pickers/pickadate/pickadate.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/vendors/css/pickers/daterange/daterangepicker.css">
     <script>
         var admin_url = '<?php echo base_url(); ?>';
     </script>

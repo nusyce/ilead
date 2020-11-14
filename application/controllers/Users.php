@@ -119,18 +119,4 @@ class Users extends AdminControler
         redirect('users/representants');
 
     }
-
-    public function change_plan($plan_id)
-    {
-        $data['plans'] = $this->plans->get_plan_above_this($plan_id);
-        //$data['plans'] = $this->plans->myadherents();
-        $this->load_view('user/change_plan',$data);
-    }
-
-    public function update_plan($user_id, $plan_id)
-    {
-        $data['plans'] = $this->plans->get_plan_above_this($plan_id);
-        //$data['plans'] = $this->plans->myadherents();
-        $this->load_view('user/change_plan',$data);
-    }
 }

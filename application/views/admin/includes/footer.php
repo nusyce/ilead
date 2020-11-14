@@ -36,13 +36,5 @@
 <script src="<?= base_url()?>assets/js/datepicker.js"></script>
 <script src="<?= base_url()?>assets/js/scripts.js"></script>
 <!-- end custom js for this page -->
-
-<script src="<?= base_url()?>assets/vendors/js/pickers/pickadate/picker.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/pickers/pickadate/picker.date.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/pickers/pickadate/picker.time.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/pickers/pickadate/legacy.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/pickers/daterange/moment.min.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
-<script src="<?= base_url()?>assets/vendors/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
 </body>
 </html>    

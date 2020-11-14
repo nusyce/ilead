@@ -93,7 +93,11 @@ class Auth extends CI_Controller
                     'user_plan' => $this->plans->get_plan_by_id($result['plan_id'])->name,
 
                 );
+
                 $this->session->set_userdata($admin_data);
+                if($result['role_id']==1){
+                    redirect(base_url('start/dashboard2'));
+                }
                 redirect(base_url('start/dashboard'));
             }else{
                 $this->session->set_flashdata('danger', $this->lang->line('error_input'));
@@ -113,7 +117,7 @@ class Auth extends CI_Controller
     public function get_sponsor_name()
     {
 
-         echo $this->user->get_user_by_key($_GET['cle']);
+        echo $this->user->get_user_by_key($_GET['cle']);
     }
 
     public function register()
@@ -121,7 +125,7 @@ class Auth extends CI_Controller
 
 
         if ($this->input->post()) {
-           $user=$this->user->get_user_by_key($this->input->post('sponsor'));
+            $user=$this->user->get_user_by_key($this->input->post('sponsor'));
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
             $this->form_validation->set_rules('confirm_email', 'confirm_email', 'required|matches[email]');
 

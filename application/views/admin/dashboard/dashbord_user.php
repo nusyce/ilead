@@ -67,6 +67,10 @@
                                     </thead>
                                     <tbody>
                                     <?php foreach($othe_event as $my_event) {?>
+                                        <?php $CI =& get_instance();
+                                        $CI->db->where('event_id', $my_event['id']);
+                                        $CI->db->where('user_id', get_user_id());
+                                        $result = $CI->db->get('tbl_transactions')->result_array();?>
                                         <tr>
                                             <td class="py-1 line-ellipsis">
                                                 <?=$my_event['name']?>
@@ -74,8 +78,11 @@
                                             <td class="py-1"><i class="bx bx-trending-down text-danger align-middle mr-50"></i><span> <?=date('d/m/Y', strtotime($my_event['start_date']))?></span>
                                             </td>
                                             <td class="py-1"> <?=date('d/m/Y', strtotime($my_event['end_date']))?></td>
-
-                                            <td class="text-success py-1"><button class="btn btn-primary">Consulter</button></td>
+                                            <?php if(!$result) {?>
+                                            <td class="text-success py-1"><button onclick="buy_token(<?=$my_event['id']?>)" class="btn btn-primary">Buy Token</button></td>
+                                            <?php }else{?>
+                                                <td class="text-success py-1"><a href="<?=site_url('event/paie_token/'.$my_event['id'])?>" class="btn btn-primary">Make Paiement</a></td>
+                                            <?php }?>
                                         </tr>
                                     <?php }?>
                                     </tbody>
@@ -134,6 +141,16 @@
     </div>
 
 </div>
+<div id="zone_modal"></div>
+<script>
+    function buy_token(id)
+    {
+        requestGet('event/buy_token/' + id).done(function (response) {
+            $('#zone_modal').html(response)
+            $('#buy_token_modal').modal('show')
+        });
+    }
+</script>
 
 
 

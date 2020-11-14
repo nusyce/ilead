@@ -8,6 +8,9 @@
 td:hover .detail-option {
     opacity: 1;
 }
+.danger{
+    color: red;
+}
 .ps > .ps__rail-x {
     width: 3px;
     background-color: rgba(72, 83, 114, 0.06);

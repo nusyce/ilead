@@ -1,44 +1,40 @@
+
 <div class="page-content">
     <?php $this->load->view('admin/event/nav'); ?>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title"><?php echo $this->lang->line('liste_des_transactions'); ?></h6>
-                    <div class="table-responsive">
-                        <table id="databable" class="table">
-                            <thead>
+                    <table id="databable" class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Cluster</th>
+                            <th>Country</th>
+                            <th>Sexe</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($adherents as $adherent): ?>
                             <tr>
-                                <th><?php echo $this->lang->line('N°'); ?></th>
-                                <th><?php echo $this->lang->line('nom_participant'); ?></th>
-                                <th><?php echo $this->lang->line('prenom_participant'); ?></th>
-                                <th><?php echo $this->lang->line('pays_du_participant'); ?></th>
-                                <th><?php echo $this->lang->line('numero_du_participant'); ?></th>
-                                <th><?php echo $this->lang->line('email_du_participant'); ?></th>
+                                <td><?= $adherent['id'] ?></td>
+                                <td><?= $adherent['firstname'] ?></td>
+                                <td><?= $adherent['lastname'] ?></td>
+                                <td><?= $adherent['email'] ?></td>
+                                <td><?= $adherent['whatsapp_phone'] ?></td>
+                                <td><?= $adherent['cluster'] ?></td>
+                                <td><?= $adherent['country'] ?></td>
+
+                                <td><?= $adherent['sexe'] ?></td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            foreach ($data as $dd):
-                                ?>
-                                <tr>
-                                    <td>
-                                        <div><?= $dd['id'] ?></div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <?= $dd['first'] ?>
-                                        </div>
-                                    </td>
-                                    <td><?= $dd['last'] ?></td></td>
-                                    <td><?= $dd['ctryid'] ?></td></td>
-                                    <td><?= $dd['whatsapp'] ?></td>
-                                    <td><?= $dd['email'] ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

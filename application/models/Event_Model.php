@@ -20,6 +20,13 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_events')->result_array();
     }
 
+    public function get_attachments($id)
+    {
+        $this->db->where('ref_id', $id);
+        $this->db->where('ref', 'events');
+        return $this->db->get('tbl_attachments')->result_array();
+    }
+
     public function insert($data)
     {
         $my_data['name'] = $data['name'];
@@ -31,6 +38,7 @@ class Event_Model extends CI_Model
         $this->db->insert('tbl_events', $my_data);
         return $this->db->insert_id();
     }
+
     public function participants($id)
     {
         $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country,tbl_users.djp');
@@ -40,6 +48,7 @@ class Event_Model extends CI_Model
         $this->db->where('tbl_book_event.event_id', $id);
         return $this->db->get('tbl_book_event')->result_array();
     }
+
     public function update($data)
     {
         $my_data['name'] = $data['name'];
@@ -93,7 +102,8 @@ class Event_Model extends CI_Model
 
     }
 
-    public function getAllDepense($id){
+    public function getAllDepense($id)
+    {
         $this->db->select('tbl_depenses.description as description,tbl_depenses.amount as amount,tbl_task.name as taskname,tbl_depenses.id as id');
         $this->db->join('tbl_events', 'tbl_events.id = tbl_depenses.event_id', 'inner');
         $this->db->join('tbl_task', 'tbl_task.id = tbl_depenses.task_id', 'inner');
@@ -101,12 +111,6 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_depenses')->result_array();
     }
 
-    public function get_attachments($id)
-    {
-        $this->db->where('ref_id', $id);
-        $this->db->where('ref', 'events');
-        return $this->db->get('tbl_attachments')->result_array();
-    }
     public function add_attachments($id, $datapod)
     {
         $data['file_type'] = $datapod['file_type'];
@@ -117,15 +121,17 @@ class Event_Model extends CI_Model
         $this->db->insert('tbl_attachments', $data);
         return true;
     }
+
     public function insert_depense($data)
     {
         $my_data['description'] = $data['description'];
         $my_data['amount'] = $data['amount'];
         $my_data['event_id'] = $data['event_id'];
-            $my_data['task_id'] = $data['task_id'];
+        $my_data['task_id'] = $data['task_id'];
         $this->db->insert('tbl_depenses', $my_data);
         return $this->db->insert_id();
     }
+
     public function delete_depense($id)
     {
 
@@ -134,6 +140,7 @@ class Event_Model extends CI_Model
         return true;
 
     }
+
     public function getDepense($id)
     {
         $this->db->select('tbl_depenses.event.id,tbl_depenses.description as description, tbl_depenses.amount as amount,tbl_task.name as name');
@@ -143,13 +150,15 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_depenses.id')->result_array();
     }
 
-    public function getMyEvenement($id){
-        $sql="SELECT * FROM tbl_events WHERE tbl_events.start_date > '".date('Y-m-d H:i:s')."'  and tbl_events.id in (select distinct event_id from tbl_book_event where user_id = ".$id.")";
+    public function getMyEvenement($id)
+    {
+        $sql = "SELECT * FROM tbl_events WHERE tbl_events.start_date > '" . date('Y-m-d H:i:s') . "'  and tbl_events.id in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
         return $this->db->query($sql)->result_array();
     }
 
-    public function getOtherEvenement($id){
-        $sql="SELECT * FROM tbl_events WHERE tbl_events.start_date > '".date('Y-m-d H:i:s')."'  and tbl_events.id not in (select distinct event_id from tbl_book_event where user_id = ".$id.")";
+    public function getOtherEvenement($id)
+    {
+        $sql = "SELECT * FROM tbl_events WHERE tbl_events.start_date > '" . date('Y-m-d H:i:s') . "'  and tbl_events.id not in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
         return $this->db->query($sql)->result_array();
     }
 

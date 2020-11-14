@@ -340,7 +340,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
             <li class="nav-item">
                 <a href="<?= base_url('Config') ?>" class="nav-link">
                     <i class="fa fa-gear" data-feather="trending-up"></i>
-                    <span class="link-title"><?php echo $this->lang->line('parametre_generaux'); ?></span>
+                    <span><?php echo $this->lang->line('parametre_generaux'); ?></span>
                 </a>
             </li>
                 <li class="nav-item">

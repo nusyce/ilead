@@ -125,7 +125,8 @@ function can_represente()
     }
 }
 
-function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
+function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
+{
     $output = NULL;
     if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
         $ip = $_SERVER["REMOTE_ADDR"];
@@ -136,8 +137,8 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
                 $ip = $_SERVER['HTTP_CLIENT_IP'];
         }
     }
-    $purpose    = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
-    $support    = array("country", "countrycode", "state", "region", "city", "location", "address");
+    $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+    $support = array("country", "countrycode", "state", "region", "city", "location", "address");
     $continents = array(
         "AF" => "Africa",
         "AN" => "Antarctica",
@@ -153,11 +154,11 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
             switch ($purpose) {
                 case "location":
                     $output = array(
-                        "city"           => @$ipdat->geoplugin_city,
-                        "state"          => @$ipdat->geoplugin_regionName,
-                        "country"        => @$ipdat->geoplugin_countryName,
-                        "country_code"   => @$ipdat->geoplugin_countryCode,
-                        "continent"      => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
+                        "city" => @$ipdat->geoplugin_city,
+                        "state" => @$ipdat->geoplugin_regionName,
+                        "country" => @$ipdat->geoplugin_countryName,
+                        "country_code" => @$ipdat->geoplugin_countryCode,
+                        "continent" => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
                         "continent_code" => @$ipdat->geoplugin_continentCode
                     );
                     break;
@@ -239,28 +240,26 @@ function clusters($active = '')
 }
 
 
-
 function get_plan_upgrade_price($selected_plan_id)
 {
     if (!is_user_logged_in()) {
         return false;
     }
 
-    $current_plan_id =  get_instance()->session->userdata('user_plan_id');
+    $current_plan_id = get_instance()->session->userdata('user_plan_id');
 
     $amount = 0;
-    if($current_plan_id == 1 & $selected_plan_id == 2){
+    if ($current_plan_id == 1 & $selected_plan_id == 2) {
         $amount = get_option("clasic_to_vip");
-    }elseif($current_plan_id == 1 & $selected_plan_id == 3){
+    } elseif ($current_plan_id == 1 & $selected_plan_id == 3) {
         $amount = get_option("clasic_to_platinium");
-    }elseif($current_plan_id == 2 & $selected_plan_id == 3){
+    } elseif ($current_plan_id == 2 & $selected_plan_id == 3) {
         $amount = get_option("vip_to_platinium");
-    }
-    elseif($current_plan_id == 1 & $selected_plan_id == 1){
+    } elseif ($current_plan_id == 1 & $selected_plan_id == 1) {
         $amount = get_option("clasic_to_clasic");
-    } elseif($current_plan_id == 2 & $selected_plan_id == 2){
+    } elseif ($current_plan_id == 2 & $selected_plan_id == 2) {
         $amount = get_option("vip_to_vip");
-    } elseif($current_plan_id == 3 & $selected_plan_id == 3){
+    } elseif ($current_plan_id == 3 & $selected_plan_id == 3) {
         $amount = get_option("platinium_to_platinium");
     }
 
@@ -383,4 +382,44 @@ function add_option($name, $value = '')
     }
 
     return false;
+}
+
+function event_status($event)
+{
+    $CI = &get_instance();
+    $CI->db->where('id', $event);
+    $event = $CI->db->get('tbl_events')->row();
+    $start_date = date('d/m/Y', strtotime($event->start_date));
+    $end_date = date('d/m/Y', strtotime($event->end_date));
+    $curent_date = date('d/m/Y');
+    if ($start_date > $curent_date) {
+        return 'a_venir';
+    } else if ($end_date < $curent_date) {
+        return 'passe';
+    } else {
+        return 'en_cours';
+    }
+}
+
+function event_flag($event)
+{
+    $satus = event_status($event);
+    $class = '';
+    if ($satus == 'a_venir') {
+        $class = 'comming-event';
+        $msg = 'Evenement à venir';
+    } else if ($satus == 'en_cours') {
+        $class = 'online-event';
+        $msg = 'Evenement à cours';
+    } else if ($satus == 'passe') {
+        $class = 'passs-event';
+        $msg = 'Evenement à passé';
+    }
+    echo '<span data-toggle="tooltip" data-placement="top" title="' . $msg . '" class="status-event ' . $class . '"></span>';
+}
+
+
+function __price($amount, $currency = ' F CFA')
+{
+    return number_format($amount, $decimals = 0, $dec_point = ",", $thousands_sep = " ") . $currency;
 }

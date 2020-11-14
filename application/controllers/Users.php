@@ -13,6 +13,7 @@ class Users extends AdminControler
         $this->load->model('User_model');
         $this->load->model('Plans_model', 'plans');
         $this->load->model('Representates_model');
+        $this->load->model('Transactions_model', 'transaction');
     }
 
     public function index()
@@ -118,5 +119,29 @@ class Users extends AdminControler
         $this->Representates_model->delete($id,$user_id);
         redirect('users/representants');
 
+    }
+
+    public function change_plan($plan_id)
+    {
+        $data['plans'] = $this->plans->get_plan_above_this($plan_id);
+        $this->load_view('user/change_plan',$data);
+    }
+
+    public function update_plan($user_id, $plan_id)
+    {
+        $transactionData = array(
+            'user_id' => $user_id, 
+            'plan_id' => $plan_id, 
+            'due' => date('d-m-Y H:i:s'), 
+            'created_at' => date('d-m-Y H:i:s'), 
+            'status' => 'pending', 
+            'amount' => get_plan_upgrade_price($plan_id)
+        );
+
+       // var_dump($transactionData);
+
+        $this->transaction->add($transactionData);
+        
+        redirect('users/representants');
     }
 }

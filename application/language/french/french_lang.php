@@ -253,8 +253,13 @@ $lang['delete_succes'] = "Supprimé avec succes ";
 $lang['delete_danger'] = "Echec de suppression ";
 $lang['date_error'] = "La date de début ne peut pas être supérieure à la date de fin";
 $lang['parametre_generaux'] = "Paramètre généraux";
-
-
+$lang['liste_des_taches'] = "Liste des taches";
+$lang['ajouter_une_tache'] = "Ajouter une tache";
+$lang['modifier_la_tache'] = "Modifier la tache";
+$lang['nom_la_tache'] = "Nom de la tache";
+$lang['description_depense'] = "Description de la depense";
+$lang['liste_depense'] = "Liste des depenses";
+$lang['ajouter_une_depense'] = "Ajouter une depense";
 //changement de plan
 $lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Impossible de sélectionner un plan quand un autre est en attente </div>";
 $lang['success_package_change_message'] = "Votre demande à été envoyé; il ne vous reste plus qu'à payer";

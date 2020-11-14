@@ -49,6 +49,7 @@ class Event_Model extends CI_Model
         $my_data['updated_at'] = date('Y-m-d H:i:s');
         $this->db->where('id', $data['id']);
         $this->db->update('tbl_events', $data);
+        return true;
     }
 
     public function delete($id)
@@ -116,7 +117,23 @@ class Event_Model extends CI_Model
         $this->db->insert('tbl_attachments', $data);
         return true;
     }
+    public function insert_depense($data)
+    {
+        $my_data['description'] = $data['description'];
+        $my_data['amount'] = $data['amount'];
+        $my_data['event_id'] = $data['event_id'];
+            $my_data['task_id'] = $data['task_id'];
+        $this->db->insert('tbl_depenses', $my_data);
+        return $this->db->insert_id();
+    }
+    public function delete_depense($id)
+    {
 
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_depenses');
+        return true;
+
+    }
     public function getDepense($id)
     {
         $this->db->select('tbl_depenses.event.id,tbl_depenses.description as description, tbl_depenses.amount as amount,tbl_task.name as name');

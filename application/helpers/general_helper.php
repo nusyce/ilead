@@ -238,6 +238,8 @@ function clusters($active = '')
     return $CI->db->get()->result_array();
 }
 
+
+
 function get_plan_upgrade_price($selected_plan_id)
 {
     if (!is_user_logged_in()) {
@@ -254,6 +256,14 @@ function get_plan_upgrade_price($selected_plan_id)
     }elseif($current_plan_id == 2 & $selected_plan_id == 3){
         $amount = get_option("vip_to_platinium");
     }
+    elseif($current_plan_id == 1 & $selected_plan_id == 1){
+        $amount = get_option("clasic_to_clasic");
+    } elseif($current_plan_id == 2 & $selected_plan_id == 2){
+        $amount = get_option("vip_to_vip");
+    } elseif($current_plan_id == 3 & $selected_plan_id == 3){
+        $amount = get_option("platinium_to_platinium");
+    }
+
 
     return $amount;
 }

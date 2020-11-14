@@ -20,6 +20,7 @@ class Transactions extends AdminControler
 
     public function index()
     {
+
         $data['data'] = $this->Transactions_model->get();
         $this->load_view('transactions/manager', $data);
     }
@@ -33,12 +34,16 @@ class Transactions extends AdminControler
     }
 
 
+    public function cancel($id)
+    {
+        $this->Transactions_model->cancel($id);
+        redirect(base_url('transactions'));
+    }
     public function create_inv($id)
     {
         $this->Transactions_model->create_invoice($id);
         redirect(base_url('transactions/detail/' . $id));
     }
-
     public function print_inv($id)
     {
 

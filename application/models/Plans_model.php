@@ -32,7 +32,7 @@ class Plans_model extends CI_Model
 
     public function get_plan_above_this($id)
     {
-        $this->db->where('id > ', $id);
+        $this->db->where('id >= ', $id);
         return $this->db->get('tbl_plans')->result_array();
     }
     /**

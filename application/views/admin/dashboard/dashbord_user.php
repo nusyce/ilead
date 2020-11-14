@@ -1,8 +1,10 @@
+<?php  $CI =& get_instance();
+$CI->load->model('User_model');
+$user = $CI->User_model->get_user_by_id(get_user_id()); ?>
 <div class="page-content">
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+
                     <div class="col-xl-8 col-12 dashboard-marketing-campaign">
                         <div class="card marketing-campaigns">
                             <div class="card-header d-flex justify-content-between align-items-center pb-1">
@@ -39,8 +41,12 @@
                                 <div class="ps__rail-x" style="width: 672px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 652px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
                         </div>
                 </div>
-            </div>
-        </div>
+                    <div class="col-xl-4 col-12 dashboard-marketing-campaign">
+                        <div class="card marketing-campaigns" style="    height: 150px;">
+                            <h4 style="text-align: center;margin-top: 10px">LIVE</h4>
+                        </div>
+                    </div>
+
         </div>
     </div>
     <div class="row">
@@ -79,7 +85,7 @@
                                             </td>
                                             <td class="py-1"> <?=date('d/m/Y', strtotime($my_event['end_date']))?></td>
                                             <?php if(!$result) {?>
-                                            <td class="text-success py-1"><button onclick="buy_token(<?=$my_event['id']?>)" class="btn btn-primary">Buy Token</button></td>
+                                            <td  class="text-success py-1"><button <?php if (strtotime($user->expiration) < strtotime($my_event['end_date'])) echo "disabled"; ?> onclick="buy_token(<?=$my_event['id']?>)" class="btn btn-primary">Buy Token</button></td>
                                             <?php }else{?>
                                                 <td class="text-success py-1"><a href="<?=site_url('event/paie_token/'.$my_event['id'])?>" class="btn btn-primary">Make Paiement</a></td>
                                             <?php }?>

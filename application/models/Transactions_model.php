@@ -24,11 +24,20 @@ class Transactions_model extends CI_Model
 
     public function get($id = '')
     {
+
         if (get_user_role_id() == 1) {
             $this->db->where('user_id', get_user_id());
+            $this->db->where('tbl_transactions.is_deleted != 1');
+            $this->db->where('tbl_transactions.is_deleted is null')->or_where('tbl_transactions.is_deleted',0);
         } elseif (can_represente()) {
             $can = can_represente();
             $this->db->where('u.country_id', $can->country_id);
+            $this->db->where('tbl_transactions.is_deleted != 1');
+            $this->db->where('tbl_transactions.is_deleted is null')->or_where('tbl_transactions.is_deleted',0);
+        }
+        elseif (get_user_role_id() == 2) {
+
+            $this->db->where('tbl_transactions.is_deleted is null')->or_where('tbl_transactions.is_deleted',0);
         }
 
 
@@ -101,6 +110,17 @@ public function get_transaction_by_numtran($numtran)
         $insert = $this->db->insert_id();
         return $insert;
     }
+    public function cancel($id)
+    {
+        if (get_user_role_id() != 3 && get_user_role_id() != 4 && get_user_role_id() != 2)
+            return false;
+        $data = [];
+        $data['is_deleted']=1;
+        $data['deleted_by']=get_user_id();
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_transactions',$data);
+
+    }
 
 
     public function numgeneratorcode($id)
@@ -146,7 +166,14 @@ public function get_transaction_by_numtran($numtran)
 
             }
             else{
-                $data['expiration']=date('Y-m-d H:i:s', strtotime("+".$plan->duree. "months", strtotime($user->expiration)));
+                   if(strtotime($user->expiration) < strtotime(date('Y-m-d H:i:s')))
+                   {
+                       $data['expiration']=date('Y-m-d H:i:s', strtotime("+".$plan->duree." months", strtotime(date('Y-m-d H:i:s'))));
+
+                   }else{
+                       $data['expiration']=date('Y-m-d H:i:s', strtotime("+".$plan->duree. "months", strtotime($user->expiration)));
+                   }
+
             }
             $this->db->where('id', $transaction->user_id);
             $data['plan_id'] = $transaction->plan_id;
@@ -294,6 +321,7 @@ public function get_transaction_by_numtran($numtran)
         $this->db->where('user_id', get_user_id());
         $this->db->where('status', "pending");
         $this->db->where('type', "souscription");
+        $this->db->where('tbl_transactions.is_deleted is null')->or_where('tbl_transactions.is_deleted',0);
         $query = $this->db->get('tbl_transactions');
 
         return $query->num_rows() > 0 ? true : false;

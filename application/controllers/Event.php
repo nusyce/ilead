@@ -16,6 +16,7 @@ class Event extends AdminControler
         $this->load->model('Plans_model', 'plans');
         $this->load->model('payment_modes_model', 'mode');
         $this->load->model('Misc_model', 'misc');
+        $this->load->model('depense_model');
     }
 
 
@@ -55,7 +56,8 @@ class Event extends AdminControler
             $data['navigation']=$_GET['navigation'];
             $ref = 'event';
             $data['data'] = $this->Event_Model->getAllDepense($id);
-            $this->load_view('event/list_file', $data);
+
+            $this->load_view('event/depense', $data);
         }
 
     }
@@ -161,6 +163,33 @@ class Event extends AdminControler
             $this->session->set_flashdata('danger', $this->lang->line('delete_danger'));
         }
         redirect('event/index');
+    }
+    public function delete_depense($id,$id_event)
+    {
+
+        $result= $this->Event_Model->delete_depense($id);
+
+        if ($result)
+        {
+            $this->session->set_flashdata('success', $this->lang->line('delete_succes'));
+        }else{
+            $this->session->set_flashdata('danger', $this->lang->line('delete_danger'));
+        }
+        redirect('event/event/'.$id_event.'?navigation=depense');
+    }
+
+    public function depense($id)
+    {
+
+        $result= $this->Event_Model->insert_depense($_POST);
+
+        if ($result)
+        {
+            $this->session->set_flashdata('success', $this->lang->line('add_succes'));
+        }else{
+            $this->session->set_flashdata('danger', $this->lang->line('add_danger'));
+        }
+        redirect('event/event/'.$id.'?navigation=depense');
     }
 
 

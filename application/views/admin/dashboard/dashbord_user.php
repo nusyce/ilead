@@ -16,7 +16,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                                 <div class="col-12 col-md-12 col-xl-12">
                                     <h4 class="mb-2 text-center"><?php
                                         $user_clee = get_user_cle();
-                                        echo total_rows('tbl_users', ['sponsor' => $user_clee]) ?></h4>
+                                        echo total_rows('tbl_users', ['sponsor' => $user_clee]); ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
-                                    <h4 class="mb-2 text-center">1</h4>
+                                    <h4 class="mb-2 text-center"><?= user_free_ticket() ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                <h6 class=" mb-0">Ticket Bonus</h6>
+                                <h6 class=" mb-0">Conférences suivies</h6>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
@@ -58,7 +58,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
-                                    <h4 class="mb-2 text-center"><?= __price(25000) ?></h4>
+                                    <h4 class="mb-2 text-center"><?= __price(user_balance()) ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -67,12 +67,10 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
             </div>
         </div>
     </div> <!-- row -->
-
     <div class="row">
-
-        <div class="col-md-12 grid-margin stretch-card">
+        <div class="col-md-8 stretch-card">
             <div class="row flex-grow">
-                <div class="col-xl-8 col-12 dashboard-marketing-campaign">
+                <div class="col-xl-12 grid-margin  col-12 dashboard-marketing-campaign">
                     <div class="card marketing-campaigns">
                         <div class="card-header d-flex justify-content-between align-items-center pb-1">
                             <h4 class="card-title">Mes Evenements à venir</h4>
@@ -120,35 +118,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-12 dashboard-marketing-campaign">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                            <h4 class="card-title text-center">Acceder au live</h4>
-                            <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
-                        </div>
-                        <div class="card-content text-center">
-                            <?php
-                            $reunion_ID = get_option('link_telegram');
-                            $password = get_option('password_meeting');
-                            if ($reunion_ID && $password)
-                                $link = 'https://zoom.us/j/' . $reunion_ID . '?pwd=' . $password . '#success';
-                            else
-                                $link = '#';
-                            ?>
-                            <a href="<?= $link ?>"><img src="<?= base_url(('assets/images/zoom-Logo.jpg')) ?>"
-                                                        style="width: 120px"
-                                                        alt="Zoom Logo"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 grid-margin stretch-card">
-            <div class="row flex-grow">
-                <div class="col-xl-8 col-12 dashboard-marketing-campaign">
+                <div class="col-xl-12 grid-margin  col-12 dashboard-marketing-campaign">
                     <div class="card marketing-campaigns">
                         <div class="card-header d-flex justify-content-between align-items-center pb-1">
                             <h4 class="card-title">Les autres évènements</h4>
@@ -184,20 +154,46 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                                         <td class="py-1"> <?php event_flag($my_event['id']) ?></td>
                                         <?php if (!$result) { ?>
                                             <td class="text-success py-1">
-                                                <button <?php if (strtotime($user->expiration) < strtotime($my_event['end_date'])) echo "disabled"; ?>
+                                                <button data-toggle="tooltip" data-placement="top"
+                                                        title="Frais d'expéditions des documments de formation de cette retraite" <?php if (strtotime($user->expiration) < strtotime($my_event['end_date'])) echo "disabled"; ?>
                                                         onclick="buy_token(<?= $my_event['id'] ?>)"
-                                                        class="btn btn-primary">Buy Token
+                                                        class="btn btn-primary">Payer le token
                                                 </button>
                                             </td>
                                         <?php } else { ?>
                                             <td class="text-success py-1"><a
                                                         href="<?= site_url('event/paie_token/' . $my_event['id']) ?>"
-                                                        class="btn btn-primary">Make Paiement</a></td>
+                                                        class="btn btn-primary">Finaliser le paiment</a></td>
                                         <?php } ?>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="row flex-grow">
+                <div class="col-xl-12 col-12 dashboard-marketing-campaign">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center pb-1">
+                            <h4 class="card-title text-center">Acceder au live</h4>
+                            <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
+                        </div>
+                        <div class="card-content text-center">
+                            <?php
+                            $reunion_ID = get_option('link_zoo');
+                            $password = get_option('password_meeting');
+                            if ($reunion_ID && $password)
+                                $link = 'https://zoom.us/j/' . $reunion_ID . '?pwd=' . $password . '#success';
+                            else
+                                $link = '#';
+                            ?>
+                            <a href="<?= $link ?>"><img src="<?= base_url(('assets/images/zoom-Logo.jpg')) ?>"
+                                                        style="width: 120px"
+                                                        alt="Zoom Logo"></a>
                         </div>
                     </div>
                 </div>

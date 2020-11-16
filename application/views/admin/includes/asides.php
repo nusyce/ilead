@@ -337,20 +337,20 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                 </a>
             </li>
             <li class="nav-item">
-                    <a href="<?= base_url('Event/')?>" class="nav-link">
-                        <i data-feather="user"></i>
-                        <span><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
+                    <a href="<?= base_url('event/')?>" class="nav-link">
+                        <i class="link-icon" data-feather="award"></i>
+                        <span class="link-title"><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
                     </a>
             </li>
             <li class="nav-item">
-                <a href="<?= base_url('Config') ?>" class="nav-link">
-                    <i class="fa fa-gear" data-feather="trending-up"></i>
-                    <span><?php echo $this->lang->line('parametre_generaux'); ?></span>
+                <a href="<?= base_url('config') ?>" class="nav-link">
+                    <i class="link-icon" data-feather="settings"></i>
+                    <span class="link-title"><?php echo $this->lang->line('parametre_generaux'); ?></span>
                 </a>
             </li>
                 <li class="nav-item">
                     <a href="<?= base_url('task') ?>" class="nav-link">
-                        <i class="link-icon" data-feather="trending-up"></i>
+                        <i class="link-icon" data-feather="briefcase"></i>
                         <span class="link-title"><?php echo $this->lang->line('liste_des_taches'); ?></span>
                     </a>
                 </li>

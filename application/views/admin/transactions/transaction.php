@@ -89,7 +89,7 @@
                                     </td>
                                     <td><?= $dd['plan'] ?></td>
                                     <td><?= $dd['user'] ?></td>
-                                    <td>  <?= __price($data['amount']);?></td>
+                                    <td>  <?= __price($dd['amount']);?></td>
                                     <td><?= _dd($dd['due']) ?></td>
                                     <td><?= $dd['by_user'] ?></td>
                                     <td><a target="_blank" href="<?= base_url('transactions/print_inv/') . $dd['id'] ?>"><i

@@ -18,7 +18,7 @@
                 <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('event/confirm_buy_token/'.$id) ?>" >
 
                     <h3 style="text-align: center;"><?php if (isset($event)) echo $event->name; ?></h3>
-                    <h4 style="text-align: center;margin-top: 10px">Frais : <b><?=get_option('token_price')?> FCFA</b></h4>
+                    <h4 style="text-align: center;margin-top: 10px">Frais : <b><?=__price(get_option('token_price'))?></b></h4>
                     <input type="hidden" name="id" id="id" value="<?php if (isset($event)) echo $event->id; ?>">
                     <!--<?php  if(isset($event) && count($event->attachment)>0){?>
                         <h6>liste des fichiers</h6><br>

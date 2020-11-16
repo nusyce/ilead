@@ -15,8 +15,7 @@
                                             <h5 class="text-center text-uppercase mt-3 mb-4"><?= $plan['name'] ?></h5>
                                             <i data-feather="award"
                                             class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                                            <h4 class="text-center font-weight-light"><?= get_plan_upgrade_price($plan['id']); ?>
-                                                FCFA</h4>
+                                            <h4 class="text-center font-weight-light"><?=__price( get_plan_upgrade_price($plan['id'])); ?></h4>
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                             <br>

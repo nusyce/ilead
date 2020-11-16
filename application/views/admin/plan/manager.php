@@ -18,7 +18,7 @@
                             <?php foreach ($data as $dd): ?>
                                 <tr>
                                     <td><?= $dd['name']?></td>
-                                    <td><?= $dd['price']?></td>
+                                    <td><?= __price($dd['price'])?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

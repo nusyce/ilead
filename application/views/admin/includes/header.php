@@ -26,6 +26,9 @@
     <script>
         var admin_url = '<?php echo base_url(); ?>';
     </script>
+    <link href="<?= base_url('assets/vendors/dropzone/dropzone.min.css')?>" rel="stylesheet"/>
+    <link href="<?= base_url('plugins/file-uploaders/dropzone.min.css')?>" rel="stylesheet"/>
+    <link href="<?= base_url('assets/css/app-file-manager.css')?>" rel="stylesheet"/>
 </head>
 <body>
 <div class="main-wrapper">

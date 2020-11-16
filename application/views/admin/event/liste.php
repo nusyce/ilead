@@ -7,7 +7,8 @@
                 <div class="card-body">
                     <h6 class="card-title"><?php echo $this->lang->line('liste_des_evenement'); ?>
 
-                        <a onclick="edit(event,'')" type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0" id="addRespons"
+                        <a onclick="edit(event,'')" type="button"
+                           class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0" id="addRespons"
                            href="#">
                             <i class="btn-icon-prepend" data-feather="plus"></i>
                             <?php echo $this->lang->line('ajouter_un_evenement'); ?>
@@ -33,20 +34,22 @@
                                     <td>
                                         <div><?= $dd['id'] ?></div>
                                         <div class="detail-option">
-                                            <a href="#" onclick="edit(event,<?=$dd['id']?>)" class="">Modifier</a> | <a href="<?=base_url('event/delete_event/'.$dd['id']) ?>" class="delete text-danger">Supprimer</a>
+                                            <a href="#" onclick="edit(event,<?= $dd['id'] ?>)" class="">Modifier</a> |
+                                            <a href="<?= base_url('event/delete_event/' . $dd['id']) ?>"
+                                               class="delete text-danger">Supprimer</a>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="<?=base_url('event/event/'.$dd['id']) ?>"
                                         <div>
-                                            <?= $dd['name'] ?>
+                                            <a href="<?= base_url('event/event/' . $dd['id']) ?>">
+                                                <?= $dd['name'] ?>
+                                            </a>
                                         </div>
-                                        </a>
                                     </td>
-                                    <td><?= $dd['start_date'] ?></td></td>
-                                    <td><?= $dd['end_date'] ?></td>
+                                    <td><?= formatted_date_time($dd['start_date']) ?></td>
+                                    <td><?= formatted_date_time($dd['end_date']) ?></td>
                                     <td><?= $dd['description'] ?></td>
-                                    <td><i class="fa fa-circle online"></i></td>
+                                    <td><div><?php event_flag($dd['id']); ?></div></td>
 
                                 </tr>
                             <?php endforeach; ?>
@@ -61,21 +64,18 @@
 <div id="edit_zone"></div>
 
 <script>
-function edit(e,id)
-{
-    e.preventDefault();
-    requestGet('event/modal/' + id).done(function (response) {
-        $('#edit_zone').html(response)
-        $('#editevent').modal('show')
-    });
-}
+    function edit(e, id) {
+        e.preventDefault();
+        requestGet('event/modal/' + id).done(function (response) {
+            $('#edit_zone').html(response)
+            $('#editevent').modal('show')
+        });
+    }
 
-    function UpdateStatus(id)
-    {
+    function UpdateStatus(id) {
         var Status = $(this).val();
 
-        $(function()
-        {
+        $(function () {
             $.ajax({
                 url: 'Ajax/StatusUpdate.php?Status='.Status, data: "", dataType: 'json'
             });

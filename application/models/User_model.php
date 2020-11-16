@@ -109,7 +109,7 @@ class User_model extends CI_Model
     public function getCommissionOfAllUser(){
         $users = $this->get();
         foreach ($users as $user){
-            $adherents = myadherentsModify($user['sponsor']);
+            $adherents = $this->myadherentsModify($user['sponsor']);
             $somme = 0;
             foreach ($adherents  as $adherent){
                 $this->db->select('tbl_transactions');
@@ -167,6 +167,7 @@ class User_model extends CI_Model
             }
         }
     }
+
 
     public function register($data, $pass)
     {

@@ -300,38 +300,23 @@ function delete_option($name)
     $CI = &get_instance();
     $CI->db->where('name', $name);
     $CI->db->delete('tbl_options');
-
     return (bool)$CI->db->affected_rows();
 }
 
 
-/**
- * Updates option by name
- *
- * @param string $name Option name
- * @param string $value Option Value
- * @return boolean
- */
 function update_option($name, $value)
 {
-    /**
-     * Create the option if not exists
-     * @since  2.3.3
-     */
     if (!option_exists($name)) {
         return add_option($name, $value);
     }
 
     $CI = &get_instance();
-
     $CI->db->where('name', $name);
     $data = ['value' => $value];
     $CI->db->update('tbl_options', $data);
-
     if ($CI->db->affected_rows() > 0) {
         return true;
     }
-
     return false;
 }
 
@@ -341,6 +326,131 @@ function option_exists($name)
             'name' => $name,
         ]) > 0;
 }
+
+
+function get_user_meta($user_id, $name, $default = '')
+{
+    $name = trim($name);
+    $CI = &get_instance();
+    // is not auto loaded
+    $CI->db->select('value');
+    $CI->db->where('name', $name);
+    $CI->db->where('user_id', $user_id);
+    $row = $CI->db->get('tbl_meta_user')->row();
+    if ($row) {
+        return $row->value;
+    } else {
+        return $default;
+    }
+}
+
+function delete_user_meta($user_id, $name)
+{
+    $CI = &get_instance();
+    $CI->db->where('name', $name);
+    $CI->db->where('user_id', $user_id);
+    $CI->db->delete('tbl_meta_user');
+
+    return (bool)$CI->db->affected_rows();
+}
+
+
+function formatted_date($date)
+{
+    return date('d/m/Y', strtotime($date));
+}
+
+function formatted_date_time($date)
+{
+    return date('d/m/Y H:s', strtotime($date));
+}
+
+/**
+ * Updates option by name
+ *
+ * @param string $name Option name
+ * @param string $value Option Value
+ * @return boolean
+ */
+function update_user_meta($user_id, $name, $value)
+{
+    if (!user_meta_exists($user_id, $name)) {
+        return add_meta_user($user_id, $name, $value);
+    }
+
+    $CI = &get_instance();
+
+    $CI->db->where('user_id', $user_id);
+    $CI->db->where('name', $name);
+    $data = ['value' => $value];
+    $CI->db->update('tbl_meta_user', $data);
+
+    if ($CI->db->affected_rows() > 0) {
+        return true;
+    }
+
+    return false;
+}
+
+function user_meta_exists($user_id, $name)
+{
+    return total_rows('tbl_meta_user', [
+            'user_id' => $user_id,
+            'name' => $name,
+        ]) > 0;
+}
+
+
+function add_meta_user($user_id, $name, $value = '')
+{
+    if (!user_meta_exists($user_id, $name)) {
+        $CI = &get_instance();
+
+        $newData = [
+            'user_id' => $user_id,
+            'name' => $name,
+            'value' => $value,
+        ];
+        $CI->db->insert('tbl_meta_user', $newData);
+        $insert_id = $CI->db->insert_id();
+        if ($insert_id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    return false;
+}
+
+
+function user_balance($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+
+    $balance = get_user_meta($user_id, 'balance');
+    if (empty($balance)) {
+        $balance = 0;
+        update_user_meta($user_id, 'balance', $balance);
+    }
+    return $balance;
+}
+
+function user_free_ticket($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+    $ticket = get_user_meta($user_id, 'ticket');
+    if (empty($ticket)) {
+        $ticket = 0;
+        update_user_meta($user_id, 'ticket', $ticket);
+    }
+    return $ticket +1;
+}
+
 
 /**
  * Count total rows on table based on params
@@ -419,6 +529,28 @@ function event_flag($event)
 }
 
 
+function get_user_sponsor($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+    $CI = &get_instance();
+    $CI->db->where('id', $user_id);
+    $CI->db->from('tbl_users');
+    $user = $CI->db->get()->row();
+    if (!empty($user->sponsor)) {
+        $CI->db->where('sponsor', $user->sponsor);
+        $CI->db->from('tbl_users');
+        $sponsor = $CI->db->get()->row();
+    }
+    return $sponsor->id;
+}
+
+function genererate_tiket()
+{
+
+}
+
 function isExpired($user)
 {
     if (!$user->expiration)
@@ -429,7 +561,7 @@ function isExpired($user)
     return false;
 }
 
-function __price($amount, $currency = ' F CFA')
+function __price($amount, $currency = 'F CFA')
 {
-    return number_format($amount, $decimals = 0, $dec_point = ",", $thousands_sep = " ") . $currency;
+    return number_format($amount, $decimals = 0, $dec_point = ",", $thousands_sep = " ") . ' ' . $currency;
 }

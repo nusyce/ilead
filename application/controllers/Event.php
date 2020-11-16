@@ -56,7 +56,7 @@ class Event extends AdminControler
             $this->load_view('event/participants', $data);
         } else if ($_GET['navigation'] == 'listfile') {
             $data['navigation'] = $_GET['navigation'];
-            $data['data'] = $this->Event_Model->get_attachments($id, $ref);
+            $data['files'] = $this->Event_Model->get_attachments($id, $ref);
             $this->load_view('event/list_file', $data);
         } else if ($_GET['navigation'] == 'depense') {
             $data['navigation'] = $_GET['navigation'];

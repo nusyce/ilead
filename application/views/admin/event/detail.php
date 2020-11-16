@@ -1,5 +1,17 @@
 <div class="page-content">
-    <?php $this->load->view('admin/event/nav'); ?>
+    <?php
+    $CI= get_instance();
+    $CI->db->where('event_id',$event->id);
+    $depense= $CI->db->get('tbl_depenses')->result_array();
+    $CI->db->where('event_id',$event->id);
+    $adherents= $CI->db->get('tbl_book_event')->result_array();
+    $CI->db->where('ref_id',$event->id);
+    $CI->db->where('ref','events');
+    $file= $CI->db->get('tbl_attachments')->result_array();
+
+    $CI->db->where('event_id',$event->id);
+    $transaction= $CI->db->get('tbl_transactions')->result_array();
+    $this->load->view('admin/event/nav'); ?>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">

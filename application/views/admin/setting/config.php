@@ -110,11 +110,29 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <label>VIP vers VIP</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input type="text" class="form-control" name="vip_to_vip"
+                                               value="<?= get_option('vip_to_vip') ?>">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
                                         <label>VIP vers Platinium</label>
                                     </div>
                                     <div class="col-md-8 form-group">
                                         <input type="text" class="form-control" name="vip_to_platinium"
                                                value="<?= get_option('vip_to_platinium') ?>">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Platinium vers Platinium</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input type="text" class="form-control" name="platinium_to_platinium"
+                                               value="<?= get_option('platinium_to_platinium') ?>">
                                     </div>
                                 </div>
                             </div>

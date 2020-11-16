@@ -116,7 +116,7 @@ class Transactions_model extends CI_Model
             $data['djp'] = 1;
             $this->db->update('tbl_users', $data);
             //
-            $this->db->where('start_date > ', strtotime(date('Y-m-d H:i:s')));
+            $this->db->where('start_date > ', date('Y-m-d H:i:s'));
             $this->db->order_by("start_date","asc");
             $this->db->limit(1);
             $event= $this->db->get('tbl_events')->row();

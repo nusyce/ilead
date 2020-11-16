@@ -11,9 +11,7 @@ class Config extends AdminControler
     {
         parent::__construct();
         has_permission();
-        $this->load->model('plans_model');
-        $this->load->model('Event_model');
-        $this->load->model('transactions_model');
+
     }
 
 

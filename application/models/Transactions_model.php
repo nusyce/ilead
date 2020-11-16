@@ -109,19 +109,48 @@ class Transactions_model extends CI_Model
             $this->db->where('id', $transaction->user_id);
             $data['plan_id'] = $transaction->plan_id;
             $this->db->update('tbl_users', $data);
-       }
-        $sponsor = get_user_sponsor($transaction->user_id);
-        if($sponsor){
-            $commisson_a = $transaction->amount * $commission_parraing * 0.001;
-            $commisson_a +=  get_user_meta($sponsor, 'balance');
-            update_user_meta($sponsor, 'balance', $commisson_a);
-            $this->sendMailToSponsor($id,$commisson_a,$sponsor );
-        }
 
-        $commisson_v = $transaction->amount * $commission_validateur * 0.001;
-        $commisson_v +=  get_user_meta(get_user_id(), 'balance_validation');
-        update_user_meta(get_user_id(), 'balance_validation', $commisson_v);
-        $this->sendMailOnValidation($transaction,$id,$commisson_v);
+
+
+            $this->db->join('tbl_users', 'u.id = tbl_transactions.user_id', 'left');
+            $this->db->where('tbl_users.sponsor', $user->sponsor);
+            $this->db->where('tbl_transactions.type', 'souscription');
+            $this->db->where('tbl_transactions.status', 'paie');
+            $trans = $this->db->get('tbl_transactions')->result_array();
+
+
+            $ticket=(int)(count($trans)/20);
+            $sponsor = get_user_sponsor($transaction->user_id);
+            if($sponsor){
+                $this->db->where('tbl_free_tickets.user_id', $sponsor->id);
+                $ticket_sponsor = $this->db->get('tbl_free_tickets')->result_array();
+                if(count($ticket_sponsor) < $ticket)
+                {
+                    $data = [];
+                    $data['user_id']=$sponsor->id;
+                    $data['plan_id']=$sponsor->plan_id;
+                    $data['is_used']=0;
+                    $data['created_at'] = date('Y-m-d H:i:s');
+                    $data['updated_at'] = date('Y-m-d H:i:s');
+                    $this->db->insert('tbl_free_tickets', $data);
+
+                    $this->db->where('tbl_free_tickets.id', $this->db->insert_id());
+                    $data = [];
+                    $data['code']="ticket_0".$sponsor->plan_id.'_0'.$this->db->insert_id();
+                    $this->db->update('tbl_free_tickets', $data);
+                }
+                $commisson_a = $transaction->amount * $commission_parraing * 0.001;
+                $commisson_a +=  get_user_meta($sponsor, 'balance');
+                update_user_meta($sponsor->id, 'balance', $commisson_a);
+                $this->sendMailToSponsor($id,$commisson_a,$sponsor->id );
+            }
+
+            $commisson_v = $transaction->amount * $commission_validateur * 0.001;
+            $commisson_v +=  get_user_meta(get_user_id(), 'balance_validation');
+            update_user_meta(get_user_id(), 'balance_validation', $commisson_v);
+            $this->sendMailOnValidation($transaction,$id,$commisson_v);
+       }
+
         $invoice = $this->create_invoice($id);
     }
 

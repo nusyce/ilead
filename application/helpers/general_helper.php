@@ -572,7 +572,7 @@ function get_user_sponsor($user_id = 0)
         $CI->db->from('tbl_users');
         $sponsor = $CI->db->get()->row();
     }
-    return $sponsor->id;
+    return $sponsor;
 }
 
 function genererate_tiket()

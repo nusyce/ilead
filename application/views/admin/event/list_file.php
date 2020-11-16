@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                         <form action="#" class="dropzone dropzone-area" id="dpz-remove-all-thumb">
+                         <form action="#" class="dropzone dropzone-area" id="my-awesome-dropzone">
                             <div class="dz-message">Déposer les fichies à importer ici</div>
                         </form>
                     </div>
@@ -52,9 +52,16 @@
 
         </div>
     </div>
-    <script src="<?= base_url('assets/vendors/js/extensions/dropzone.min.js')?>"></script>
+    <script src="<?= base_url('assets/js/drop/dropzone.js')?>"></script>
     <script>
+        Dropzone.options.myAwesomeDropzone = {
+            init: function() {
 
+                this.on('complete', function () {
+                    location.reload();
+                });
+            }
+        };
     </script>
 </div>
 

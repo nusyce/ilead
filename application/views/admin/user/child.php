@@ -86,7 +86,26 @@
                                     </select>
                                 </div>
                             </div>
+                            <?php    $CI = &get_instance();
+                            $CI->db->where('tbl_free_tickets.user_id', get_user_id());
+                            $CI->db->where('tbl_free_tickets.is_used', 0);
+                            $tickets = $CI->db->get('tbl_free_tickets')->result_array();
+                            ?>
+                            <?php if (count($tickets) > 0) {?>
+                            <div class="col-6">
+                                <input onclick="change()" type="checkbox" id="use_ticket" name="use_ticket">
+                                <label for="use_ticket">Use ticket ?</label>
+                                <div class="form-group" id="bloc_tickets" style="display: none">
+                                    <label for="exampleInputEmail1">Tickets</label>
+                                    <select style="color: black"  id="monselect" name="ticket">
+                                        <?php foreach($tickets as $ticket) { ?>
+                                            <option   value="<?=$ticket['code'] ?>"><?=$ticket['code'] ?></option>
+                                        <?php } ?>
 
+                                    </select>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
 
                         <div class="mt-3">
@@ -101,3 +120,15 @@
         </div>
     </div>
 </div>
+<script>
+
+    function change()
+    {
+        if (document.getElementById('use_ticket').checked)
+        {
+            document.getElementById('bloc_tickets').style.display = "block";
+        } else {
+            document.getElementById('bloc_tickets').style.display = "none";
+        }
+    }
+</script>

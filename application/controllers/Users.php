@@ -15,7 +15,8 @@ class Users extends AdminControler
         $this->load->model('Representates_model');
         $this->load->model('Transactions_model', 'transaction');
         $this->load->model('User_roles_model');
-
+        $this->load->model('payment_modes_model', 'mode');
+        $this->load->model('Misc_model', 'misc');
     }
 
     public function index()
@@ -37,6 +38,7 @@ class Users extends AdminControler
     public function child()
     {
         if ($this->input->post()) {
+
             if (!$this->User_model->get_user_by_key($this->input->post('sponsor')))
             {
                 $this->session->set_flashdata('danger', 'sponsor inconnu');
@@ -56,7 +58,26 @@ class Users extends AdminControler
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
             );
-            $user = $this->User_model->register($data, $pass);
+            $ticket='';
+    if (isset($_POST['use_ticket']) && $_POST['use_ticket'] == "on")
+    {
+        $this->db->where('tbl_free_tickets.user_id', get_user_id());
+        $this->db->where('tbl_free_tickets.is_used', 0);
+        $this->db->where('tbl_free_tickets.code', $_POST['ticket']);
+        $tickets = $this->db->get('tbl_free_tickets')->row();
+
+        if (!$tickets)
+        {
+
+
+            $this->session->set_flashdata('danger', 'ticket invalide');
+            redirect(base_url('users/mychildren'));
+        }else{
+            $ticket=$tickets;
+        }
+    }
+
+            $user = $this->User_model->register($data, $pass,$ticket);
             $this->session->set_flashdata('success', 'Enregistré avec succes');
             redirect(base_url('users/mychildren'));
 
@@ -148,7 +169,24 @@ class Users extends AdminControler
     {
         $data['plans'] = $this->plans->get_plan_above_this($plan_id);
         $data['has_pending_souscription'] = $this->transaction->has_pending_souscription();
+
+        if($data['has_pending_souscription'])
+        {
+
+            redirect('users/paie_souscription');
+        }
         $this->load_view('user/change_plan',$data);
+    }
+    public function paie_souscription()
+    {
+
+
+        $data['transation'] = $this->transaction->has_pending_souscription();
+        $data['modes'] = $this->mode->get();
+        $data['representates'] = $this->User_model->get_user_representate();
+        $data['country'] = $this->misc->get_country(get_user_country());
+        $this->load_view('user/paid',$data);
+
     }
 
     public function update_plan($user_id, $plan_id)

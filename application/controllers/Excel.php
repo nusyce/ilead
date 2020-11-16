@@ -36,6 +36,11 @@ class Excel extends AdminControler
         $sheet->setCellValue('G1', 'Cluster');
         $rows = 2;
         foreach ($paids as $val){
+            $data=[];
+            $data['plan_id']=$val['plan_id'];
+            $this->db->where('cle', $val['cle']);
+            $this->db->update('tbl_users', $data);
+
             $sheet->setCellValue('A' . $rows, $val['cle']);
             $sheet->setCellValue('B' . $rows, $val['firstname']);
             $sheet->setCellValue('C' . $rows, $val['lastname']);

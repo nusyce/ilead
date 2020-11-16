@@ -487,7 +487,14 @@ function user_free_ticket($user_id = 0)
     $tickets = $CI->db->get('tbl_free_tickets')->result_array();
     return count($tickets);
 }
+function get_plan_name($id)
+{
 
+    $CI = &get_instance();
+    $CI->db->where('id', $id);
+    $plan = $CI->db->get('tbl_plans')->row();
+    return $plan->name;
+}
 
 /**
  * Count total rows on table based on params

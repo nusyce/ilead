@@ -20,6 +20,11 @@ class Transactions_model extends CI_Model
         $this->db->insert('tbl_transactions', $data);
         $insert = $this->db->insert_id();
         $this->numgeneratorcode($insert);
+        if(isset($data['ticket_id']))
+        {
+            $this->make_paie($insert,1);
+        }
+
         return $insert;
     }
 
@@ -72,7 +77,7 @@ class Transactions_model extends CI_Model
 
     }
 
-    public function make_paie($id)
+    public function make_paie($id,$ticket="")
     {
         $commission_validateur = get_option('percentage_adherent');
         $commission_parraing = get_option('percentage_commission');
@@ -110,42 +115,66 @@ class Transactions_model extends CI_Model
             $data['plan_id'] = $transaction->plan_id;
             $data['djp'] = 1;
             $this->db->update('tbl_users', $data);
-
-
-
-            $this->db->join('tbl_users', 'tbl_users.id = tbl_transactions.user_id', 'left');
-            $this->db->where('tbl_users.sponsor', $user->sponsor);
-            $this->db->where('tbl_transactions.type', 'souscription');
-            $this->db->where('tbl_transactions.status', 'paie');
-            $trans = $this->db->get('tbl_transactions')->result_array();
-
-
-            $ticket=(int)(count($trans)/20);
-            $sponsor = get_user_sponsor($transaction->user_id);
-            if($sponsor){
-                $this->db->where('tbl_free_tickets.user_id', $sponsor->id);
-                $ticket_sponsor = $this->db->get('tbl_free_tickets')->result_array();
-                if(count($ticket_sponsor) < $ticket)
+            //
+            $this->db->where('start_date > ', strtotime(date('Y-m-d H:i:s')));
+            $this->db->order_by("start_date","asc");
+            $this->db->limit(1);
+            $event= $this->db->get('tbl_events')->row();
+            if($event)
+            {
+                $this->db->where('event_id', $event->id);
+                $this->db->where('user_id',  $transaction->user_id);
+                $booking=$this->db->get('tbl_book_event')->result_array();
+                if(!$booking)
                 {
-                    $data = [];
-                    $data['user_id']=$sponsor->id;
-                    $data['plan_id']=$sponsor->plan_id;
-                    $data['is_used']=0;
+                    $data=[];
+                    $data['event_id']=$event->id;
+                    $data['user_id']=$transaction->user_id;
                     $data['created_at'] = date('Y-m-d H:i:s');
                     $data['updated_at'] = date('Y-m-d H:i:s');
-                    $this->db->insert('tbl_free_tickets', $data);
-
-                    $this->db->where('tbl_free_tickets.id', $this->db->insert_id());
-                    $data = [];
-                    $data['code']="ticket_0".$sponsor->plan_id.'_0'.$this->db->insert_id();
-                    $this->db->update('tbl_free_tickets', $data);
+                    $this->db->insert('tbl_book_event', $data);
                 }
-                $commisson_a = $transaction->amount * $commission_parraing * 0.001;
-                $commisson_a +=  get_user_meta($sponsor->id, 'balance');
-                update_user_meta($sponsor->id, 'balance', $commisson_a);
-                $this->sendMailToSponsor($id,$commisson_a,$sponsor );
             }
 
+           if ($ticket=="")
+           {
+               $this->db->join('tbl_users', 'tbl_users.id = tbl_transactions.user_id', 'left');
+               $this->db->where('tbl_users.sponsor', $user->sponsor);
+               $this->db->where('tbl_transactions.type', 'souscription');
+               $this->db->where('tbl_transactions.status', 'paie');
+               $trans = $this->db->get('tbl_transactions')->result_array();
+
+
+               $ticket=(int)(count($trans)/20);
+               $sponsor = get_user_sponsor($transaction->user_id);
+               if($sponsor){
+                   $this->db->where('tbl_free_tickets.user_id', $sponsor->id);
+                   $ticket_sponsor = $this->db->get('tbl_free_tickets')->result_array();
+                   if(count($ticket_sponsor) < $ticket)
+                   {
+                       $data = [];
+                       $data['user_id']=$sponsor->id;
+                       $data['plan_id']=$sponsor->plan_id;
+                       $data['is_used']=0;
+                       $data['created_at'] = date('Y-m-d H:i:s');
+                       $data['updated_at'] = date('Y-m-d H:i:s');
+                       $this->db->insert('tbl_free_tickets', $data);
+                       $idtick=$this->db->insert_id();
+
+                       $data = [];
+                       $plan=get_plan_name($sponsor->plan_id);
+                       $this->db->where('tbl_free_tickets.id', $idtick);
+                       $data['code']="ticket_".$plan.'_0'.$idtick;
+                       $this->db->update('tbl_free_tickets', $data);
+                   }
+                   $commisson_a = $transaction->amount * $commission_parraing * 0.001;
+                   $commisson_a +=  get_user_meta($sponsor->id, 'balance');
+                   update_user_meta($sponsor->id, 'balance', $commisson_a);
+                   $this->sendMailToSponsor($id,$commisson_a,$sponsor );
+               }
+           }
+
+            //
 
        }
 
@@ -419,12 +448,14 @@ class Transactions_model extends CI_Model
 
     public function has_pending_souscription()
     {
+        $this->db->select('pl.name as plan, pl.id as plan_id,tbl_transactions.amount as price,tbl_transactions.id as id');
+        $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'inner');
         $this->db->where('user_id', get_user_id());
         $this->db->where('status', "pending");
         $this->db->where('type', "souscription");
         $this->db->where('tbl_transactions.is_deleted is null')->or_where('tbl_transactions.is_deleted', 0);
-        $query = $this->db->get('tbl_transactions');
+        $query = $this->db->get('tbl_transactions')->row();
 
-        return $query->num_rows() > 0 ? true : false;
+        return $query;
     }
 }

@@ -4,10 +4,10 @@
                 <div class="card">
                     <?php $this->load->view('admin/includes/message.php') ?>
                     <div class="card-body" id="detail-tra">
-                        <?php if($has_pending_souscription){echo $this->lang->line('plan_existing_pending_message');} ?>
+
                         <h4 class="text-center mb-3 mt-4"><?php echo $this->lang->line('home_package'); ?></h4>
 
-                        <div class="row"  <?php if($has_pending_souscription){echo "style=\"pointer-events: none; opacity : 0.3;\"";} ?>  >
+                        <div class="row">
                             <?php foreach ($plans as $plan) { ?>
                                 <div class="col-md-4 stretch-card grid-margin grid-margin-md-0">
                                     <div class="card">

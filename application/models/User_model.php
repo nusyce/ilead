@@ -37,6 +37,7 @@ class User_model extends CI_Model
         $this->db->select('pl.name as plan, pl.id as plan_id,pl.price as price,pl.price_euro as price_euro,pl.price_dollard as price_dollard');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'inner');
         $this->db->where('user_id', get_user_id());
+        $this->db->where('type','souscription');
         return $this->db->order_by('tbl_transactions.id', "desc")->limit(1)->get('tbl_transactions')->row();
     }
 
@@ -48,7 +49,7 @@ class User_model extends CI_Model
 
     public function get_all_paid()
     {
-        $this->db->select('tbl_transactions.user_id,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, u.cle as cle, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
+        $this->db->select('tbl_transactions.user_id,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, u.cle as cle, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, pl.id as plan_id, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
         $this->db->join('tbl_users as u', 'u.id = tbl_transactions.user_id', 'left');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = u.cluster', 'left');
@@ -169,21 +170,30 @@ class User_model extends CI_Model
     }
 
 
-    public function register($data, $pass)
+    public function register($data, $pass,$ticket="")
     {
 
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso = get_country($data['country_id'])->iso;
         $generate = $this->codeGeneratorKey($insert, $iso);
-        $this->welcome_email($generate['cle'], $generate['code'], $data);
+        //commentaire$this->welcome_email($generate['cle'], $generate['code'], $data);
         $this->db->where('id', $_POST['plan']);
         $plan = $this->db->get('tbl_plans')->row();
         $CI =& get_instance();
         $CI->load->model('plans_model');
         $plan = $CI->plans_model->get_plan_by_id($_POST['plan']);
+if ($ticket=="")
+{
+    $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription');
+}else{
+    $data=[];
+    $data['is_used']=1;
+    $this->db->where('id', $ticket->id);
+    $this->db->update('tbl_free_tickets', $data);
+    $transaction = array('user_id' => $insert, 'plan_id' => $ticket->plan_id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'paie', 'amount' => 0,'type' => 'souscription','ticket_id' => $ticket->id);
+}
 
-        $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription');
         $CI->load->model('transactions_model');
         $CI->transactions_model->add($transaction);
 

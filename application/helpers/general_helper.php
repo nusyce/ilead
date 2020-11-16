@@ -424,7 +424,7 @@ function add_meta_user($user_id, $name, $value = '')
 }
 
 
-function user_balance($user_id = 0)
+function user_balance_commission($user_id = 0)
 {
     if ($user_id == 0) {
         $user_id = get_user_id();
@@ -434,6 +434,20 @@ function user_balance($user_id = 0)
     if (empty($balance)) {
         $balance = 0;
         update_user_meta($user_id, 'balance', $balance);
+    }
+    return $balance;
+}
+
+function user_balance_validation($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+
+    $balance = get_user_meta($user_id, 'balance_validation');
+    if (empty($balance)) {
+        $balance = 0;
+        update_user_meta($user_id, 'balance_validation', $balance);
     }
     return $balance;
 }

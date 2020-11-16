@@ -78,12 +78,12 @@ class Event_Model extends CI_Model
 
     public function getAllParticipate($id)
     {
-        $this->db->select('tbl_book_event.event_id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_events.start_date as start,tbl_events.end_date as end,u.firstname, u.lastname');
-        $this->db->join('tbl_events as e', 'e.id = tbl_book_event.id', 'inner');
-        $this->db->join('tbl_users as u', 'u.id = tbl_book_event.id', 'inner');
+        $this->db->select('tbl_book_event.event_id,tbl_book_event.user_id,tbl_events.name as event_name,tbl_events.start_date as start,tbl_events.end_date as end,tbl_users.firstname, tbl_users.lastname');
+        $this->db->join('tbl_events', 'tbl_events.id = tbl_book_event.id', 'inner');
+        $this->db->join('tbl_users', 'tbl_users.id = tbl_book_event.id', 'inner');
         if (is_numeric($id)) {
             $this->db->where('tbl_book_event.event_id', $id);
-            $transaction = $this->db->get('tbl_book_event');
+            $transaction = $this->db->get('tbl_book_event')->result_array();
             return $transaction;
         }
         return $this->db->get('tbl_book_event')->result_array();

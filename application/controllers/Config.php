@@ -12,6 +12,8 @@ class Config extends AdminControler
         parent::__construct();
         has_permission();
         $this->load->model('plans_model');
+        $this->load->model('Event_model');
+        $this->load->model('transactions_model');
     }
 
 
@@ -25,5 +27,10 @@ class Config extends AdminControler
         }
         has_permission();
         $this->load_view('setting/config');
+    }
+
+    public function test(){
+        $data = $this->Event_model->getAllDepense(6);
+        var_dump($data);
     }
 }

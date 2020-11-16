@@ -109,23 +109,96 @@ class Transactions_model extends CI_Model
             $this->db->where('id', $transaction->user_id);
             $data['plan_id'] = $transaction->plan_id;
             $this->db->update('tbl_users', $data);
-       }     /**
-     * Credit sponsor
-     */
+       }
         $sponsor = get_user_sponsor($transaction->user_id);
-        $commisson_a = $transaction->amount * $commission_parraing * 0.001;
-        $commisson_a +=  get_user_meta($sponsor, 'balance');
-        update_user_meta($sponsor, 'balance', $commisson_a);
+        if($sponsor){
+            $commisson_a = $transaction->amount * $commission_parraing * 0.001;
+            $commisson_a +=  get_user_meta($sponsor, 'balance');
+            update_user_meta($sponsor, 'balance', $commisson_a);
+            $this->sendMailToSponsor($id,$commisson_a,$sponsor );
+        }
 
         $commisson_v = $transaction->amount * $commission_validateur * 0.001;
-        $commisson_v +=  get_user_meta(get_user_id(), 'balance');
-        update_user_meta(get_user_id(), 'balance', $commisson_v);
-
+        $commisson_v +=  get_user_meta(get_user_id(), 'balance_validation');
+        update_user_meta(get_user_id(), 'balance_validation', $commisson_v);
+        $this->sendMailOnValidation($transaction,$id,$commisson_v);
         $invoice = $this->create_invoice($id);
-      /*  $this->send_invoice($invoice, $id);*/
-
     }
 
+    public function sendMailOnValidation($tansaction,$id,$commission){
+        $this->load->model('user_model');
+        $us = $this->user_model->get_user_by_id($id);
+        $CI =& get_instance();
+        if ($us->country_id == 156 || $us->country_id == 226) {
+            $sujet = 'Commission validation added to your account';
+            $body = 'Hello Mr/M '.$us->firstme.'<br> Following the validation you performed on the transaction '.$tansaction->id.', you received a commission of a value available '.$commission.' in your account.<br>Thank you.<br><b>The iLEAD Management</b>';
+
+            $lann = 'english';
+            $CI->lang->load($lann, $lann);
+        } else {
+                $sujet = 'Commission de validation ajoutée à votre compte';
+            $body = 'Hello Mr/M '.$us->firstme.'<br> Suite à la validation que vous avez éffectué sur la transaction '.$tansaction->id.', vous avez recu une commission d\'une valeur de  '.$commission.' dans votre compte..<br>Thank you.<br><b>The iLEAD Management</b>';
+            $lann = 'french';
+            $CI->lang->load($lann, $lann);
+        }
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mail@ileadglobe.com';
+        $mail->Password = 'Taylor@123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('mail@ileadglobe.com', 'iLead globe');
+        $mail->addAddress($us->email, $us->firstname);
+        $mail->isHTML(true);
+        $mail->Subject = $sujet;
+        $mail->Body =$body;
+            if (!$mail->send()) {
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                echo 'The email message was sent.';
+            }
+    }
+    public function sendMailToSponsor($id,$commission,$sponsor){
+        $this->load->model('user_model');
+        $us = $this->user_model->get_user_by_id($id);
+        $CI =& get_instance();
+        if ($us->country_id == 156 || $us->country_id == 226) {
+            $sujet = 'Commission validation added to your account';
+            $body = 'Hello Mr/M '.$sponsor->firstme.'<br> Following the subscription made by your godchild'.$us->firstname.', you receive a bonus of '.$commission.' linked to the sponsorship that binds you.<br>Thank you.<br><b>The iLEAD Management</b>';
+
+            $lann = 'english';
+            $CI->lang->load($lann, $lann);
+        } else {
+            $sujet = 'Commission de validation ajoutée à votre compte';
+            $body = 'Bonjour Mr/M '.$sponsor->firstname.'<br>Suite à la souscription éffectuée par votre filleuil '.$us->firstname.', yvous recevez  de bonus '.$commission.' lié au parrainage qui vous lie<br>Merci.<br><b>The iLEAD Management</b>';
+            $lann = 'french';
+            $CI->lang->load($lann, $lann);
+        }
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mail@ileadglobe.com';
+        $mail->Password = 'Taylor@123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('mail@ileadglobe.com', 'iLead globe');
+        $mail->addAddress($sponsor->email, $sponsor->firstname);
+        $mail->isHTML(true);
+        $mail->Subject = $sujet;
+        $mail->Body =$body;
+        if (!$mail->send()) {
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'The email message was sent.';
+        }
+    }
+
+    public function sendMailTSponsor(){
+
+    }
     public function create_invoice($id)
     {
         $data = [];

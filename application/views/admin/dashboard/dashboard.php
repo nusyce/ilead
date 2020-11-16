@@ -56,8 +56,19 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                                 <h6 class="mb-0">Mes gains</h6>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-12 col-xl-12">
-                                    <h4 class="mb-2 text-center"><?= __price(user_balance()) ?></h4>
+                                <div class="col-md-6">
+                                    <span class="mb-2 text-center">Validation</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="mb-2 text-center">Parainage</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h7 class="text-center"><?= __price(user_balance_validation()) ?></h7>
+                                </div>
+                                <div class="col-md-6">
+                                    <h7 class="text-center"><?= __price(user_balance_commission()) ?></h7>
                                 </div>
                             </div>
                         </div>

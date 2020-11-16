@@ -58,7 +58,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
-                                    <h4 class="mb-2 text-center"><?= __price(user_balance()) ?></h4>
+                                    <h4 class="mb-2 text-center"><?= __price(user_balance_commission()) ?></h4>
                                 </div>
                             </div>
                         </div>

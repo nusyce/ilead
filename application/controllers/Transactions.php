@@ -69,12 +69,10 @@ class Transactions extends AdminControler
     }
     public function send_facture($id)
     {
-
         $data = $this->Transactions_model->invoices($id);
         $this->load->model('transactions_model');
          $this->load->model('user_model');
          $tansaction=$this->transactions_model->get_transaction_by_numtran($data['num_trans']);
-      
         $us = $this->user_model->get_user_by_id($tansaction->user_id);
         if($us->country_id == 156 || $us->country_id==226)
         {
@@ -96,9 +94,6 @@ class Transactions extends AdminControler
         $baseFolder = $_SERVER['DOCUMENT_ROOT'];
 
         $paths = '/uploads/tmps/';
-        /*if (!file_exists($paths)) {
-            mkdir($paths, 0777, true);
-        }*/
         $file_path = $baseFolder . $paths . 'ticket.pdf';
         try {
             extract($data, EXTR_REFS);
@@ -112,20 +107,11 @@ class Transactions extends AdminControler
                 $html2pdf->writeHTML($content);
                 $html2pdf->output($file_path, 'F');
             } catch (Html2PdfException $e) {
-                /*$html2pdf->clean();
-
-                $formatter = new ExceptionFormatter($e);
-                echo $formatter->getHtmlMessage();*/
             }
-
-
-            //Recipients
             $mail->setFrom('mail@ileadglobe.com', 'iLead globe');
             $mail->addAddress($us->email, $us->firstname);
             //$mail->AddStringAttachment($attachment, 'Facture.pdf', 'base64', 'application/pdf');
             $mail->addAttachment($file_path, 'Facture_' . $tansaction->num_trans . '.pdf');
-
-            // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $this->lang->line('confirm_pay');
             $mail->Body = $this->lang->line('your_pack_is_active').' <b>' . $us->code . '</b>, '.$this->lang->line('your_invoice_is_join');
@@ -136,19 +122,11 @@ class Transactions extends AdminControler
                 echo 'The email message was sent.';
             }
         } catch (Html2PdfException $e) {
-           /* $html2pdf->clean();
-
-            $formatter = new ExceptionFormatter($e);
-            echo $formatter->getHtmlMessage();*/
         }
-
-
     }
   
       public function send_all_facture()
     {
-
-       
         $this->load->model('transactions_model');
          $this->load->model('user_model');
            $tansactions = $this->transactions_model->get_paie_transaction();
@@ -180,40 +158,37 @@ class Transactions extends AdminControler
              $sujet = 'code Zoom de connexion';
              $body = 'Priere de trouver ci-dessous le code a utiliser pour vous connecter sur la plateform :<br><a href="https://us02web.zoom.us/j/">https://us02web.zoom.us/j/</a><br>pour la 3eme edition de la JCM Retreat Entreprenarial.<br>ID de reunion : 884 0660 2326<br>Nom:' .$us['name'][0].'_'.$us['code'].'_'.$us['firstname'].'<br>Merci.<br><b>The iLEAD Management</b>';
         }
-
-
-
-  
-
-
-
-            //Recipients
-
-            
-            
-
-            // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $sujet;
             $mail->Body = $body;
- if (filter_var($us['email'], FILTER_VALIDATE_EMAIL))
-{
-    $mail->addAddress($us['email'], $us['firstname']);
-if (!$mail->send()) {
-    echo 'Invalid email address';
-    break;
-}
-}          
-
-
-           
+        if (filter_var($us['email'], FILTER_VALIDATE_EMAIL))
+            {
+                 $mail->addAddress($us['email'], $us['firstname']);
+                if (!$mail->send()) {
+                echo 'Invalid email address';
+                break;
+            }
         }
-       
-        
+        }
         echo 'The email message was sent.';
-
     }
 
+    public function test(){
+        $id = '';
+        if ($this->input->post() !== FALSE) {
+            $id = $this->input->post('id');
+            if (!empty($_FILES['attachment']['name'][0])) {
+                if ($this->upload_files($_FILES['attachment'], $id) === FALSE) {
+                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
+                }
+            }
+            $this->Transactions_model->make_paie(18);
+            redirect(base_url('transactions/detail/18'));
+
+        } else {
+            redirect(base_url('transactions/detail/18'));
+        }
+    }
 
     public function make_paiement()
     {

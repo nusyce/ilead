@@ -26,6 +26,12 @@ class Event extends AdminControler
         $this->load_view('event/liste', $data);
     }
 
+    public function get_file($id){
+        $data['event'] = $this->Event_Model->get($id);
+        $data['files'] = $this->Event_Model->get_attachments($id);
+        $this->load_view('event/files', $data,true);
+        }
+
     public function event($id)
     {
         $data['event'] = $this->Event_Model->get($id);

@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="grid-margin">
+    <div class="grid-margin" id="file_zone">
         <div class="row">
             <?php foreach ($files as $file){ ?>
             <div class="col-md-3 col-6">
@@ -58,7 +58,11 @@
             init: function() {
 
                 this.on('complete', function () {
-                    location.reload();
+                    var id = "<?php echo $event->id ?>";
+                        requestGet('event/get_file/'+id).done(function (response) {
+                            $('#file_zone').html(response)
+                        });
+
                 });
             }
         };

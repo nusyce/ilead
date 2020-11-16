@@ -90,7 +90,7 @@ class Transactions_model extends CI_Model
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
             $this->db->insert('tbl_book_event', $data);
-        } elseif ($transaction->type == "souscription")
+        } elseif ($transaction->type == "souscription"){
             $data = [];
             $CI =& get_instance();
             $CI->load->model('plans_model');
@@ -112,7 +112,7 @@ class Transactions_model extends CI_Model
 
 
 
-            $this->db->join('tbl_users', 'u.id = tbl_transactions.user_id', 'left');
+            $this->db->join('tbl_users', 'tbl_users.id = tbl_transactions.user_id', 'left');
             $this->db->where('tbl_users.sponsor', $user->sponsor);
             $this->db->where('tbl_transactions.type', 'souscription');
             $this->db->where('tbl_transactions.status', 'paie');
@@ -140,15 +140,12 @@ class Transactions_model extends CI_Model
                     $this->db->update('tbl_free_tickets', $data);
                 }
                 $commisson_a = $transaction->amount * $commission_parraing * 0.001;
-                $commisson_a +=  get_user_meta($sponsor, 'balance');
+                $commisson_a +=  get_user_meta($sponsor->id, 'balance');
                 update_user_meta($sponsor->id, 'balance', $commisson_a);
                 $this->sendMailToSponsor($id,$commisson_a,$sponsor->id );
             }
 
-            $commisson_v = $transaction->amount * $commission_validateur * 0.001;
-            $commisson_v +=  get_user_meta(get_user_id(), 'balance_validation');
-            update_user_meta(get_user_id(), 'balance_validation', $commisson_v);
-            $this->sendMailOnValidation($transaction,$id,$commisson_v);
+
        }
 
         $invoice = $this->create_invoice($id);

@@ -55,6 +55,16 @@ class Event extends AdminControler
             $data['adherents'] = $this->Event_Model->participants($id);
             $this->load_view('event/participants', $data);
         } else if ($_GET['navigation'] == 'listfile') {
+
+
+            if (!empty($_FILES['file']['name'][0])) {
+
+
+                if ($this->upload_files($_FILES['file'], $id) === FALSE) {
+
+                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
+                }
+            }
             $data['navigation'] = $_GET['navigation'];
             $data['files'] = $this->Event_Model->get_attachments($id, $ref);
             $this->load_view('event/list_file', $data);

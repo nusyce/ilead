@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                         <form action="#" class="dropzone dropzone-area" id="dpz-remove-all-thumb">
+                         <form action="#" class="dropzone dropzone-area" id="my-awesome-dropzone">
                             <div class="dz-message">Déposer les fichies à importer ici</div>
                         </form>
                     </div>
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="grid-margin">
+    <div class="grid-margin" id="file_zone">
         <div class="row">
             <?php foreach ($files as $file){ ?>
             <div class="col-md-3 col-6">
@@ -52,9 +52,20 @@
 
         </div>
     </div>
-    <script src="<?= base_url('assets/vendors/js/extensions/dropzone.min.js')?>"></script>
+    <script src="<?= base_url('assets/js/drop/dropzone.js')?>"></script>
     <script>
+        Dropzone.options.myAwesomeDropzone = {
+            init: function() {
 
+                this.on('complete', function () {
+                    var id = "<?php echo $event->id ?>";
+                        requestGet('event/get_file/'+id).done(function (response) {
+                            $('#file_zone').html(response)
+                        });
+
+                });
+            }
+        };
     </script>
 </div>
 

@@ -14,6 +14,8 @@ class Users extends AdminControler
         $this->load->model('Plans_model', 'plans');
         $this->load->model('Representates_model');
         $this->load->model('Transactions_model', 'transaction');
+        $this->load->model('User_roles_model');
+
     }
 
     public function index()
@@ -67,15 +69,34 @@ class Users extends AdminControler
     public function profile()
     {
         if ($this->input->post()) {
-            $data = array(
-                'firstname' => $this->input->post('firstname'),
-                'lastname' => $this->input->post('lastname'),
-            );
+            $data = $_POST;
             $user = $this->User_model->update($data);
+            $this->User_roles_model->get_all();
+            $result =$this->User_model->get_user_by_id(get_user_id());
+            if($result) {
+                $admin_data = array(
+                    'user_logged_in' => true,
+                    'user_id' => $result->id,
+                    'user_role_id' => $result->role_id,
+                    'user_role' => $this->User_roles_model->get_role_by_id($result->role_id)->name,
+                    'user_mail' => $result->email,
+                    'user_name' => $result->firstname,
+                    'last_name' => $result->lastname,
+                    'cle' => $result->cle,
+                    'djp' => $result->djp,
+                    'country' => $result->country_id,
+                    'user_plan_id' => $result->plan_id,
+                    'user_plan' => $this->plans->get_plan_by_id($result->plan_id)->name,
+
+                );
+
+                $this->session->set_userdata($admin_data);
+                $this->session->set_flashdata('success', $this->lang->line('edit_succes'));
+            }
             redirect(base_url('users/profile'));
 
         }
-        $data['data']= $this->User_model->get(get_user_id());
+        $data['data']= $this->User_model->get_user_by_id(get_user_id());
         $this->load_view('user/profile', $data);
 
     }

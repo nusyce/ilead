@@ -263,7 +263,7 @@ $lang['ajouter_une_depense'] = "Ajouter une depense";
 //changement de plan
 $lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Impossible de sélectionner un plan quand un autre est en attente </div>";
 $lang['success_package_change_message'] = "Votre demande à été envoyé; il ne vous reste plus qu'à payer";
-
+$lang['edit_profile'] = 'Modifier mon profil';
 
 
 

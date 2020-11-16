@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-6">
                             <h6>
-                                Prix : <?= number_format($data->amount, 0, 0, ' ') ?> F CFA
+                                Prix : <?= __price($data->amount);?>
 
                             </h6></div>
                     </div>
@@ -89,7 +89,7 @@
                                     </td>
                                     <td><?= $dd['plan'] ?></td>
                                     <td><?= $dd['user'] ?></td>
-                                    <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
+                                    <td>  <?= __price($dd['amount']);?></td>
                                     <td><?= _dd($dd['due']) ?></td>
                                     <td><?= $dd['by_user'] ?></td>
                                     <td><a target="_blank" href="<?= base_url('transactions/print_inv/') . $dd['id'] ?>"><i

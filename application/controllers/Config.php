@@ -17,11 +17,11 @@ class Config extends AdminControler
 
     public function index()
     {
-        if($this->input->post()){
-           foreach ($_POST as $k=> $setting){
-               update_option($k, $setting);
-               redirect('Config');
-           }
+        if (isset($_POST['percentage_adherent'])) {
+            foreach ($_POST as $k => $setting) {
+                update_option($k, $setting);
+            }
+            redirect('config');
         }
         has_permission();
         $this->load_view('setting/config');

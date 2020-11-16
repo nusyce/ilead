@@ -70,13 +70,10 @@
                                             <h5 class="text-center text-uppercase mt-3 mb-4"><?= $plan['name'] ?></h5>
                                             <i data-feather="award"
                                                class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                                            <h4 class="text-center font-weight-light"><?= number_format($plan['price']) ?>
-                                                FCFA</h4>
+                                            <h4 class="text-center font-weight-light"><?= __price($plan['price']) ?></h4>
 
-                                            <h5 class="text-center font-weight-light"><?= number_format($plan['price_dollard']) ?>
-                                                DOLLARS</h5>
-                                            <h5 class="text-center font-weight-light"><?= number_format($plan['price_euro']) ?>
-                                                EURO</h5>
+                                            <h5 class="text-center font-weight-light"><?= __price($plan['price_dollard'],'DOLLARS') ?></h5>
+                                            <h5 class="text-center font-weight-light"><?= __price($plan['price_euro'],'EURO') ?></h5>
                                             <!--<p class="text-muted text-center mb-4 font-weight-light">per month</p>-->
                                             <!--<h6 class="text-muted text-center mb-4 font-weight-normal">Up to 25 units</h6>-->
                                             <br>

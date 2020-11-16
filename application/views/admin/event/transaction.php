@@ -30,7 +30,7 @@
                                             <?= $dd['first'].' '.$dd['last'] ?>
                                         </div>
                                     </td>
-                                    <td><?= $dd['amount'] ?></td></td>
+                                    <td><?= __price($dd['amount']) ?></td></td>
                                     <td><?= $dd['date'] ?></td>
                                     <td><?= $dd['status'] ?></td>
                                     <td><?= $dd['paiement_mode'] ?></td>

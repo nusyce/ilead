@@ -92,6 +92,24 @@ function get_user_role_id()
     return (int)get_instance()->session->userdata('user_role_id');
 }
 
+function get_user_plan_id()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_plan_id');
+}
+
+function get_user_plan()
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    return get_instance()->session->userdata('user_plan');
+}
+
 function can_represente()
 {
     if (get_user_role_id() != 3)
@@ -107,7 +125,8 @@ function can_represente()
     }
 }
 
-function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
+function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
+{
     $output = NULL;
     if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
         $ip = $_SERVER["REMOTE_ADDR"];
@@ -118,8 +137,8 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
                 $ip = $_SERVER['HTTP_CLIENT_IP'];
         }
     }
-    $purpose    = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
-    $support    = array("country", "countrycode", "state", "region", "city", "location", "address");
+    $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+    $support = array("country", "countrycode", "state", "region", "city", "location", "address");
     $continents = array(
         "AF" => "Africa",
         "AN" => "Antarctica",
@@ -135,11 +154,11 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
             switch ($purpose) {
                 case "location":
                     $output = array(
-                        "city"           => @$ipdat->geoplugin_city,
-                        "state"          => @$ipdat->geoplugin_regionName,
-                        "country"        => @$ipdat->geoplugin_countryName,
-                        "country_code"   => @$ipdat->geoplugin_countryCode,
-                        "continent"      => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
+                        "city" => @$ipdat->geoplugin_city,
+                        "state" => @$ipdat->geoplugin_regionName,
+                        "country" => @$ipdat->geoplugin_countryName,
+                        "country_code" => @$ipdat->geoplugin_countryCode,
+                        "continent" => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
                         "continent_code" => @$ipdat->geoplugin_continentCode
                     );
                     break;
@@ -221,6 +240,34 @@ function clusters($active = '')
 }
 
 
+function get_plan_upgrade_price($selected_plan_id)
+{
+    if (!is_user_logged_in()) {
+        return false;
+    }
+
+    $current_plan_id = get_instance()->session->userdata('user_plan_id');
+
+    $amount = 0;
+    if ($current_plan_id == 1 & $selected_plan_id == 2) {
+        $amount = get_option("clasic_to_vip");
+    } elseif ($current_plan_id == 1 & $selected_plan_id == 3) {
+        $amount = get_option("clasic_to_platinium");
+    } elseif ($current_plan_id == 2 & $selected_plan_id == 3) {
+        $amount = get_option("vip_to_platinium");
+    } elseif ($current_plan_id == 1 & $selected_plan_id == 1) {
+        $amount = get_option("clasic_to_clasic");
+    } elseif ($current_plan_id == 2 & $selected_plan_id == 2) {
+        $amount = get_option("vip_to_vip");
+    } elseif ($current_plan_id == 3 & $selected_plan_id == 3) {
+        $amount = get_option("platinium_to_platinium");
+    }
+
+
+    return $amount;
+}
+
+
 /**
  * Get option value
  * @param string $name Option name
@@ -253,38 +300,23 @@ function delete_option($name)
     $CI = &get_instance();
     $CI->db->where('name', $name);
     $CI->db->delete('tbl_options');
-
     return (bool)$CI->db->affected_rows();
 }
 
 
-/**
- * Updates option by name
- *
- * @param string $name Option name
- * @param string $value Option Value
- * @return boolean
- */
 function update_option($name, $value)
 {
-    /**
-     * Create the option if not exists
-     * @since  2.3.3
-     */
     if (!option_exists($name)) {
         return add_option($name, $value);
     }
 
     $CI = &get_instance();
-
     $CI->db->where('name', $name);
     $data = ['value' => $value];
     $CI->db->update('tbl_options', $data);
-
     if ($CI->db->affected_rows() > 0) {
         return true;
     }
-
     return false;
 }
 
@@ -294,6 +326,131 @@ function option_exists($name)
             'name' => $name,
         ]) > 0;
 }
+
+
+function get_user_meta($user_id, $name, $default = '')
+{
+    $name = trim($name);
+    $CI = &get_instance();
+    // is not auto loaded
+    $CI->db->select('value');
+    $CI->db->where('name', $name);
+    $CI->db->where('user_id', $user_id);
+    $row = $CI->db->get('tbl_meta_user')->row();
+    if ($row) {
+        return $row->value;
+    } else {
+        return $default;
+    }
+}
+
+function delete_user_meta($user_id, $name)
+{
+    $CI = &get_instance();
+    $CI->db->where('name', $name);
+    $CI->db->where('user_id', $user_id);
+    $CI->db->delete('tbl_meta_user');
+
+    return (bool)$CI->db->affected_rows();
+}
+
+
+function formatted_date($date)
+{
+    return date('d/m/Y', strtotime($date));
+}
+
+function formatted_date_time($date)
+{
+    return date('d/m/Y H:s', strtotime($date));
+}
+
+/**
+ * Updates option by name
+ *
+ * @param string $name Option name
+ * @param string $value Option Value
+ * @return boolean
+ */
+function update_user_meta($user_id, $name, $value)
+{
+    if (!user_meta_exists($user_id, $name)) {
+        return add_meta_user($user_id, $name, $value);
+    }
+
+    $CI = &get_instance();
+
+    $CI->db->where('user_id', $user_id);
+    $CI->db->where('name', $name);
+    $data = ['value' => $value];
+    $CI->db->update('tbl_meta_user', $data);
+
+    if ($CI->db->affected_rows() > 0) {
+        return true;
+    }
+
+    return false;
+}
+
+function user_meta_exists($user_id, $name)
+{
+    return total_rows('tbl_meta_user', [
+            'user_id' => $user_id,
+            'name' => $name,
+        ]) > 0;
+}
+
+
+function add_meta_user($user_id, $name, $value = '')
+{
+    if (!user_meta_exists($user_id, $name)) {
+        $CI = &get_instance();
+
+        $newData = [
+            'user_id' => $user_id,
+            'name' => $name,
+            'value' => $value,
+        ];
+        $CI->db->insert('tbl_meta_user', $newData);
+        $insert_id = $CI->db->insert_id();
+        if ($insert_id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    return false;
+}
+
+
+function user_balance($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+
+    $balance = get_user_meta($user_id, 'balance');
+    if (empty($balance)) {
+        $balance = 0;
+        update_user_meta($user_id, 'balance', $balance);
+    }
+    return $balance;
+}
+
+function user_free_ticket($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+    $ticket = get_user_meta($user_id, 'ticket');
+    if (empty($ticket)) {
+        $ticket = 0;
+        update_user_meta($user_id, 'ticket', $ticket);
+    }
+    return $ticket +1;
+}
+
 
 /**
  * Count total rows on table based on params
@@ -335,4 +492,76 @@ function add_option($name, $value = '')
     }
 
     return false;
+}
+
+function event_status($event)
+{
+    $CI = &get_instance();
+    $CI->db->where('id', $event);
+    $event = $CI->db->get('tbl_events')->row();
+    $start_date = date('d/m/Y', strtotime($event->start_date));
+    $end_date = date('d/m/Y', strtotime($event->end_date));
+    $curent_date = date('d/m/Y');
+    if ($start_date > $curent_date) {
+        return 'a_venir';
+    } else if ($end_date < $curent_date) {
+        return 'passe';
+    } else {
+        return 'en_cours';
+    }
+}
+
+function event_flag($event)
+{
+    $satus = event_status($event);
+    $class = '';
+    if ($satus == 'a_venir') {
+        $class = 'comming-event';
+        $msg = 'Evenement à venir';
+    } else if ($satus == 'en_cours') {
+        $class = 'online-event';
+        $msg = 'Evenement à cours';
+    } else if ($satus == 'passe') {
+        $class = 'passs-event';
+        $msg = 'Evenement à passé';
+    }
+    echo '<span data-toggle="tooltip" data-placement="top" title="' . $msg . '" class="status-event ' . $class . '"></span>';
+}
+
+
+function get_user_sponsor($user_id = 0)
+{
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+    $CI = &get_instance();
+    $CI->db->where('id', $user_id);
+    $CI->db->from('tbl_users');
+    $user = $CI->db->get()->row();
+    if (!empty($user->sponsor)) {
+        $CI->db->where('sponsor', $user->sponsor);
+        $CI->db->from('tbl_users');
+        $sponsor = $CI->db->get()->row();
+    }
+    return $sponsor->id;
+}
+
+function genererate_tiket()
+{
+
+}
+
+function isExpired($user)
+{
+    if (!$user->expiration)
+        return false;
+    if (strtotime($user->expiration) < time()) {
+        return true;
+    }
+    return false;
+}
+
+function __price($amount, $currency = 'F CFA')
+{
+    return number_format($amount, $decimals = 0, $dec_point = ",", $thousands_sep = " ") . ' ' . $currency;
 }

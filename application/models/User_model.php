@@ -88,7 +88,7 @@ class User_model extends CI_Model
 
     public function myadherents()
     {
-        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country');
+        $this->db->select('tbl_users.id,firstname,lastname,email,whatsapp_phone,sexe,cu.name as cluster,co.name as country,tbl_users.djp');
         $this->db->join('tbl_cluster as cu', 'cu.id = tbl_users.cluster', 'inner');
         $this->db->join('tbl_country as co', 'co.id = tbl_users.country_id', 'inner');
         $this->db->where('sponsor', get_user_cle());
@@ -109,7 +109,7 @@ class User_model extends CI_Model
     public function getCommissionOfAllUser(){
         $users = $this->get();
         foreach ($users as $user){
-            $adherents = myadherentsModify($user['sponsor']);
+            $adherents = $this->myadherentsModify($user['sponsor']);
             $somme = 0;
             foreach ($adherents  as $adherent){
                 $this->db->select('tbl_transactions');
@@ -168,6 +168,7 @@ class User_model extends CI_Model
         }
     }
 
+
     public function register($data, $pass)
     {
 
@@ -182,7 +183,7 @@ class User_model extends CI_Model
         $CI->load->model('plans_model');
         $plan = $CI->plans_model->get_plan_by_id($_POST['plan']);
 
-        $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price);
+        $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription');
         $CI->load->model('transactions_model');
         $CI->transactions_model->add($transaction);
 

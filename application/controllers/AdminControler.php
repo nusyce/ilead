@@ -31,12 +31,20 @@ class AdminControler extends CI_Controller
 
     }
 
-    public function load_view($view, $data = [])
+    public function load_view($view, $data = [],$only=false)
     {
-        $this->load->view('admin/includes/header', $data);
-        $this->load->view('admin/includes/asides', $data);
-        $this->load->view('admin/' . $view, $data);
-        $this->load->view('admin/includes/footer', $data);
+        if (!$only)
+        {
+            $this->load->view('admin/includes/header', $data);
+            $this->load->view('admin/includes/asides', $data);
+            $this->load->view('admin/' . $view, $data);
+            $this->load->view('admin/includes/footer', $data);
+        }else{
+
+            $this->load->view('admin/' . $view, $data);
+
+        }
+
     }
 
 

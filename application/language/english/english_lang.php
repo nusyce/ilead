@@ -105,6 +105,8 @@ $lang['asides_light_message'] = "Light";
 $lang['asides_dark_message'] = "Dark";
 $lang['asides_light_theme_message'] = "Light Theme";
 $lang['asides_dark_theme_message'] = "Dark  Theme";
+$lang['asides_plan_message'] = "Current package";
+$lang['asides_change_plan_message'] = "Change your package?";
 
 
 // plan
@@ -213,3 +215,6 @@ $lang['desc_pack3'] = ' <div class="d-flex align-items-center mb-2">
                                                 </div>';
 
 
+//change of package
+$lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Cannot select a plan while another one is on hold  </div>";
+$lang['success_package_change_message'] = "Your application has been sent; all you have to do is pay. ";

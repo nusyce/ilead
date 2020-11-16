@@ -9,6 +9,32 @@ td:hover .detail-option {
     opacity: 1;
 }
 
+.danger {
+    color: red;
+}
+
+.ps > .ps__rail-x {
+    width: 3px;
+    background-color: rgba(72, 83, 114, 0.06);
+    z-index: 10;
+    position: absolute;
+    left: auto;
+    right: 0;
+    opacity: 0;
+    margin: 1px;
+    display: none !important;
+}
+
+.nav-link {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    padding-left: 10px !important;
+}
+
+.pull-right {
+    float: right;
+}
+
 #topmenu {
     width: 100% !important;
     left: 0 !important;
@@ -21,10 +47,45 @@ td:hover .detail-option {
     margin-bottom: 80px;
 }
 
+.dashboard h6 {
+    text-align: center !important;
+}
+
+.status-event {
+    border-radius: 50%;
+    width: 16px;
+    margin: 0 auto;
+    display: block;
+    height: 16px;
+}
+
+.opsof {
+    position: absolute;
+    color: #b1b102 !important;
+    top: 5px;
+    right: 5px;
+}
+
+.comming-event {
+    background: deepskyblue;
+}
+
+.passs-event {
+    background: red;
+}
+
+.online-event {
+    background: green;
+}
+
 .stretch-card > .card {
     max-width: 300px;
 }
 
 #modal-responsable .select2 {
     width: 100% !important;
+}
+
+.card-content {
+    padding-bottom: 30px;
 }

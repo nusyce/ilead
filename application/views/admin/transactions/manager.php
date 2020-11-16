@@ -49,7 +49,7 @@
                                                     <a class="dropdown-item" id="dopayer" data-id="<?= $dd['id'] ?>"
                                                        href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
                                                     <a class="dropdown-item" data-id="<?= $dd['id'] ?>"
-                                                       href="#"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
+                                                       href="<?=site_url('transactions/cancel/'.$dd['id']) ?>"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
                                                 </div>
                                             </div>
                                         <?php else: ?>

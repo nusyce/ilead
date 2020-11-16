@@ -32,7 +32,7 @@ $lang['sponsor_inconnu'] = "Sponsor inconnnu";
 $lang['error_input'] = "données érronées";
 $lang['send_key'] = "Enregistré avec succes , votre clé vous a été transmise au ";
 
-$lang['number_message'] = "NOMBRE D'ADHERENTS";
+$lang['number_message'] = "MES ADHERENTS";
 $lang['choose_method'] = 'Choisissez votre moyen de paiement';
 //login
 
@@ -102,6 +102,8 @@ $lang['asides_light_message'] = "Lumière";
 $lang['asides_dark_message'] = "Sombre";
 $lang['asides_light_theme_message'] = "Thème léger";
 $lang['asides_dark_theme_message'] = "Thème sombre";
+$lang['asides_plan_message'] = "Plan actuel";
+$lang['asides_change_plan_message'] = "Changer de plan?";
 
 
 // plan
@@ -224,6 +226,7 @@ $lang['position'] = "Position";
 $lang['status'] = "Status";
 $lang['liste_des_evenement'] = "Liste des évènements";
 $lang['ajouter_un_evenement'] = "Ajouter un évènement";
+$lang['modifier_un_evenement'] = "Modifier un évènement";
 $lang['description'] = "Description";
 $lang['nom_participant'] = "Nom du participant";
 $lang['liste_des_transactions'] = "Liste des transactions";
@@ -242,10 +245,25 @@ $lang['cout_depense'] = "Coût de la depense";
 $lang['N°'] = "N°";
 $lang['nom_du_fichier'] = "nom du fichier";
 $lang['type_de_fichier'] = "type de fichier ";
+$lang['add_succes'] = "Ajouté avec succes ";
+$lang['add_danger'] = "Echec d'insertion ";
+$lang['edit_succes'] = "Modifié avec succes ";
+$lang['edit_danger'] = "Echec de modification ";
+$lang['delete_succes'] = "Supprimé avec succes ";
+$lang['delete_danger'] = "Echec de suppression ";
+$lang['date_error'] = "La date de début ne peut pas être supérieure à la date de fin";
 $lang['parametre_generaux'] = "Paramètre généraux";
-
-
-
+$lang['liste_des_taches'] = "Liste des tâches";
+$lang['ajouter_une_tache'] = "Ajouter une tache";
+$lang['modifier_la_tache'] = "Modifier la tache";
+$lang['nom_la_tache'] = "Nom de la tache";
+$lang['description_depense'] = "Description de la depense";
+$lang['liste_depense'] = "Liste des depenses";
+$lang['ajouter_une_depense'] = "Ajouter une depense";
+//changement de plan
+$lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Impossible de sélectionner un plan quand un autre est en attente </div>";
+$lang['success_package_change_message'] = "Votre demande à été envoyé; il ne vous reste plus qu'à payer";
+$lang['edit_profile'] = 'Modifier mon profil';
 
 
 

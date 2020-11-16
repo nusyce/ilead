@@ -1,4 +1,7 @@
 <!-- partial:partials/_navbar.html -->
+<?php  $CI =& get_instance();
+$CI->load->model('User_model');
+$user = $CI->User_model->get_user_by_id(get_user_id()); ?>
 <nav class="navbar">
     <a href="#" class="sidebar-toggler">
         <i data-feather="menu"></i>
@@ -15,6 +18,24 @@
                   </div>
               </form>-->
         <ul class="navbar-nav">
+            
+        <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="link-icon" title="us" data-feather="dollar-sign"></i>
+                    <span  class="font-weight-small ml-1 mr-1" style="font-style: italic;"><?php echo $this->lang->line('asides_plan_message'); ?> : <?=get_user_plan() ?> </span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <a href="<?=base_url('users/change_plan/'.get_user_plan_id()); ?>" class="dropdown-item py-2"> <span
+                                class="ml-1"><?php echo $this->lang->line('asides_change_plan_message'); ?></span></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+
+               <span style="padding-right: 4px;"> | </span><span class="<?php if (round((strtotime($user->expiration)-strtotime(date('Y-m-d H:i:s')))/ 86400) < 3) echo "danger"; ?>" > <?=date('d/m/Y H:i:s',strtotime($user->expiration))?></span>
+
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,6 +59,7 @@
                                 class="ml-1"> Spanish </span></a>-->
                 </div>
             </li>
+
             <!--                <li class="nav-item dropdown nav-apps">
                                 <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -244,6 +266,11 @@
             </li>
         </ul>
     </div>
+    <?php if (isExpired($user)): ?>
+    <div class="row" style="width: 100%">
+        <div class="alert alert-danger col-md-12 text-center" style="padding: 0">Votre compte est expiré</div>
+    </div>
+    <?php endif;?>
 </nav>
 <!-- partial -->
 
@@ -266,6 +293,12 @@
                 <a href="<?= base_url('start/dashboard') ?>" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?= base_url('start/dashboard2') ?>" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?> User</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -304,17 +337,23 @@
                 </a>
             </li>
             <li class="nav-item">
-                    <a href="<?= base_url('Event/')?>" class="nav-link">
-                        <i data-feather="user"></i>
-                        <span><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
+                    <a href="<?= base_url('event/')?>" class="nav-link">
+                        <i class="link-icon" data-feather="award"></i>
+                        <span class="link-title"><?php echo $this->lang->line('Liste_des_evenements'); ?></span>
                     </a>
             </li>
             <li class="nav-item">
-                <a href="<?= base_url('Config') ?>" class="nav-link">
-                    <i class="fa fa-gear" data-feather="trending-up"></i>
+                <a href="<?= base_url('config') ?>" class="nav-link">
+                    <i class="link-icon" data-feather="settings"></i>
                     <span class="link-title"><?php echo $this->lang->line('parametre_generaux'); ?></span>
                 </a>
             </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('task') ?>" class="nav-link">
+                        <i class="link-icon" data-feather="briefcase"></i>
+                        <span class="link-title"><?php echo $this->lang->line('liste_des_taches'); ?></span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="<?= base_url('plans') ?>" class="nav-link">
                         <i class="link-icon" data-feather="trending-up"></i>

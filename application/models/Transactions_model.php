@@ -90,7 +90,7 @@ class Transactions_model extends CI_Model
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
             $this->db->insert('tbl_book_event', $data);
-        } else {
+        } elseif ($transaction->type == "souscription")
             $data = [];
             $CI =& get_instance();
             $CI->load->model('plans_model');

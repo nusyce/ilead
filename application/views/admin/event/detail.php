@@ -32,26 +32,44 @@
                                         <div class="d-flex justify-content-around align-items-center flex-wrap">
                                             <div class="user-analytics">
                                                 <i class="bx bx-user mr-25 align-middle"></i>
-                                                <span class="align-middle text-muted">Users</span>
-                                                <div class="d-flex">
-                                                    <div id="radial-success-chart"></div>
-                                                    <h3 class="mt-1 ml-50">61K</h3>
+                                                <span class="align-middle text-muted">Total des depenses</span>
+                                                <div class="d-flex align-items-center">
+                                                    <h4 class="mt-1 ml-50 text-center"><?php
+                                                        $dep = 0;
+                                                        foreach ($depense as $dd){
+                                                            $dep = $dep + $dd['amount'];
+                                                        }
+                                                        echo  __Price($dep);
+                                                    ?></h4>
                                                 </div>
                                             </div>
                                             <div class="sessions-analytics">
                                                 <i class="bx bx-trending-up align-middle mr-25"></i>
-                                                <span class="align-middle text-muted">Sessions</span>
-                                                <div class="d-flex">
-                                                    <div id="radial-warning-chart"></div>
-                                                    <h3 class="mt-1 ml-50">92K</h3>
-                                                </div>
+                                                <span class="align-middle text-muted">Total des participants</span>
+                                                <center>                                                <div class="d-flex align-items-center">
+                                                        <h4 class="mt-1 ml-50 align-items-center"><?php
+                                                            $adh = 0;
+                                                            foreach ($adherents as $dd){
+                                                                $adh = $adh + 1;
+                                                            }
+                                                            echo $adh;
+                                                            ?></h4>
+                                                    </div></center>
+
                                             </div>
                                             <div class="bounce-rate-analytics">
                                                 <i class="bx bx-pie-chart-alt align-middle mr-25"></i>
-                                                <span class="align-middle text-muted">Bounce Rate</span>
-                                                <div class="d-flex">
+                                                <span class="align-middle text-muted">Liste des fichiers</span>
+                                                <div class="d-flex text-center" style="text-align: center">
                                                     <div id="radial-danger-chart"></div>
-                                                    <h3 class="mt-1 ml-50">72.6%</h3>
+                                                        <h3 class="mt-1 ml-50"><?php
+                                                            $fil = 0;
+                                                            foreach ($file as $dd){
+                                                                $fil = $fil + 1;
+                                                            }
+                                                            echo $fil;
+                                                            ?>
+                                                        </h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,17 +79,38 @@
                             </div>
 
                         </div>
-                        <div class="col-xl-3 col-md-6 col-sm-12 dashboard-referral-impression">
-                            <div class="row">
-                                <!-- Referral Chart Starts-->
-                                <div class="col-xl-12 col-12">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="card-body text-center pb-0">
-                                                <h2>$32,690</h2>
-                                                <span class="text-muted">Referral</span> 40%
-                                                <div id="success-line-chart"></div>
-                                            </div>
+                        <div class="col-md-3 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dashboard text-center card-title justify-content-between align-items-baseline">
+                                        <h6 class=" mb-0">Total des retenus</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 col-xl-12">
+                                            <h4 class="mb-2 text-center"><?php
+                                                $tra = 0;
+                                                foreach ($transaction as $dd){
+                                                    $tra = $tra + $dd["amount"];
+                                                }
+                                                echo __Price($tra);
+                                                ?></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dashboard text-center card-title justify-content-between align-items-baseline">
+                                        <h6 class=" mb-0">Gain retenu</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 col-xl-12">
+                                            <h4 class="mb-2 text-center"><?php
+                                                    $som = $tra - $dep;
+                                                    echo __PRICE($som);
+                                                    ?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -80,21 +119,6 @@
                         <div class="col-xl-3 col-md-12 col-sm-12">
                             <div class="row">
                                 <!-- Conversion Chart Starts-->
-                                <div class="col-xl-12 col-md-6 col-12">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-between pb-xl-0 pt-xl-1">
-                                            <div class="conversion-title">
-                                                <h4 class="card-title">Conversion</h4>
-                                                <p>60%
-                                                    <i class="bx bx-trending-up text-success font-size-small align-middle mr-25"></i>
-                                                </p>
-                                            </div>
-                                            <div class="conversion-rate">
-                                                <h2>89k</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

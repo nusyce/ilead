@@ -48,6 +48,7 @@
                         <p>Date : <b> <?php echo date('d/m/Y à H:i:s'); ?></b></p>
                         <p><?=$this->lang->line('payment_method')?> : <b> <?= $mode_paiement ?></b></p>
                         <p><?=$this->lang->line('transaction_message')?> : <b><?= number_format($amount, 0, 0, ' ') ?> F CFA </b></p>
+                        <p><?=$this->lang->line('type')?> : <b><?=$type?></b></p>
                         <p><?=$this->lang->line('invoice_trans')?> : <b>#<?= $num_trans ?> </b> <span style="position: relative;left:290px;"><?=$this->lang->line('invoice_code')?>: <b><?= $code_user ?></b></span>
                         </p>
                     </div>

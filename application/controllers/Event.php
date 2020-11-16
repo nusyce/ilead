@@ -28,11 +28,16 @@ class Event extends AdminControler
 
     public function event($id)
     {
+        $ref = 'event';
         $data['event'] = $this->Event_Model->get($id);
 
         if (!isset($_GET['navigation'])) {
             $data['navigation'] = '';
             $data['data'] = $this->Event_Model->get();
+            $data['depense'] = $this->Event_Model->getAllDepense($id);
+            $data['transaction'] = $this->Event_Model->getAllTransaction($id);
+            $data['adherents'] = $this->Event_Model->participants($id);
+            $data['file'] = $this->Event_Model->get_attachments($id, $ref);
             $this->load_view('event/detail', $data);
         } else if ($_GET['navigation'] == 'transaction') {
             $data['navigation'] = $_GET['navigation'];
@@ -43,19 +48,8 @@ class Event extends AdminControler
             $data['adherents'] = $this->Event_Model->participants($id);
             $this->load_view('event/participants', $data);
         } else if ($_GET['navigation'] == 'listfile') {
-
-
-            if (!empty($_FILES['file']['name'][0])) {
-
-
-                if ($this->upload_files($_FILES['file'], $id) === FALSE) {
-
-                    $data['error'] = $this->upload->display_errors('<div class="alert alert-danger">', '</div>');
-                }
-            }
             $data['navigation'] = $_GET['navigation'];
-            $ref = 'event';
-            $data['files'] = $this->Event_Model->get_attachments($id);
+            $data['data'] = $this->Event_Model->get_attachments($id, $ref);
             $this->load_view('event/list_file', $data);
         } else if ($_GET['navigation'] == 'depense') {
             $data['navigation'] = $_GET['navigation'];
@@ -138,15 +132,6 @@ class Event extends AdminControler
 
 
     }
-    function delete_event_file($file, $id)
-    {
-        $result=delete_file($file);
-        if($result)
-        {
-            $this->session->set_flashdata('success', $this->lang->line('delete_succes'));
-        }
-        redirect('event/event/'.$id.'?navigation=listfile');
-    }
 
     private function upload_files($files, $id)
     {
@@ -164,12 +149,12 @@ class Event extends AdminControler
 
         $images = array();
 
-
-            $_FILES['attachment[]']['name'] = $files['name'];
-            $_FILES['attachment[]']['type'] = $files['type'];
-            $_FILES['attachment[]']['tmp_name'] = $files['tmp_name'];
-            $_FILES['attachment[]']['error'] = $files['error'];
-            $_FILES['attachment[]']['size'] = $files['size'];
+        foreach ($files['name'] as $key => $image) {
+            $_FILES['attachment[]']['name'] = $files['name'][$key];
+            $_FILES['attachment[]']['type'] = $files['type'][$key];
+            $_FILES['attachment[]']['tmp_name'] = $files['tmp_name'][$key];
+            $_FILES['attachment[]']['error'] = $files['error'][$key];
+            $_FILES['attachment[]']['size'] = $files['size'][$key];
             $this->upload->initialize($config);
             if ($this->upload->do_upload('attachment[]')) {
                 $dd = $this->upload->data();
@@ -178,7 +163,7 @@ class Event extends AdminControler
             } else {
                 return false;
             }
-
+        }
 
         return $images;
     }

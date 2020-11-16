@@ -270,6 +270,7 @@ class Transactions_model extends CI_Model
         $data['code_user'] = $data_ar->code;
         $data['by_user'] = get_user_name();
         $data['num_trans'] = $data_ar->num_trans;
+        $data['type'] = $data_ar->type;
         $this->db->insert('tbl_factures', $data);
         $insert = $this->db->insert_id();
         return $insert;

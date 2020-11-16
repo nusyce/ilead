@@ -469,7 +469,7 @@ function user_balance_validation($user_id = 0)
 
 function user_free_ticket($user_id = 0)
 {
-    if ($user_id == 0) {
+    /*if ($user_id == 0) {
         $user_id = get_user_id();
     }
     $ticket = get_user_meta($user_id, 'ticket');
@@ -477,7 +477,15 @@ function user_free_ticket($user_id = 0)
         $ticket = 0;
         update_user_meta($user_id, 'ticket', $ticket);
     }
-    return $ticket +1;
+    return $ticket +1;*/
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+    $CI = &get_instance();
+    $CI->db->where('tbl_free_tickets.user_id', $user_id);
+    $CI->db->where('tbl_free_tickets.is_used', 0);
+    $tickets = $CI->db->get('tbl_free_tickets')->result_array();
+    return count($tickets);
 }
 
 
@@ -568,7 +576,7 @@ function get_user_sponsor($user_id = 0)
     $CI->db->from('tbl_users');
     $user = $CI->db->get()->row();
     if (!empty($user->sponsor)) {
-        $CI->db->where('sponsor', $user->sponsor);
+        $CI->db->where('cle', $user->sponsor);
         $CI->db->from('tbl_users');
         $sponsor = $CI->db->get()->row();
     }

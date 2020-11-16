@@ -22,6 +22,7 @@ class Event extends AdminControler
 
     public function index()
     {
+
         $data['data'] = $this->Event_Model->get();
         $this->load_view('event/liste', $data);
     }

@@ -108,6 +108,7 @@ class Transactions_model extends CI_Model
             }
             $this->db->where('id', $transaction->user_id);
             $data['plan_id'] = $transaction->plan_id;
+            $data['djp'] = 1;
             $this->db->update('tbl_users', $data);
 
 
@@ -142,7 +143,7 @@ class Transactions_model extends CI_Model
                 $commisson_a = $transaction->amount * $commission_parraing * 0.001;
                 $commisson_a +=  get_user_meta($sponsor->id, 'balance');
                 update_user_meta($sponsor->id, 'balance', $commisson_a);
-                $this->sendMailToSponsor($id,$commisson_a,$sponsor->id );
+                $this->sendMailToSponsor($id,$commisson_a,$sponsor );
             }
 
 
@@ -309,9 +310,7 @@ class Transactions_model extends CI_Model
             $lann = 'french';
             $CI->lang->load($lann, $lann);
         }
-        $this->db->where('id', $tansaction->user_id);
-        $datas['djp'] = 1;
-        $this->db->update('tbl_users', $datas);
+
 
         $mail = new PHPMailer(true);
         $mail->isSMTP();

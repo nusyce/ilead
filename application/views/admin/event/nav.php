@@ -4,6 +4,7 @@
             <div class="card-body">
                 <h4><?=$event->name?></h4>
                 <a href="<?=base_url('event')?>">Liste des retraites</a>
+                <?php $this->load->view('admin/includes/message.php') ?>
                 <hr>
                 <ul class="nav user-profile-nav justify-content-center justify-content-md-start nav-tabs border-bottom-0 mb-0"
                     role="tablist">

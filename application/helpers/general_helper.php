@@ -124,7 +124,22 @@ function can_represente()
         return false;
     }
 }
-
+function delete_file($id)
+{
+    if (get_user_role_id() != 2 && get_user_role_id() != 4)
+        return false;
+    $CI = &get_instance();
+    $CI->db->where('id', $id);
+    $file= $CI->db->get('tbl_attachments')->row();
+    unlink('uploads/'.$file->ref.'/'.$file->ref_id.'/'.$file->patch);
+    $CI->db->where('id', $id);
+    $rest =  $CI->db->delete('tbl_attachments');
+    if ($rest) {
+        return $rest;
+    } else {
+        return false;
+    }
+}
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
 {
     $output = NULL;

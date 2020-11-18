@@ -17,6 +17,8 @@ class Users extends AdminControler
         $this->load->model('User_roles_model');
         $this->load->model('payment_modes_model', 'mode');
         $this->load->model('Misc_model', 'misc');
+        $this->load->model('Event_model');
+        $this->load->model('Transactions_model');
     }
 
     public function index()
@@ -160,6 +162,14 @@ class Users extends AdminControler
     {
         $this->Representates_model->delete($id,$user_id);
         redirect('users/representants');
+
+    }
+
+    public function details($id){
+        $data['user'] = $this->User_model->get($id);
+        $data['event'] = $this->Event_model->getAllMyEvenement($id);
+        $data['transaction'] = $this->Transactions_model->getTransactionOfOneUser($id);
+        $this->load_view('user/detail', $data);
 
     }
 

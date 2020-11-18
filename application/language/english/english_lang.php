@@ -23,6 +23,12 @@ $lang['new_member_registration_message'] = "A new member has just registered";
 $lang['confirm_pay'] = "PAYMENT CONFIRMATION";
 $lang['your_pack_is_active'] = "Your pack is now successfully activated, your code is as follows ";
 $lang['your_invoice_is_join'] = "your invoice is attached to this email. ";
+$lang['envoyer_des_fonds_a_quelquun'] = 'Transfer fund';
+$lang['Liste_des_evenements'] = "List of events";
+$lang['parametre_generaux'] = "General config";
+$lang['liste_des_taches'] = "List of task";
+$lang['valider_le_transfert'] = 'Allow the transfer';
+
 
 //
 $lang['welcome_message'] = "Welcome";

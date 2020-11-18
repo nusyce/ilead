@@ -20,6 +20,7 @@ class Event_Model extends CI_Model
         return $this->db->get('tbl_events')->result_array();
     }
 
+
     public function get_attachments($id)
     {
         $this->db->where('ref_id', $id);
@@ -153,6 +154,12 @@ class Event_Model extends CI_Model
     public function getMyEvenement($id)
     {
         $sql = "SELECT * FROM tbl_events WHERE tbl_events.start_date > '" . date('Y-m-d H:i:s') . "'  and tbl_events.id in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
+        return $this->db->query($sql)->result_array();
+    }
+
+    public function getAllMyEvenement($id)
+    {
+        $sql = "SELECT * FROM tbl_events WHERE tbl_events.id in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
         return $this->db->query($sql)->result_array();
     }
 

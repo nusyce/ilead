@@ -265,6 +265,11 @@ $lang['ajouter_une_depense'] = "Ajouter une depense";
 $lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Impossible de sélectionner un plan quand un autre est en attente </div>";
 $lang['success_package_change_message'] = "Votre demande à été envoyé; il ne vous reste plus qu'à payer";
 $lang['edit_profile'] = 'Modifier mon profil';
+$lang['envoyer_des_fonds_a_quelquun'] = 'Transferer des fonds';
+$lang['montant_du_transfert'] = 'montant du transfert';
+$lang['transferer_vers'] = 'Transferer vers';
+$lang['valider_le_transfert'] = 'Valider le transfert';
+
 
 
 

@@ -77,7 +77,6 @@
                         <?php $CI =& get_instance();
                         $CI->load->model('task_model');
                         $tasks = $CI->task_model->get();
-                        var_dump($tasks);
                         foreach ($tasks as $task):
                             ?>
                             <option value="<?= $task['id'] ?>"><?= $task['name'] ?></option>

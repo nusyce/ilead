@@ -314,6 +314,12 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <span class="link-title"><?php echo $this->lang->line('asides_transaction_message'); ?></span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url('transfer'); ?>" class="nav-link">
+                    <i class="link-icon" data-feather="send"></i>
+                    <span class="link-title"><?php echo $this->lang->line('envoyer_des_fonds_a_quelquun'); ?></span>
+                </a>
+            </li>
             <?php if (get_user_role_id()==2){?>
             <li class="nav-item nav-category"><?php echo $this->lang->line('asides_autre_message'); ?></li>
             <li class="nav-item">

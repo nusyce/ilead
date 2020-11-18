@@ -467,6 +467,19 @@ function user_balance_validation($user_id = 0)
     return $balance;
 }
 
+function user_balance_transfer($user_id = 0){
+    if ($user_id == 0) {
+        $user_id = get_user_id();
+    }
+
+    $balance = get_user_meta($user_id, 'transfert');
+    if (empty($balance)) {
+        $balance = 0;
+        update_user_meta($user_id, 'transfert', $balance);
+    }
+    return $balance;
+}
+
 function user_free_ticket($user_id = 0)
 {
     /*if ($user_id == 0) {

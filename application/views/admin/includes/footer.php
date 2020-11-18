@@ -35,6 +35,9 @@
 <script src="<?= base_url()?>assets/js/dashboard.js"></script>
 <script src="<?= base_url()?>assets/js/datepicker.js"></script>
 <script src="<?= base_url()?>assets/js/scripts.js"></script>
+<script src="<?= base_url()?>assets/js/bootstrap.js"></script>
+<script src="<?= base_url()?>assets/js/bootstrap.min.js"></script>
+
 <!-- end custom js for this page -->
 </body>
 </html>    

@@ -55,7 +55,7 @@
                                                     ?></h4>
                                                 </div>
                                             </div>
-                                            <div class="sessions-analytics">
+                                            <div class="user-analytics">
                                                 <i class="bx bx-trending-up align-middle mr-25"></i>
                                                 <span class="align-middle text-muted">Total des participants</span>
                                                 <center>                                                <div class="d-flex align-items-center">
@@ -69,19 +69,19 @@
                                                     </div></center>
 
                                             </div>
-                                            <div class="bounce-rate-analytics">
+                                            <div class="user-analytics">
                                                 <i class="bx bx-pie-chart-alt align-middle mr-25"></i>
                                                 <span class="align-middle text-muted">Liste des fichiers</span>
                                                 <div class="d-flex text-center" style="text-align: center">
                                                     <div id="radial-danger-chart"></div>
-                                                        <h3 class="mt-1 ml-50"><?php
+                                                        <h4 class="mt-1 ml-50"><?php
                                                             $fil = 0;
                                                             foreach ($file as $dd){
                                                                 $fil = $fil + 1;
                                                             }
                                                             echo $fil;
                                                             ?>
-                                                        </h3>
+                                                        </h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +102,9 @@
                                             <h4 class="mb-2 text-center"><?php
                                                 $tra = 0;
                                                 foreach ($transaction as $dd){
-                                                    $tra = $tra + $dd["amount"];
+                                                    if(empty($dd["ticket"])){
+                                                        $tra = $tra + $dd["amount"];
+                                                    }
                                                 }
                                                 echo __Price($tra);
                                                 ?></h4>

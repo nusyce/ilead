@@ -288,6 +288,9 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
     </div>
     <div class="sidebar-body">
         <ul class="nav">
+            <?php if(get_user_role()==4 || get_user_role()==2){
+
+            ?>
             <li class="nav-item nav-category"><?php echo $this->lang->line('asides_principal_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('start/dashboard') ?>" class="nav-link">
@@ -295,10 +298,11 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
                 </a>
             </li>
+            <?php }  ?>
             <li class="nav-item">
                 <a href="<?= base_url('start/dashboard2') ?>" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?> User</span>
+                    <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
                 </a>
             </li>
             <li class="nav-item">

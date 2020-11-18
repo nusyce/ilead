@@ -1,104 +1,97 @@
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4><?=$user->firstname.' '.$user->lastname?></h4>
-                <hr>
-                <ul class="nav user-profile-nav justify-content-center justify-content-md-start nav-tabs border-bottom-0 mb-0"
-                    role="tablist" id="myTab" >
-                    <li class="nav-item pb-0 active" data-toggle="tab">
-                        <a class=" nav-link d-flex px-1 active" href="#sectionA"><i class="bx bx-home"></i><span
-                                class="d-none d-md-block">Solde des comptes</span></a>
-                    </li>
-                    <li class="nav-item pb-0" data-toggle="tab">
-                        <a class="nav-link d-flex px-1" id="activity-tab" href="#sectionB"><i
-                                class="bx bx-user"></i><span class="d-none d-md-block">Liste des retraites</span></a>
-                    </li>
-                    <li class="nav-item pb-0" data-toggle="tab">
-                        <a class="nav-link d-flex px-1" href="#sectionC"><i
-                                class="bx bx-message-alt"></i><span
-                                class="d-none d-md-block">Liste des transactions</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<br><br><br><br><br>
+<h3 class="text-center"><?=$user->firstname.' '.$user->lastname?></h3>
+<br><br><br><br>
+<div id="content">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a class="nav-link d-flex px-1" href="#orange" data-toggle="tab">Solde des comptes</a>
+        </li>
+        <li><a class="nav-link d-flex px-1" href="#yellow" data-toggle="tab">Liste des retraites</a>
+        </li>
+        <li><a class="nav-link d-flex px-1" href="#red" data-toggle="tab">Liste des transactions</a>
+        </li>
+
+    </ul>
 </div>
-<div class="tab-content">
-    <div id="sectionA" class="app-content content tab-pane active">
-        <div class="content-overlay"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
-            <div class="content-body">
-                <!-- Dashboard Analytics Start -->
-                <section id="dashboard-analytics">
-                    <div class="row">
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                        <h6 class=" mb-0">Gain sur les validations</h6>
+<div id="my-tab-content" class="tab-content">
+    <div class="tab-pane active" id="orange">
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card" >
+                    <div class="content-wrapper">
+                        <div class="content-header row">
+                        </div>
+                        <div class="content-body">
+                            <!-- Dashboard Analytics Start -->
+                            <section id="dashboard-analytics">
+                                <div class="row">
+                                    <div class="col-md-3 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="dashboard text-center card-title justify-content-between align-items-baseline">
+                                                    <h6 class=" mb-0">Gain sur les validations</h6>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-12 col-xl-12">
+                                                        <h4 class="mb-2 text-center"><?php
+                                                            if(user_balance_validation($user->id))
+                                                                echo __PRICE(user_balance_validation($user->id));
+                                                            else echo __PRICE(0)
+                                                            ?></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 col-xl-12">
-                                            <h4 class="mb-2 text-center"><?php
-                                                if(user_balance_validation($user->id))
-                                                echo __PRICE(user_balance_validation($user->id));
-                                                else echo __PRICE(0)
-                                                ?></h4>
+                                    <div class="col-md-3 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="dashboard text-center card-title justify-content-between align-items-baseline">
+                                                    <h6 class=" mb-0">Gain sur les filleuils</h6>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-12 col-xl-12">
+                                                        <h4 class="mb-2 text-center"><?php
+                                                            if(user_balance_commission($user->id))
+                                                                echo __PRICE(user_balance_commission($user->id));
+                                                            else echo __PRICE(0)
+                                                            ?></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="dashboard text-center card-title justify-content-between align-items-baseline">
+                                                    <h6 class=" mb-0">Gain sur les transferts</h6>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-12 col-xl-12">
+                                                        <h4 class="mb-2 text-center"><?php
+                                                            if(user_balance_transfer($user->id))
+                                                                echo __PRICE(user_balance_transfer($user->id));
+                                                            else echo __PRICE(0)
+                                                            ?></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <!-- Conversion Chart Starts-->
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                        <h6 class=" mb-0">Gain sur les filleuils</h6>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 col-xl-12">
-                                            <h4 class="mb-2 text-center"><?php
-                                                if(user_balance_commission($user->id))
-                                                    echo __PRICE(user_balance_commission($user->id));
-                                                else echo __PRICE(0)
-                                                ?></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                        <h6 class=" mb-0">Gain sur les transferts</h6>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-12 col-xl-12">
-                                            <h4 class="mb-2 text-center"><?php
-                                                if(user_balance_transfer($user->id))
-                                                    echo __PRICE(user_balance_transfer($user->id));
-                                                else echo __PRICE(0)
-                                                ?></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-12 col-sm-12">
-                            <div class="row">
-                                <!-- Conversion Chart Starts-->
-                            </div>
+                            </section>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
         </div>
     </div>
-    <div class="page-content tab-pane" id="sectionB">
+    <div class="tab-pane" id="yellow">
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -153,70 +146,78 @@
             </div>
         </div>
     </div>
-    <div id="sectionC" class="page-content tab-pane">
-        <div class="page-content">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title"><?php echo $this->lang->line('asides_transaction_message'); ?></h6>
-                            <div class="table-responsive">
-                                <table id="databable" class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>N°<?php echo $this->lang->line('asides_transaction_message'); ?></th>
-                                        <th><?php echo $this->lang->line('transaction_plan_message'); ?></th>
-                                        <th><?php echo $this->lang->line('transaction_adherant_message'); ?></th>
-                                        <th>Conctact</th>
-                                        <th>Country</th>
-                                        <th><?php echo $this->lang->line('transaction_message'); ?></th>
-                                        <th><?php echo $this->lang->line('country_status_message'); ?></th>
-                                        <th><?php echo $this->lang->line('transaction_date_message'); ?></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($transaction as $dd): ?>
-                                        <tr>
-                                            <td><?= $dd['id'] ?></td>
-                                            <td>#<?= $dd['num_trans'] ?>
-                                                <?php if (get_user_role_id() == 2): ?>
-                                                    <br>
-                                                    <a href="<?= base_url('transactions/detail/') . $dd['id'] ?>"><?php echo $this->lang->line('transaction_detail_message'); ?></a>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td><?= $dd['plan'] ?></td>
-                                            <td><?= $dd['lastname'] . ' ' . $dd['firstname'] ?></td>
-                                            <td><?= $dd['phone'] ?></td>
-                                            <td><?= $dd['country'] ?></td>
-                                            <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
-                                            <td>
-                                                <?php
-                                                if ((get_user_role_id() == 2 || get_user_role_id() == 3) && $dd['status'] != 'paie'):?>
-                                                    <div class="dropdown">
-                                                        <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
-                                                           data-toggle="dropdown" aria-haspopup="true" href="#"
-                                                           aria-expanded="false">
-                                                            <?= $dd['status'] ?>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" id="dopayer" data-id="<?= $dd['id'] ?>"
-                                                               href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
-                                                            <a class="dropdown-item" data-id="<?= $dd['id'] ?>"
-                                                               href="<?=site_url('transactions/cancel/'.$dd['id']) ?>"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
-                                                        </div>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <span class="badge badge-success">
+    <div class="tab-pane" id="red">
+        <div class="row">
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card" >
+
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-md-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><?php echo $this->lang->line('asides_transaction_message'); ?></h6>
+                                        <div class="table-responsive">
+                                            <table id="databable" class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>N°<?php echo $this->lang->line('asides_transaction_message'); ?></th>
+                                                    <th><?php echo $this->lang->line('transaction_plan_message'); ?></th>
+                                                    <th><?php echo $this->lang->line('transaction_adherant_message'); ?></th>
+                                                    <th>Conctact</th>
+                                                    <th>Country</th>
+                                                    <th><?php echo $this->lang->line('transaction_message'); ?></th>
+                                                    <th><?php echo $this->lang->line('country_status_message'); ?></th>
+                                                    <th><?php echo $this->lang->line('transaction_date_message'); ?></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php foreach ($transaction as $dd): ?>
+                                                    <tr>
+                                                        <td><?= $dd['id'] ?></td>
+                                                        <td>#<?= $dd['num_trans'] ?>
+                                                            <?php if (get_user_role_id() == 2): ?>
+                                                                <br>
+                                                                <a href="<?= base_url('transactions/detail/') . $dd['id'] ?>"><?php echo $this->lang->line('transaction_detail_message'); ?></a>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td><?= $dd['plan'] ?></td>
+                                                        <td><?= $dd['lastname'] . ' ' . $dd['firstname'] ?></td>
+                                                        <td><?= $dd['phone'] ?></td>
+                                                        <td><?= $dd['country'] ?></td>
+                                                        <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
+                                                        <td>
+                                                            <?php
+                                                            if ((get_user_role_id() == 2 || get_user_role_id() == 3) && $dd['status'] != 'paie'):?>
+                                                                <div class="dropdown">
+                                                                    <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
+                                                                       data-toggle="dropdown" aria-haspopup="true" href="#"
+                                                                       aria-expanded="false">
+                                                                        <?= $dd['status'] ?>
+                                                                    </a>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" id="dopayer" data-id="<?= $dd['id'] ?>"
+                                                                           href="#"><?php echo $this->lang->line('transaction_payer_message'); ?></a>
+                                                                        <a class="dropdown-item" data-id="<?= $dd['id'] ?>"
+                                                                           href="<?=site_url('transactions/cancel/'.$dd['id']) ?>"><?php echo $this->lang->line('transaction_annuler_message'); ?></a>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else: ?>
+                                                                <span class="badge badge-success">
                                                  <?php echo $this->lang->line('invoice_paid'); ?>
                                              </span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td><?= _dd($dd['due']) ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td><?= _dd($dd['due']) ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,8 +225,6 @@
             </div>
         </div>
     </div>
-</div>
-
 
 </div>
-
+</div>

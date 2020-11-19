@@ -20,6 +20,7 @@ class Auth extends CI_Controller
         $this->load->model('User_roles_model');
         $this->load->model('Plans_model', 'plans');
         $this->load->library('form_validation');
+        $this->load->model('Event_model');
     }
 
     public function index()
@@ -171,6 +172,7 @@ class Auth extends CI_Controller
                 'exigences' => $this->input->post('exigences'),
                 'created_at' => date('Y-m-d : h:m:s'),
                 'updated_at' => date('Y-m-d : h:m:s'),
+                'event_id' => $this->input->post('event_id'),
             );
             $user = $this->user->register($data, $pass);
             $this->session->set_flashdata('success', $this->lang->line('send_key').$this->input->post('email'));
@@ -178,6 +180,7 @@ class Auth extends CI_Controller
         }else{
             $data['plans'] = $this->plans->get_all();
             $data['pack']=(!empty($_GET['pack'])) ?$_GET['pack']:'';
+            $data['events'] = $this->Event_model->get_not_pass();
             $this->load->view('admin/auth/register',$data);
         }
 

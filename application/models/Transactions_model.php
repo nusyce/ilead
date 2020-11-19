@@ -116,25 +116,37 @@ class Transactions_model extends CI_Model
             $data['djp'] = 1;
             $this->db->update('tbl_users', $data);
             //
-            $this->db->where('start_date > ', date('Y-m-d H:i:s'));
-            $this->db->order_by("start_date","asc");
-            $this->db->limit(1);
-            $event= $this->db->get('tbl_events')->row();
-            if($event)
+            if($transaction->event_id!=null && $transaction->event_id!=0)
             {
-                $this->db->where('event_id', $event->id);
-                $this->db->where('user_id',  $transaction->user_id);
-                $booking=$this->db->get('tbl_book_event')->result_array();
-                if(!$booking)
+                $data=[];
+                $data['event_id']=$transaction->event_id;
+                $data['user_id']=$transaction->user_id;
+                $data['created_at'] = date('Y-m-d H:i:s');
+                $data['updated_at'] = date('Y-m-d H:i:s');
+                $this->db->insert('tbl_book_event', $data);
+            }
+            else{
+                $this->db->where('start_date > ', date('Y-m-d H:i:s'));
+                $this->db->order_by("start_date","asc");
+                $this->db->limit(1);
+                $event= $this->db->get('tbl_events')->row();
+                if($event)
                 {
-                    $data=[];
-                    $data['event_id']=$event->id;
-                    $data['user_id']=$transaction->user_id;
-                    $data['created_at'] = date('Y-m-d H:i:s');
-                    $data['updated_at'] = date('Y-m-d H:i:s');
-                    $this->db->insert('tbl_book_event', $data);
+                    $this->db->where('event_id', $event->id);
+                    $this->db->where('user_id',  $transaction->user_id);
+                    $booking=$this->db->get('tbl_book_event')->result_array();
+                    if(!$booking)
+                    {
+                        $data=[];
+                        $data['event_id']=$event->id;
+                        $data['user_id']=$transaction->user_id;
+                        $data['created_at'] = date('Y-m-d H:i:s');
+                        $data['updated_at'] = date('Y-m-d H:i:s');
+                        $this->db->insert('tbl_book_event', $data);
+                    }
                 }
             }
+
 
            if ($ticket=="")
            {
@@ -170,7 +182,7 @@ class Transactions_model extends CI_Model
                    $commisson_a = $transaction->amount * $commission_parraing * 0.001;
                    $commisson_a +=  get_user_meta($sponsor->id, 'balance');
                    update_user_meta($sponsor->id, 'balance', $commisson_a);
-                   $this->sendMailToSponsor($id,$commisson_a,$sponsor );
+                   $this->sendMailToSponsor($transaction->user_id,$commisson_a,$sponsor );
                }
            }
 
@@ -210,17 +222,21 @@ class Transactions_model extends CI_Model
         $mail->isHTML(true);
         $mail->Subject = $sujet;
         $mail->Body =$body;
-            if (!$mail->send()) {
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
-                echo 'The email message was sent.';
-            }
+        try {
+
+            $mail->Send();
+            echo 'The email message was sent.';
+        } catch (phpmailerException $e) {
+            echo $e->errorMessage(); //Pretty error messages from PHPMailer
+        } catch (Exception $e) {
+            echo $e->getMessage(); //Boring error messages from anything else!
+        }
     }
     public function sendMailToSponsor($id,$commission,$sponsor){
         $this->load->model('user_model');
         $us = $this->user_model->get_user_by_id($id);
         $CI =& get_instance();
-        if ($us->country_id == 156 || $us->country_id == 226) {
+        if ($sponsor->country_id == 156 || $sponsor->country_id == 226) {
             $sujet = 'Commission validation added to your account';
             $body = 'Hello Mr/M '.$sponsor->firstme.'<br> Following the subscription made by your godchild'.$us->firstname.', you receive a bonus of '.$commission.' linked to the sponsorship that binds you.<br>Thank you.<br><b>The iLEAD Management</b>';
 
@@ -245,11 +261,16 @@ class Transactions_model extends CI_Model
         $mail->isHTML(true);
         $mail->Subject = $sujet;
         $mail->Body =$body;
-        if (!$mail->send()) {
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
+        try {
+
+            $mail->Send();
             echo 'The email message was sent.';
+        } catch (phpmailerException $e) {
+            echo $e->errorMessage(); //Pretty error messages from PHPMailer
+        } catch (Exception $e) {
+            echo $e->getMessage(); //Boring error messages from anything else!
         }
+
     }
 
     public function sendMailTSponsor(){
@@ -403,10 +424,14 @@ class Transactions_model extends CI_Model
             $mail->Subject = $this->lang->line('confirm_pay');
             $mail->Body = $this->lang->line('your_pack_is_active') . '<b>' . $us->code . '</b>, ' . $this->lang->line('your_invoice_is_join');
 
-            if (!$mail->send()) {
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
+            try {
+
+                $mail->Send();
                 echo 'The email message was sent.';
+            } catch (phpmailerException $e) {
+                echo $e->errorMessage(); //Pretty error messages from PHPMailer
+            } catch (Exception $e) {
+                echo $e->getMessage(); //Boring error messages from anything else!
             }
         } catch (Html2PdfException $e) {
             $html2pdf->clean();

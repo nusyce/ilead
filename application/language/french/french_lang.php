@@ -269,6 +269,10 @@ $lang['envoyer_des_fonds_a_quelquun'] = 'Transferer des fonds';
 $lang['montant_du_transfert'] = 'montant du transfert';
 $lang['transferer_vers'] = 'Transferer vers';
 $lang['valider_le_transfert'] = 'Valider le transfert';
+$lang['liste_des_transferts'] = 'Transfert des fonds';
+$lang['ajouter_un_transfert_fond'] = 'Ajouter un transfert';
+$lang['evenement_associe'] = 'Evenement associé';
+
 
 
 

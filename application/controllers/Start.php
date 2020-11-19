@@ -23,7 +23,7 @@ class Start extends CI_Controller
         $this->load->model('Plans_model', 'plans');
         $this->load->model('User_model', 'user');
         $this->load->model('payment_modes_model', 'mode');
-        $this->load->model('Event_Model');
+        $this->load->model('Event_model');
 
 
     }
@@ -67,8 +67,8 @@ class Start extends CI_Controller
         }
         else{
 
-            $data['myevent'] = $this->Event_Model->getMyEvenement(get_user_id());
-            $data['othe_event'] = $this->Event_Model->getOtherEvenement(get_user_id());
+            $data['myevent'] = $this->Event_model->getMyEvenement(get_user_id());
+            $data['othe_event'] = $this->Event_model->getOtherEvenement(get_user_id());
 
             $this->load->view('admin/includes/header', $data);
             $this->load->view('admin/includes/asides', $data);

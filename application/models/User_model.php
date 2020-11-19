@@ -172,7 +172,12 @@ class User_model extends CI_Model
 
     public function register($data, $pass,$ticket="")
     {
-
+        $event=0;
+        if(!empty($data['event_id']))
+        {
+            $event=$data['event_id'];
+        }
+        unset($data['event_id']);
         $this->db->insert('tbl_users', $data);
         $insert = $this->db->insert_id();
         $iso = get_country($data['country_id'])->iso;
@@ -185,13 +190,13 @@ class User_model extends CI_Model
         $plan = $CI->plans_model->get_plan_by_id($_POST['plan']);
 if ($ticket=="")
 {
-    $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription');
+    $transaction = array('user_id' => $insert, 'plan_id' => $plan->id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $plan->price,'type' => 'souscription','event_id' =>$event);
 }else{
     $data=[];
     $data['is_used']=1;
     $this->db->where('id', $ticket->id);
     $this->db->update('tbl_free_tickets', $data);
-    $transaction = array('user_id' => $insert, 'plan_id' => $ticket->plan_id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'paie', 'amount' => 0,'type' => 'souscription','ticket_id' => $ticket->id);
+    $transaction = array('user_id' => $insert, 'plan_id' => $ticket->plan_id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'paie', 'amount' => 0,'type' => 'souscription','ticket_id' => $ticket->id,'event_id' =>$event);
 }
 
         $CI->load->model('transactions_model');

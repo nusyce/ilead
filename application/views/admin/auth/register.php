@@ -133,6 +133,17 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><?php echo $this->lang->line('evenement_associe'); ?></label>
+                                                <select style="color: black"  id="monselect" name="event_id">
+                                                    <?php foreach($events as $event) { ?>
+                                                        <option  value="<?=$event['id'] ?>"><?=$event['name'] ?></option>
+                                                    <?php } ?>
+
+                                                </select>
+                                            </div>
+                                        </div>
 <!--
                                         <div class="mt-3">
                                             <div style="margin-left: 15px; width: 150px;" id="show" class="btn btn-primary text-white mr-2 mb-2 mb-md-0">Autres</div>

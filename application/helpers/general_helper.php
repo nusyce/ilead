@@ -577,10 +577,10 @@ function event_flag($event)
         $msg = 'Evenement à venir';
     } else if ($satus == 'en_cours') {
         $class = 'online-event';
-        $msg = 'Evenement à cours';
+        $msg = 'Evenement en cours';
     } else if ($satus == 'passe') {
         $class = 'passs-event';
-        $msg = 'Evenement à passé';
+        $msg = 'Evenement passé';
     }
     echo '<span data-toggle="tooltip" data-placement="top" title="' . $msg . '" class="status-event ' . $class . '"></span>';
 }

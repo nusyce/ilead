@@ -222,5 +222,58 @@ $lang['desc_pack3'] = ' <div class="d-flex align-items-center mb-2">
 
 
 //change of package
-$lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Cannot select a plan while another one is on hold  </div>";
-$lang['success_package_change_message'] = "Your application has been sent; all you have to do is pay. ";
+//new version
+$lang['Liste_des_evenements'] = "Events list";
+$lang['nom_evenement'] = "Event name";
+$lang['date_debut'] = "Start date";
+$lang['date_fin'] = "end date";
+$lang['position'] = "Position";
+$lang['status'] = "Status";
+$lang['liste_des_evenement'] = "Events list";
+$lang['ajouter_un_evenement'] = "Add an event";
+$lang['modifier_un_evenement'] = "Modify an event";
+$lang['description'] = "Description";
+$lang['nom_participant'] = "Participant's name";
+$lang['liste_des_transactions'] = "List of transactions";
+$lang['Montant'] = "Amount";
+$lang['date_de_paiement'] = "Payment date";
+$lang['status_de_la_transaction'] = "Status of the transaction";
+$lang['methode_de_paiement'] = "Methode de paiement";
+$lang['prenom_participant'] = "Participant's first name";
+$lang['pays_du_participant'] = "Participant's country";
+$lang['numero_du_participant'] = "participant number";
+$lang['numero_du_participant'] = "participant number";
+$lang['email_du_participant'] = "participant email";
+$lang['nom_tache'] = "Task Name";
+$lang['escription_depense'] = "Description of the expense";
+$lang['cout_depense'] = "Cost of expense";
+$lang['N°'] = "N°";
+$lang['nom_du_fichier'] = "file name";
+$lang['type_de_fichier'] = " file type";
+$lang['type'] = "type";
+$lang['add_succes'] = " Successfully added";
+$lang['add_danger'] = "Insertion failure";
+$lang['edit_succes'] = "Successfully modified ";
+$lang['edit_danger'] = "Modification failure ";
+$lang['delete_succes'] = " Successfully deleted";
+$lang['delete_danger'] = " Deletion failure";
+$lang['date_error'] = "The start date cannot be greater than the end date";
+$lang['parametre_generaux'] = "General parameters";
+$lang['liste_des_taches'] = "To do-list";
+$lang['ajouter_une_tache'] = "Add a stain";
+$lang['modifier_la_tache'] = "Modify the task";
+$lang['nom_la_tache'] = "Task Name";
+$lang['description_depense'] = "Description of the expense";
+$lang['liste_depense'] = "List of expenses";
+$lang['ajouter_une_depense'] = "Add an expense";
+//changement de plan
+$lang['plan_existing_pending_message'] = "<div class=\"text-center text-danger font-italic font-weight-small mb-3 mt-4\" > Cannot select a plan when another is pending </div>";
+$lang['success_package_change_message'] = "Your request has been sent; all you have to do is pay";
+$lang['edit_profile'] = 'Edit my profile';
+$lang['envoyer_des_fonds_a_quelquun'] = 'Transfer funds';
+$lang['montant_du_transfert'] = 'amount of the transfer';
+$lang['transferer_vers'] = 'Transfer to';
+$lang['valider_le_transfert'] = 'Validate the transfer';
+$lang['liste_des_transferts'] = 'Transfer of funds';
+$lang['ajouter_un_transfert_fond'] = 'Add transfer';
+$lang['evenement_associe'] = 'Associated event';

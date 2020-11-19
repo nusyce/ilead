@@ -12,7 +12,7 @@ class Event extends AdminControler
         has_permission();
         $this->load->model('User_model', 'user');
         $this->load->model('Transactions_model');
-        $this->load->model('Event_Model');
+        $this->load->model('Event_model');
         $this->load->model('Plans_model', 'plans');
         $this->load->model('payment_modes_model', 'mode');
         $this->load->model('Misc_model', 'misc');
@@ -23,31 +23,31 @@ class Event extends AdminControler
     public function index()
     {
 
-        $data['data'] = $this->Event_Model->get();
+        $data['data'] = $this->Event_model->get();
         $this->load_view('event/liste', $data);
     }
 
     public function get_file($id){
-        $data['event'] = $this->Event_Model->get($id);
-        $data['files'] = $this->Event_Model->get_attachments($id);
+        $data['event'] = $this->Event_model->get($id);
+        $data['files'] = $this->Event_model->get_attachments($id);
         $this->load_view('event/files', $data,true);
     }
 
     public function event($id)
     {
-        $data['event'] = $this->Event_Model->get($id);
+        $data['event'] = $this->Event_model->get($id);
 
         if (!isset($_GET['navigation'])) {
             $data['navigation'] = '';
-            $data['data'] = $this->Event_Model->get();
+            $data['data'] = $this->Event_model->get();
             $this->load_view('event/detail', $data);
         } else if ($_GET['navigation'] == 'transaction') {
             $data['navigation'] = $_GET['navigation'];
-            $data['data'] = $this->Event_Model->getAllTransaction($id);
+            $data['data'] = $this->Event_model->getAllTransaction($id);
             $this->load_view('event/transaction', $data);
         } else if ($_GET['navigation'] == 'participants') {
             $data['navigation'] = $_GET['navigation'];
-            $data['adherents'] = $this->Event_Model->participants($id);
+            $data['adherents'] = $this->Event_model->participants($id);
             $this->load_view('event/participants', $data);
         } else if ($_GET['navigation'] == 'listfile') {
 
@@ -62,12 +62,12 @@ class Event extends AdminControler
             }
             $data['navigation'] = $_GET['navigation'];
             $ref = 'event';
-            $data['files'] = $this->Event_Model->get_attachments($id);
+            $data['files'] = $this->Event_model->get_attachments($id);
             $this->load_view('event/list_file', $data);
         } else if ($_GET['navigation'] == 'depense') {
             $data['navigation'] = $_GET['navigation'];
             $ref = 'event';
-            $data['data'] = $this->Event_Model->getAllDepense($id);
+            $data['data'] = $this->Event_model->getAllDepense($id);
 
             $this->load_view('event/depense', $data);
         }
@@ -78,7 +78,7 @@ class Event extends AdminControler
     public function buy_token($id)
     {
         $data['title'] = "Payer le token de cet evenement";
-        $data['event'] = $this->Event_Model->get($id);
+        $data['event'] = $this->Event_model->get($id);
         $this->load_view('event/buy_token_modal', $data, true);
 
     }
@@ -86,7 +86,7 @@ class Event extends AdminControler
     public function paie_token($id)
     {
 
-        $data['event'] = $this->Event_Model->get($id);
+        $data['event'] = $this->Event_model->get($id);
         $data['modes'] = $this->mode->get();
         $data['representates'] = $this->user->get_user_representate();
         $data['country'] = $this->misc->get_country(get_user_country());
@@ -114,7 +114,7 @@ class Event extends AdminControler
                 redirect('event');
             }
             if ($id == '') {
-                $result = $this->Event_Model->insert($_POST);
+                $result = $this->Event_model->insert($_POST);
                 if ($result) {
                     if (!empty($_FILES['attachment']['name'][0])) {
                         if ($this->upload_files($_FILES['attachment'], $result) === FALSE) {
@@ -127,7 +127,7 @@ class Event extends AdminControler
                 }
                 redirect('event');
             } else {
-                $result = $this->Event_Model->update($_POST);
+                $result = $this->Event_model->update($_POST);
                 if ($result) {
                     if (!empty($_FILES['attachment']['name'][0])) {
                         if ($this->upload_files($_FILES['attachment'], $id) === FALSE) {
@@ -180,7 +180,7 @@ class Event extends AdminControler
         $this->upload->initialize($config);
         if ($this->upload->do_upload('attachment[]')) {
             $dd = $this->upload->data();
-            $this->Event_Model->add_attachments($id, $dd);
+            $this->Event_model->add_attachments($id, $dd);
 
         } else {
             return false;
@@ -195,7 +195,7 @@ class Event extends AdminControler
         $data['title'] = $this->lang->line('ajouter_un_evenement');
         if ($id != '') {
             $data['title'] = $this->lang->line('modifier_un_evenement');
-            $data['event'] = $this->Event_Model->get($id);
+            $data['event'] = $this->Event_model->get($id);
         }
 
 
@@ -207,7 +207,7 @@ class Event extends AdminControler
     public function delete_event($id)
     {
 
-        $result = $this->Event_Model->delete($id);
+        $result = $this->Event_model->delete($id);
 
         if ($result) {
             $this->session->set_flashdata('success', $this->lang->line('delete_succes'));
@@ -220,7 +220,7 @@ class Event extends AdminControler
     public function delete_depense($id, $id_event)
     {
 
-        $result = $this->Event_Model->delete_depense($id);
+        $result = $this->Event_model->delete_depense($id);
 
         if ($result) {
             $this->session->set_flashdata('success', $this->lang->line('delete_succes'));
@@ -233,7 +233,7 @@ class Event extends AdminControler
     public function depense($id)
     {
 
-        $result = $this->Event_Model->insert_depense($_POST);
+        $result = $this->Event_model->insert_depense($_POST);
 
         if ($result) {
             $this->session->set_flashdata('success', $this->lang->line('add_succes'));

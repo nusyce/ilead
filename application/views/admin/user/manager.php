@@ -42,7 +42,7 @@
                                     <td>
                                         <div><?= $dd['firstname'] . ' ' . $dd['lastname'] ?></div>
                                         <div class="detail-option">
-                                            <a href="<?=base_url('users/change_role/'.$dd['id']) ?>" class="">Changer le role</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;<a href="<?=base_url('users/details/'.$dd['id']) ?>" class="">Plus d'infos</a> <!--| <a href="#" class="delete text-danger">Supprimer</a>-->
+                                            <a href="<?=base_url('users/change_role/'.$dd['id']) ?>" class="">Changer le role</a> |&nbsp;<a href="<?=base_url('users/details/'.$dd['id']) ?>" class="">Plus d'infos</a> <!--| <a href="#" class="delete text-danger">Supprimer</a>-->
                                         </div>
                                     </td>
                                     <td><?= $dd['profession'] ?></td>

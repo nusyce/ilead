@@ -269,11 +269,13 @@ $lang['envoyer_des_fonds_a_quelquun'] = 'Transferer des fonds';
 $lang['montant_du_transfert'] = 'montant du transfert';
 $lang['transferer_vers'] = 'Transferer vers';
 $lang['valider_le_transfert'] = 'Valider le transfert';
-$lang['liste_des_transferts'] = 'Transfert des fonds';
-$lang['ajouter_un_transfert_fond'] = 'Ajouter un transfert';
-$lang['evenement_associe'] = 'Evenement associé';
-
-
+$lang['limitation_de_place'] = 'Nombre de maximum de participants';
+$lang['type_de_plan'] = 'Type d\'abonnement requis';
+$lang['changer_de_pays'] = 'Changer de pays';
+$lang['changer_de_pays?'] = 'Voulez vous changer de pays?';
+$lang['Mise_a_jour_pays'] = 'Mise à jour du pays';
+$lang['Demander_retrait'] = 'Demander un retrait';
+$lang['choisir_type_compte'] = 'Choisir le type de compte';
 
 
 

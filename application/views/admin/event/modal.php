@@ -18,12 +18,32 @@
                 <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('event/save/'.$id) ?>" >
                     <label for="name"><?php echo $this->lang->line('nom_evenement'); ?></label>
                     <input type="text" value="<?php if (isset($event)) echo $event->name; ?>" name="name" class="form-control" id="name"><br>
+                    <label for="number_place"><?php echo $this->lang->line('limitation_de_place'); ?></label>
+                    <input type="number" value="<?php if (isset($event)) echo $event->number_place; ?>" name="number_place" class="form-control" id="name"><br>
+                    <label for=""><?php echo $this->lang->line('type_de_plan'); ?></label>
+                    <div class="form-inline">
+                        <?php foreach ($plan as $item): ?>
+                            <div class="col-md-3">
+                                <input class="my_plan" id="<?=$item['id']?>" type="checkbox" name="<?=$item['id']?>" <?php if (isset($event) && $event->plan_type == $item['id']){
+                                    echo "checked";
+                                }?> value="<?=$item['id']?>">&nbsp&nbsp<?=$item['name']?>
+                            </div>
+
+                            <?php endforeach; ?>
+                    </div>
+                    <div class="form-inline"><input type="number" name="price_1" id="price_1" style="display: none" class="col-md-3" placeholder="prix du token"> <input style="display: none" class="col-md-3" type="number" id="price_2" placeholder="prix du token" name="price_2"> <input style="display: none" class="col-md-3" placeholder="prix du token" type="number" id="price_3" name="price_3"> </div>
                     <label for="descrption"><?php echo $this->lang->line('description'); ?></label>
                     <textarea required rows="4" class="form-control" name="description" id="descrption"><?php if (isset($event)) echo $event->description; ?> </textarea><br>
-                    <label for="start_date"><?php echo $this->lang->line('date_debut'); ?></label>
-                    <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->start_date)); ?>" name="start_date" class="form-control pickadate" placeholder="Select Date" id="start_date"><br>
-                    <label for="end_date"><?php echo $this->lang->line('date_fin'); ?></label>
-                    <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->end_date)); ?>" name="end_date" class="form-control pickadate" placeholder="Select Date" id="end_date"><br>
+                    <div class="form-inline">
+
+                        <label for="start_date" class="col-md-6"><?php echo $this->lang->line('date_debut'); ?></label>
+                        <label for="end_date" class="col-md-6"><?php echo $this->lang->line('date_fin'); ?></label>
+
+                    </div>
+                    <div class="form-inline">
+                        <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->start_date)); ?>" name="start_date" class="form-control pickadate" placeholder="Select Date" id="start_date">
+                        <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->end_date)); ?>" name="end_date" class="form-control pickadate" placeholder="Select Date" id="end_date">
+                    </div>
                     <input type="hidden" name="id" id="id" value="<?php if (isset($event)) echo $event->id; ?>">
                     <!--<?php  if(isset($event) && count($event->attachment)>0){?>
                         <h6>liste des fichiers</h6><br>
@@ -86,3 +106,23 @@
         </div>
     </div>
 </div>
+<script>
+    for(i=1;i<4;i++){
+        document.getElementById(i).onclick = function(){
+            var x = document.getElementById("price_"+i);
+            x.style.display ='block';
+        };
+    }
+    $(".my_plan").click(function(event){
+        var x = event.target.id;
+        var object = document.getElementById(x);
+        var final = document.getElementById('price_'+x);
+        alert($(x).is(":checked"));
+        if($(x).is(":checked")){
+            final.style.display = "none";
+        }
+        else{
+            final.style.display = "block";
+        }
+    });
+</script>

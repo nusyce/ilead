@@ -28,6 +28,8 @@ class Paid extends CI_Controller
 
     public function index()
     {
+
+        $data['user'] = get_user_id();
         $data['transation'] = $this->user->get_last_transaction();
         $data['modes'] = $this->mode->get();
         $data['representates'] = $this->user->get_user_representate();
@@ -35,6 +37,21 @@ class Paid extends CI_Controller
         $this->load->view('home/paid',$data);
     }
 
+    public function modal()
+    {
+        if ($this->input->post()) {
+            $data['user'] =  get_user_id();
+
+            $data['transation'] = $this->user->get_last_transaction();
+            $data['modes'] = $this->mode->get();
+            $data['representates'] = $this->user->get_user_representate();
+            $data['country'] = $this->misc->get_country(get_user_country());
+            $data['title'] = $this->lang->line('changer_de_pays');
+            $this->user->updateCountry($_POST);
+            $this->load_view('home/index', $data);
+        }
+
+    }
 
 
 

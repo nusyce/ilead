@@ -121,6 +121,13 @@ class Auth extends CI_Controller
         echo $this->user->get_user_by_key($_GET['cle']);
     }
 
+    public function updateCountry($id){
+        if ($this->input->post()) {
+            $this->user->update($_POST);
+        }
+
+    }
+
     public function register()
     {
 

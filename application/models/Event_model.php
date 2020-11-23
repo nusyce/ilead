@@ -41,12 +41,24 @@ class Event_model extends CI_Model
 
     public function insert($data)
     {
+        $plan[] = array();
         $my_data['name'] = $data['name'];
         $my_data['description'] = $data['description'];
         $my_data['start_date'] = $data['start_date'];
         $my_data['end_date'] = $data['end_date'];
         $my_data['created_at'] = date('Y-m-d H:i:s');
         $my_data['updated_at'] = date('Y-m-d H:i:s');
+        $my_data['number_place'] = $data['number_place'];
+        if($data['1']=="1"){
+            array_push($plan, array($data['1']), $data['price_1']);
+        }
+        if($data['2']=="2"){
+            array_push($plan, array($data['2']), $data['price_2']);
+        }
+        if($data['3']=="3"){
+            array_push($plan, array($data['3']), $data['price_3']);
+        }
+        $my_data['plan_type'] = serialize($plan);
         $this->db->insert('tbl_events', $my_data);
         return $this->db->insert_id();
     }

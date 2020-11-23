@@ -47,6 +47,8 @@ class User_model extends CI_Model
         return $this->db->update('tbl_users', $data);
     }
 
+
+
     public function get_all_paid()
     {
         $this->db->select('tbl_transactions.user_id,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, u.cle as cle, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, pl.id as plan_id, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
@@ -203,6 +205,19 @@ if ($ticket=="")
         $CI->transactions_model->add($transaction);
 
     }
+    public function updateCountry($data)
+    {
+
+
+        $this->db->where('id', get_user_id());
+        $user = $this->db->get('tbl_users')->row();
+        $iso = get_country($data['country_id'])->iso;
+        $code= $iso.substr($user->code, 2);
+        $data['code']=$code;
+        $this->db->where('id', get_user_id());
+        $this->db->update('tbl_users', $data);
+        $this->updating_country($code,$user);
+    }
 
     public function get_user_by_email($email)
     {
@@ -251,6 +266,61 @@ if ($ticket=="")
         return $data;
 
 
+    }
+
+
+
+    private function updating_country($code, $data)
+    {
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mail@ileadglobe.com';
+        $mail->Password = 'Taylor@123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->SMTPKeepAlive = true;
+        $mail->SmtpConnect();
+
+
+        try {
+            //Recipients
+            $mail->setFrom('mail@ileadglobe.com', 'iLead globe');
+            $mail->addAddress($data['email'], $data['firstname']);     // Add a recipient
+
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = $this->lang->line('Mise_a_jour_pays');
+            $mail->Body = $this->lang->line('dear_message') . ' <b>' . $data['firstname'] . '</b><br>' . $this->lang->line('your_code_is') . substr($code, 0, -2) . 'XX' . '<br>';
+
+            if (!$mail->send()) {
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                echo 'The email message was sent.';
+            }
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
+        }
+        $mail->ClearAllRecipients();
+        $representates = $this->get_user_representate($data['country_id']);
+        foreach ($representates as $representate) {
+            $mail->ClearAllRecipients();
+            $mail->isHTML(true);
+            $mail->Subject = $this->lang->line('new_registration_message');
+            $mail->Body = $this->lang->line('dear_message') . ' <b>' . $representate['firstname'] . '</b><br>' . $this->lang->line('new_member_registration_message') . '<br>' . $this->lang->line('register_name_message') . ' : ' . $data['firstname'] . ' ' . $data['lastname'] . '<br>' . $this->lang->line('register_mail_message') . ' : ' . $data['email'] . '<br>' . $this->lang->line('register_whatapp_phone_message') . ' : ' . $data['whatsapp_phone'];
+            if (filter_var($representate['email'], FILTER_VALIDATE_EMAIL)) {
+                $mail->addAddress($representate['email'], $representate['firstname']);
+                if (!$mail->send()) {
+                    echo 'Invalid email address';
+                    break;
+                }
+            }
+        }
     }
 
     private function welcome_email($key, $code, $data)

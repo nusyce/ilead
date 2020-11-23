@@ -83,6 +83,15 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                 <div class="col-md-6">
                                     <h7 class="text-center"><?= __price(user_balance_commission()) ?></h7>
                                 </div>
+                                <div class=" text-center card-title justify-content-between align-items-baseline">
+                                    <p style="text-align: center" class="text-center">
+
+                                        <a data-toggle="modal" data-target="#change_pays" class="btn btn-primary btn-icon-text mb-1 mb-md-0 text-center" id="addRespons"
+                                           href="#">
+                                            <i class="btn-icon-prepend" data-feather="plus"></i>
+                                            <?php echo $this->lang->line('Demander_retrait'); ?>
+                                        </a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,6 +233,46 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
         </div>
     </div>
 </div>
+<div class="modal fade" id="change_pays" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"
+                    id="exampleModalLabel">  <?php echo $this->lang->line('Demander_retrait')?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if (isset($event)) {
+                    $id=$event->id;
+                }
+                else {
+                    $id="";}?>
+                <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('paid/modal') ?>" >
+                    <div class="form-group">
+                        <label  for="exampleInputEmail1"><?php echo $this->lang->line('choisir_type_compte'); ?></label>
+                        <select required style="color: black"  id="monselect" name="country_id">
+                            <option value="1">Gain sur les f
+                                illeuils</option>
+                            <option value="2">Gain sur les validations</option>
+                            <option value="3">Gain sur les transfert</option>
+                        </select>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-secondary "
+                                data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
+                        <button type="submit"
+                                class="btn btn-primary deleted"
+                                data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="zone_modal"></div>
 <script>
     function buy_token(id) {

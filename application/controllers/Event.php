@@ -192,6 +192,7 @@ class Event extends AdminControler
 
     public function modal($id = '')
     {
+        $data['plan'] =  $this->plans->get_all();
         $data['title'] = $this->lang->line('ajouter_un_evenement');
         if ($id != '') {
             $data['title'] = $this->lang->line('modifier_un_evenement');

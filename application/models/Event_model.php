@@ -41,7 +41,7 @@ class Event_model extends CI_Model
 
     public function insert($data)
     {
-        $plan[] = array();
+        $plan = array();
         $my_data['name'] = $data['name'];
         $my_data['description'] = $data['description'];
         $my_data['start_date'] = $data['start_date'];
@@ -50,13 +50,14 @@ class Event_model extends CI_Model
         $my_data['updated_at'] = date('Y-m-d H:i:s');
         $my_data['number_place'] = $data['number_place'];
         if($data['1']=="1"){
-            array_push($plan, array($data['1']), $data['price_1']);
+
+            array_push($plan, array("plan"=>$data['1'], "price"=>$data['price_1']));
         }
         if($data['2']=="2"){
-            array_push($plan, array($data['2']), $data['price_2']);
+            array_push($plan, array("plan"=>$data['2'], "price"=>$data['price_2']));
         }
         if($data['3']=="3"){
-            array_push($plan, array($data['3']), $data['price_3']);
+            array_push($plan, array("plan"=>$data['3'], "price"=>$data['price_3']));
         }
         $my_data['plan_type'] = serialize($plan);
         $this->db->insert('tbl_events', $my_data);
@@ -75,21 +76,35 @@ class Event_model extends CI_Model
 
     public function update($data)
     {
+        $plan = array();
         $my_data['name'] = $data['name'];
         $my_data['description'] = $data['description'];
         $my_data['start_date'] = $data['start_date'];
         $my_data['end_date'] = $data['end_date'];
+        $my_data['created_at'] = date('Y-m-d H:i:s');
         $my_data['updated_at'] = date('Y-m-d H:i:s');
+        $my_data['number_place'] = $data['number_place'];
+        if($data['1']=="1"){
+
+            array_push($plan, array("plan"=>$data['1'], "price"=>$data['price_1']));
+        }
+        if($data['2']=="2"){
+            array_push($plan, array("plan"=>$data['2'], "price"=>$data['price_2']));
+        }
+        if($data['3']=="3"){
+            array_push($plan, array("plan"=>$data['3'], "price"=>$data['price_3']));
+        }
+        $my_data['plan_type'] = serialize($plan);
         $this->db->where('id', $data['id']);
-        $this->db->update('tbl_events', $data);
+        $this->db->update('tbl_events', $my_data);
         return true;
     }
 
     public function delete($id)
     {
-        $this->db->select('tbl_transactions');
+
         $this->db->where('event_id', $id);
-        $result = $this->db->get('tbl_transactions');
+        $result = $this->db->get('tbl_transactions')->result_array();
         if ($result) {
             return false;
         }
@@ -188,7 +203,7 @@ class Event_model extends CI_Model
 
     public function getOtherEvenement($id)
     {
-        $sql = "SELECT * FROM tbl_events WHERE tbl_events.start_date > '" . date('Y-m-d H:i:s') . "'  and tbl_events.id not in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
+        $sql = "SELECT * FROM tbl_events WHERE tbl_events.end_date > '" . date('Y-m-d H:i:s') . "'  and tbl_events.id not in (select distinct event_id from tbl_book_event where user_id = " . $id . ")";
         return $this->db->query($sql)->result_array();
     }
 

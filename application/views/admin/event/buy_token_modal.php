@@ -1,3 +1,6 @@
+<?php
+    $result = 0;
+    ?>
 <div class="modal fade" id="buy_token_modal" tabindex="-1" role="dialog"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -18,7 +21,20 @@
                 <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('event/confirm_buy_token/'.$id) ?>" >
 
                     <h3 style="text-align: center;"><?php if (isset($event)) echo $event->name; ?></h3>
-                    <h4 style="text-align: center;margin-top: 10px">Frais : <b><?=__price(get_option('token_price'))?></b></h4>
+                    <h4 style="text-align: center;margin-top: 10px">Frais : <b>
+                            <?php
+                                $plan = unserialize($event->plan_type);
+                                foreach ($plan as $item){
+                                    if($item['plan'] == get_user_plan_id()){
+                                        $result = $item["price"];
+                                        echo __price($result);
+                                        break;
+                                    }
+                                }
+                                if($result == 0){
+                                    echo "Il n'ya pas de token disponible pour ce plan d'abonnement";
+                                }
+                            ?></b></h4>
                     <input type="hidden" name="id" id="id" value="<?php if (isset($event)) echo $event->id; ?>">
                     <!--<?php  if(isset($event) && count($event->attachment)>0){?>
                         <h6>liste des fichiers</h6><br>
@@ -72,9 +88,11 @@
                     <div class="" style="text-align: center;margin-top: 10px">
                         <button type="button" class="btn btn-secondary "
                                 data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
-                        <button type="submit"
-                                class="btn btn-primary deleted"
-                                data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                      <?php  if($result != 0){?>
+                          <button type="submit"
+                                  class="btn btn-primary deleted"
+                                  data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
+                      <?php  }?>
                     </div>
                 </form>
             </div>

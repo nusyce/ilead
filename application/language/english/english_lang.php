@@ -231,3 +231,7 @@ $lang['changer_de_pays?'] = 'Do you want to change your country?';
 $lang['Mise_a_jour_pays'] = 'Update your country';
 $lang['Demander_retrait'] = 'Ask for withdrawal';
 $lang['choisir_type_compte'] = 'Choose account type';
+$lang['Retrait'] = 'WITHDRAWALS';
+$lang['list_retrait'] = 'List of Withdrawal';
+$lang['ma_list_retrait'] = 'My List of Withdrawal';
+$lang['account_type'] = 'Widrawal type';

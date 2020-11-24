@@ -21,17 +21,53 @@
                     <label for="number_place"><?php echo $this->lang->line('limitation_de_place'); ?></label>
                     <input type="number" value="<?php if (isset($event)) echo $event->number_place; ?>" name="number_place" class="form-control" id="name"><br>
                     <label for=""><?php echo $this->lang->line('type_de_plan'); ?></label>
-                    <div class="form-inline">
-                        <?php foreach ($plan as $item): ?>
-                            <div class="col-md-3">
-                                <input class="my_plan" id="<?=$item['id']?>" type="checkbox" name="<?=$item['id']?>" <?php if (isset($event) && $event->plan_type == $item['id']){
-                                    echo "checked";
-                                }?> value="<?=$item['id']?>">&nbsp&nbsp<?=$item['name']?>
-                            </div>
+                        <div class="form-inline">
+                            <?php foreach ($plan as $item): ?>
+                                <div class="col-md-3" style="padding: 0;margin-right: 30px">
+                                    <input class="my_plan" id="<?=$item['id']?>" class="form-control" type="checkbox" name="<?=$item['id']?>"
+                                        <?php  if (isset($event) && $event->plan_type!=null){
+                                        $plans = unserialize($event->plan_type);
+                                        foreach ($plans as $value){
+                                            if($value['plan']==$item['id'])
+                                                echo "checked";
+                                        }
+
+                                    }?> value="<?=$item['id']?>">&nbsp&nbsp<?=$item['name']?>
+                                </div>
 
                             <?php endforeach; ?>
-                    </div>
-                    <div class="form-inline"><input type="number" name="price_1" id="price_1" style="display: none" class="col-md-3" placeholder="prix du token"> <input style="display: none" class="col-md-3" type="number" id="price_2" placeholder="prix du token" name="price_2"> <input style="display: none" class="col-md-3" placeholder="prix du token" type="number" id="price_3" name="price_3"> </div>
+                        </div>
+
+                        <div class="form-inline">
+                            <div class="col-md-3" style="padding: 0;margin-right: 30px">
+                            <input type="number" <?php  if (isset($event) && $event->plan_type!=null) {
+                                $plans = unserialize($event->plan_type);
+                                foreach ($plans as $value) {
+                                    if ($value['plan'] == 1)
+                                        echo 'value=' . $value['price'] . ' ';
+                                }
+                            }?>  name="price_1" id="price_1" style="display: none;width: 130px" class="form-control " placeholder="prix du token">
+                            </div>
+                                <div class="col-md-3" style="padding: 0;margin-right: 30px">
+                            <input style="display: none;  width: 130px" class="form-control " <?php  if (isset($event) && $event->plan_type!=null) {
+                                $plans = unserialize($event->plan_type);
+                                foreach ($plans as $value) {
+                                    if ($value['plan'] == 2)
+                                        echo 'value=' . $value['price'] . ' ';
+                                }
+                            }?>    type="number" id="price_2" placeholder="prix du token" name="price_2">
+                                </div>
+                                    <div class="col-md-3" style="padding: 0;margin-right: 30px">  <input style="display: none;
+              width: 130px" class="form-control "  <?php  if (isset($event) && $event->plan_type!=null) {
+                                            $plans = unserialize($event->plan_type);
+                                            foreach ($plans as $value) {
+                                                if ($value['plan'] == 3)
+                                                    echo 'value=' . $value['price'] . ' ';
+                                            }
+                                        }?> placeholder="prix du token" type="number" id="price_3" name="price_3">
+                                    </div>
+                        </div>
+
                     <label for="descrption"><?php echo $this->lang->line('description'); ?></label>
                     <textarea required rows="4" class="form-control" name="description" id="descrption"><?php if (isset($event)) echo $event->description; ?> </textarea><br>
                     <div class="form-inline">
@@ -40,9 +76,10 @@
                         <label for="end_date" class="col-md-6"><?php echo $this->lang->line('date_fin'); ?></label>
 
                     </div>
+
                     <div class="form-inline">
-                        <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->start_date)); ?>" name="start_date" class="form-control pickadate" placeholder="Select Date" id="start_date">
-                        <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->end_date)); ?>" name="end_date" class="form-control pickadate" placeholder="Select Date" id="end_date">
+                        <input required type="datetime-local"  value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->start_date)); ?>" name="start_date" class="form-control col-md-5 pickadate" style="padding: 0;margin-right: 30px" placeholder="Select Date" id="start_date">
+                        <input required type="datetime-local" value="<?php if (isset($event)) echo date('Y-m-d\TH:i',strtotime($event->end_date)); ?>" name="end_date" class="form-control col-md-5 pickadate" style="padding: 0;margin-right: 30px" placeholder="Select Date" id="end_date">
                     </div>
                     <input type="hidden" name="id" id="id" value="<?php if (isset($event)) echo $event->id; ?>">
                     <!--<?php  if(isset($event) && count($event->attachment)>0){?>
@@ -94,6 +131,7 @@
                     </div>-->
 
 
+                    <br><br>
                     <div class="text-right">
                         <button type="button" class="btn btn-secondary "
                                 data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
@@ -107,22 +145,36 @@
     </div>
 </div>
 <script>
-    for(i=1;i<4;i++){
-        document.getElementById(i).onclick = function(){
-            var x = document.getElementById("price_"+i);
-            x.style.display ='block';
-        };
-    }
+    $( document ).ready(function() {
+
+
+           if($("#1").is(":checked"))
+            {
+                document.getElementById('price_1').style.display ='block';
+            }
+        if($("#2").is(":checked"))
+        {
+            document.getElementById('price_2').style.display ='block';
+        }
+        if($("#3").is(":checked"))
+        {
+            document.getElementById('price_3').style.display ='block';
+        }
+
+
+    });
+
+
+
     $(".my_plan").click(function(event){
-        var x = event.target.id;
-        var object = document.getElementById(x);
+        var x = $(this).attr("id");
         var final = document.getElementById('price_'+x);
-        alert($(x).is(":checked"));
-        if($(x).is(":checked")){
-            final.style.display = "none";
+        if($(this).is(":checked")){
+            final.style.display = "block";
         }
         else{
-            final.style.display = "block";
+            final.style.display = "none";
+
         }
     });
 </script>

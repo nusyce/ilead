@@ -22,7 +22,9 @@ class Event extends AdminControler
 
     public function index()
     {
-
+        if(get_user_role_id()!=4){
+            redirect('start/dashboard2');
+        }
         $data['data'] = $this->Event_model->get();
         $this->load_view('event/liste', $data);
     }
@@ -87,6 +89,14 @@ class Event extends AdminControler
     {
 
         $data['event'] = $this->Event_model->get($id);
+        $plans = unserialize($data['event']->plan_type);
+        $data['amount']=get_option('token_price');
+        foreach ($plans as $value) {
+            if ($value['plan'] == get_user_plan_id())
+            {
+                $data['amount']=$value['price'];
+            }
+        }
         $data['modes'] = $this->mode->get();
         $data['representates'] = $this->user->get_user_representate();
         $data['country'] = $this->misc->get_country(get_user_country());
@@ -96,11 +106,19 @@ class Event extends AdminControler
 
     function confirm_buy_token($id)
     {
-
+        $event = $this->Event_model->get($id);
+        $plans = unserialize($event->plan_type);
+        $amount=get_option('token_price');
+        foreach ($plans as $value) {
+            if ($value['plan'] == get_user_plan_id())
+            {
+                $amount=$value['price'];
+            }
+        }
         $user = $this->user->get_user_by_id(get_user_id());
-        $transaction = array('user_id' => get_user_id(), 'plan_id' => $user->plan_id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => get_option('token_price'), 'type' => 'token', 'event_id' => $id);
+        $transaction = array('user_id' => get_user_id(), 'plan_id' => $user->plan_id, 'due' => date('d-m-Y H:i:s'), 'created_at' => date('d-m-Y H:i:s'), 'status' => 'pending', 'amount' => $amount, 'type' => 'token', 'event_id' => $id);
         $this->load->model('transactions_model');
-        $id = $this->transactions_model->add($transaction);
+        $this->transactions_model->add($transaction);
         redirect('event/paie_token/' . $id);
         //  redirect('start/dashboard2');
     }

@@ -276,6 +276,10 @@ $lang['changer_de_pays?'] = 'Voulez vous changer de pays?';
 $lang['Mise_a_jour_pays'] = 'Mise à jour du pays';
 $lang['Demander_retrait'] = 'Demander un retrait';
 $lang['choisir_type_compte'] = 'Choisir le type de compte';
+$lang['Retrait'] = 'RETRAITS';
+$lang['list_retrait'] = 'Liste des retraits';
+$lang['ma_list_retrait'] = 'Ma liste des retraits';
+$lang['account_type'] = 'Type de retrait';
 
 
 

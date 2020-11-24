@@ -23,6 +23,7 @@ class Users extends AdminControler
 
     public function index()
     {
+        secure_route();
         has_permission();
         $data['data'] = $this->User_model->get();
         $this->load_view('user/manager', $data);

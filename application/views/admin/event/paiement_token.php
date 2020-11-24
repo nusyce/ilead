@@ -10,7 +10,7 @@
                             <h5 class="text-center text-uppercase mt-3 mb-4"><?= $mode['nom'] ?></h5>
                             <i data-feather="award"
                                class="text-primary icon-xxl d-block mx-auto my-3"></i>
-                            <h5 class="text-center font-weight-light"> <b><?= get_option('token_price')?>
+                            <h5 class="text-center font-weight-light"> <b><?= $amount?>
                                 FCFA</b></h5>
 
 

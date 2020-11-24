@@ -44,9 +44,9 @@ class WithDrawal extends AdminControler
     }
 
     public function all(){
+
+      secure_route();
         $data['data'] = $this->WithDrawal_model->get_all();
-
-
         $this->load_view('retrait/list', $data);
     }
 

@@ -14,6 +14,7 @@ class Roles extends AdminControler
 
     public function index()
     {
+        secure_route();
         $roles = $this->User_roles_model->get_all();
         $data['title'] = '';
         $data['roles'] = $roles;

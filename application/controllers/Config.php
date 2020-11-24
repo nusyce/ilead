@@ -17,6 +17,9 @@ class Config extends AdminControler
 
     public function index()
     {
+        if(get_user_role_id()!=4){
+            redirect('start/dashboard2');
+        }
         if (isset($_POST['percentage_adherent'])) {
             foreach ($_POST as $k => $setting) {
                 update_option($k, $setting);

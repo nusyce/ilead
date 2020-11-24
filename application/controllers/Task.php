@@ -16,6 +16,9 @@ class Task extends AdminControler
 
     public function index()
     {
+        if(get_user_role_id()!=4){
+            redirect('start/dashboard2');
+        }
         has_permission();
         $data['data'] = $this->task_model->get();
         $this->load_view('task/manager', $data);

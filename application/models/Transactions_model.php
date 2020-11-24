@@ -20,9 +20,15 @@ class Transactions_model extends CI_Model
         $this->db->insert('tbl_transactions', $data);
         $insert = $this->db->insert_id();
         $this->numgeneratorcode($insert);
+
         if(isset($data['ticket_id']))
         {
             $this->make_paie($insert,1);
+        }else{
+            if ($data['amount']==0)
+            {
+                $this->make_paie($insert);
+            }
         }
 
         return $insert;

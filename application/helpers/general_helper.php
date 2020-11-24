@@ -568,6 +568,13 @@ function event_status($event)
     }
 }
 
+
+    function secure_route()
+    {
+        if(get_user_role_id()!=2 && get_user_role_id()!=4){
+            redirect('start/dashboard2');
+        }
+    }
 function event_flag($event)
 {
     $satus = event_status($event);
@@ -581,6 +588,22 @@ function event_flag($event)
     } else if ($satus == 'passe') {
         $class = 'passs-event';
         $msg = 'Evenement passé';
+    }
+    echo '<span data-toggle="tooltip" data-placement="top" title="' . $msg . '" class="status-event ' . $class . '"></span>';
+}
+
+function event_point($status)
+{
+    $class = '';
+    if ($status == 0) {
+        $class = 'comming-event';
+        $msg = 'En attente de validation';
+    } else if ($status == 1) {
+        $class = 'online-event';
+        $msg = 'Retrait validé';
+    } else if ($status == 2) {
+        $class = 'passs-event';
+        $msg = 'Retrait refusé';
     }
     echo '<span data-toggle="tooltip" data-placement="top" title="' . $msg . '" class="status-event ' . $class . '"></span>';
 }

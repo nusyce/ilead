@@ -56,12 +56,12 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 <div class="col-md-3 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <span class="opsof" data-placement="top" data-toggle="tooltip" data-original-title="Vous devez passez à PREMIUM pour bénéficier"><?php if($plan->id!=3){ ?><i class="link-icon" data-feather="award"></i><?php } ?></span>
+                            <span class="opsof" data-placement="top" data-toggle="tooltip"><i class="link-icon" data-feather="award"></i></span>
                             <div class=" text-center card-title justify-content-between align-items-baseline">
                                 <h6 class="mb-0">Mes gains</h6>
                             </div>
                             <div class="row">
-                               <?php if(can_represente()){
+                               <?php if(get_user_role_id() !=1){
 
                                 ?>
                                 <div class="col-md-6">
@@ -73,7 +73,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                 </div>
                             </div>
                             <div class="row">
-                                <?php if(can_represente()){
+                                <?php if(get_user_role_id() !=1){
 
                                 ?>
                                 <div class="col-md-6">
@@ -83,14 +83,14 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                 <div class="col-md-6">
                                     <h7 class="text-center"><?= __price(user_balance_commission()) ?></h7>
                                 </div>
-                                <div class=" text-center card-title justify-content-between align-items-baseline">
-                                    <p style="text-align: center" class="text-center">
-
-                                        <a data-toggle="modal" data-target="#change_pays" class="btn btn-primary btn-icon-text mb-1 mb-md-0 text-center" id="addRespons"
-                                           href="#">
-                                            <i class="btn-icon-prepend" data-feather="plus"></i>
-                                            <?php echo $this->lang->line('Demander_retrait'); ?>
-                                        </a></p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br>
+                                    <a data-toggle="modal" data-target="#change_pays" class="mb-1 mb-md-0 text-center" id="addRespons"
+                                       href="#" style="font-size: 10px">
+                                        <?php echo $this->lang->line('Demander_retrait'); ?>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -250,20 +250,28 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 }
                 else {
                     $id="";}?>
-                <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('paid/modal') ?>" >
+                <form  method="post"  action="<?= base_url('withdrawal/add') ?>" >
                     <div class="form-group">
+                        <span id="txt_verification"></span>
                         <label  for="exampleInputEmail1"><?php echo $this->lang->line('choisir_type_compte'); ?></label>
-                        <select required style="color: black"  id="monselect" name="country_id">
-                            <option value="1">Gain sur les f
-                                illeuils</option>
-                            <option value="2">Gain sur les validations</option>
-                            <option value="3">Gain sur les transfert</option>
+                        <select required style="color: black"  id="monselect" name="account_type">
+                            <option></option>
+                            <?php if(get_user_plan_id()==3){
+
+                            ?>
+                            <option value="balance">Gain sur les filleuils</option>
+                            <?php } ?>
+                            <?php if(get_user_role_id() !=1){
+
+                            ?>
+                            <option value="balance_validation">Gain sur les validations</option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="text-right">
                         <button type="button" class="btn btn-secondary "
                                 data-dismiss="modal"><?php echo $this->lang->line('transaction_fermer_message'); ?></button>
-                        <button type="submit"
+                        <button disabled id="validate_btn" type="submit"
                                 class="btn btn-primary deleted"
                                 data-message="Confirmez vous ce paiement?"><?php echo $this->lang->line('transaction_valider_message'); ?></button>
                     </div>
@@ -275,6 +283,20 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
 
 <div id="zone_modal"></div>
 <script>
+    document.getElementById("monselect").onchange = function(){
+        if($(this).val()!= null && $(this).val() !="")
+        {
+            requestGet('withdrawal/verify_balance/' + $(this).val()).done(function (response) {
+               if(response > 0)
+               {
+                   document.getElementById("validate_btn").disabled = false;
+               }
+            });
+        }else {
+            document.getElementById("validate_btn").disabled = true;
+        }
+    };
+
     function buy_token(id) {
         requestGet('event/buy_token/' + id).done(function (response) {
             $('#zone_modal').html(response)

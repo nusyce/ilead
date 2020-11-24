@@ -318,10 +318,19 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <span class="link-title"><?php echo $this->lang->line('asides_transaction_message'); ?></span>
                 </a>
             </li>
+            <li class="nav-item nav-category"><?php echo $this->lang->line('Retrait'); ?></li>
+            <?php if(get_user_role_id()==2 || get_user_role_id()==4){ ?>
             <li class="nav-item">
-                <a href="<?= base_url('transfer'); ?>" class="nav-link">
-                    <i class="link-icon" data-feather="send"></i>
-                    <span class="link-title"><?php echo $this->lang->line('envoyer_des_fonds_a_quelquun'); ?></span>
+                <a href="<?= base_url('withdrawal/all'); ?>" class="nav-link">
+                    <i class="link-icon" data-feather="arrow-up-right"></i>
+                    <span class="link-title"><?php echo $this->lang->line('list_retrait'); ?></span>
+                </a>
+            </li>
+            <?php } ?>
+            <li class="nav-item">
+                <a href="<?= base_url('withdrawal/mywithdrawal'); ?>" class="nav-link">
+                    <i class="link-icon" data-feather="arrow-up-right"></i>
+                    <span class="link-title"><?php echo $this->lang->line('ma_list_retrait'); ?></span>
                 </a>
             </li>
             <?php if (get_user_role_id()==2){?>

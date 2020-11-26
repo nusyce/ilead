@@ -213,7 +213,8 @@ function _dd($date)
 
 function has_permission()
 {
-    if (get_user_role_id() !== 2)
+
+    if (get_user_role_id() != 2 && get_user_role_id() != 4 )
         redirect('auth/login');
 }
 
@@ -556,9 +557,9 @@ function event_status($event)
     $CI = &get_instance();
     $CI->db->where('id', $event);
     $event = $CI->db->get('tbl_events')->row();
-    $start_date = date('d/m/Y', strtotime($event->start_date));
-    $end_date = date('d/m/Y', strtotime($event->end_date));
-    $curent_date = date('d/m/Y');
+    $start_date = strtotime($event->start_date);
+    $end_date = strtotime($event->end_date);
+    $curent_date = time();
     if ($start_date > $curent_date) {
         return 'a_venir';
     } else if ($end_date < $curent_date) {
@@ -572,7 +573,7 @@ function event_status($event)
     function secure_route()
     {
         if(get_user_role_id()!=2 && get_user_role_id()!=4){
-            redirect('start/dashboard2');
+            redirect('start/dashboard');
         }
     }
 function event_flag($event)

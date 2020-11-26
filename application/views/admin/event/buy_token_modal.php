@@ -21,7 +21,7 @@
                 <form role="form" autocomplete="off" accept-charset="utf-8" method="post" enctype="multipart/form-data" action="<?= base_url('event/confirm_buy_token/'.$id) ?>" >
 
                     <h3 style="text-align: center;"><?php if (isset($event)) echo $event->name; ?></h3>
-                    <h4 style="text-align: center;margin-top: 10px">Frais : <b>
+                    <h5 style="text-align: center;margin-top: 10px">Frais : <b>
                             <?php
                                 $plan = unserialize($event->plan_type);
                                 foreach ($plan as $item){
@@ -32,9 +32,9 @@
                                     }
                                 }
                                 if($result == 0){
-                                    echo "Il n'ya pas de token disponible pour ce plan d'abonnement";
+                                    echo 'Indisponible pour ce plan. Passer à <a href='.base_url('users/change_plan/'.get_user_plan_id()).'> Platinuim</a>';
                                 }
-                            ?></b></h4>
+                            ?></b></h5>
                     <input type="hidden" name="id" id="id" value="<?php if (isset($event)) echo $event->id; ?>">
                     <!--<?php  if(isset($event) && count($event->attachment)>0){?>
                         <h6>liste des fichiers</h6><br>

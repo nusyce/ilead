@@ -4,6 +4,15 @@
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
+                <br><br>
+                <?php if(get_user_role_id()==4) {
+
+                  ?>
+                <a target="_blank" style="float: left;" type="button" class="btn pull-right btn-primary btn-icon-text mb-1 mb-md-0 col-md-3 grid-margin stretch-card""
+                   href="<?= base_url('excel/transaction') ?>">
+                <p style="text-align: center">Export all transactions</p>
+                </a>
+                <?php } ?>
                 <div class="card-body">
                     <h6 class="card-title"><?php echo $this->lang->line('asides_transaction_message'); ?></h6>
                     <div class="table-responsive">
@@ -38,7 +47,7 @@
                                     <td><?= number_format($dd['amount'], 0, 0, ' ') ?> F CFA</td>
                                     <td>
                                         <?php
-                                        if ((get_user_role_id() == 2 || get_user_role_id() == 3) && $dd['status'] != 'paie'):?>
+                                        if ((get_user_role_id() !=1) && $dd['status'] != 'paie'):?>
                                             <div class="dropdown">
                                                 <a class="badge badge-info dropdown-toggle" id="dropdownMenuButton"
                                                    data-toggle="dropdown" aria-haspopup="true" href="#"

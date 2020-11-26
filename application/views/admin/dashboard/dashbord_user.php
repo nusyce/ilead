@@ -29,21 +29,26 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                     <div class="card">
                         <div class="card-body">
                             <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                <h6 class=" mb-0">Ticket Bonus</h6>
+                                <h6 class=" mb-0"><?php echo $this->lang->line('ticket_bonus'); ?></h6>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
                                     <h4 class="mb-2 text-center"><?= user_free_ticket() ?></h4>
                                 </div>
                             </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: <?= ($abonne*100)/20?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><?= ($abonne*100)/20?>%</div>
+                            </div>
+                            <p> Il vous reste <?= 20 - $abonne ?> parrainage(s) pour votre prochain ticket gratuit</p>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-md-3 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                <h6 class=" mb-0">Conférences suivies</h6>
+                                <h6 class=" mb-0"><?php echo $this->lang->line('conference_suivi'); ?></h6>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-12 col-xl-12">
@@ -56,9 +61,9 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 <div class="col-md-3 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <span class="opsof" data-placement="top" data-toggle="tooltip"><i class="link-icon" data-feather="award"></i></span>
+                            <span class="opsof" data-placement="top" data-toggle="tooltip"><?php if(get_user_plan_id()!=3){ ?><i class="link-icon" data-feather="award"><?php } ?></i></span>
                             <div class=" text-center card-title justify-content-between align-items-baseline">
-                                <h6 class="mb-0">Mes gains</h6>
+                                <h6 class="mb-0"><?php echo $this->lang->line('mes_gains'); ?></h6>
                             </div>
                             <div class="row">
                                <?php if(get_user_role_id() !=1){
@@ -105,7 +110,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 <div class="col-xl-12 grid-margin  col-12 dashboard-marketing-campaign">
                     <div class="card marketing-campaigns">
                         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                            <h4 class="card-title">Mes Evenements à venir</h4>
+                            <h4 class="card-title"><?php echo $this->lang->line('evenement_a_venir'); ?></h4>
                             <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                         </div>
                         <div class="table-responsive card-content ps ps--active-x">
@@ -114,9 +119,9 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                    class="table table-borderless table-marketing-campaigns mb-0">
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Date de début</th>
-                                    <th>Date de fin</th>
+                                    <th><?php echo $this->lang->line('register_name_message'); ?></th>
+                                    <th><?php echo $this->lang->line('user_start_date_message'); ?></th>
+                                    <th><?php echo $this->lang->line('date_fin'); ?></th>
                                     <th>Status</th>
                                     <th class="">Action</th>
                                 </tr>
@@ -134,7 +139,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                         <td class="py-1"> <?php event_flag($my_event['id']) ?></td>
 
                                         <td class="text-success py-1">
-                                            <button class="btn btn-primary">Consulter</button>
+                                            <button class="btn btn-primary"><?php echo $this->lang->line('consulter'); ?></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -153,7 +158,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 <div class="col-xl-12 grid-margin  col-12 dashboard-marketing-campaign">
                     <div class="card marketing-campaigns">
                         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                            <h4 class="card-title">Les autres évènements</h4>
+                            <h4 class="card-title"><?php echo $this->lang->line('autre_evenement'); ?></h4>
                             <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                         </div>
                         <div class="table-responsive card-content ps ps--active-x">
@@ -162,9 +167,9 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                    class="table table-borderless table-marketing-campaigns mb-0">
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Date de début</th>
-                                    <th>Date de fin</th>
+                                    <th><?php echo $this->lang->line('register_name_message'); ?></th>
+                                    <th><?php echo $this->lang->line('user_start_date_message'); ?></th>
+                                    <th><?php echo $this->lang->line('date_fin'); ?></th>
                                     <th>Status</th>
                                     <th class="">Action</th>
                                 </tr>
@@ -195,7 +200,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                                         <?php } else { ?>
                                             <td class="text-success py-1"><a
                                                         href="<?= site_url('event/paie_token/' . $my_event['id']) ?>"
-                                                        class="btn btn-primary">Finaliser le paiment</a></td>
+                                                        class="btn btn-primary"><?php echo $this->lang->line('finaliser_paiement'); ?></a></td>
                                         <?php } ?>
                                     </tr>
                                 <?php } ?>
@@ -211,7 +216,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                 <div class="col-xl-12 col-12 dashboard-marketing-campaign">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center pb-1">
-                            <h4 class="card-title text-center">Acceder au live</h4>
+                            <h4 class="card-title text-center"><?php echo $this->lang->line('acceder_live'); ?></h4>
                             <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                         </div>
                         <div class="card-content text-center">
@@ -255,7 +260,7 @@ $plan = $CI->Plans_model->get_plan_by_id($user->plan_id);
                         <span id="txt_verification"></span>
                         <label  for="exampleInputEmail1"><?php echo $this->lang->line('choisir_type_compte'); ?></label>
                         <select required style="color: black"  id="monselect" name="account_type">
-                            <option></option>
+                            <option disabled selected>Selectionner un compte</option>
                             <?php if(get_user_plan_id()==3){
 
                             ?>

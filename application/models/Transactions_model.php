@@ -101,7 +101,8 @@ class Transactions_model extends CI_Model
             $data['created_at'] = date('Y-m-d H:i:s');
             $data['updated_at'] = date('Y-m-d H:i:s');
             $this->db->insert('tbl_book_event', $data);
-        } elseif ($transaction->type == "souscription"){
+        } elseif ($transaction->type == "souscription")
+        {
             $data = [];
             $CI =& get_instance();
             $CI->load->model('plans_model');
@@ -115,6 +116,26 @@ class Transactions_model extends CI_Model
                     $data['expiration'] = date('Y-m-d H:i:s', strtotime("+" . $plan->duree . " months", strtotime(date('Y-m-d H:i:s'))));
                 } else {
                     $data['expiration'] = date('Y-m-d H:i:s', strtotime("+" . $plan->duree . "months", strtotime($user->expiration)));
+                }
+            }
+
+            if($user->plan_id < $transaction->plan_id)
+            {
+                $this->db->where('id', $user->plan_id);
+                $planA = $this->db->get('tbl_transactions')->row();
+                $this->db->where('id',$transaction->plan_id);
+                $planB = $this->db->get('tbl_transactions')->row();
+                $code = $user->code;
+                $last = substr($code, -1);
+                if(is_numeric($last)){
+                    $add = substr($planA, 1,1).substr($planB, 1,1);
+                    $newCode = $code.'-'.$add;
+                    $data = array();
+                    $data['code'] = $newCode;
+                    var_dump($newCode);
+                    exit();
+                    $this->db->where('id', $user->id);
+                    $this->db->update('tbl_users',$data);
                 }
             }
             $this->db->where('id', $transaction->user_id);
@@ -156,14 +177,14 @@ class Transactions_model extends CI_Model
 
            if ($ticket=="")
            {
-               $this->db->join('tbl_users', 'tbl_users.id = tbl_transactions.user_id', 'left');
+
                $this->db->where('tbl_users.sponsor', $user->sponsor);
-               $this->db->where('tbl_transactions.type', 'souscription');
-               $this->db->where('tbl_transactions.status', 'paie');
-               $trans = $this->db->get('tbl_transactions')->result_array();
+               $this->db->where('tbl_users.djp', 1);
+               $this->db->where('tbl_users.cle <>', $user->sponsor);
+               $adhe = $this->db->get('tbl_users')->result_array();
 
 
-               $ticket=(int)(count($trans)/20);
+               $ticket=(int)(count($adhe)/20);
                $sponsor = get_user_sponsor($transaction->user_id);
                if($sponsor){
                    $this->db->where('tbl_free_tickets.user_id', $sponsor->id);
@@ -279,9 +300,7 @@ class Transactions_model extends CI_Model
 
     }
 
-    public function sendMailTSponsor(){
 
-    }
     public function create_invoice($id)
     {
         $data = [];
@@ -321,7 +340,7 @@ class Transactions_model extends CI_Model
         }
 
 
-        $this->db->select('tbl_transactions.user_id,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
+        $this->db->select('tbl_transactions.user_id,tbl_transactions.mode_paiement,tbl_transactions.id as id, due,c.name as cluster,by_user_id,u.sponsor as sponsor, u.code as code, num_trans, tbl_transactions.status as status, amount,u.lastname as lastname, u.firstname as firstname, pl.name as plan, p.nom as mde_pement,u.whatsapp_phone as phone,co.name as country');
         $this->db->join('tbl_users as u', 'u.id = tbl_transactions.user_id', 'left');
         $this->db->join('tbl_plans as pl', 'pl.id = tbl_transactions.plan_id', 'left');
         $this->db->join('tbl_cluster as c', 'c.id = u.cluster', 'left');

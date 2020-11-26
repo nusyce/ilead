@@ -48,13 +48,21 @@
 
                                     </td>
                                     <td><?= __price($dd['amount'])  ?></td>
-                                    <td><div><?php event_point($dd['status']); ?></div></td>
+                                    <td><div><?php event_point($dd['status']); ?></div>
+                                    <?php if($dd['status']!=1) {
+
+                                    ?>
                                     <td>
                                         <div>
                                             <a class="btn btn-success" href="<?= base_url('withdrawal/approuve/'.$dd['id'])?>" > Approuver</a>
-                                            <a class="btn btn-danger" href="<?= base_url('withdrawal/block/'.$dd['id'])?>" > Bloquer</a>
+                                                <?php if($dd['status']!=2) {
+
+                                                ?>
+                                                    <a class="btn btn-danger" href="<?= base_url('withdrawal/block/'.$dd['id'])?>" > Bloquer</a>
+                                                <?php } ?>
                                         </div>
-                                    </td>
+
+                                    <?php } ?>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

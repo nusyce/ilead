@@ -9,7 +9,7 @@ class WithDrawal extends AdminControler
     public function __construct()
     {
         parent::__construct();
-        has_permission();
+
         $this->load->model('WithDrawal_model');
         $this->load->model('Event_model');
     }
@@ -40,27 +40,24 @@ class WithDrawal extends AdminControler
                 $this->WithDrawal_model->insert($data);
             }
         }
-        redirect('start/dashboard2');
+        redirect('start/dashboard');
     }
 
     public function all(){
 
-      secure_route();
         $data['data'] = $this->WithDrawal_model->get_all();
         $this->load_view('retrait/list', $data);
     }
 
     public function approuve($id){
         $this->WithDrawal_model->approuve($id);
-
-
-        redirect('WithDrawal/all');
+        redirect('withdrawal/all');
 
     }
 
     public  function block($id){
         $this->WithDrawal_model->block($id);
-        redirect('WithDrawal/all');
+        redirect('withdrawal/all');
     }
 
     public function mywithdrawal(){

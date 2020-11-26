@@ -97,7 +97,7 @@ class Auth extends CI_Controller
 
                 $this->session->set_userdata($admin_data);
                 if($result['role_id']==1){
-                    redirect(base_url('start/dashboard2'));
+                    redirect(base_url('start/dashboard'));
                 }
                 redirect(base_url('start/dashboard'));
             }else{

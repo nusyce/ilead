@@ -288,19 +288,10 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
     </div>
     <div class="sidebar-body">
         <ul class="nav">
-            <?php if(get_user_role()==4 || get_user_role()==2){
 
-            ?>
             <li class="nav-item nav-category"><?php echo $this->lang->line('asides_principal_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('start/dashboard') ?>" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
-                </a>
-            </li>
-            <?php }  ?>
-            <li class="nav-item">
-                <a href="<?= base_url('start/dashboard2') ?>" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title"><?php echo $this->lang->line('dashboard_message'); ?></span>
                 </a>
@@ -318,7 +309,6 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <span class="link-title"><?php echo $this->lang->line('asides_transaction_message'); ?></span>
                 </a>
             </li>
-            <li class="nav-item nav-category"><?php echo $this->lang->line('Retrait'); ?></li>
             <?php if(get_user_role_id()==2 || get_user_role_id()==4){ ?>
             <li class="nav-item">
                 <a href="<?= base_url('withdrawal/all'); ?>" class="nav-link">
@@ -333,7 +323,7 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
                     <span class="link-title"><?php echo $this->lang->line('ma_list_retrait'); ?></span>
                 </a>
             </li>
-            <?php if (get_user_role_id()==2){?>
+            <?php if (get_user_role_id()==4){?>
             <li class="nav-item nav-category"><?php echo $this->lang->line('asides_autre_message'); ?></li>
             <li class="nav-item">
                 <a href="<?= base_url('users/representants'); ?>" class="nav-link">
@@ -431,5 +421,6 @@ $user = $CI->User_model->get_user_by_id(get_user_id()); ?>
         </div>
     </nav>
 <?php endif; ?>
+
 
 <!-- partial -->

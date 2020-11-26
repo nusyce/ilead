@@ -9,7 +9,6 @@ class Event extends AdminControler
     public function __construct()
     {
         parent::__construct();
-        has_permission();
         $this->load->model('User_model', 'user');
         $this->load->model('Transactions_model');
         $this->load->model('Event_model');
@@ -23,7 +22,7 @@ class Event extends AdminControler
     public function index()
     {
         if(get_user_role_id()!=4){
-            redirect('start/dashboard2');
+            redirect('start/dashboard');
         }
         $data['data'] = $this->Event_model->get();
         $this->load_view('event/liste', $data);

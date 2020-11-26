@@ -95,14 +95,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="dashboard text-center card-title justify-content-between align-items-baseline">
-                                        <h6 class=" mb-0">Total des retenus</h6>
+                                        <h6 class=" mb-0">Total des revenus</h6>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-md-12 col-xl-12">
                                             <h4 class="mb-2 text-center"><?php
                                                 $tra = 0;
                                                 foreach ($transaction as $dd){
-                                                    if(empty($dd["ticket"])){
+                                                    if(empty($dd["ticket"]) && $dd['status']=='paie'){
                                                         $tra = $tra + $dd["amount"];
                                                     }
                                                 }

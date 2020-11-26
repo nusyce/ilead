@@ -21,7 +21,7 @@
                                             <br>
                                             <?= $this->lang->line('desc_pack'.$plan['id']) ?>
 
-                                            <a href="<?php echo base_url('Users/update_plan/'.get_user_id().'/'.$plan['id'] ) ?>" class="btn btn-primary d-block mx-auto mt-4"><?php echo $this->lang->line('home_subscribe_message'); ?></a>
+                                            <a href="<?php echo base_url('Users/update_plan/'.get_user_id().'/'.$plan['id'] ) ?>" class="btn btn-primary d-block mx-auto mt-4"><?php if ($plan['id']==get_user_plan_id()){echo $this->lang->line('renew');} else{ echo $this->lang->line('home_subscribe_message');}  ?></a>
                                         </div>
                                     </div>
                                 </div>

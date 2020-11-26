@@ -14,7 +14,7 @@ class Misc extends AdminControler
     public function countries()
     {
         if(get_user_role_id()!=4){
-            redirect('start/dashboard2');
+            redirect('start/dashboard');
         }
         $data['title'] = '';
         $this->load_view('country/manager', $data);

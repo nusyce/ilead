@@ -17,7 +17,7 @@ class PaieMethode extends AdminControler
     public function index()
     {
         if(get_user_role_id()!=4){
-            redirect('start/dashboard2');
+            redirect('start/dashboard');
         }
         $data['data'] = $this->payment_modes_model->get();
         $this->load_view('paie_method/manager', $data);

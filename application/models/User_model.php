@@ -225,6 +225,14 @@ if ($ticket=="")
         return $this->db->get('tbl_users')->row();
     }
 
+    public function restToTicket(){
+        $this->db->where('djp', 1);
+        $this->db->where('sponsor', get_user_cle());
+        $fils  = $this->db->get('tbl_users')->result_array();
+        $reste = count($fils)%20;
+        return $reste;
+    }
+
     public function get_user_by_key($cle)
     {
         $this->db->where('cle', $cle);

@@ -280,9 +280,15 @@ $lang['Retrait'] = 'RETRAITS';
 $lang['list_retrait'] = 'Liste des retraits';
 $lang['ma_list_retrait'] = 'Ma liste des retraits';
 $lang['account_type'] = 'Type de retrait';
-
-
-
+$lang['mes_gains'] = 'Mes gains';
+$lang['conference_suivi'] = 'CONFERENCES SUIVIES';
+$lang['ticket_bonus'] = 'TICKET BONUS';
+$lang['evenement_a_venir'] = 'MES EVENEMENTS AVENIR';
+$lang['autre_evenement'] = 'LES AUTRES EVENEMENTS';
+$lang['acceder_live'] = 'ACCEDER AU LIVE';
+$lang['consulter'] = 'Consulter';
+$lang['finaliser_paiement'] = "Finaliser le paiement";
+$lang['renew'] = "Renouveler";
 
 
 

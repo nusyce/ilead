@@ -40,41 +40,27 @@ class Start extends CI_Controller
 
         if(get_user_djp()==0)
         {
-
           redirect(base_url('paid'));
-
-
         }
         else{
 
             $data = [];
-            $this->load->view('admin/includes/header', $data);
-            $this->load->view('admin/includes/asides', $data);
-            $this->load->view('admin/dashboard/dashboard');
-            $this->load->view('admin/includes/footer', $data);
-        }
-
-    }
-    public function dashboard2()
-    {
-
-        if(get_user_djp()==0)
-        {
-
-            redirect(base_url('paid'));
-
-
-        }
-        else{
-
+            $data['abonne'] = $this->user->restToTicket();
             $data['myevent'] = $this->Event_model->getMyEvenement(get_user_id());
             $data['othe_event'] = $this->Event_model->getOtherEvenement(get_user_id());
-
             $this->load->view('admin/includes/header', $data);
             $this->load->view('admin/includes/asides', $data);
-            $this->load->view('admin/dashboard/dashbord_user');
+            if(get_user_role_id()==4){
+                $this->load->view('admin/dashboard/dashboard',$data);
+            }
+            else{
+
+                $this->load->view('admin/dashboard/dashbord_user',$data);
+            }
+
             $this->load->view('admin/includes/footer', $data);
         }
 
     }
+
 }

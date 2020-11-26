@@ -122,20 +122,19 @@ class Transactions_model extends CI_Model
             if($user->plan_id < $transaction->plan_id)
             {
                 $this->db->where('id', $user->plan_id);
-                $planA = $this->db->get('tbl_transactions')->row();
+                $planA = $this->db->get('tbl_plans')->row();
                 $this->db->where('id',$transaction->plan_id);
-                $planB = $this->db->get('tbl_transactions')->row();
+                $planB = $this->db->get('tbl_plans')->row();
                 $code = $user->code;
                 $last = substr($code, -1);
                 if(is_numeric($last)){
-                    $add = substr($planA, 1,1).substr($planB, 1,1);
+                    $add = substr($planA->name, 0,1).substr($planB->name, 0,1);
                     $newCode = $code.'-'.$add;
                     $data = array();
                     $data['code'] = $newCode;
-                    var_dump($newCode);
-                    exit();
                     $this->db->where('id', $user->id);
                     $this->db->update('tbl_users',$data);
+                    $this->sendMail($user,$newCode);
                 }
             }
             $this->db->where('id', $transaction->user_id);
@@ -218,6 +217,45 @@ class Transactions_model extends CI_Model
        }
 
         $invoice = $this->create_invoice($id);
+    }
+
+    public function sendMail($user, $code){
+
+        $CI =& get_instance();
+        if ($user->country_id == 156 || $user->country_id == 226) {
+            $sujet = 'Commission validation added to your account';
+            $body = 'Hello Mr/M '.$user->firstname.'<br> Your new connexion code is: '.$code.' <br>Thank you.<br><b>The iLEAD Management</b>';
+
+            $lann = 'english';
+            $CI->lang->load($lann, $lann);
+        } else {
+            $sujet = 'Commission de validation ajoutée à votre compte';
+            $body = 'Hello Mr/M '.$user->firstname.'<br> Votre nouveau code de connexion est: '.$code.' <br>Thank you.<br><b>The iLEAD Management</b>';
+            $lann = 'french';
+            $CI->lang->load($lann, $lann);
+        }
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mail@ileadglobe.com';
+        $mail->Password = 'Taylor@123';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('mail@ileadglobe.com', 'iLead globe');
+        $mail->addAddress($user->email, $user->firstname);
+        $mail->isHTML(true);
+        $mail->Subject = $sujet;
+        $mail->Body =$body;
+        try {
+
+            $mail->Send();
+            echo 'The email message was sent.';
+        } catch (phpmailerException $e) {
+            echo $e->errorMessage(); //Pretty error messages from PHPMailer
+        } catch (Exception $e) {
+            echo $e->getMessage(); //Boring error messages from anything else!
+        }
     }
 
     public function sendMailOnValidation($tansaction,$id,$commission){
